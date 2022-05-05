@@ -3,7 +3,7 @@ title: "Troutman Lab Research"
 sidebar: false
 ---
 
-# Macrophages in inflammation and obesity
+### Macrophages in inflammation and obesity
 
 The biological systems of inflammation and metabolism are closely intertwined, and tissue macrophages are key immune cells linking these systems. In addition to their roles as sentinels of infection, macrophages also contribute to obesity-associated diseases. 
 
@@ -13,7 +13,7 @@ One documented consequence is the development of insulin resistance and increase
 
 One area of interest in the Troutman Lab is to define molecular mechanisms controlling tissue macrophage behaviors resulting from inflammation and obesity.
 
-# Genetic variation and control of macrophage behaviors
+### Genetic variation and control of macrophage behaviors
 
 Normal tissue behaviors depend on a network of cell populations functioning together to support organ function. Disease may result if the system becomes unbalanced in one or more constituent cell types. Some diseases have known lesions in a single causal gene. However, most diseases result from the polygenic background of a susceptible individual interacting with a range of environmental factors. Thus, the susceptibility of a tissue to develop disease may be governed by interactions of the genetic background with one or more environmental factors. Notable examples include Alzheimer disease, cardiovascular disease, insulin resistance, steatohepatitis and cirrhosis and atopic diseases. In these cases, certain populations are resistant to disease progression in the context of similar environmental triggers. 
 
