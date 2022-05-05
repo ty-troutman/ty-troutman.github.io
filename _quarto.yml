@@ -7,7 +7,7 @@ website:
     background: dark
     right:
       - text: Home
-        href: home.qmd
+        href: index.qmd
       - text: Analysis
         menu: 
           - text: "Processing RNA-Seq Data"
