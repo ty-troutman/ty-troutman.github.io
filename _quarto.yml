@@ -8,6 +8,12 @@ website:
     right:
       - text: Home
         href: index.qmd
+      - text: Research
+        href: index.qmd
+      - text: Publications
+        href: index.qmd
+      - text: Lab Members
+        href: index.qmd
       - text: Analysis
         menu: 
           - text: "BMI Cluster"
@@ -26,7 +32,6 @@ website:
             href: Pages/Sequencing/Pooling_Submission.qmd
           - text: "Downloading the Data"
             href: Pages/Sequencing/NGSScraper_KevinErnst.qmd
-          - text: "More stuff"
       - icon: github
         href: https://github.com/ty-troutman
         aria-label: Troutman GitHub
