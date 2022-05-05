@@ -57,7 +57,7 @@ An example command to request an interactive session:
     bsub -W 4:00 -n 1 -M 10000 -Is /bin/bash
 
 ::: callout-note
-We have wrapper scripts to automate assembly of .bat files and submission to the LSF scheduler. More information is available [here](processingRNASeqData.qmd).
+We have wrapper scripts to automate assembly of .bat files and submission to the LSF scheduler. More information is available [here](Processing_RNASeq_Data.qmd).
 :::
 
 # Checking your cluster balance

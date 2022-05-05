@@ -9,11 +9,11 @@ website:
       - text: Home
         href: index.qmd
       - text: Research
-        href: index.qmd
+        href: Pages/Research/Research.qmd
       - text: Publications
-        href: index.qmd
+        href: Pages/Publications/Publications.qmd
       - text: Lab Members
-        href: index.qmd
+        href: Pages/Lab_Members/Lab_Members.qmd
       - text: Analysis
         menu: 
           - text: "BMI Cluster"
@@ -21,7 +21,7 @@ website:
           - text: "Lab Cluster Drives"
             href: Pages/Analysis/Lab_Cluster_Drives.qmd
           - text: "Processing RNA-Seq Data"
-            href: Pages/Analysis/processingRNASeqData.qmd
+            href: Pages/Analysis/Processing_RNASeq_Data.qmd
           - text: "Just beginning?"
             href: "https://github.com/ty-troutman/Genomics-analyses"
       - text: Sequencing
@@ -31,7 +31,7 @@ website:
           - text: "Pooling and Submission"
             href: Pages/Sequencing/Pooling_Submission.qmd
           - text: "Downloading the Data"
-            href: Pages/Sequencing/NGSScraper_KevinErnst.qmd
+            href: Pages/Sequencing/NGS_Scraper_KevinErnst.qmd
       - icon: github
         href: https://github.com/ty-troutman
         aria-label: Troutman GitHub
