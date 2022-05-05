@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.345">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Troutman Lab - Making a bar chart using RNA-seq data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link class="quarto-color-scheme" id="quarto-text-highlighting-styles" href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" id="quarto-text-highlighting-styles" href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link class="quarto-color-scheme" href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" href="../../site_libs/bootstrap/bootstrap-dark.min.css">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Troutman Lab</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../home.html">Home</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-analysis" role="button" data-bs-toggle="dropdown" aria-expanded="false">Analysis</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-analysis">    
+        <li>
+    <a class="dropdown-item" href="../../Docs/Analysis/processingRNASeqData.html">
+ <span class="dropdown-text">Processing RNA-Seq Data</span></a>
+  </li>  
+        <li class="dropdown-header">Processing ATAC-Seq Data</li>
+        <li class="dropdown-header">Processing ChIP-Seq Data</li>
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-sequencing" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sequencing</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-sequencing">    
+        <li>
+    <a class="dropdown-item" href="../../Docs/Sequencing/Database_Barcodes.html">
+ <span class="dropdown-text">Database and Barcodes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Docs/Sequencing/Pooling_Submission.html">
+ <span class="dropdown-text">Pooling and Submission</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Docs/Sequencing/ngsScraper_KevinErnst.html">
+ <span class="dropdown-text">Downloading the Data</span></a>
+  </li>  
+        <li class="dropdown-header">More stuff</li>
+    </ul>
+  </li>
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#finished" id="toc-finished" class="nav-link active" data-scroll-target="#finished">Finished!</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Making a bar chart using RNA-seq data</h1>
+</div>
+
+
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>In this tutorial we will learn to make a bar chart using RNA-seq data from table S2 in <a href="https://pubmed.ncbi.nlm.nih.gov/32362324/">Seidman et. al.&nbsp;Immunity. Volume 52, Issue 6, 16 June 2020, Pages 1057-1074.e7</a>, which can be downloaded <a href="https://ars.els-cdn.com/content/image/1-s2.0-S107476132030159X-mmc3.xlsx">here</a>. Once we have the data, we will need to open Rstudio and load the necessary packages. We can do that with <a href="https://www.datacamp.com/community/tutorials/r-packages-guide">library()</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> <span class="fu">c</span>(<span class="st">"cowplot"</span>, <span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span>, <span class="st">"readr"</span>, <span class="st">"tidyr"</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">FUN =</span> library,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">character.only =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the prior tutorial, we spent time learning how to read in data, and process it into a more friendly, or tidy, format. You can revisit that information <a href="Introduction-RNASeqAnalysis.md">here</a>.</p>
+<p>With the assumption that this information is fresh in our minds, lets read in a subset of this data. We will select the first 8 columns, and rename these columns to an easier to read format. We will also extract the gene name from column 2 and discard all text after the first occurrence of the ‘|’ symbol using ‘separate.’ We will then discard rows containing the same gene using ‘distinct.’ This occurs because the initial expression table was generated using without the -condenseGenes option using <a href="http://homer.ucsd.edu/homer/ngs/rnaseq/index.html">HOMER analyzeRepeats.pl</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note, when reading in your data, you should change the path to the</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># location/name of your data</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="at">path =</span> <span class="st">"../Data/Source/1-s2.0-S107476132030159X-mmc3.xlsx"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Transcript/RepeatID (cmd=analyzeRepeats.pl rna mm10 -count exons -tpm -dfile Table_S2_dfile.txt)"
+[2] "Annotation/Divergence"                                                                           
+[3] "KCH_rep1_figure1,3,4"                                                                            
+[4] "KCH_rep2_figure1,3,4"                                                                            
+[5] "KCN_rep1_figure1,3,4"                                                                            
+[6] "KCN_rep2_figure1,3,4"                                                                            
+[7] "KN-RM_rep1_figure1,3,4"                                                                          
+[8] "KN-RM_rep2_figure1,3,4"                                                                          </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tb1 <span class="ot">&lt;-</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="at">path =</span> <span class="st">"../Data/Source/1-s2.0-S107476132030159X-mmc3.xlsx"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">accession =</span> <span class="dv">1</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">gene =</span> <span class="dv">2</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">healthy_rep1 =</span> <span class="dv">3</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">healthy_rep2 =</span> <span class="dv">4</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">nash_rep1 =</span> <span class="dv">5</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">nash_rep2 =</span> <span class="dv">6</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">recruited_rep1 =</span> <span class="dv">7</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">recruited_rep2 =</span> <span class="dv">8</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> <span class="dv">2</span>, <span class="at">into =</span> <span class="st">"gene"</span>, </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">|"</span>, <span class="co"># uses regular expression rules</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>           <span class="at">remove =</span> <span class="cn">TRUE</span>, <span class="at">extra =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(gene, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>tb1 <span class="sc">%&gt;%</span> <span class="fu">head</span>() <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>() <span class="co">#knitr::kable can be used for displaying nicer tables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">accession</th>
+<th style="text-align: left;">gene</th>
+<th style="text-align: right;">healthy_rep1</th>
+<th style="text-align: right;">healthy_rep2</th>
+<th style="text-align: right;">nash_rep1</th>
+<th style="text-align: right;">nash_rep2</th>
+<th style="text-align: right;">recruited_rep1</th>
+<th style="text-align: right;">recruited_rep2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NM_001329047</td>
+<td style="text-align: left;">Mia2</td>
+<td style="text-align: right;">43.600</td>
+<td style="text-align: right;">36.309</td>
+<td style="text-align: right;">29.644</td>
+<td style="text-align: right;">26.789</td>
+<td style="text-align: right;">31.999</td>
+<td style="text-align: right;">38.089</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NM_172405</td>
+<td style="text-align: left;">Abraxas1</td>
+<td style="text-align: right;">1.913</td>
+<td style="text-align: right;">2.205</td>
+<td style="text-align: right;">1.953</td>
+<td style="text-align: right;">1.818</td>
+<td style="text-align: right;">2.278</td>
+<td style="text-align: right;">2.202</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NM_001359283</td>
+<td style="text-align: left;">Sec63</td>
+<td style="text-align: right;">19.312</td>
+<td style="text-align: right;">17.762</td>
+<td style="text-align: right;">13.237</td>
+<td style="text-align: right;">12.867</td>
+<td style="text-align: right;">14.032</td>
+<td style="text-align: right;">15.969</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NM_001168290</td>
+<td style="text-align: left;">Sugp2</td>
+<td style="text-align: right;">11.500</td>
+<td style="text-align: right;">8.864</td>
+<td style="text-align: right;">10.921</td>
+<td style="text-align: right;">7.571</td>
+<td style="text-align: right;">12.740</td>
+<td style="text-align: right;">9.618</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NM_001356498</td>
+<td style="text-align: left;">Mtmr12</td>
+<td style="text-align: right;">7.145</td>
+<td style="text-align: right;">8.743</td>
+<td style="text-align: right;">6.711</td>
+<td style="text-align: right;">6.839</td>
+<td style="text-align: right;">7.881</td>
+<td style="text-align: right;">7.009</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NM_001358950</td>
+<td style="text-align: left;">Cbx5</td>
+<td style="text-align: right;">6.531</td>
+<td style="text-align: right;">6.207</td>
+<td style="text-align: right;">5.856</td>
+<td style="text-align: right;">7.199</td>
+<td style="text-align: right;">8.375</td>
+<td style="text-align: right;">8.728</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Making plots with ggplot2 requires data to be in a particular format. Each column is a variable, each row should is an observation, and each cell is a single value. Having data in this <a href="https://tidyr.tidyverse.org/articles/tidy-data.html">‘tidy’</a> format is a common goal within the tidyverse. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">geneName =</span> <span class="fu">c</span>(<span class="st">"geneA"</span>, <span class="st">"geneA"</span>, <span class="st">"geneB"</span>, <span class="st">"geneB"</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">"untreated"</span>, <span class="st">"treated"</span>, <span class="st">"untreated"</span>, <span class="st">"treated"</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">expression =</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">103</span>, <span class="dv">109</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">geneName</th>
+<th style="text-align: left;">condition</th>
+<th style="text-align: right;">expression</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">geneA</td>
+<td style="text-align: left;">untreated</td>
+<td style="text-align: right;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">geneA</td>
+<td style="text-align: left;">treated</td>
+<td style="text-align: right;">23</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">geneB</td>
+<td style="text-align: left;">untreated</td>
+<td style="text-align: right;">103</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">geneB</td>
+<td style="text-align: left;">treated</td>
+<td style="text-align: right;">109</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>For the purpose of a ggplot2 barplot, we can use dplyr::summarize to calculate the associated statistics. In this case, we don’t want to transform our data or pre-calculate the mean. But we do need to shift the data into the ‘longer’ format as above. We can accomplish this using <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">tidyr::pivot_longer</a>. In this case, first define which columns should be pivoted using <strong>cols</strong>, then define the variable name assigned to the values column with <strong>values_to</strong>. Variable names for each condition and replicate are generated by splitting on the ‘_’ character integrated with the rename function when reading in the data. This is done with <strong>names_to</strong> and <strong>names_sep</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tb1 <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="co"># by using a `-`, we can exclude the first two columns</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="fu">c</span>(<span class="st">"tpm"</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"condition"</span>, <span class="st">"replicate"</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_sep  =</span> <span class="st">"_"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">head</span>() <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">accession</th>
+<th style="text-align: left;">gene</th>
+<th style="text-align: left;">condition</th>
+<th style="text-align: left;">replicate</th>
+<th style="text-align: right;">tpm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NM_001329047</td>
+<td style="text-align: left;">Mia2</td>
+<td style="text-align: left;">healthy</td>
+<td style="text-align: left;">rep1</td>
+<td style="text-align: right;">43.600</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NM_001329047</td>
+<td style="text-align: left;">Mia2</td>
+<td style="text-align: left;">healthy</td>
+<td style="text-align: left;">rep2</td>
+<td style="text-align: right;">36.309</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NM_001329047</td>
+<td style="text-align: left;">Mia2</td>
+<td style="text-align: left;">nash</td>
+<td style="text-align: left;">rep1</td>
+<td style="text-align: right;">29.644</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NM_001329047</td>
+<td style="text-align: left;">Mia2</td>
+<td style="text-align: left;">nash</td>
+<td style="text-align: left;">rep2</td>
+<td style="text-align: right;">26.789</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NM_001329047</td>
+<td style="text-align: left;">Mia2</td>
+<td style="text-align: left;">recruited</td>
+<td style="text-align: left;">rep1</td>
+<td style="text-align: right;">31.999</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NM_001329047</td>
+<td style="text-align: left;">Mia2</td>
+<td style="text-align: left;">recruited</td>
+<td style="text-align: left;">rep2</td>
+<td style="text-align: right;">38.089</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>With the data in this longer format, we can now use a combination of <a href="https://dplyr.tidyverse.org/reference/group_by.html">dplyr::group_by</a> and <a href="https://dplyr.tidyverse.org/reference/summarise.html">dplyr::summarise</a> to calculate the plotting variable we desire for each gene:condition.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>summary1 <span class="ot">&lt;-</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  tb1 <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="fu">c</span>(<span class="st">"tpm"</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"condition"</span>, <span class="st">"replicate"</span>),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_sep  =</span> <span class="st">"_"</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gene, condition) <span class="sc">%&gt;%</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(tpm),</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(tpm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'gene'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>summary1 <span class="sc">%&gt;%</span> <span class="fu">head</span>() <span class="sc">%&gt;%</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">gene</th>
+<th style="text-align: left;">condition</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">healthy</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.9915</td>
+<td style="text-align: right;">1.4021927</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">nash</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2.5565</td>
+<td style="text-align: right;">3.6154370</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">recruited</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3.9465</td>
+<td style="text-align: right;">0.1053589</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0610005C13Rik</td>
+<td style="text-align: left;">healthy</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2.3495</td>
+<td style="text-align: right;">0.7700393</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">0610005C13Rik</td>
+<td style="text-align: left;">nash</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.1445</td>
+<td style="text-align: right;">0.5536646</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0610005C13Rik</td>
+<td style="text-align: left;">recruited</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.1375</td>
+<td style="text-align: right;">0.6682159</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Now the data is in a suitable tidy format. Ggplot has two options for making <a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">bar charts</a>: geom_bar and geom_col.&nbsp;Read more at the link above. Essentially, <strong>use</strong> <strong><em>geom_bar()</em></strong> <strong>if the desired plot should be proportional to the number of times an observation occurs</strong>, and <strong>use</strong> <strong><em>geom_col()</em></strong> <strong>if the plot should be proportional to the values in the data</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>summary1 <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">==</span> <span class="st">"Adgre1"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition)) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"geom_bar"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>summary1 <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">==</span> <span class="st">"Adgre1"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean)) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"geom_col"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Bar-Charts_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" style="width:50.0%"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="Bar-Charts_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+<p>We can also add an error bar to the geom_col() using <a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar() or geom_linerange()</a>. Layering the error interval onto the bar charts requires defining aesthetic mappings with aes().</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>summary1 <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">==</span> <span class="st">"Adgre1"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean)) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> condition,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> mean <span class="sc">-</span> sd,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> mean <span class="sc">+</span> sd</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>summary1 <span class="sc">%&gt;%</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">==</span> <span class="st">"Adgre1"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean)) <span class="sc">+</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> condition,</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> mean <span class="sc">-</span> sd,</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> mean <span class="sc">+</span> sd</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Bar-Charts_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" style="width:50.0%"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="Bar-Charts_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+<p>Often it will be desired to create a panel of bar charts for several genes of interest. This is quite easy to accomplish with ggplot by adding <a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a> or <a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a> to the ggplot object. In this case, we will also need to retain a few more example genes. These can be added to the filter function directly, or a character vector can be created and intersected within the filter step.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>goi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Adgre1"</span>, <span class="st">"Vsig4"</span>, <span class="st">"Clec4f"</span>, <span class="st">"Actb"</span>, <span class="st">"Timd4"</span>, <span class="st">"Tnf"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>summary1 <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">%in%</span> goi) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean)) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> condition,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> mean <span class="sc">-</span> sd,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> mean <span class="sc">+</span> sd</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> gene)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Bar-Charts_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>In this case, the scales are automatically shared and reflect the range of the supplied data. In this case the scales misrepresent the expression data for genes not expressed at a similar magnitude as beta actin. This can be adjusted by adjusting the ‘scales’ option to ‘free_y’ or ‘free.’</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>goi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Adgre1"</span>, <span class="st">"Vsig4"</span>, <span class="st">"Clec4f"</span>, <span class="st">"Actb"</span>, <span class="st">"Timd4"</span>, <span class="st">"Tnf"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>summary1 <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">%in%</span> goi) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean)) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> condition,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> mean <span class="sc">-</span> sd,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> mean <span class="sc">+</span> sd</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> gene, <span class="at">scales =</span> <span class="st">'free'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Bar-Charts_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can also create bar charts for several genes within one panel by assigning a color or fill parameter in the mapping aesthetics. The data is grouped first by the x/y mapping and then by the fill/color mapping.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>goi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Adgre1"</span>, <span class="st">"Vsig4"</span>, <span class="st">"Clec4f"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>summary1 <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">%in%</span> goi) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gene, <span class="at">y =</span> mean, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> gene,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymin =</span> mean <span class="sc">-</span> sd,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymax =</span> mean <span class="sc">+</span> sd,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.2</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">"identity"</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>summary1 <span class="sc">%&gt;%</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">%in%</span> goi) <span class="sc">%&gt;%</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean, <span class="at">fill =</span> gene)) <span class="sc">+</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> condition,</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymin =</span> mean <span class="sc">-</span> sd,</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymax =</span> mean <span class="sc">+</span> sd,</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> gene</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.2</span>,</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">"identity"</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Bar-Charts_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" style="width:50.0%"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="Bar-Charts_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+<p>We can also easily generate sideways barcharts changing mapping to x or y. In this case the error interval mapping must be appropriately altere. As an alterntaive, the chart can be flipped using <a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip()</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>goi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Adgre1"</span>, <span class="st">"Vsig4"</span>, <span class="st">"Clec4f"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>summary1 <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">%in%</span> goi) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean, <span class="at">y =</span> gene, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> gene,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">xmin =</span> mean <span class="sc">-</span> sd,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">xmax =</span> mean <span class="sc">+</span> sd,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.2</span>,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">"identity"</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Using adjusted ggplot(aes()) and geom_errorbar(aes())"</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>summary1 <span class="sc">%&gt;%</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">%in%</span> goi) <span class="sc">%&gt;%</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gene, <span class="at">y =</span> mean, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> gene,</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymin =</span> mean <span class="sc">-</span> sd,</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymax =</span> mean <span class="sc">+</span> sd</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.2</span>,</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">"identity"</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Using coord_flip()"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Bar-Charts_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" style="width:50.0%"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="Bar-Charts_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+<p>A publication quality bar chart can be rendered by adjusting parameters to your specifications. Panels can be assembled and easily aligned using the <a href="https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html">cowplot</a> and/or the <a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a> packages.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>goi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Adgre1"</span>, <span class="st">"Vsig4"</span>, <span class="st">"Clec4f"</span>, <span class="st">"Actb"</span>, <span class="st">"Timd4"</span>, <span class="st">"Tnf"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>pointSize <span class="ot">&lt;-</span> <span class="dv">14</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>lineWidth <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fl">2.835</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  summary1 <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">%in%</span> goi) <span class="sc">%&gt;%</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> condition,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> mean <span class="sc">-</span> sd,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> mean <span class="sc">+</span> sd</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.spacing =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"lines"</span>)) <span class="sc">+</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="fu">c</span>(<span class="st">"Transcripts per million +/- SD"</span>)) <span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> pointSize, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">rect =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">line =</span> <span class="fu">element_line</span>(<span class="at">size =</span> lineWidth, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> pointSize <span class="sc">*</span> <span class="fl">0.8</span>, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> pointSize <span class="sc">*</span> <span class="fl">0.8</span>, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x  =</span> <span class="fu">element_text</span>(</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> pointSize <span class="sc">*</span> <span class="fl">0.6</span>,</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> <span class="st">"black"</span>,</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">1</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> pointSize <span class="sc">*</span> <span class="fl">0.6</span>, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> pointSize <span class="sc">*</span> <span class="fl">0.6</span>, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.key.height =</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"cm"</span>),</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>),</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">size =</span> lineWidth, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="st">"cm"</span>),</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>      <span class="at">face =</span> <span class="st">"italic"</span>,</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> pointSize <span class="sc">*</span> <span class="fl">0.6</span>,</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">0</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.placement =</span> <span class="st">"outside"</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"viridis"</span>) <span class="sc">+</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> gene, <span class="at">scales =</span> <span class="st">'free_y'</span>)</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>  summary1 <span class="sc">%&gt;%</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gene <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Adgre1"</span>, <span class="st">"Vsig4"</span>, <span class="st">"Clec4f"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gene, <span class="at">y =</span> mean, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> gene,</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymin =</span> mean <span class="sc">-</span> sd,</span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymax =</span> mean <span class="sc">+</span> sd</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.2</span>,</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">"identity"</span></span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.spacing =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"lines"</span>)) <span class="sc">+</span></span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="fu">c</span>(<span class="st">"Transcripts per million +/- SD"</span>),) <span class="sc">+</span></span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> pointSize, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">rect =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">line =</span> <span class="fu">element_line</span>(<span class="at">size =</span> lineWidth, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> pointSize <span class="sc">*</span> <span class="fl">0.8</span>, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> pointSize <span class="sc">*</span> <span class="fl">0.8</span>, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> pointSize <span class="sc">*</span> <span class="fl">0.6</span>, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y  =</span> <span class="fu">element_text</span>(</span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> pointSize <span class="sc">*</span> <span class="fl">0.6</span>,</span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> <span class="st">"black"</span>,</span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>      <span class="at">face =</span> <span class="st">"italic"</span></span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> pointSize <span class="sc">*</span> <span class="fl">0.6</span>, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.key.height =</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"cm"</span>),</span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>),</span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">size =</span> lineWidth, <span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="st">"cm"</span>),</span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"mako"</span>) <span class="sc">+</span></span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(a,</span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>          b,</span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>          <span class="at">align =</span> <span class="st">"v"</span>,</span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis =</span> <span class="st">"bt"</span>,</span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a>          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Bar-Charts_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="finished" class="level2">
+<h2 class="anchored" data-anchor-id="finished">Finished!</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sessioninfo<span class="sc">::</span><span class="fu">session_info</span>(<span class="at">pkgs =</span> <span class="cn">NULL</span>) <span class="sc">%&gt;%</span> details<span class="sc">::</span><span class="fu">details</span>(<span class="at">summary =</span> <span class="st">'Current session info'</span>, <span class="at">open =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<details open="">
+<summary>
+<span title="Click to Expand"> Current session info </span>
+</summary>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>─ Session info ───────────────────────────────────────────────────────────────</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a> setting  value</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a> version  R version <span class="dv">4</span>.<span class="fl">1.0</span> (<span class="dv">2021-05-18</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a> os       macOS Big Sur <span class="fl">10.16</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a> system   x86_64, darwin17<span class="fl">.0</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a> ui       X11</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">language</span> (EN)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a> collate  en_US.UTF<span class="dv">-8</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a> ctype    en_US.UTF<span class="dv">-8</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a> tz       America<span class="sc">/</span>New_York</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a> date     <span class="dv">2022-05-04</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a> pandoc   <span class="dv">2</span>.<span class="dv">17</span>.<span class="fl">1.1</span> <span class="sc">@</span> <span class="er">/</span>Applications<span class="sc">/</span>RStudio.app<span class="sc">/</span>Contents<span class="sc">/</span>MacOS<span class="sc">/</span>quarto<span class="sc">/</span>bin<span class="sc">/</span> (via rmarkdown)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>─ Packages ───────────────────────────────────────────────────────────────────</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a> package     <span class="sc">*</span> version <span class="fu">date</span> (UTC) lib source</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a> assertthat    <span class="dv">0</span>.<span class="fl">2.1</span>   <span class="dv">2019-03-21</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a> cellranger    <span class="dv">1</span>.<span class="fl">1.0</span>   <span class="dv">2016-07-27</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a> cli           <span class="dv">3</span>.<span class="fl">1.1</span>   <span class="dv">2022-01-20</span> [<span class="dv">1</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.2</span>)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a> clipr         <span class="dv">0</span>.<span class="fl">7.1</span>   <span class="dv">2020-10-08</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a> colorspace    <span class="fl">2.0</span><span class="dv">-2</span>   <span class="dv">2021-06-24</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a> cowplot     <span class="sc">*</span> <span class="dv">1</span>.<span class="fl">1.1</span>   <span class="dv">2020-12-30</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a> crayon        <span class="dv">1</span>.<span class="fl">4.2</span>   <span class="dv">2021-10-29</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a> DBI           <span class="dv">1</span>.<span class="fl">1.2</span>   <span class="dv">2021-12-20</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a> desc          <span class="dv">1</span>.<span class="fl">4.0</span>   <span class="dv">2021-09-28</span> [<span class="dv">1</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a> details       <span class="dv">0</span>.<span class="fl">2.1</span>   <span class="dv">2020-01-12</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a> digest        <span class="dv">0</span>.<span class="fl">6.29</span>  <span class="dv">2021-12-01</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a> dplyr       <span class="sc">*</span> <span class="dv">1</span>.<span class="fl">0.8</span>   <span class="dv">2022-02-08</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a> ellipsis      <span class="dv">0</span>.<span class="fl">3.2</span>   <span class="dv">2021-04-29</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a> evaluate      <span class="fl">0.14</span>    <span class="dv">2019-05-28</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a> fansi         <span class="dv">1</span>.<span class="fl">0.2</span>   <span class="dv">2022-01-14</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.2</span>)</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a> farver        <span class="dv">2</span>.<span class="fl">1.0</span>   <span class="dv">2021-02-28</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a> fastmap       <span class="dv">1</span>.<span class="fl">1.0</span>   <span class="dv">2021-01-25</span> [<span class="dv">1</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a> generics      <span class="dv">0</span>.<span class="fl">1.2</span>   <span class="dv">2022-01-31</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.2</span>)</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a> ggplot2     <span class="sc">*</span> <span class="dv">3</span>.<span class="fl">3.5</span>   <span class="dv">2021-06-25</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a> glue          <span class="dv">1</span>.<span class="fl">6.1</span>   <span class="dv">2022-01-22</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.2</span>)</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a> gtable        <span class="dv">0</span>.<span class="fl">3.0</span>   <span class="dv">2019-03-25</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a> highr         <span class="fl">0.9</span>     <span class="dv">2021-04-16</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a> hms           <span class="dv">1</span>.<span class="fl">1.1</span>   <span class="dv">2021-09-26</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a> htmltools     <span class="dv">0</span>.<span class="fl">5.2</span>   <span class="dv">2021-08-25</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a> htmlwidgets   <span class="dv">1</span>.<span class="fl">5.4</span>   <span class="dv">2021-09-08</span> [<span class="dv">1</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a> httr          <span class="dv">1</span>.<span class="fl">4.2</span>   <span class="dv">2020-07-20</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a> jsonlite      <span class="dv">1</span>.<span class="fl">7.3</span>   <span class="dv">2022-01-17</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.2</span>)</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a> knitr         <span class="fl">1.37</span>    <span class="dv">2021-12-16</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a> labeling      <span class="dv">0</span>.<span class="fl">4.2</span>   <span class="dv">2020-10-20</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a> lifecycle     <span class="dv">1</span>.<span class="fl">0.1</span>   <span class="dv">2021-09-24</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a> magrittr      <span class="dv">2</span>.<span class="fl">0.2</span>   <span class="dv">2022-01-26</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.2</span>)</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a> munsell       <span class="dv">0</span>.<span class="fl">5.0</span>   <span class="dv">2018-06-12</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a> pillar        <span class="dv">1</span>.<span class="fl">7.0</span>   <span class="dv">2022-02-01</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.2</span>)</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a> pkgconfig     <span class="dv">2</span>.<span class="fl">0.3</span>   <span class="dv">2019-09-22</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a> png           <span class="fl">0.1</span><span class="dv">-7</span>   <span class="dv">2013-12-03</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a> purrr         <span class="dv">0</span>.<span class="fl">3.4</span>   <span class="dv">2020-04-17</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a> R6            <span class="dv">2</span>.<span class="fl">5.1</span>   <span class="dv">2021-08-19</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a> Rcpp          <span class="dv">1</span>.<span class="fl">0.8</span>   <span class="dv">2022-01-13</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.2</span>)</span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a> readr       <span class="sc">*</span> <span class="dv">2</span>.<span class="fl">1.2</span>   <span class="dv">2022-01-30</span> [<span class="dv">1</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.2</span>)</span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a> readxl        <span class="dv">1</span>.<span class="fl">3.1</span>   <span class="dv">2019-03-13</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a> rlang         <span class="dv">1</span>.<span class="fl">0.1</span>   <span class="dv">2022-02-03</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.2</span>)</span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a> rmarkdown     <span class="fl">2.11</span>    <span class="dv">2021-09-14</span> [<span class="dv">1</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a> rprojroot     <span class="dv">2</span>.<span class="fl">0.2</span>   <span class="dv">2020-11-15</span> [<span class="dv">1</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a> rstudioapi    <span class="fl">0.13</span>    <span class="dv">2020-11-12</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a> scales        <span class="dv">1</span>.<span class="fl">1.1</span>   <span class="dv">2020-05-11</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a> sessioninfo   <span class="dv">1</span>.<span class="fl">2.2</span>   <span class="dv">2021-12-06</span> [<span class="dv">1</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a> stringi       <span class="dv">1</span>.<span class="fl">7.6</span>   <span class="dv">2021-11-29</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a> stringr       <span class="dv">1</span>.<span class="fl">4.0</span>   <span class="dv">2019-02-10</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a> tibble        <span class="dv">3</span>.<span class="fl">1.6</span>   <span class="dv">2021-11-07</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a> tidyr       <span class="sc">*</span> <span class="dv">1</span>.<span class="fl">2.0</span>   <span class="dv">2022-02-01</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.2</span>)</span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a> tidyselect    <span class="dv">1</span>.<span class="fl">1.1</span>   <span class="dv">2021-04-30</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a> tzdb          <span class="dv">0</span>.<span class="fl">2.0</span>   <span class="dv">2021-10-27</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a> utf8          <span class="dv">1</span>.<span class="fl">2.2</span>   <span class="dv">2021-07-24</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a> vctrs         <span class="dv">0</span>.<span class="fl">3.8</span>   <span class="dv">2021-04-29</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a> viridisLite   <span class="dv">0</span>.<span class="fl">4.0</span>   <span class="dv">2021-04-13</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a> withr         <span class="dv">2</span>.<span class="fl">4.3</span>   <span class="dv">2021-11-30</span> [<span class="dv">1</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a> xfun          <span class="fl">0.29</span>    <span class="dv">2021-12-14</span> [<span class="dv">1</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a> xml2          <span class="dv">1</span>.<span class="fl">3.3</span>   <span class="dv">2021-11-30</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.0</span>)</span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a> yaml          <span class="dv">2</span>.<span class="fl">2.2</span>   <span class="dv">2022-01-25</span> [<span class="dv">2</span>] <span class="fu">CRAN</span> (R <span class="dv">4</span>.<span class="fl">1.2</span>)</span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a> [<span class="dv">1</span>] <span class="sc">/</span>Users<span class="sc">/</span>tro3nr<span class="sc">/</span>Library<span class="sc">/</span>R<span class="sc">/</span>x86_64<span class="sc">/</span><span class="fl">4.1</span><span class="sc">/</span>library</span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a> [<span class="dv">2</span>] <span class="sc">/</span>Library<span class="sc">/</span>Frameworks<span class="sc">/</span>R.framework<span class="sc">/</span>Versions<span class="sc">/</span><span class="fl">4.1</span><span class="sc">/</span>Resources<span class="sc">/</span>library</span>
+<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a>──────────────────────────────────────────────────────────────────────────────</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p><br></p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+    } else {
+      disableStylesheet(alternateStylesheets);
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

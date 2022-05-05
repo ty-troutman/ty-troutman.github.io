@@ -1,0 +1,39 @@
+project:
+  type: website
+  output-dir: docs
+website:
+  title: Troutman Lab
+  navbar:
+    background: dark
+    right:
+      - text: Home
+        href: home.qmd
+      - text: Analysis
+        menu: 
+          - text: "Processing RNA-Seq Data"
+            href: Docs/Analysis/processingRNASeqData.qmd
+          - text: "Processing ATAC-Seq Data"
+          - text: "Processing ChIP-Seq Data"
+      - text: Sequencing
+        menu:
+          - text: "Database and Barcodes"
+            href: Docs/Sequencing/Database_Barcodes.qmd
+          - text: "Pooling and Submission"
+            href: Docs/Sequencing/Pooling_Submission.qmd
+          - text: "Downloading the Data"
+            href: Docs/Sequencing/ngsScraper_KevinErnst.qmd
+          - text: "More stuff"
+      - icon: github
+        href: https://github.com/ty-troutman
+        aria-label: Troutman GitHub
+      - text: "CCHMC"
+        href: "https://www.cincinnatichildrens.org/research/divisions/a/allergy-immunology/labs/troutman"
+        
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    css: styles.css
+    toc: true
+editor: visual
