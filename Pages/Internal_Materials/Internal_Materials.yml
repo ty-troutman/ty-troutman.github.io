@@ -7,6 +7,8 @@
       href: ../Analysis/Lab_Cluster_Drives.qmd
     - text: "Processing RNA-Seq"
       href: ../Analysis/Processing_RNASeq_Data.qmd
+    - text: "Genomics Analyses"
+      href: "https://github.com/ty-troutman/Genomics-analyses"
 
 - title: Sequencing
   subtitle: Information related to sequencing libraries, sample submission, and data download
