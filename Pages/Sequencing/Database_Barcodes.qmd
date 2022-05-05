@@ -5,12 +5,13 @@ editor: visual
 
 ::: callout-important
 # Required!
+
 Use the [linked database](https://docs.google.com/spreadsheets/d/15NMOWsKdL7QIupXOQ3CLYt0YsTYBMaimaXhoMHbe-8w/edit?usp=sharing) to generate a sample name with a unique id and to track associated meta data.
 :::
 
 # Data base instructions
 
-*To be updated:*  
+*To be updated:*
 
 -   Arrange access through the lab manager or Ty.
 -   Do not delete other peoples entries!
@@ -18,9 +19,9 @@ Use the [linked database](https://docs.google.com/spreadsheets/d/15NMOWsKdL7QIup
 -   Use generated sample names in submitted sample sheets.
 -   Track relevant meta data in additional columns.
 
-
 # [Lab Sequencing Barcodes](https://docs.google.com/spreadsheets/d/109S5mDFF2S8gghYd7Q-zsrvwM2nfUP9SjjCCN-za5Og/edit?usp=sharing)
-:::callout-important
+
+::: callout-important
 -   Not all barcode sequences between manufacturers are compatible with each other.
 -   It is important to plan ahead, consider Hamming distances, GC balance, and communicate with colleagues to facilitate multiplexing.
 -   Examples for determining Hamming distances can be found on the lab [GitHub](https://github.com/ty-troutman/labSequencingBarcodes).
@@ -28,44 +29,46 @@ Use the [linked database](https://docs.google.com/spreadsheets/d/15NMOWsKdL7QIup
 :::
 
 ### [NEXTFLEX UDI Barcodes](https://github.com/ty-troutman/labSequencingBarcodes/blob/main/data/NEXTflex_UDI_Index_Sequences_v21.06_v1-New.xlsx)
-:::callout-important
--   Never thaw the annealed adapters above room temperature or they can denature. 
--   Mix carefully and centrifuge prior to opening. 
+
+::: callout-important
+-   Never thaw the annealed adapters above room temperature or they can denature.
+-   Mix carefully and centrifuge prior to opening.
 -   Handle carefully to avoid downstream adapter cross-contamination.
 :::
 
 We have three sets of NEXTFLEX full-length unique dual index (UDI) barcoding adapters from [Perkin Elmer](https://perkinelmer-appliedgenomics.com/home/products/library-preparation-kits/nextflex-ngs-barcodes/nextflex-unique-dual-index-barcodes/nextflex-udi-adapters/). These adapters are for use in ligation chemistry (lab standard dUTP RNA-seq and ChIP-seq protocols). They contain a unique 8 nucleotide index in the P5 (i5) and P7 (i7) sequence. Each pair was designed with a Hamming distance of at least 3 across the entire series of 384 UDI barcodes, meaning any two or more chosen NEXTFLEX UDI adapters in the entire set are internally compatible with themselves. They are not all appropriately GC balanced though. These UDI barcodes are purchased in sets of 96 adapters. We purchased set 4 (barcodes 289:384) and were gifted small aliquots of set 1 (1:96) and set 2 (97:192) from the labs' of Chris Glass and Sven Heinz at UC San Diego.
 
 Adapter stocks are delivered at 25 µM and diluted to 0.625 µM in 1X T4 DNA ligase buffer (10X T4 ligase buffer, NEB #B0202S; dilute 1:10 with ultra-pure water to obtain 1X buffer). Diluted stocks are further diluted to 0.25 µM as routine use aliquots. Typically, 0.5 to 1 µl of the working aliquot is adequate for adapter ligation. Barcoded libraries are amplified using NEXTFLEX common primer sequences.
-```
-NEXTFLEX PCR Primer 1: AATGATACGGCGACCACCGAGATCTACAC 
-NEXTFLEX PCR Primer 2: CAAGCAGAAGACGGCATACGAGAT
 
-NEXTFLEX P5 Adapter: AATGATACGGCGACCACCGAGATCTACACXXXXXXXXACACTCTTTCCCTACACGACGCTCTTCCGATCT
-NEXTFLEX P7 Adapter: GATCGGAAGAGCACACGTCTGAACTCCAGTCACXXXXXXXXATCTCGTATGCCGTCTTCTGCTTG
+    NEXTFLEX PCR Primer 1: AATGATACGGCGACCACCGAGATCTACAC 
+    NEXTFLEX PCR Primer 2: CAAGCAGAAGACGGCATACGAGAT
 
-```
+    NEXTFLEX P5 Adapter: AATGATACGGCGACCACCGAGATCTACACXXXXXXXXACACTCTTTCCCTACACGACGCTCTTCCGATCT
+    NEXTFLEX P7 Adapter: GATCGGAAGAGCACACGTCTGAACTCCAGTCACXXXXXXXXATCTCGTATGCCGTCTTCTGCTTG
 
 ::: callout-note
 XXXXXXXX denotes the P5 or P7 index region of the adapter.
 :::
 
 ### [Tn5 Barcoding Primers](https://github.com/ty-troutman/labSequencingBarcodes/blob/main/data/41586_2015_BFnature14590_MOESM36_ESM.xlsx)
+
 [Buenrostro et. al. Nature, 2015. PMID: 26083756.](https://pubmed.ncbi.nlm.nih.gov/26083756/)
 
 Tn5 transposase barcoding primers for (ATAC-seq and other suitable transposase chemistry libraries) were sourced from the labs' of Howard Chang and William Greenleaf (Supplementary Table 1 of the linked [manuscript](https://pubmed.ncbi.nlm.nih.gov/26083756/)). Each primer contains a unique 8 nucleotide index. Combinatorial or unique P5 and P7 primers are selected for each sample and are used as primers for PCR amplfication of ATAC-seq libraries.
 
 Primers were ordered from IDT as standard oligonucleotides and resuspended at 10 µM in low-EDTA TE buffer. Reconstituted primers stocks are stored at -20C. Working aliquots should be used routinely in place of the stocks.
-```
-Tn5 P5 Primer Sequence: AATGATACGGCGACCACCGAGATCTACACXXXXXXXXTCGTCGGCAGCGTCAGATGTGTAT
-Tn5 P7 Primer Sequence: CAAGCAGAAGACGGCATACGAGATXXXXXXXXGTCTCGTGGGCTCGGAGATGTG
-```
+
+    Tn5 P5 Primer Sequence: AATGATACGGCGACCACCGAGATCTACACXXXXXXXXTCGTCGGCAGCGTCAGATGTGTAT
+    Tn5 P7 Primer Sequence: CAAGCAGAAGACGGCATACGAGATXXXXXXXXGTCTCGTGGGCTCGGAGATGTG
+
 ::: callout-note
 XXXXXXXX denotes the P5 or P7 index region of the primer.
 :::
 
 # [Additional information](https://dnatech.genomecenter.ucdavis.edu/faqs/how-should-i-submit-the-barcode-sequence-information-in-which-direction-will-they-be-sequenced/)
-##### For barcoded adapters added via ligation (e.g. NEXTFLEX UDI, standard Truseq style Y-adapters): 
+
+##### For barcoded adapters added via ligation (e.g. NEXTFLEX UDI, standard Truseq style Y-adapters):
+
 -   index 1 (i7) is always read in the direction (5' to 3′) of the sequence in the oligo
 -   index 2 (i5) is read in the direction of the oligos for Miseq and NovaSeq runs
 -   index 2 (i5) is read as reverse complement of barcoded PCR oligos for NextSeq and iSeq runs
@@ -73,5 +76,5 @@ XXXXXXXX denotes the P5 or P7 index region of the primer.
 ##### For barcodes added via a PCR step (e.g. Tn5 Transposase Barcoding PCR Primers, Nextera; or through primers and stubby adapters):
 
 -   index 1 (i7) is always read as reverse complement of the sequence in TruSeq or Nextera style PCR oligos
--   index 2 (i5) is read in direction of TruSeq or Nextera PCR oligos for Miseq and NovaSeq runs  
--   index 2 (i5) is read as reverse complement of barcoded PCR oligos for NextSeq and iSeq runs  
+-   index 2 (i5) is read in direction of TruSeq or Nextera PCR oligos for Miseq and NovaSeq runs\
+-   index 2 (i5) is read as reverse complement of barcoded PCR oligos for NextSeq and iSeq runs

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Troutman Lab - Troutman Lab Research</title>
+<title>Troutman Lab - Internal Materials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,10 +24,11 @@ ul.task-list{list-style: none;}
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link class="quarto-color-scheme" id="quarto-text-highlighting-styles" href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
 <link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" id="quarto-text-highlighting-styles" href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css">
@@ -54,12 +55,36 @@ ul.task-list{list-style: none;}
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-guide-links .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-subtitle','listing-links',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-title","listing-subtitle","listing-links"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-guide-links'] = new List('listing-guide-links', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-sidebar nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -77,7 +102,7 @@ ul.task-list{list-style: none;}
     <a class="nav-link" href="../../index.html">Home</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../Pages/Research/Research.html" aria-current="page">Research</a>
+    <a class="nav-link" href="../../Pages/Research/Research.html">Research</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../Pages/Publications/Publications.html">Publications</a>
@@ -86,7 +111,7 @@ ul.task-list{list-style: none;}
     <a class="nav-link" href="../../Pages/Lab_Members/Lab_Members.html">Lab Members</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../Pages/Internal_Materials/Internal_Materials.html">Internal Materials</a>
+    <a class="nav-link active" href="../../Pages/Internal_Materials/Internal_Materials.html" aria-current="page">Internal Materials</a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/ty-troutman"><i class="bi bi-github" role="img" aria-label="Troutman GitHub">
@@ -104,30 +129,120 @@ ul.task-list{list-style: none;}
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Internal Materials</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Analysis</a>
+      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Pages/Analysis/BMI_Cluster.html" class="sidebar-item-text sidebar-link">Biomedical Informatics High Performance Computing Cluster</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Pages/Analysis/Lab_Cluster_Drives.html" class="sidebar-item-text sidebar-link">Lab Cluster Drives</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Pages/Analysis/Processing_RNASeq_Data.html" class="sidebar-item-text sidebar-link">Processing RNA-seq data</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/ty-troutman/Genomics-analyses" class="sidebar-item-text sidebar-link">Genomics analyses</a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Sequencing</a>
+      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Pages/Sequencing/Database_Barcodes.html" class="sidebar-item-text sidebar-link">Sequencing Database and Barcodes</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Pages/Sequencing/Pooling_Submission.html" class="sidebar-item-text sidebar-link">Pooling and Submission of Sequencing Libraries</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Pages/Sequencing/NGS_Scraper_KevinErnst.html" class="sidebar-item-text sidebar-link">NGS scraper / downloader</a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Logs and Protocols</a>
+      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://sites.google.com/view/troutman-lab/logs-and-protocols/logs" class="sidebar-item-text sidebar-link">Logs</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://sites.google.com/view/troutman-lab/logs-and-protocols/cell-preparation" class="sidebar-item-text sidebar-link">Cell Preparation</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://sites.google.com/view/troutman-lab/logs-and-protocols/equipment" class="sidebar-item-text sidebar-link">Equipment</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://sites.google.com/view/troutman-lab/logs-and-protocols/genomics" class="sidebar-item-text sidebar-link">Genomics</a>
+  </div>
+</li>
+    </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#current-projects" id="toc-current-projects" class="nav-link active" data-scroll-target="#current-projects">Current Projects</a>
-  <ul class="collapse">
-  <li><a href="#macrophages-in-inflammation-and-obesity" id="toc-macrophages-in-inflammation-and-obesity" class="nav-link" data-scroll-target="#macrophages-in-inflammation-and-obesity"><strong>Macrophages in inflammation and obesity</strong></a></li>
-  <li><a href="#genetic-variation-and-control-of-macrophage-behaviors" id="toc-genetic-variation-and-control-of-macrophage-behaviors" class="nav-link" data-scroll-target="#genetic-variation-and-control-of-macrophage-behaviors"><strong>Genetic variation and control of macrophage behaviors</strong></a></li>
-  </ul></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Troutman Lab Research</h1>
+<h1 class="title d-none d-lg-block">Internal Materials</h1>
+<p class="subtitle lead">Information and resources useful for day-to-day research activities in the Troutman Lab.</p>
 </div>
 
 
@@ -143,25 +258,62 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<p>The Troutman Lab investigates the functions of tissue-residing myeloid cells, including macrophages, in regulating health and disease. Macrophages reside in all tissues, where they contribute to innate immune surveillance, clear cellular debris and promote repair in response to injuries. In addition, macrophages and other recruited mononuclear phagocytes participate in disease processes associated with obesity, allergic inflammation, suppression of anti-cancer immunity and neurodegeneration. Within each tissue, cell subtypes adopt specialized roles through unique combinations of niche-provided signals. As a result, macrophages and other recruited mononuclear phagocytes may diversify further during disease because of environmental perturbation.&nbsp;</p>
-<p>In the Troutman Lab, established in July 2021, we couple cellular and molecular immunology approaches to quantitative analyses of dynamic epigenetic factors ultimately controlling gene expression. With these approaches, we discover novel intercellular and intracellular mechanisms controlling tissue myeloid cell behaviors during health and disease.</p>
-<section id="current-projects" class="level1">
-<h1>Current Projects</h1>
-<section id="macrophages-in-inflammation-and-obesity" class="level3">
-<h3 class="anchored" data-anchor-id="macrophages-in-inflammation-and-obesity"><strong>Macrophages in inflammation and obesity</strong></h3>
-<p>The biological systems of inflammation and metabolism are closely intertwined, and tissue macrophages are key immune cells linking these systems. In addition to their roles as sentinels of infection, macrophages also contribute to obesity-associated diseases.&nbsp;</p>
-<p>For example, certain diets can drive tissue accumulation of inflammatory lipids and augment intestinal permeability. These inflammatory lipid species and products of the leaky gut may result in local and systemic inflammation.&nbsp;</p>
-<p>One documented consequence is the development of insulin resistance and increased obesity, driven by adipose tissue – recruited macrophages. Additionally, hepatic macrophages lining the liver sinusoids become more susceptible to death and inflammatory dysregulation. These hepatic macrophages function to clear microbes and microbial products draining from the intestine, and absence and dysregulation of these hepatic macrophages may exacerbate systemic inflammation.&nbsp;</p>
-<p>One area of interest in the Troutman Lab is to define molecular mechanisms controlling tissue macrophage behaviors resulting from inflammation and obesity.</p>
+<div id="listing-guide-links" class="column-screen-inset-right quarto-listing quarto-listing-container-custom" style="max-width: 850px;">
+<div class="link-cards">
+<div class="card">
+<div class="card-body">
+<section id="analysis" class="level4 card-title">
+<h4 data-anchor-id="analysis">Analysis</h4>
+<section id="get-started-analyzing-sequencing-data" class="level6 card-subtitle text-muted">
+<h6 data-anchor-id="get-started-analyzing-sequencing-data">Get started analyzing sequencing data</h6>
 </section>
-<section id="genetic-variation-and-control-of-macrophage-behaviors" class="level3">
-<h3 class="anchored" data-anchor-id="genetic-variation-and-control-of-macrophage-behaviors"><strong>Genetic variation and control of macrophage behaviors</strong></h3>
-<p>Normal tissue behaviors depend on a network of cell populations functioning together to support organ function. Disease may result if the system becomes unbalanced in one or more constituent cell types. Some diseases have known lesions in a single causal gene. However, most diseases result from the polygenic background of a susceptible individual interacting with a range of environmental factors. Thus, the susceptibility of a tissue to develop disease may be governed by interactions of the genetic background with one or more environmental factors. Notable examples include Alzheimer disease, cardiovascular disease, insulin resistance, steatohepatitis and cirrhosis and atopic diseases. In these cases, certain populations are resistant to disease progression in the context of similar environmental triggers.&nbsp;</p>
-<p>Genome-wide association studies provide the identities of susceptibility loci for many complex diseases. These susceptibility loci often lie in noncoding regions of the genome, which suggest that they function by regulating gene expression. However, different cell lineages can select divergent sets of noncoding regulatory elements controlling cell fate and function. Therefore, improving mechanistic understanding of the genetic and environmental factors interacting to promote disease may require knowledge of the cell types actively using the mutated DNA elements. The Troutman Lab studies these interactions using purified cells from inbred mouse strains. Gene regulatory differences between the model genomes are assessed using experimental conditions that fix the contribution of environmental effects. This enables defining cell autonomous and non–cell autonomous roles for naturally occurring genetic variation in controlling macrophage behaviors. Although the locations of gene regulatory elements have diverged between humans and mice, the mechanisms controlling gene regulation and the functional properties of macrophages remain highly conserved between the two species. Thus, the prevalence of mutations in mouse macrophages affecting the binding of a certain transcription factor may cause similar outcomes in humans.</p>
+</section>
+<ul>
+<li><a href="../../Pages/Analysis/BMI_Cluster.html">BMI Cluster</a></li>
+<li><a href="../../Pages/Analysis/Lab_Cluster_Drives.html">Lab Cluster Drives</a></li>
+<li><a href="../../Pages/Analysis/Processing_RNASeq_Data.html">Processing RNA-Seq</a></li>
+</ul>
+</div>
+</div>
+<div class="card">
+<div class="card-body">
+<section id="sequencing" class="level4 card-title">
+<h4 data-anchor-id="sequencing">Sequencing</h4>
+<section id="information-related-to-sequencing-libraries-sample-submission-and-data-download" class="level6 card-subtitle text-muted">
+<h6 data-anchor-id="information-related-to-sequencing-libraries-sample-submission-and-data-download">Information related to sequencing libraries, sample submission, and data download</h6>
+</section>
+</section>
+<ul>
+<li><a href="../../Pages/Sequencing/Database_Barcodes.html">Sequencing Database and Barcodes</a></li>
+<li><a href="../../Pages/Sequencing/Pooling_Submission.html">Sample Pooling and Submission</a></li>
+<li><a href="../../Pages/Sequencing/NGS_Scraper_KevinErnst.html">Downloading Data</a></li>
+</ul>
+</div>
+</div>
+<div class="card">
+<div class="card-body">
+<section id="logs-and-protocols" class="level4 card-title">
+<h4 data-anchor-id="logs-and-protocols">Logs and Protocols</h4>
+<section id="locations-of-lab-logs-and-common-protocols" class="level6 card-subtitle text-muted">
+<h6 data-anchor-id="locations-of-lab-logs-and-common-protocols">Locations of lab logs and common protocols</h6>
+</section>
+</section>
+<ul>
+<li><a href="https://sites.google.com/view/troutman-lab/logs-and-protocols/logs">Logs</a></li>
+<li><a href="https://sites.google.com/view/troutman-lab/logs-and-protocols/cell-preparation">Cell Preparation</a></li>
+<li><a href="https://sites.google.com/view/troutman-lab/logs-and-protocols/equipment">Equipment</a></li>
+<li><a href="https://sites.google.com/view/troutman-lab/logs-and-protocols/genomics">Genomics</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
 
 
-</section>
-</section>
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -263,13 +415,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
   } 
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const clipboard = new window.ClipboardJS('.code-copy-button', {
     target: function(trigger) {
       return trigger.previousElementSibling;

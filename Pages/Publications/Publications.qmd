@@ -1,5 +1,6 @@
 ---
 title: "Publications"
+sidebar: false
 ---
 
 More details coming soon.

@@ -1,0 +1,14 @@
+---
+title: "Internal Materials"
+subtitle: Information and resources useful for day-to-day research activities in the Troutman Lab.
+page-layout: article
+anchor-sections: false
+search: false
+listing:
+  id: guide-links
+  template: ../../ejs/links.ejs
+  contents: Internal_Materials.yml
+---
+
+::: {#guide-links .column-screen-inset-right style="max-width: 850px;"}
+:::

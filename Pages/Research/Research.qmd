@@ -1,5 +1,6 @@
 ---
 title: "Troutman Lab Research"
+sidebar: false
 ---
 
 The Troutman Lab investigates the functions of tissue-residing myeloid cells, including macrophages, in regulating health and disease. Macrophages reside in all tissues, where they contribute to innate immune surveillance, clear cellular debris and promote repair in response to injuries. In addition, macrophages and other recruited mononuclear phagocytes participate in disease processes associated with obesity, allergic inflammation, suppression of anti-cancer immunity and neurodegeneration. Within each tissue, cell subtypes adopt specialized roles through unique combinations of niche-provided signals. As a result, macrophages and other recruited mononuclear phagocytes may diversify further during disease because of environmental perturbation. 

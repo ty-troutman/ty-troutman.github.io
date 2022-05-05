@@ -14,29 +14,42 @@ website:
         href: Pages/Publications/Publications.qmd
       - text: Lab Members
         href: Pages/Lab_Members/Lab_Members.qmd
-      - text: Analysis
-        menu: 
-          - text: "BMI Cluster"
-            href: Pages/Analysis/BMI_Cluster.qmd
-          - text: "Lab Cluster Drives"
-            href: Pages/Analysis/Lab_Cluster_Drives.qmd
-          - text: "Processing RNA-Seq Data"
-            href: Pages/Analysis/Processing_RNASeq_Data.qmd
-          - text: "Just beginning?"
-            href: "https://github.com/ty-troutman/Genomics-analyses"
-      - text: Sequencing
-        menu:
-          - text: "Database and Barcodes"
-            href: Pages/Sequencing/Database_Barcodes.qmd
-          - text: "Pooling and Submission"
-            href: Pages/Sequencing/Pooling_Submission.qmd
-          - text: "Downloading the Data"
-            href: Pages/Sequencing/NGS_Scraper_KevinErnst.qmd
+      - text: Internal Materials
+        href: Pages/Internal_Materials/Internal_Materials.qmd
       - icon: github
         href: https://github.com/ty-troutman
         aria-label: Troutman GitHub
       - text: "CCHMC"
         href: "https://www.cincinnatichildrens.org/research/divisions/a/allergy-immunology/labs/troutman"
+  
+  sidebar:
+    - id: Internal_Materials
+      align: left
+      style: "floating"
+      collapse-level: 1
+      contents:
+      - section: "Analysis"
+        contents:
+          - Pages/Analysis/BMI_Cluster.qmd
+          - Pages/Analysis/Lab_Cluster_Drives.qmd
+          - Pages/Analysis/Processing_RNASeq_Data.qmd
+          - text: "Genomics analyses"
+            href: "https://github.com/ty-troutman/Genomics-analyses"
+      - section: "Sequencing"
+        contents: 
+          - Pages/Sequencing/Database_Barcodes.qmd
+          - Pages/Sequencing/Pooling_Submission.qmd
+          - Pages/Sequencing/NGS_Scraper_KevinErnst.qmd
+      - section: "Logs and Protocols"
+        contents:
+          - text: "Logs"
+            href: "https://sites.google.com/view/troutman-lab/logs-and-protocols/logs"
+          - text: "Cell Preparation"
+            href: "https://sites.google.com/view/troutman-lab/logs-and-protocols/cell-preparation"
+          - text: "Equipment"
+            href: "https://sites.google.com/view/troutman-lab/logs-and-protocols/equipment"
+          - text: "Genomics"
+            href: "https://sites.google.com/view/troutman-lab/logs-and-protocols/genomics"
         
 format:
   html:

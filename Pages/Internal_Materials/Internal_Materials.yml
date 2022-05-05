@@ -1,0 +1,31 @@
+- title: Analysis
+  subtitle: Get started analyzing sequencing data 
+  links:
+    - text: "BMI Cluster"
+      href: ../Analysis/BMI_Cluster.qmd
+    - text: "Lab Cluster Drives"
+      href: ../Analysis/Lab_Cluster_Drives.qmd
+    - text: "Processing RNA-Seq"
+      href: ../Analysis/Processing_RNASeq_Data.qmd
+
+- title: Sequencing
+  subtitle: Information related to sequencing libraries, sample submission, and data download
+  links:
+    - text: "Sequencing Database and Barcodes"
+      href: ../Sequencing/Database_Barcodes.qmd
+    - text: "Sample Pooling and Submission"
+      href: ../Sequencing/Pooling_Submission.qmd
+    - text: "Downloading Data"
+      href: ../Sequencing/NGS_Scraper_KevinErnst.qmd
+      
+- title: Logs and Protocols
+  subtitle: Locations of lab logs and common protocols
+  links:
+    - text: "Logs"
+      href: https://sites.google.com/view/troutman-lab/logs-and-protocols/logs
+    - text: "Cell Preparation"
+      href: https://sites.google.com/view/troutman-lab/logs-and-protocols/cell-preparation
+    - text: "Equipment"
+      href: https://sites.google.com/view/troutman-lab/logs-and-protocols/equipment
+    - text: "Genomics"
+      href: https://sites.google.com/view/troutman-lab/logs-and-protocols/genomics
