@@ -32,16 +32,22 @@ website:
         href: Pages/Internal_Materials/Internal_Materials.qmd
       - section: "Analysis"
         contents:
-          - Pages/Analysis/BMI_Cluster.qmd
-          - Pages/Analysis/Lab_Cluster_Drives.qmd
-          - Pages/Analysis/Processing_RNASeq_Data.qmd
-          - text: "Genomics analyses"
+          - text: "BMI Cluster"
+            href: Pages/Analysis/BMI_Cluster.qmd
+          - text: "Lab Cluster Drives"
+            href: Pages/Analysis/Lab_Cluster_Drives.qmd
+          - text: "Processing RNA-Seq Data"
+            href: Pages/Analysis/Processing_RNASeq_Data.qmd
+          - text: "Genomics Analyses"
             href: "https://github.com/ty-troutman/Genomics-analyses"
       - section: "Sequencing"
         contents: 
-          - Pages/Sequencing/Database_Barcodes.qmd
-          - Pages/Sequencing/Pooling_Submission.qmd
-          - Pages/Sequencing/NGS_Scraper_KevinErnst.qmd
+          - text: "Database and Barcodes"
+            href: Pages/Sequencing/Database_Barcodes.qmd
+          - text: "Pooling and Submitting Samples"
+            href: Pages/Sequencing/Pooling_Submission.qmd
+          - text: "Downloading from CCHMC"
+            href: Pages/Sequencing/NGS_Scraper_KevinErnst.qmd
       - section: "Logs and Protocols"
         contents:
           - text: "Logs"
