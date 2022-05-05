@@ -28,6 +28,8 @@ website:
       style: "floating"
       collapse-level: 1
       contents:
+      - text: "Internal Materials"
+        href: Pages/Internal_Materials/Internal_Materials.qmd
       - section: "Analysis"
         contents:
           - Pages/Analysis/BMI_Cluster.qmd
