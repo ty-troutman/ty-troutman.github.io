@@ -11,17 +11,17 @@ website:
       - text: Analysis
         menu: 
           - text: "Processing RNA-Seq Data"
-            href: Docs/Analysis/processingRNASeqData.qmd
+            href: Pages/Analysis/processingRNASeqData.qmd
           - text: "Processing ATAC-Seq Data"
           - text: "Processing ChIP-Seq Data"
       - text: Sequencing
         menu:
           - text: "Database and Barcodes"
-            href: Docs/Sequencing/Database_Barcodes.qmd
+            href: Pages/Sequencing/Database_Barcodes.qmd
           - text: "Pooling and Submission"
-            href: Docs/Sequencing/Pooling_Submission.qmd
+            href: Pages/Sequencing/Pooling_Submission.qmd
           - text: "Downloading the Data"
-            href: Docs/Sequencing/ngsScraper_KevinErnst.qmd
+            href: Pages/Sequencing/ngsScraper_KevinErnst.qmd
           - text: "More stuff"
       - icon: github
         href: https://github.com/ty-troutman
