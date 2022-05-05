@@ -17,7 +17,7 @@
       href: ../Sequencing/Database_Barcodes.qmd
     - text: "Sample Pooling and Submission"
       href: ../Sequencing/Pooling_Submission.qmd
-    - text: "Downloading Data"
+    - text: "Downloading from CCHMC"
       href: ../Sequencing/NGS_Scraper_KevinErnst.qmd
       
 - title: Logs and Protocols
