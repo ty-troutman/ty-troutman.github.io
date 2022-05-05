@@ -1,13 +1,20 @@
 ---
-title: "Troutman Lab Internal Website"
+title: "Welcome to the Troutman Lab"
 sidebar: false
 ---
 
-**Cincinnati Children's Hospital Medical Center\
-Division of Allergy and Immunology\
-240 Albert Sabin Way\
-Building S, S6.540\
-Cincinnati, OH 45229**
+We investigate the functions of tissue-residing myeloid cells, including macrophages, in regulating health and disease. Macrophages reside in all tissues, where they contribute to innate immune surveillance, clear cellular debris and promote repair in response to injuries. In addition, macrophages and other recruited mononuclear phagocytes participate in disease processes associated with obesity, allergic inflammation, suppression of anti-cancer immunity and neurodegeneration. Within each tissue, cell subtypes adopt specialized roles through unique combinations of niche-provided signals. As a result, macrophages and other recruited mononuclear phagocytes may diversify further during disease because of environmental perturbation. 
+
+We couple cellular and molecular immunology approaches to quantitative analyses of dynamic epigenetic factors ultimately controlling gene expression. With these approaches, we discover novel intercellular and intracellular mechanisms controlling tissue myeloid cell behaviors during health and disease.
+
+#### Principal Investigator
+[Ty D. Troutman, PhD](https://www.cincinnatichildrens.org/bio/t/ty-troutman)  
+Cincinnati Children's Hospital Medical Center  
+Division of Allergy and Immunology  
+240 Albert Sabin Way  
+Building S, S6.540  
+Cincinnati, OH 45229  
+Ty dot Troutman -at- cchmc dot org  
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3094.5056566234!2d-84.5037283838583!3d39.14047924018238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8841b39813aaaaab%3A0xf8de29b38ec4c772!2sCincinnati%20Children&#39;s%20Hospital%20Medical%20Center!5e0!3m2!1sen!2sus!4v1651702853001!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
 
