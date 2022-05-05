@@ -13,7 +13,7 @@ lapply(
 )
 ```
 
-In the prior tutorial, we spent time learning how to read in data, and process it into a more friendly, or tidy, format. You can revisit that information [here](Introduction-RNASeqAnalysis.md).
+In the prior tutorial, we spent time learning how to read in data, and process it into a more friendly, or tidy, format. You can revisit that information [here](Introduction-RNASeqAnalysis.qmd).
 
 With the assumption that this information is fresh in our minds, lets read in a subset of this data. We will select the first 8 columns, and rename these columns to an easier to read format. We will also extract the gene name from column 2 and discard all text after the first occurrence of the '\|' symbol using 'separate.' We will then discard rows containing the same gene using 'distinct.' This occurs because the initial expression table was generated using without the -condenseGenes option using [HOMER analyzeRepeats.pl](http://homer.ucsd.edu/homer/ngs/rnaseq/index.html).
 

@@ -2,10 +2,10 @@
 title: "Processing RNA-seq data"
 ---
 
-#### **This example is for stranded RNA-seq data, which is our lab's [standard protocol](https://docs.google.com/document/d/10gv3azAfEpOEBIOYLgxlRpkMJf1_qg_o-lhHULrTp0g/edit?usp=sharing).**
+# Quality control, mapping, and tag directories
 
 ::: callout-important
-**These analyses can't be run on the cluster head node. You will either need to generate a script to submit to the LSF scheduler, or request an interactive session.** **Quality control, mapping, and tag directories**
+-   These analyses can't be run on the cluster head node. Generate a script to submit to the LSF scheduler, or request an interactive session.
 :::
 
 1.  Verify data checksums and rename following lab convention: \<filenameA\>\_R1.fastq.gz \<filenameA\>\_R2.fastq.gz \<filenameB\>\_R1.fastq.gz \<filenameB\>\_R2.fastq.gz
@@ -14,18 +14,20 @@ title: "Processing RNA-seq data"
 
 3.  Group data according to mapping needs, e.g. by genome, paired end and single read, etc.
 
-4.  Map the data using [STAR](https://github.com/alexdobin/STAR) and create [HOMER tag directories](http://homer.ucsd.edu/homer/ngs/tagDir.html). We have wrapper tools to automate and parallelize this process. There is one wrapper script for [single read](../../Code/Wrapper_STAR_SingleRead.R) chemistry, and one for [paired end](../../Code/Wrapper_STAR_PairedEnd.R) chemistry.
+4.  Map the data using [STAR](https://github.com/alexdobin/STAR) and create [HOMER tag directories](http://homer.ucsd.edu/homer/ngs/tagDir.html). We have wrapper tools to automate and parallelize this process. There is one wrapper script for [single read](../../Code/Wrapper_STAR_SingleRead.R) chemistry, and one for [paired end](../../Code/Wrapper_STAR_PairedEnd.R) chemistry. These scripts are also accessible on [github](https://github.com/ty-troutman/Genomics-analyses/tree/main/Code).
 
-::: callout-note
-**A loaded R module is required for use on the BMI HPC cluster.**
+::: callout-important
+-   These tools depend on file names in the lab convention (`*R1.fastq.gz *R2.fastq.gz`)
 
-``` bash
-module load R/4.0.2
-```
-:::
+-   These tools require input of only one `fastq.gz` file per sample per read direction
 
-::: {.callout-important collapse="false"}
-**These tools: depend on file names in the lab convention (\*R1.fastq.gz); require input of only one fastq.gz file per sample per read direction; generate tag directories assuming a stranded library chemistry (e.g. dUTP RNA-seq protocol).**
+-   These tools generate tag directories assuming a stranded library chemistry (e.g. lab standard [dUTP RNA-seq protocol](https://docs.google.com/document/d/10gv3azAfEpOEBIOYLgxlRpkMJf1_qg_o-lhHULrTp0g/edit?usp=sharing).
+
+-   A loaded R module is required for use on the BMI HPC cluster.
+
+    ``` bash
+    module load R/4.0.2
+    ```
 :::
 
       Execute the scripts with:
@@ -50,7 +52,7 @@ Rscript /data/hpc-troutman/software/scripts/Wrapper_STAR_PairedEnd.R \
 
     2.  [IGV](https://software.broadinstitute.org/software/igv/) is another good option. It can be used locally.
 
-### **(Slightly more) advanced users.**
+# Considerations
 
 If RNA-seq data from the dUTP protocol is single read, then use the -flip option in HOMER makeTagDirectory.
 
@@ -67,6 +69,8 @@ makeTagDirectory <tagDirectoryName> <filename.sam> -genome <experiment_genome> \
 ```
 
 Data type, quality, etc. may require use of altered commands with STAR and/or HOMER. More information on these applications can be found by reading the documentation. For reference, below is an example bat script for mapping paired end RNA-seq data with STAR and generating an appropriately formatted HOMER tag directory.
+
+# LSF scheduler example
 
 ``` bash
 #BSUB -W 1:00

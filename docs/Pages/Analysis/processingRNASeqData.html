@@ -143,11 +143,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-analysis" role="button" data-bs-toggle="dropdown" aria-expanded="false">Analysis</a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-analysis">    
         <li>
+    <a class="dropdown-item" href="../../Pages/Analysis/BMI_Cluster.html">
+ <span class="dropdown-text">BMI Cluster</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Pages/Analysis/Lab_Cluster_Drives.html">
+ <span class="dropdown-text">Lab Cluster Drives</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../Pages/Analysis/processingRNASeqData.html">
  <span class="dropdown-text">Processing RNA-Seq Data</span></a>
   </li>  
-        <li class="dropdown-header">Processing ATAC-Seq Data</li>
-        <li class="dropdown-header">Processing ChIP-Seq Data</li>
+        <li>
+    <a class="dropdown-item" href="https://github.com/ty-troutman/Genomics-analyses">
+ <span class="dropdown-text">Just beginning?</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -162,7 +172,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="dropdown-text">Pooling and Submission</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Pages/Sequencing/ngsScraper_KevinErnst.html">
+    <a class="dropdown-item" href="../../Pages/Sequencing/NGSScraper_KevinErnst.html">
  <span class="dropdown-text">Downloading the Data</span></a>
   </li>  
         <li class="dropdown-header">More stuff</li>
@@ -194,7 +204,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#slightly-more-advanced-users." id="toc-slightly-more-advanced-users." class="nav-link active" data-scroll-target="#slightly-more-advanced-users."><strong>(Slightly more) advanced users.</strong></a></li>
+  <li><a href="#quality-control-mapping-and-tag-directories" id="toc-quality-control-mapping-and-tag-directories" class="nav-link active" data-scroll-target="#quality-control-mapping-and-tag-directories">Quality control, mapping, and tag directories</a></li>
+  <li><a href="#considerations" id="toc-considerations" class="nav-link" data-scroll-target="#considerations">Considerations</a></li>
+  <li><a href="#lsf-scheduler-example" id="toc-lsf-scheduler-example" class="nav-link" data-scroll-target="#lsf-scheduler-example">LSF scheduler example</a></li>
   </ul>
 </nav>
     </div>
@@ -219,8 +231,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="this-example-is-for-stranded-rna-seq-data-which-is-our-labs-standard-protocol." class="level4">
-<h4 class="anchored" data-anchor-id="this-example-is-for-stranded-rna-seq-data-which-is-our-labs-standard-protocol."><strong>This example is for stranded RNA-seq data, which is our lab’s <a href="https://docs.google.com/document/d/10gv3azAfEpOEBIOYLgxlRpkMJf1_qg_o-lhHULrTp0g/edit?usp=sharing">standard protocol</a>.</strong></h4>
+<section id="quality-control-mapping-and-tag-directories" class="level1">
+<h1>Quality control, mapping, and tag directories</h1>
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -231,43 +243,34 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>These analyses can’t be run on the cluster head node. You will either need to generate a script to submit to the LSF scheduler, or request an interactive session.</strong> <strong>Quality control, mapping, and tag directories</strong></p>
+<ul>
+<li>These analyses can’t be run on the cluster head node. Generate a script to submit to the LSF scheduler, or request an interactive session.</li>
+</ul>
 </div>
 </div>
 <ol type="1">
 <li><p>Verify data checksums and rename following lab convention: &lt;filenameA&gt;_R1.fastq.gz &lt;filenameA&gt;_R2.fastq.gz &lt;filenameB&gt;_R1.fastq.gz &lt;filenameB&gt;_R2.fastq.gz</p></li>
 <li><p>Run <a href="https://github.com/s-andrews/FastQC">fastqc</a> on the data.</p></li>
 <li><p>Group data according to mapping needs, e.g.&nbsp;by genome, paired end and single read, etc.</p></li>
-<li><p>Map the data using <a href="https://github.com/alexdobin/STAR">STAR</a> and create <a href="http://homer.ucsd.edu/homer/ngs/tagDir.html">HOMER tag directories</a>. We have wrapper tools to automate and parallelize this process. There is one wrapper script for <a href="../../Code/Wrapper_STAR_SingleRead.R">single read</a> chemistry, and one for <a href="../../Code/Wrapper_STAR_PairedEnd.R">paired end</a> chemistry.</p></li>
+<li><p>Map the data using <a href="https://github.com/alexdobin/STAR">STAR</a> and create <a href="http://homer.ucsd.edu/homer/ngs/tagDir.html">HOMER tag directories</a>. We have wrapper tools to automate and parallelize this process. There is one wrapper script for <a href="../../Code/Wrapper_STAR_SingleRead.R">single read</a> chemistry, and one for <a href="../../Code/Wrapper_STAR_PairedEnd.R">paired end</a> chemistry. These scripts are also accessible on <a href="https://github.com/ty-troutman/Genomics-analyses/tree/main/Code">github</a>.</p></li>
 </ol>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>A loaded R module is required for use on the BMI HPC cluster.</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load R/4.0.2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
 <div class="callout-important callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-3" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
 Important
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p><strong>These tools: depend on file names in the lab convention (*R1.fastq.gz); require input of only one fastq.gz file per sample per read direction; generate tag directories assuming a stranded library chemistry (e.g.&nbsp;dUTP RNA-seq protocol).</strong></p>
-</div>
+<ul>
+<li><p>These tools depend on file names in the lab convention (<code>*R1.fastq.gz *R2.fastq.gz</code>)</p></li>
+<li><p>These tools require input of only one <code>fastq.gz</code> file per sample per read direction</p></li>
+<li><p>These tools generate tag directories assuming a stranded library chemistry (e.g.&nbsp;lab standard <a href="https://docs.google.com/document/d/10gv3azAfEpOEBIOYLgxlRpkMJf1_qg_o-lhHULrTp0g/edit?usp=sharing">dUTP RNA-seq protocol</a>.</p></li>
+<li><p>A loaded R module is required for use on the BMI HPC cluster.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load R/4.0.2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
 </div>
 </div>
 <pre><code>  Execute the scripts with:</code></pre>
@@ -286,8 +289,8 @@ Important
 </ol></li>
 </ol>
 </section>
-<section id="slightly-more-advanced-users." class="level3">
-<h3 class="anchored" data-anchor-id="slightly-more-advanced-users."><strong>(Slightly more) advanced users.</strong></h3>
+<section id="considerations" class="level1">
+<h1>Considerations</h1>
 <p>If RNA-seq data from the dUTP protocol is single read, then use the -flip option in HOMER makeTagDirectory.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">makeTagDirectory</span> <span class="op">&lt;</span>tagDirectoryName<span class="op">&gt;</span> <span class="op">&lt;</span>filename.sam<span class="op">&gt;</span> -genome <span class="op">&lt;</span>experiment_genome<span class="op">&gt;</span> <span class="dt">\</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>-checkGC <span class="at">-format</span> sam <span class="at">-flip</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -295,6 +298,9 @@ Important
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">makeTagDirectory</span> <span class="op">&lt;</span>tagDirectoryName<span class="op">&gt;</span> <span class="op">&lt;</span>filename.sam<span class="op">&gt;</span> -genome <span class="op">&lt;</span>experiment_genome<span class="op">&gt;</span> <span class="dt">\</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>-checkGC <span class="at">-sspe</span> <span class="at">-format</span> sam <span class="at">-flip</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Data type, quality, etc. may require use of altered commands with STAR and/or HOMER. More information on these applications can be found by reading the documentation. For reference, below is an example bat script for mapping paired end RNA-seq data with STAR and generating an appropriately formatted HOMER tag directory.</p>
+</section>
+<section id="lsf-scheduler-example" class="level1">
+<h1>LSF scheduler example</h1>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -W 1:00</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -n 16</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -M 40000</span></span>

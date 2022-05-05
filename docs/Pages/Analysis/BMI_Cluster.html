@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Troutman Lab - Pooling and Submission of Sequencing Libraries</title>
+<title>Troutman Lab - Biomedical Informatics High Performance Computing Cluster</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,32 +74,42 @@ ul.task-list{list-style: none;}
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../home.html">Home</a>
+    <a class="nav-link" href="../../index.html">Home</a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-analysis" role="button" data-bs-toggle="dropdown" aria-expanded="false">Analysis</a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-analysis">    
         <li>
-    <a class="dropdown-item" href="../../Docs/Analysis/processingRNASeqData.html">
+    <a class="dropdown-item" href="../../Pages/Analysis/BMI_Cluster.html">
+ <span class="dropdown-text">BMI Cluster</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Pages/Analysis/Lab_Cluster_Drives.html">
+ <span class="dropdown-text">Lab Cluster Drives</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Pages/Analysis/processingRNASeqData.html">
  <span class="dropdown-text">Processing RNA-Seq Data</span></a>
   </li>  
-        <li class="dropdown-header">Processing ATAC-Seq Data</li>
-        <li class="dropdown-header">Processing ChIP-Seq Data</li>
+        <li>
+    <a class="dropdown-item" href="https://github.com/ty-troutman/Genomics-analyses">
+ <span class="dropdown-text">Just beginning?</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-sequencing" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sequencing</a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-sequencing">    
         <li>
-    <a class="dropdown-item" href="../../Docs/Sequencing/Database_Barcodes.html">
+    <a class="dropdown-item" href="../../Pages/Sequencing/Database_Barcodes.html">
  <span class="dropdown-text">Database and Barcodes</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Docs/Sequencing/Pooling_Submission.html">
+    <a class="dropdown-item" href="../../Pages/Sequencing/Pooling_Submission.html">
  <span class="dropdown-text">Pooling and Submission</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Docs/Sequencing/ngsScraper_KevinErnst.html">
+    <a class="dropdown-item" href="../../Pages/Sequencing/NGSScraper_KevinErnst.html">
  <span class="dropdown-text">Downloading the Data</span></a>
   </li>  
         <li class="dropdown-header">More stuff</li>
@@ -127,14 +137,27 @@ ul.task-list{list-style: none;}
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#accessing-the-hpc-cluster" id="toc-accessing-the-hpc-cluster" class="nav-link active" data-scroll-target="#accessing-the-hpc-cluster">Accessing the HPC cluster</a></li>
+  <li><a href="#running-jobs-on-the-hpc-cluster" id="toc-running-jobs-on-the-hpc-cluster" class="nav-link" data-scroll-target="#running-jobs-on-the-hpc-cluster">Running jobs on the HPC cluster</a></li>
+  <li><a href="#scheduling-computation-jobs-with-lsf" id="toc-scheduling-computation-jobs-with-lsf" class="nav-link" data-scroll-target="#scheduling-computation-jobs-with-lsf">Scheduling computation jobs with LSF</a></li>
+  <li><a href="#checking-your-cluster-balance" id="toc-checking-your-cluster-balance" class="nav-link" data-scroll-target="#checking-your-cluster-balance">Checking your cluster balance</a>
+  <ul class="collapse">
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also">See also:</a></li>
+  </ul></li>
+  <li><a href="#requesting-a-cluster-account" id="toc-requesting-a-cluster-account" class="nav-link" data-scroll-target="#requesting-a-cluster-account">Requesting a cluster account</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Pooling and Submission of Sequencing Libraries</h1>
+<h1 class="title">Biomedical Informatics High Performance Computing Cluster</h1>
 </div>
 
 
@@ -150,56 +173,24 @@ ul.task-list{list-style: none;}
 
 </header>
 
+<p><strong>Credit:</strong> Kevin Ernst, Matthew Weirauch, and Leah Kottyan for compiling and hosting much of this information not found on the DBS HPC website.</p>
+<p>We have access to a Linux <a href="https://bmi.cchmc.org/resources/clusters/computational-cluster">computational cluster</a> through the Division of Biomedical Informatics. To request access to the cluster, please send an email to Cluster Support: help-cluster@bmi.cchmc.org. After your access is enabled, you should be able to login to the cluster with your CCHMC employee network credentials. All users have a default disk (home directory) quota of 100 GB and a job walltime quota of 10000 hours per quarter, which is free. The quota of your home directory is fixed, and cannot be changed. To increase the walltime, please send an email to <a href="mailto:help-cluster@bmi.cchmc.org">Cluster Support</a>.</p>
+<p>Your <a href="https://en.wikipedia.org/wiki/home_directory">home directory</a> is accessible at the path <code>/users/YOURUSERID</code> and has a default 100 GB quota. You also have access to a “<a href="https://hpc.research.cchmc.org/node/14">scratch</a>” volume at <code>/scratch/YOURUSERID</code>, where there is a 100 GB quota with a burst of up to 5 TB for up to 7 days. Anything there will be removed after 60 days. Users typically do not have (read/write) access to other users’ home directories. Thus, <code>/data/hpc-troutman/</code> is the place to store data/analysis (<em>not personal files</em>) that anyone else in the lab might ever need to work with.</p>
+<section id="accessing-the-hpc-cluster" class="level1">
+<h1>Accessing the HPC cluster</h1>
+<p>Connect to the CCHMC cluster by following the <a href="https://bmi.cchmc.org/resources/clusters/computational-cluster">BMI instructions</a>, or follow the examples below.</p>
 <ul>
-<li>Only pool samples for sequencing that have compatible i5/p5 and i7/p7 barcodes.</li>
-<li>Don’t unknowingly pool samples that have very different molecular weights.</li>
-<li>Typically we target 15-25 million reads per sample for ATAC-seq, ChIP-seq and RNA-seq.</li>
-<li>Samples profiling allelic biases (F1 hybrids) may require 50-100 million reads per sample.</li>
-<li>Follow the instructions in the pooling calculator generated by the BadDNA research group at the University of Georgia.</li>
-<li>Example pooling sheet (coming soon).</li>
-<li>Pooling requires an estimate of each sample’s molecular weight and a qubit quantification of each samples concentration in ng/µl.</li>
-</ul>
-<div class="callout-important callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-1" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Critical!! Know which index orientation to submit.
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p>Verify the appropriate orientation of the index sequence matches the requirements of the targeted sequencing platform. This must be appropriately entered in the submission sample sheet or demultiplexing will fail. Illumina NovaSeq v1.0 and v1.5 workflows utilize different strategies and require entering i5 index sequences appropriately. Forward strand i5 workflow is performed with v1.0 reagent kits, while reverse complement i5 workflow is performed with v1.5 reagent kits (NovaSeq). For the Illumina MiniSeq or NextSeq platforms, enter the i5 index as the reverse complement. When in doubt, verify with the core facility or sequencing provider and/or read the user manual!!</p>
-</div>
-</div>
-</div>
-<section id="submitting-sequencing-libraries-to-the-cchmc-dna-sequencing-and-genotyping-core" class="level4">
-<h4 class="anchored" data-anchor-id="submitting-sequencing-libraries-to-the-cchmc-dna-sequencing-and-genotyping-core">Submitting sequencing libraries to the CCHMC DNA Sequencing and Genotyping Core</h4>
-<p>The core manager is David Fletcher.</p>
-<ul>
-<li><p>Non-core generated libraries can only be sequenced on a complete purchased flow cells.</p></li>
-<li><p>One SP flow cell configured at PE150 is $3679, per DNA Core Price Calculator.</p></li>
-<li><p>One lane for external users at UCSD IGM Genomics Center is $3,302 and yields 500 million per lane. - A single SP1 flow cell can yield 1 billion reads, not the core stated 650-750M clusters.</p></li>
-<li><p>More information on submission can be found at the bottom of this page.</p></li>
-<li><p>SP flow cells can turn around in 1-3 days, but the cost is ~30% higher than for S4 PE150 data from Novogene.</p></li>
-<li><p>Data is downloaded individually. The Kottyan and Weirach lab handle this by scraping the download website links, trimming out the samples already downloaded, then running the script on HPC.</p></li>
+<li><p>If you are in the CCHMC network or connected to CCHMC VPN:</p>
+<p>ssh yourusername@bmiclusterp.chmcres.cchmc.org</p></li>
+<li><p>If you are outside of CCHMC network</p>
+<p>ssh yourusername@ssh.research.cchmc.org</p></li>
+<li><p>Once you are connected to “research.cchmc.org”, do:</p>
+<p>ssh yourusername@bmiclusterp.chmcres.cchmc.org</p></li>
+<li><p>Alternatively, connect through <a href="https://connect.research.cchmc.org/vpn/index.html">citrix</a>.</p></li>
 </ul>
 </section>
-<section id="sequencing-options" class="level4">
-<h4 class="anchored" data-anchor-id="sequencing-options">Sequencing options:</h4>
-<pre><code>    Instrument     Type           Lanes   Cycles          Clusters/Lane(M)   Total Clusters(M) 
-    -------------  -------------  ------  --------------  -----------------  ------------------
-    iSeq 100       i1             1       300             4                  4                 
-    MiSeq          MiSeq          1       300, 500, 600   15                 15                
-    NextSeq 500    Mid Output     1       150             130                130               
-    NextSeq 500    High Output    1       75, 150         360                360               
-    NovaSeq 6000   SP (S prime)   1       100, 300, 500   720                720               
-    NovaSeq 6000   S1*            2       100, 200        720                1440              
-    NovaSeq 6000   S2             2       100, 200, 300   1600               3200              
-    NovaSeq 6000   S4             4       200, 300        2000               8000   
-</code></pre>
+<section id="running-jobs-on-the-hpc-cluster" class="level1">
+<h1>Running jobs on the HPC cluster</h1>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -210,50 +201,139 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>S1 flow cells can be split into separate, independent lanes with the XP workflow. Talk to the core manager ahead of time if this is needed.</p>
+<p>Do not run computationally intensive jobs on the login/head nodes (bmiclusterp2 or p3). Basic file management or resuming a GNU Screen or tmux session should be about the extent of it.</p>
 </div>
 </div>
-<div class="callout-important callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-3" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<p>The “head nodes” bmiclusterp1 and bmiclusterp2 are not intended to be used for computationally-intensive tasks; basic file management is about it. The head nodes are where everyone logs in and submits their jobs, so if you were to submit computationally heavy tasks, you could prevent others from logging in or submitting their own jobs to the actual cluster nodes. Processes run from the cluster head node directly (i.e., not submitted using bsub as shown below) are limited to 75% of one CPU and 10% of total system RAM (currently at 10 GB, so 1 GB) and will be terminated if they go over.</p>
+<p><strong>What is a “job”?</strong> A job is basically a Bash shell script that runs computationally intensive program of your making on the cluster.</p>
+<p><strong>What is a cluster?</strong> A cluster is a form of supercomputer, which is made up of individual servers or nodes. They share access to a large pool of disk storage through NAS (Network Attached Storage). Our server uses IBM’s “Platform LSF” workload management platform, which means, among other things, that there is a scheduler for using the cluster. You submit batch jobs (programs) to the scheduler, and it starts your jobs as soon as resources are available.</p>
+<p>The BMI cluster offers several advantages:</p>
+<ul>
+<li><p>First, the cluster has big computer capabilities. The largest nodes have 512 GB RAM and 16 cores.</p></li>
+<li><p>Linux environment with lots of software ready to go. This is handles with many pre-installed sofware envrionment, called <a href="http://modules.sourceforge.net/">Modules</a>. Please refer to modules <a href="https://bmi.cchmc.org/resources/software/environment-modules">page</a> for more information and examples.</p></li>
+<li><p>The cluster allows you to do pseudo-parallelism. You can break a problem into many pieces and run many jobs in a distributed fashion.</p></li>
+</ul>
+</section>
+<section id="scheduling-computation-jobs-with-lsf" class="level1">
+<h1>Scheduling computation jobs with LSF</h1>
+<p>The cluster batch system is currently managed by LSF resource manager and scheduler. You can find some examples of submitting jobs using LSF <a href="https://bmi.cchmc.org/resources/software/lsf-examples">here</a>. Please read the job scheduling policies <a href="https://bmi.cchmc.org/resources/clusters/policies">page</a> for recent policy changes.</p>
+<p>Essentially, users submit jobs to the server using the bsub command. The current state of the queue in the server can be viewed using bjobs. There are a host of other utilities that can be used by Torque users like: bkill, bmod, bstop, bmig, bresume etc. bsub can be used for batch as well as interactive submission of jobs. Interactive job submission should be used only when a user needs to run and debug his code and for short-duration jobs. In either case, you need to submit your job to a cluster node so that you can do your testing without burdening the head node.</p>
+<p>An example command to request an interactive session:</p>
+<pre><code>bsub -W 4:00 -n 1 -M 10000 -Is /bin/bash</code></pre>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Critical!!
+Note
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>Verify the appropriate orientation of the index sequence matches the requirements of the targeted sequencing platform. This must be appropriately entered in the submission sample sheet or demultiplexing will fail. Illumina NovaSeq v1.0 and v1.5 workflows utilize different strategies and require entering i5 index sequences appropriately. Forward strand i5 workflow is performed with v1.0 reagent kits, while reverse complement i5 workflow is performed with v1.5 reagent kits (NovaSeq). For the Illumina MiniSeq or NextSeq platforms, enter the i5 index as the reverse complement. When in doubt, verify with the core facility or sequencing provider and/or read the user manual!!</p>
-</div>
+<p>We have wrapper scripts to automate assembly of .bat files and submission to the LSF scheduler. More information is available <a href="../../Pages/Analysis/processingRNASeqData.html">here</a>.</p>
 </div>
 </div>
 </section>
-<section id="lane-submission-requirements" class="level4">
-<h4 class="anchored" data-anchor-id="lane-submission-requirements">Lane submission requirements:</h4>
-<pre><code>Sequencing           Min µl   Max µl   Diluent          [Min] 
--------------------  -------  -------  ---------------  ------
-MiSeq                20       50       10 mM Tris-HCl   5 nM  
-NextSeq 500          20       50       10 mM Tris-HCl   5 nM  
-NovaSeq SP, S1, S2   30       50       10 mM Tris-HCl   5 nM  
-NovaSeq S4           65       120      10 mM Tris-HCl   5 nM</code></pre>
-</section>
-<section id="ccmhc-submission-sample-sheet" class="level4">
-<h4 class="anchored" data-anchor-id="ccmhc-submission-sample-sheet">CCMHC Submission Sample Sheet:</h4>
-<p>Use the lab standardized naming convention (linked here)!</p>
-</section>
-<section id="submitting-sequencing-libraries-to-novogene" class="level4">
-<h4 class="anchored" data-anchor-id="submitting-sequencing-libraries-to-novogene">Submitting sequencing libraries to Novogene</h4>
+<section id="checking-your-cluster-balance" class="level1">
+<h1>Checking your cluster balance</h1>
+<p>By default, you have 10,000 hours of “wall time” (real-world computation time for the jobs you run) on the cluster, and this quota resets quarterly (<a href="https://bmi.cchmc.org/resources/charge-backs">ref</a>).</p>
+<p>BMI uses an accounting system named “Gold” to keep track of how many wall hours you have remaining; you need to load a module named gold to use this: - load the ‘gold’ module, which provides the ‘gbalance’ command - you should be on a cluster node (e.g., bmiclusterp2) when you do this</p>
+<pre><code>module load gold</code></pre>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>leave off the ‘-h’ if for some reason you want to see the output in seconds of wall time instead of the more human-readable hours</p>
+</div>
+</div>
+<pre><code>gbalance -h -u \$USER</code></pre>
+<p>The string $USER is an environment variable that always refers to the currently-logged in user (you!). You can replace $USER with some other username if you want to spy on someone else’s cluster usage.</p>
+<p>The columns in the output of gbalance are:</p>
+<table class="table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column Name</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Id</td>
+<td style="text-align: left;">Unique user identifier</td>
+</tr>
+<tr class="even">
+<td>Name</td>
+<td style="text-align: left;">Your username</td>
+</tr>
+<tr class="odd">
+<td>Amount</td>
+<td style="text-align: left;">Wall time requested for currently running jobs</td>
+</tr>
+<tr class="even">
+<td>Reserved</td>
+<td style="text-align: left;">Wall time requested for currently pending jobs</td>
+</tr>
+<tr class="odd">
+<td>Balance</td>
+<td style="text-align: left;">Total wall time currently requested (sum of amount and reserved)</td>
+</tr>
+<tr class="even">
+<td>CreditLimit</td>
+<td style="text-align: left;">Amount of wall time credited each quarter</td>
+</tr>
+<tr class="odd">
+<td>Available</td>
+<td style="text-align: left;">Wall time remaining after current requests</td>
+</tr>
+</tbody>
+</table>
+<section id="see-also" class="level2">
+<h2 class="anchored" data-anchor-id="see-also">See also:</h2>
 <ul>
-<li>Email Justin.Golday@novogeneusa.com to arrange a quote.</li>
-<li>All runs are PE150 on S4 lanes. To be determined, but for this reason the lab will probably target PE150 for libraries sequenced elsewhere.</li>
-<li>Human samples exome sequencing and whole genome sequencing require approval and may be subject to change. Be sure to check regulations first.</li>
-<li>There may be a minimum requirement of &gt;300 million reads per pool.</li>
-<li>Submit quoted order at 30 µl and 0.5 ng/µl, 2-30 nM.</li>
-<li>Turn around is ~2 weeks.</li>
-<li>Accessing the data is quirky as CCHMC block access by default. The Kottyan and Weirach labs’ work around is to download the data first to their Ohio Super Computer account then transfer to over to HPC. These accounts are linked in some way.</li>
+<li><a href="http://docs.adaptivecomputing.com">Gold Allocation Manager User Guide</a> (<a href="http://docs.adaptivecomputing.com/gold/pdf/GoldUserGuide.pdf">pdf</a>)<br>
+</li>
+<li><a href="http://docs.adaptivecomputing.com/gold/pdf/GoldUserGuide.pdf#page=32">“Check the Balance”</a> section of the user guide</li>
 </ul>
+</section>
+</section>
+<section id="requesting-a-cluster-account" class="level1">
+<h1>Requesting a cluster account</h1>
+<p>Here is a boilerplate request for a BMI HPC cluster account that you can update with your own information:</p>
+<pre><code>To: help@bmi.cchmc.org 
+Subject: New HPC cluster account
+
+Hi everyone,
+
+May I please have an HPC cluster account? My username is usr0xy (replace with your actual username).
+
+Please also grant me the appropriate roles so that I can use the BMI HTTP proxy to download scientific data to the cluster.
+
+Thanks very much.
+
+--Your Name</code></pre>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure to say “please” and “thank you,” and include your Children’s username, which is something like <code>usr0xy</code> (three letters of your last name, then three random characters). Also include with your request that you want BMI proxy access, and mention that they can look at account <code>ern6xv</code> if they need a template.</p>
+</div>
+</div>
 
 
 </section>

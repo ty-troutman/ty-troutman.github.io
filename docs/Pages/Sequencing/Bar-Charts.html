@@ -143,11 +143,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-analysis" role="button" data-bs-toggle="dropdown" aria-expanded="false">Analysis</a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-analysis">    
         <li>
+    <a class="dropdown-item" href="../../Pages/Analysis/BMI_Cluster.html">
+ <span class="dropdown-text">BMI Cluster</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Pages/Analysis/Lab_Cluster_Drives.html">
+ <span class="dropdown-text">Lab Cluster Drives</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../Pages/Analysis/processingRNASeqData.html">
  <span class="dropdown-text">Processing RNA-Seq Data</span></a>
   </li>  
-        <li class="dropdown-header">Processing ATAC-Seq Data</li>
-        <li class="dropdown-header">Processing ChIP-Seq Data</li>
+        <li>
+    <a class="dropdown-item" href="https://github.com/ty-troutman/Genomics-analyses">
+ <span class="dropdown-text">Just beginning?</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -162,7 +172,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="dropdown-text">Pooling and Submission</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Pages/Sequencing/ngsScraper_KevinErnst.html">
+    <a class="dropdown-item" href="../../Pages/Sequencing/NGSScraper_KevinErnst.html">
  <span class="dropdown-text">Downloading the Data</span></a>
   </li>  
         <li class="dropdown-header">More stuff</li>
@@ -227,7 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">character.only =</span> <span class="cn">TRUE</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In the prior tutorial, we spent time learning how to read in data, and process it into a more friendly, or tidy, format. You can revisit that information <a href="Introduction-RNASeqAnalysis.md">here</a>.</p>
+<p>In the prior tutorial, we spent time learning how to read in data, and process it into a more friendly, or tidy, format. You can revisit that information <a href="../../Pages/Sequencing/Introduction-RNASeqAnalysis.html">here</a>.</p>
 <p>With the assumption that this information is fresh in our minds, lets read in a subset of this data. We will select the first 8 columns, and rename these columns to an easier to read format. We will also extract the gene name from column 2 and discard all text after the first occurrence of the ‘|’ symbol using ‘separate.’ We will then discard rows containing the same gene using ‘distinct.’ This occurs because the initial expression table was generated using without the -condenseGenes option using <a href="http://homer.ucsd.edu/homer/ngs/rnaseq/index.html">HOMER analyzeRepeats.pl</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note, when reading in your data, you should change the path to the</span></span>
@@ -825,7 +835,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a> collate  en_US.UTF<span class="dv">-8</span></span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a> ctype    en_US.UTF<span class="dv">-8</span></span>
 <span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a> tz       America<span class="sc">/</span>New_York</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a> date     <span class="dv">2022-05-04</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a> date     <span class="dv">2022-05-05</span></span>
 <span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a> pandoc   <span class="dv">2</span>.<span class="dv">17</span>.<span class="fl">1.1</span> <span class="sc">@</span> <span class="er">/</span>Applications<span class="sc">/</span>RStudio.app<span class="sc">/</span>Contents<span class="sc">/</span>MacOS<span class="sc">/</span>quarto<span class="sc">/</span>bin<span class="sc">/</span> (via rmarkdown)</span>
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>─ Packages ───────────────────────────────────────────────────────────────────</span>
