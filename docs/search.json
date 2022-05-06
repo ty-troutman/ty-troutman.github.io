@@ -7,13 +7,6 @@
     "text": "We couple cellular and molecular immunology approaches to quantitative analyses of dynamic epigenetic factors ultimately controlling gene expression. With these approaches, we discover novel intercellular and intracellular mechanisms controlling tissue myeloid cell behaviors during health and disease.\n\nPrincipal Investigator\nTy D. Troutman, PhD\nCincinnati Children’s Hospital Medical Center\nDivision of Allergy and Immunology\n240 Albert Sabin Way\nBuilding S, S6.540\nCincinnati, OH 45229\nTy dot Troutman -at- cchmc dot org"
   },
   {
-    "objectID": "Pages/Research/Research.html",
-    "href": "Pages/Research/Research.html",
-    "title": "Troutman Lab Research",
-    "section": "",
-    "text": "Genetic variation and control of macrophage behaviors\nNormal tissue behaviors depend on a network of cell populations functioning together to support organ function. Disease may result if the system becomes unbalanced in one or more constituent cell types. Some diseases have known lesions in a single causal gene. However, most diseases result from the polygenic background of a susceptible individual interacting with a range of environmental factors. Thus, the susceptibility of a tissue to develop disease may be governed by interactions of the genetic background with one or more environmental factors. Notable examples include Alzheimer disease, cardiovascular disease, insulin resistance, steatohepatitis and cirrhosis and atopic diseases. In these cases, certain populations are resistant to disease progression in the context of similar environmental triggers. \nGenome-wide association studies provide the identities of susceptibility loci for many complex diseases. These susceptibility loci often lie in noncoding regions of the genome, which suggest that they function by regulating gene expression. However, different cell lineages can select divergent sets of noncoding regulatory elements controlling cell fate and function. Therefore, improving mechanistic understanding of the genetic and environmental factors interacting to promote disease may require knowledge of the cell types actively using the mutated DNA elements. The Troutman Lab studies these interactions using purified cells from inbred mouse strains. Gene regulatory differences between the model genomes are assessed using experimental conditions that fix the contribution of environmental effects. This enables defining cell autonomous and non–cell autonomous roles for naturally occurring genetic variation in controlling macrophage behaviors. Although the locations of gene regulatory elements have diverged between humans and mice, the mechanisms controlling gene regulation and the functional properties of macrophages remain highly conserved between the two species. Thus, the prevalence of mutations in mouse macrophages affecting the binding of a certain transcription factor may cause similar outcomes in humans."
-  },
-  {
     "objectID": "Pages/Sequencing/Pooling_Submission.html",
     "href": "Pages/Sequencing/Pooling_Submission.html",
     "title": "Pooling and Submission of Sequencing Libraries",
@@ -117,19 +110,5 @@
     "title": "Biomedical Informatics High Performance Computing Cluster",
     "section": "See also:",
     "text": "See also:\n\nGold Allocation Manager User Guide (pdf)\n\n“Check the Balance” section of the user guide"
-  },
-  {
-    "objectID": "Pages/Publications/Publications.html",
-    "href": "Pages/Publications/Publications.html",
-    "title": "Publications",
-    "section": "",
-    "text": "For now, a complete list of publications can be found on Google Scholar."
-  },
-  {
-    "objectID": "Pages/Lab_Members/Lab_Members.html",
-    "href": "Pages/Lab_Members/Lab_Members.html",
-    "title": "Lab Members",
-    "section": "",
-    "text": "Current members\n\nSteven Justiniano, PhD\n\n\nJustin Marlman, BS\n\n\n\nPast members"
   }
 ]

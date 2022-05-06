@@ -8,12 +8,12 @@ website:
     right:
       - text: Home
         href: index.qmd
-      - text: Research
-        href: Pages/Research/Research.qmd
-      - text: Publications
-        href: Pages/Publications/Publications.qmd
-      - text: Lab Members
-        href: Pages/Lab_Members/Lab_Members.qmd
+      # - text: Research
+      #   href: Pages/Research/Research.qmd
+      # - text: Publications
+      #   href: Pages/Publications/Publications.qmd
+      # - text: Lab Members
+      #   href: Pages/Lab_Members/Lab_Members.qmd
       - text: Internal Materials
         href: Pages/Internal_Materials/Internal_Materials.qmd
       - icon: github

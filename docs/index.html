@@ -59,7 +59,7 @@ ul.task-list{list-style: none;}
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -75,15 +75,6 @@ ul.task-list{list-style: none;}
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link active" href="./index.html" aria-current="page">Home</a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./Pages/Research/Research.html">Research</a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./Pages/Publications/Publications.html">Publications</a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./Pages/Lab_Members/Lab_Members.html">Lab Members</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Pages/Internal_Materials/Internal_Materials.html">Internal Materials</a>
@@ -104,10 +95,114 @@ ul.task-list{list-style: none;}
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Welcome to the Troutman Lab</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Pages/Internal_Materials/Internal_Materials.html" class="sidebar-item-text sidebar-link">Internal Materials</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Analysis</a>
+      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Pages/Analysis/BMI_Cluster.html" class="sidebar-item-text sidebar-link">BMI Cluster</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Pages/Analysis/Lab_Cluster_Drives.html" class="sidebar-item-text sidebar-link">Lab Cluster Drives</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Pages/Analysis/Processing_RNASeq_Data.html" class="sidebar-item-text sidebar-link">Processing RNA-Seq Data</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/ty-troutman/Genomics-analyses" class="sidebar-item-text sidebar-link">Genomics Analyses</a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Sequencing</a>
+      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Pages/Sequencing/Database_Barcodes.html" class="sidebar-item-text sidebar-link">Database and Barcodes</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Pages/Sequencing/Pooling_Submission.html" class="sidebar-item-text sidebar-link">Pooling and Submitting Samples</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Pages/Sequencing/NGS_Scraper_KevinErnst.html" class="sidebar-item-text sidebar-link">Downloading from CCHMC</a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Logs and Protocols</a>
+      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://sites.google.com/view/troutman-lab/logs-and-protocols/logs" class="sidebar-item-text sidebar-link">Logs</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://sites.google.com/view/troutman-lab/logs-and-protocols/cell-preparation" class="sidebar-item-text sidebar-link">Cell Preparation</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://sites.google.com/view/troutman-lab/logs-and-protocols/equipment" class="sidebar-item-text sidebar-link">Equipment</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://sites.google.com/view/troutman-lab/logs-and-protocols/genomics" class="sidebar-item-text sidebar-link">Genomics</a>
+  </div>
+</li>
+    </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
@@ -117,7 +212,7 @@ ul.task-list{list-style: none;}
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to the Troutman Lab</h1>
+<h1 class="title d-none d-lg-block">Welcome to the Troutman Lab</h1>
 </div>
 
 
