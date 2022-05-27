@@ -213,7 +213,7 @@ ul.task-list{list-style: none;}
   <li><a href="#lab-sequencing-barcodes" id="toc-lab-sequencing-barcodes" class="nav-link" data-scroll-target="#lab-sequencing-barcodes"><span>Lab Sequencing Barcodes</span></a>
   <ul class="collapse">
   <li><a href="#nextflex-udi-barcodes" id="toc-nextflex-udi-barcodes" class="nav-link" data-scroll-target="#nextflex-udi-barcodes"><span>NEXTFLEX UDI Barcodes</span></a></li>
-  <li><a href="#tn5-barcoding-primers" id="toc-tn5-barcoding-primers" class="nav-link" data-scroll-target="#tn5-barcoding-primers"><span>Tn5 Barcoding Primers</span></a></li>
+  <li><a href="#nextera-tn5-barcoding-primers" id="toc-nextera-tn5-barcoding-primers" class="nav-link" data-scroll-target="#nextera-tn5-barcoding-primers"><span>‘Nextera’ Tn5 Barcoding Primers</span></a></li>
   </ul></li>
   <li><a href="#additional-information" id="toc-additional-information" class="nav-link" data-scroll-target="#additional-information"><span>Additional information</span></a></li>
   </ul>
@@ -308,8 +308,8 @@ Important
 <pre><code>NEXTFLEX PCR Primer 1: AATGATACGGCGACCACCGAGATCTACAC 
 NEXTFLEX PCR Primer 2: CAAGCAGAAGACGGCATACGAGAT
 
-NEXTFLEX P5 Adapter: AATGATACGGCGACCACCGAGATCTACACXXXXXXXXACACTCTTTCCCTACACGACGCTCTTCCGATCT
-NEXTFLEX P7 Adapter: GATCGGAAGAGCACACGTCTGAACTCCAGTCACXXXXXXXXATCTCGTATGCCGTCTTCTGCTTG</code></pre>
+NEXTFLEX i5 Adapter: AATGATACGGCGACCACCGAGATCTACACXXXXXXXXACACTCTTTCCCTACACGACGCTCTTCCGATCT
+NEXTFLEX i7 Adapter: GATCGGAAGAGCACACGTCTGAACTCCAGTCACXXXXXXXXATCTCGTATGCCGTCTTCTGCTTG</code></pre>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -320,17 +320,17 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>XXXXXXXX denotes the P5 or P7 index region of the adapter.</p>
+<p>XXXXXXXX denotes the i5 or i7 index region of the adapter.</p>
 </div>
 </div>
 </section>
-<section id="tn5-barcoding-primers" class="level3">
-<h3 class="anchored" data-anchor-id="tn5-barcoding-primers"><a href="https://github.com/ty-troutman/labSequencingBarcodes/blob/main/data/41586_2015_BFnature14590_MOESM36_ESM.xlsx">Tn5 Barcoding Primers</a></h3>
+<section id="nextera-tn5-barcoding-primers" class="level3">
+<h3 class="anchored" data-anchor-id="nextera-tn5-barcoding-primers"><a href="https://github.com/ty-troutman/labSequencingBarcodes/blob/main/data/41586_2015_BFnature14590_MOESM36_ESM.xlsx">‘Nextera’ Tn5 Barcoding Primers</a></h3>
 <p><a href="https://pubmed.ncbi.nlm.nih.gov/26083756/">Buenrostro et. al.&nbsp;Nature, 2015. PMID: 26083756.</a></p>
-<p>Tn5 transposase barcoding primers for (ATAC-seq and other suitable transposase chemistry libraries) were sourced from the labs’ of Howard Chang and William Greenleaf (Supplementary Table 1 of the linked <a href="https://pubmed.ncbi.nlm.nih.gov/26083756/">manuscript</a>). Each primer contains a unique 8 nucleotide index. Combinatorial or unique P5 and P7 primers are selected for each sample and are used as primers for PCR amplfication of ATAC-seq libraries.</p>
+<p>Nextera Tn5 transposase barcoding primers for (ATAC-seq and other suitable transposase chemistry libraries) were sourced from the labs’ of Howard Chang and William Greenleaf (Supplementary Table 1 of the linked <a href="https://pubmed.ncbi.nlm.nih.gov/26083756/">manuscript</a>). Each primer contains a unique 8 nucleotide index. Combinatorial or unique i7 and i7 primers are selected for each sample and are used as primers for PCR amplfication of ATAC-seq libraries.</p>
 <p>Primers were ordered from IDT as standard oligonucleotides and resuspended at 10 µM in low-EDTA TE buffer. Reconstituted primers stocks are stored at -20C. Working aliquots should be used routinely in place of the stocks.</p>
-<pre><code>Tn5 P5 Primer Sequence: AATGATACGGCGACCACCGAGATCTACACXXXXXXXXTCGTCGGCAGCGTCAGATGTGTAT
-Tn5 P7 Primer Sequence: CAAGCAGAAGACGGCATACGAGATXXXXXXXXGTCTCGTGGGCTCGGAGATGTG</code></pre>
+<pre><code>Nextera Tn5 i5 Primer Sequence: AATGATACGGCGACCACCGAGATCTACACXXXXXXXXTCGTCGGCAGCGTCAGATGTGTAT
+Nextera Tn5 i7 Primer Sequence: CAAGCAGAAGACGGCATACGAGATXXXXXXXXGTCTCGTGGGCTCGGAGATGTG</code></pre>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -341,7 +341,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>XXXXXXXX denotes the P5 or P7 index region of the primer.</p>
+<p>XXXXXXXX denotes the i5 or i7 index region of the primer.</p>
 </div>
 </div>
 </section>
@@ -351,17 +351,16 @@ Note
 <section id="for-barcoded-adapters-added-via-ligation-e.g.-nextflex-udi-standard-truseq-style-y-adapters" class="level5">
 <h5 class="anchored" data-anchor-id="for-barcoded-adapters-added-via-ligation-e.g.-nextflex-udi-standard-truseq-style-y-adapters">For barcoded adapters added via ligation (e.g.&nbsp;NEXTFLEX UDI, standard Truseq style Y-adapters):</h5>
 <ul>
-<li>index 1 (i7) is always read in the direction (5’ to 3′) of the sequence in the oligo</li>
-<li>index 2 (i5) is read in the direction of the oligos for Miseq and NovaSeq runs</li>
-<li>index 2 (i5) is read as reverse complement of barcoded PCR oligos for NextSeq and iSeq runs</li>
+<li><del>index 1 (i7) is always read in the direction (5’ to 3′) of the sequence in the oligo</del> this doesn’t agree with other sources</li>
+<li>index 2 (i5) is read in the direction of the oligos for Miseq <del>and NovaSeq</del> runs</li>
+<li>index 2 (i5) is read as reverse complement of barcoded PCR oligos for NextSeq and iSeq runs. And also NovaSeq runs with version 1.5 chemistry.</li>
 </ul>
 </section>
 <section id="for-barcodes-added-via-a-pcr-step-e.g.-tn5-transposase-barcoding-pcr-primers-nextera-or-through-primers-and-stubby-adapters" class="level5">
 <h5 class="anchored" data-anchor-id="for-barcodes-added-via-a-pcr-step-e.g.-tn5-transposase-barcoding-pcr-primers-nextera-or-through-primers-and-stubby-adapters">For barcodes added via a PCR step (e.g.&nbsp;Tn5 Transposase Barcoding PCR Primers, Nextera; or through primers and stubby adapters):</h5>
 <ul>
-<li>index 1 (i7) is always read as reverse complement of the sequence in TruSeq or Nextera style PCR oligos</li>
-<li>index 2 (i5) is read in direction of TruSeq or Nextera PCR oligos for Miseq and NovaSeq runs<br>
-</li>
+<li>index 1 (i7) is always read as the reverse complement of the sequence in the TruSeq or Nextera style PCR oligos</li>
+<li>index 2 (i5) is read in direction of TruSeq or Nextera PCR oligos for Miseq and NovaSeq runs</li>
 <li>index 2 (i5) is read as reverse complement of barcoded PCR oligos for NextSeq and iSeq runs</li>
 </ul>
 
