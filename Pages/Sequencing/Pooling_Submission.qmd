@@ -3,7 +3,7 @@ title: "Pooling and Submission of Sequencing Libraries"
 editor: visual
 ---
 
--   Only pool samples for sequencing that have compatible i5/p5 and i7/p7 barcodes.
+-   Only pool samples for sequencing that have compatible i5/p5 and i7/p7 barcodes. More information on Troutman lab barcode collisions can be found [here](https://github.com/ty-troutman/labSequencingBarcodes).
 -   Don't unknowingly pool samples that have very different molecular weights.
 -   Typically we target 15-25 million reads per sample for ATAC-seq, ChIP-seq and RNA-seq.
 -   Samples profiling allelic biases (F1 hybrids) may require 50-100 million reads per sample.
@@ -46,12 +46,6 @@ The local [CCHMC DNA Sequencing and Genotyping Core](https://centerlink.cchmc.or
 # Note
 
 S1 flow cells can be split into separate, independent lanes with the XP workflow. Talk to the core manager ahead of time if this is needed.
-:::
-
-::: {.callout-important collapse="false"}
-# Critical!!
-
-Verify the appropriate orientation of the index sequence matches the requirements of the targeted sequencing platform. This must be appropriately entered in the submission sample sheet or demultiplexing will fail. Illumina NovaSeq v1.0 and v1.5 workflows utilize different strategies and require entering i5 index sequences appropriately. Forward strand i5 workflow is performed with v1.0 reagent kits, while reverse complement i5 workflow is performed with v1.5 reagent kits (NovaSeq). For the Illumina MiniSeq or NextSeq platforms, enter the i5 index as the reverse complement. When in doubt, verify with the core facility or sequencing provider and/or read the user manual!!
 :::
 
 ## Lane submission requirements:

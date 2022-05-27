@@ -22,10 +22,10 @@ Use the [linked database](https://docs.google.com/spreadsheets/d/15NMOWsKdL7QIup
 # [Lab Sequencing Barcodes](https://docs.google.com/spreadsheets/d/109S5mDFF2S8gghYd7Q-zsrvwM2nfUP9SjjCCN-za5Og/edit?usp=sharing)
 
 ::: callout-important
--   Not all barcode sequences between manufacturers are compatible with each other.
+-   Not all barcode sequences between manufacturers are compatible with each other. A partial list of our colliding barcodes can be found on the lab [GitHub](https://github.com/ty-troutman/labSequencingBarcodes).
 -   It is important to plan ahead, consider Hamming distances, GC balance, and communicate with colleagues to facilitate multiplexing.
--   Examples for determining Hamming distances can be found on the lab [GitHub](https://github.com/ty-troutman/labSequencingBarcodes).
--   Barcode lists are also available on the lab [GitHub](https://github.com/ty-troutman/labSequencingBarcodes/tree/main/data)
+-   Examples for determining Hamming distances can be found on the lab [GitHub](https://github.com/ty-troutman/labSequencingBarcodes/blob/main/code/hammingDistanceCalculation.md).
+-   Barcode lists are also available on the lab [GitHub](https://github.com/ty-troutman/labSequencingBarcodes/tree/main/barcodes)
 :::
 
 ### [NEXTFLEX UDI Barcodes](https://github.com/ty-troutman/labSequencingBarcodes/blob/main/data/NEXTflex_UDI_Index_Sequences_v21.06_v1-New.xlsx)
