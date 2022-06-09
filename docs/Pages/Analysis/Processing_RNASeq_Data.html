@@ -369,29 +369,39 @@ Important
 </section>
 <section id="lsf-scheduler-example" class="level1">
 <h1>LSF scheduler example</h1>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -W 1:00</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -n 16</span></span>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -W 4:00</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -n 24</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -M 40000</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -e ./bsub_scripts/mouse_c57bl6j_Male_BMDM_RNA_KLA2hr_TDT_l20220224_ACGATCTA_GCAATATG_S14_L002.err</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -o ./bsub_scripts/mouse_c57bl6j_Male_BMDM_RNA_KLA2hr_TDT_l20220224_ACGATCTA_GCAATATG_S14_L002.out# load modulesmodule load STAR/2.7.9module load homer/4.11</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -e ./bsub_scripts/Mouse-CB6F1J-Ly6CHiRM-RNA-CDAHFD-4Wk-TGCCGTAA-GTGCATCC.err</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -o ./bsub_scripts/Mouse-CB6F1J-Ly6CHiRM-RNA-CDAHFD-4Wk-TGCCGTAA-GTGCATCC.out</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># execute STAR</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="dt">\ </span>   </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">--runThreadN</span> 16 <span class="dt">\ </span>   </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">--genomeDir</span> /data/hpc-troutman/data/genomes/indexes/star/mm10_starIndex/ <span class="dt">\ </span>   <span class="at">--readFilesCommand</span> zcat <span class="dt">\ </span>   </span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">--readFilesIn</span> .//mouse_c57bl6j_Male_BMDM_RNA_KLA2hr_TDT_l20220224_ACGATCTA_GCAATATG_S14_L002_R1.fastq.gz .//mouse_c57bl6j_Male_BMDM_RNA_KLA2hr_TDT_l20220224_ACGATCTA_GCAATATG_S14_L002_R2.fastq.gz <span class="dt">\ </span>   </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="ex">--outFileNamePrefix</span> ./star_out /mouse_c57bl6j_Male_BMDM_RNA_KLA2hr_TDT_l20220224_ACGATCTA_GCAATATG_S14_L002.mm10. <span class="dt">\ </span>   <span class="at">--outSAMtype</span> SAM</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># remove STAR temporary directories</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> ./star_out/mouse_c57bl6j_Male_BMDM_RNA_KLA2hr_TDT_l20220224_ACGATCTA_GCAATATG_S14_L002.mm10._STARtmp</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co"># execute HOMER makeTagDirectory</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="ex">makeTagDirectory</span> ./tag_directories/mouse_c57bl6j_Male_BMDM_RNA_KLA2hr_TDT_l20220224_ACGATCTA_GCAATATG_S14_L002.mm10/ ./star_out/mouse_c57bl6j_Male_BMDM_RNA_KLA2hr_TDT_l20220224_ACGATCTA_GCAATATG_S14_L002.mm10.Aligned<span class="pp">*</span>am <span class="at">-genome</span> mm10 <span class="at">-checkGC</span> <span class="at">-format</span> sam <span class="at">-sspe</span> <span class="at">-flip</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># copy STAR log files to the HOMER tag directory</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./star_out/mouse_c57bl6j_Male_BMDM_RNA_KLA2hr_TDT_l20220224_ACGATCTA_GCAATATG_S14_L002.<span class="pp">*</span>Log<span class="pp">*</span> ./tag_directories/mouse_c57bl6j_Male_BMDM_RNA_KLA2hr_TDT_l20220224_ACGATCTA_GCAATATG_S14_L002.mm10/</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> Done!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># load modules</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load STAR/2.7.9</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load homer/4.11</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load samtools</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># execute STAR</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="dt">\</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">--runThreadN</span> 24 <span class="dt">\</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">--genomeDir</span> /data/hpc-troutman/data/genomes/indexes/star/mm10_starIndex/ <span class="dt">\</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">--readFilesCommand</span> zcat <span class="dt">\</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">--readFilesIn</span> /data/hpc-troutman/data/archive/22-06-08_CCHMC_DNASeqCore_SP1//Mouse-CB6F1J-Ly6CHiRM-RNA-CDAHFD-4Wk-TGCCGTAA-GTGCATCC_R1.fastq.gz /data/hpc-troutman/data/archive/22-06-08_CCHMC_DNASeqCore_SP1//Mouse-CB6F1J-Ly6CHiRM-RNA-CDAHFD-4Wk-TGCCGTAA-GTGCATCC_R2.fastq.gz <span class="dt">\</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">--outFileNamePrefix</span> ./star_out/Mouse-CB6F1J-Ly6CHiRM-RNA-CDAHFD-4Wk-TGCCGTAA-GTGCATCC.mm10. <span class="dt">\</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">--outSAMtype</span> BAM SortedByCoordinate</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co"># remove STAR temporary directories</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> ./star_out/Mouse-CB6F1J-Ly6CHiRM-RNA-CDAHFD-4Wk-TGCCGTAA-GTGCATCC.mm10._STARtmp</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co"># execute HOMER makeTagDirectory</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="ex">makeTagDirectory</span> ./tag_directories/Mouse-CB6F1J-Ly6CHiRM-RNA-CDAHFD-4Wk-TGCCGTAA-GTGCATCC.mm10/ <span class="dt">\</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    ./star_out/Mouse-CB6F1J-Ly6CHiRM-RNA-CDAHFD-4Wk-TGCCGTAA-GTGCATCC.mm10.Aligned<span class="pp">*</span>am <span class="dt">\</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">-genome</span> mm10 <span class="at">-checkGC</span> <span class="at">-format</span> sam <span class="at">-sspe</span> <span class="at">-flip</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co"># copy STAR log files to the HOMER tag directory</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./star_out/Mouse-CB6F1J-Ly6CHiRM-RNA-CDAHFD-4Wk-TGCCGTAA-GTGCATCC.<span class="pp">*</span>Log.final.out ./tag_directories/Mouse-CB6F1J-Ly6CHiRM-RNA-CDAHFD-4Wk-TGCCGTAA-GTGCATCC.star.log.final.mm10/</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./star_out/Mouse-CB6F1J-Ly6CHiRM-RNA-CDAHFD-4Wk-TGCCGTAA-GTGCATCC.<span class="pp">*</span>Log.out ./tag_directories/Mouse-CB6F1J-Ly6CHiRM-RNA-CDAHFD-4Wk-TGCCGTAA-GTGCATCC.star.log.out.mm10/ <span class="dt">\</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a> <span class="bu">echo</span> Done!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This script can be named &lt;example&gt;.bat and submitted to the scheduler on the cluster using:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bsub</span> <span class="op">&lt;</span> example.bat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Multiple bat scripts can be submitted using a bash for loop:</p>

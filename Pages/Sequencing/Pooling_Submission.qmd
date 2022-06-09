@@ -1,6 +1,6 @@
 ---
 title: "Pooling and Submission of Sequencing Libraries"
-editor: visual
+editor: source
 ---
 
 -   Only pool samples for sequencing that have compatible i5/p5 and i7/p7 barcodes. More information on Troutman lab barcode collisions can be found [here](https://github.com/ty-troutman/labSequencingBarcodes).
@@ -11,7 +11,7 @@ editor: visual
 -   Example pooling sheet (coming soon).
 -   Pooling requires an estimate of each sample's molecular weight and a qubit quantification of each samples concentration in ng/µl.
 
-::: {.callout-important collapse="false"}
+::: {.callout-important}
 ## Critical!! Know which index orientation to submit.
 
 Verify the appropriate orientation of the index sequence matches the requirements of the targeted sequencing platform. This must be appropriately entered in the submission sample sheet or demultiplexing will fail. Illumina NovaSeq v1.0 and v1.5 workflows utilize different strategies and require entering i5 index sequences appropriately. Forward strand i5 workflow is performed with v1.0 reagent kits, while reverse complement i5 workflow is performed with v1.5 reagent kits (NovaSeq). For the Illumina MiniSeq or NextSeq platforms, enter the i5 index as the reverse complement. When in doubt, verify with the core facility or sequencing provider and/or read the user manual!!
