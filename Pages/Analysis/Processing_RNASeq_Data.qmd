@@ -17,9 +17,15 @@ title: "Processing RNA-seq data"
 4.  Map the data using [STAR](https://github.com/alexdobin/STAR) and create [HOMER tag directories](http://homer.ucsd.edu/homer/ngs/tagDir.html). We have wrapper tools to automate and parallelize this process. There is one wrapper script for [single read](../../Code/Wrapper_STAR_SingleRead.R) chemistry, and one for [paired end](../../Code/Wrapper_STAR_PairedEnd.R) chemistry. These scripts are also accessible on [github](https://github.com/ty-troutman/Genomics-analyses/tree/main/Code).
 
 ::: callout-important
--   These tools depend on file names in the lab convention (`*R1.fastq.gz *R2.fastq.gz`)
+-   These tools depend on file names in the lab convention (`*R1.fastq.gz *R2.fastq.gz`). Samples from the CCHMC core can be renamed as in the example below. *It is good practice to triple-check your commands with an `echo` statement before running the final command.*
 
--   These tools require input of only one `fastq.gz` file per sample per read direction
+    ``` bash
+    for i in *read1*.fastq.gz; do echo mv $i ${i/.fastq.gz/_R1.fastq.gz}; done
+    for i in *read2*.fastq.gz; do echo mv $i ${i/.fastq.gz/_R2.fastq.gz}; done
+    for i in *.fastq.gz; do echo mv $i ${i/run*=/}; done
+    ```
+    
+-   These tools require input of only one `fastq.gz` file per sample per read direction.
 
 -   These tools generate tag directories assuming a stranded library chemistry (e.g. lab standard [dUTP RNA-seq protocol](https://docs.google.com/document/d/10gv3azAfEpOEBIOYLgxlRpkMJf1_qg_o-lhHULrTp0g/edit?usp=sharing).
 
