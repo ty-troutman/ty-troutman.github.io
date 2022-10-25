@@ -23,11 +23,13 @@
 - title: Logs and Protocols
   subtitle: Locations of lab logs and common protocols
   links:
+    - text: "Troutman-Lab-Share"
+      href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share?csf=1&web=1&e=nEuYqw"        
     - text: "Logs"
-      href: https://sites.google.com/view/troutman-lab/logs-and-protocols/logs
+      href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Reagent_Logs?csf=1&web=1&e=oK8Gbg"
     - text: "Cell Preparation"
-      href: https://sites.google.com/view/troutman-lab/logs-and-protocols/cell-preparation
+      href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Protocols-Methods/primaryCells?csf=1&web=1&e=gtd3YL"
     - text: "Equipment"
-      href: https://sites.google.com/view/troutman-lab/logs-and-protocols/equipment
+      href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Equipment?csf=1&web=1&e=cgrrX0"
     - text: "Genomics"
-      href: https://sites.google.com/view/troutman-lab/logs-and-protocols/genomics
+      href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Protocols-Methods/genomics?csf=1&web=1&e=eifcHl"
