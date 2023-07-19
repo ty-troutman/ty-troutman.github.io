@@ -13,7 +13,7 @@ This is meant to be a guideline for processing and analysis of RNA-seq data in t
 2.  Group data according to mapping needs, e.g. by genome, paired end and single read, etc.
 
 3.  Run [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) on the raw fastq files.
-```
+```bash
     module load fastqc/0.11.7
     fastqc <data>.R1.fastq.gz -o <preferred_name>
     fastqc <data>.R2.fastq.gz -o <preferred_name>
@@ -42,9 +42,10 @@ This is meant to be a guideline for processing and analysis of RNA-seq data in t
         --outSAMtype BAM SortedByCoordinate
 ```
 
-6.  Use [HOMER](http://homer.ucsd.edu/homer/) to generate [tag directories](http://homer.ucsd.edu/homer/ngs/tagDir.html) from the STAR alignment BAM file. Use the `-sspe -flip` options if the data is generated using our lab's dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.\
+6.  Use [HOMER](http://homer.ucsd.edu/homer/) to generate [tag directories](http://homer.ucsd.edu/homer/ngs/tagDir.html) from the STAR alignment BAM file. Use the `-sspe -flip` options if the data is generated using our lab's dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.
 ```bash
-    makeTagDirectory \<tagDirectoryName\> \<filename.sam\> -genome \<experiment_genome\> \\ -checkGC -format sam -sspe -flip\
+    makeTagDirectory <tagDirectoryName> <filename.sam> -genome <experiment_genome> \
+    -checkGC -format sam -sspe -flip
 ```
     Omit `-sspe` if the sequencing data is not paired end, and omit `-flip` if the sequencing reads will not align to the opposite DNA strand as in "first-strand" library synthesis protocols.
     
@@ -62,8 +63,13 @@ Many of these QC parameters can quickly be summarized using [MultiQC](https://mu
 
 In order to run MultiQc from your local machine, you will need to do one of the following: mount the server folder as a drive on your local machine (good idea), or copy the data from the server to your local machine (bad idea). Instructions for mounting the drives can be found [here](server_lab_drives.qmd) and [here](https://confluence.research.cchmc.org/display/RESITHUB/Data+Storage).
 
-Once a drive is mounted and the Docker software is opened, the Multiqc docker image can be run through your terminal application on your local machine as in the example described [here](https://multiqc.info/docs/getting_started/installation/#docker) and provided below:\
-`` docker run -t -v `pwd`:`pwd` -w `pwd` ewels/multiqc multiqc ./path/to/mounted/drive `` Another useful tool is `alignStats.R`, which generates a table containing selected information from the STAR log file and the HOMER `tagInfo.txt` file. This tool is described in more detail [below](map_on_bmi_hpc%20(in%20progress!)).
+Once a drive is mounted and the Docker software is opened, the Multiqc docker image can be run through your terminal application on your local machine as in the example described [here](https://multiqc.info/docs/getting_started/installation/#docker) and provided below:
+
+``` bash 
+    docker run -t -v `pwd`:`pwd` -w `pwd` ewels/multiqc multiqc ./path/to/mounted/drive
+``` 
+
+Another useful tool is `alignStats.R`, which generates a table containing selected information from the STAR log file and the HOMER `tagInfo.txt` file. This tool is described in more detail [below](map_on_bmi_hpc%20(in%20progress!)).
 
 ### Data quantification
 
@@ -96,7 +102,7 @@ These wrapper scripts takes an input directory path of grouped data and generate
 
 These scripts can be run from the lab's cluster drive or added as executables to your path. Current versions are located at:
 
-```         
+```bash         
     /data/hpc-troutman/software/scripts/working_wrapper_star_paired.R
     /data/hpc-troutman/software/scripts/working_wrapper_bowtie2_pairedend.R
     /data/hpc-troutman/software/scripts/working_wrapper_bowtie2_singleread.R
@@ -104,14 +110,14 @@ These scripts can be run from the lab's cluster drive or added as executables to
 
 Usage on the cluster requires a loaded R module. An example follows:
 
-```         
+```bash         
     module load R/4.2.1
     Rscript /data/hpc-troutman/software/scripts/working_wrapper_star_paired.R -d /data/troutman-hpc/data/archive/fastq_path
 ```
 
 For example, the script generates and submits the following .bat file to the LSF scheduler:
 
-```         
+```bash         
     #BSUB -W 2:00
     #BSUB -n 16
     #BSUB -M 40000
@@ -188,7 +194,7 @@ An example follows (omit the header column):
 
 ####rnaPipe.R `rnaPipe.R` is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called `alignStats.txt`, data quantification results in a directory called `rnaQuan/`, and differential expression results in a directory called `rnaDiff/`. These tools require a compatible R module is loaded when run through the BMI HPC. An example usage follows:
 
-```         
+```bash         
     module load R/4.2.1
     rnaPipe.R /path/to/sample_definition_file -o /desired/output/path -g available_homer_genome
 ```
@@ -199,7 +205,7 @@ Steps from `rnaPipe.R` can also be run/rerun individually, and some have additio
 
 `alignStats.R` compiles various quality control statistics into a summary table based on what is in the sample definition file. An example usage follows:
 
-```         
+```bash         
     Rscript alignStats.R /path/to/sample_definition_file > alignStats.txt
 ```
 
@@ -209,7 +215,7 @@ Steps from `rnaPipe.R` can also be run/rerun individually, and some have additio
 
 An example usage follows:
 
-```         
+```bash         
     Rscript rnaQuan.R /path/to/sample_definition_file -o rnaQuan
 ```
 
@@ -219,7 +225,7 @@ An example usage follows:
 
 An example usage is follows:
 
-```         
+```bash         
     Rscript rnaDiff.R /path/to/sample_definition_file -c rnaQuan/rawC.txt -t rnaQuan/rawT.txt -o rnaDiff/
 ```
 

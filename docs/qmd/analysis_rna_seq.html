@@ -341,9 +341,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Group data according to mapping needs, e.g.&nbsp;by genome, paired end and single read, etc.</p></li>
 <li><p>Run <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">fastqc</a> on the raw fastq files.</p></li>
 </ol>
-<pre><code>    module load fastqc/0.11.7
-    fastqc &lt;data&gt;.R1.fastq.gz -o &lt;preferred_name&gt;
-    fastqc &lt;data&gt;.R2.fastq.gz -o &lt;preferred_name&gt;</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">module</span> load fastqc/0.11.7</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">fastqc</span> <span class="op">&lt;</span>data<span class="op">&gt;</span>.R1.fastq.gz <span class="at">-o</span> <span class="op">&lt;</span>preferred_name<span class="op">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">fastqc</span> <span class="op">&lt;</span>data<span class="op">&gt;</span>.R2.fastq.gz <span class="at">-o</span> <span class="op">&lt;</span>preferred_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="4" type="1">
 <li>Run <a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim Galore</a> on the fastq files. Rerun fastqc on the trimmed fastq files. Trim Galore can automatically do this for you.</li>
 </ol>
@@ -366,10 +366,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">--outFileNamePrefix</span> <span class="op">&lt;</span>preferred_prefix<span class="op">&gt;</span> <span class="dt">\</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">--outSAMtype</span> BAM SortedByCoordinate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="6" type="1">
-<li>Use <a href="http://homer.ucsd.edu/homer/">HOMER</a> to generate <a href="http://homer.ucsd.edu/homer/ngs/tagDir.html">tag directories</a> from the STAR alignment BAM file. Use the <code>-sspe -flip</code> options if the data is generated using our lab’s dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.<br>
-</li>
+<li>Use <a href="http://homer.ucsd.edu/homer/">HOMER</a> to generate <a href="http://homer.ucsd.edu/homer/ngs/tagDir.html">tag directories</a> from the STAR alignment BAM file. Use the <code>-sspe -flip</code> options if the data is generated using our lab’s dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">makeTagDirectory</span> <span class="dt">\&lt;</span>tagDirectoryName<span class="dt">\&gt;</span> <span class="dt">\&lt;</span>filename.sam<span class="dt">\&gt;</span> <span class="at">-genome</span> <span class="dt">\&lt;</span>experiment_genome<span class="dt">\&gt;</span> <span class="dt">\\</span> <span class="at">-checkGC</span> <span class="at">-format</span> sam <span class="at">-sspe</span> <span class="at">-flip</span><span class="dt">\</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">makeTagDirectory</span> <span class="op">&lt;</span>tagDirectoryName<span class="op">&gt;</span> <span class="op">&lt;</span>filename.sam<span class="op">&gt;</span> -genome <span class="op">&lt;</span>experiment_genome<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-checkGC</span> <span class="at">-format</span> sam <span class="at">-sspe</span> <span class="at">-flip</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>Omit `-sspe` if the sequencing data is not paired end, and omit `-flip` if the sequencing reads will not align to the opposite DNA strand as in "first-strand" library synthesis protocols.</code></pre>
 <ol start="7" type="1">
 <li>Use <a href="http://www.htslib.org">Samtools</a> to <a href="http://www.htslib.org/doc/samtools-index.html">index</a> the sorted BAM files.</li>
@@ -386,8 +386,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Many of these QC parameters can quickly be summarized using <a href="https://multiqc.info">MultiQC</a>. This software is not currently available on the BMI cluster but can be run locally. Installation is easy via <a href="https://www.docker.com">Docker</a>.</p>
 <p>In order to run MultiQc from your local machine, you will need to do one of the following: mount the server folder as a drive on your local machine (good idea), or copy the data from the server to your local machine (bad idea). Instructions for mounting the drives can be found <a href="../qmd/server_lab_drives.html">here</a> and <a href="https://confluence.research.cchmc.org/display/RESITHUB/Data+Storage">here</a>.</p>
-<p>Once a drive is mounted and the Docker software is opened, the Multiqc docker image can be run through your terminal application on your local machine as in the example described <a href="https://multiqc.info/docs/getting_started/installation/#docker">here</a> and provided below:<br>
-<code>docker run -t -v `pwd`:`pwd` -w `pwd` ewels/multiqc multiqc ./path/to/mounted/drive</code> Another useful tool is <code>alignStats.R</code>, which generates a table containing selected information from the STAR log file and the HOMER <code>tagInfo.txt</code> file. This tool is described in more detail <a href="map_on_bmi_hpc (in progress!)">below</a>.</p>
+<p>Once a drive is mounted and the Docker software is opened, the Multiqc docker image can be run through your terminal application on your local machine as in the example described <a href="https://multiqc.info/docs/getting_started/installation/#docker">here</a> and provided below:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">docker</span> run <span class="at">-t</span> <span class="at">-v</span> <span class="kw">`</span><span class="bu">pwd</span><span class="kw">`</span>:<span class="kw">`</span><span class="bu">pwd</span><span class="kw">`</span> <span class="at">-w</span> <span class="kw">`</span><span class="bu">pwd</span><span class="kw">`</span> ewels/multiqc multiqc ./path/to/mounted/drive</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Another useful tool is <code>alignStats.R</code>, which generates a table containing selected information from the STAR log file and the HOMER <code>tagInfo.txt</code> file. This tool is described in more detail <a href="map_on_bmi_hpc (in progress!)">below</a>.</p>
 </section>
 <section id="data-quantification" class="level3">
 <h3 class="anchored" data-anchor-id="data-quantification">Data quantification</h3>
@@ -421,65 +422,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>Presently, the lab has independent wrapper scripts individually tailored for single-read or paired-end RNA-seq data, or single-read or paired-end ChIP-seq or ATAC-seq data. Eventually these scripts will be merged into an integrated tool that functions via specification of command line options.</em></p>
 <p>These wrapper scripts takes an input directory path of grouped data and generate and submit a series of batch .bat files on the BMI High Performance Cluster. Users have the option to specify variables specific to their data or use default specified parameters. The submitted batch files automate execution of the following: fastqc, trim_galore, data alignment, tag directory creation, and sorting and indexing alignment bam files.</p>
 <p>These scripts can be run from the lab’s cluster drive or added as executables to your path. Current versions are located at:</p>
-<pre><code>    /data/hpc-troutman/software/scripts/working_wrapper_star_paired.R
-    /data/hpc-troutman/software/scripts/working_wrapper_bowtie2_pairedend.R
-    /data/hpc-troutman/software/scripts/working_wrapper_bowtie2_singleread.R</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">/data/hpc-troutman/software/scripts/working_wrapper_star_paired.R</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">/data/hpc-troutman/software/scripts/working_wrapper_bowtie2_pairedend.R</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">/data/hpc-troutman/software/scripts/working_wrapper_bowtie2_singleread.R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Usage on the cluster requires a loaded R module. An example follows:</p>
-<pre><code>    module load R/4.2.1
-    Rscript /data/hpc-troutman/software/scripts/working_wrapper_star_paired.R -d /data/troutman-hpc/data/archive/fastq_path</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">module</span> load R/4.2.1</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Rscript</span> /data/hpc-troutman/software/scripts/working_wrapper_star_paired.R <span class="at">-d</span> /data/troutman-hpc/data/archive/fastq_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For example, the script generates and submits the following .bat file to the LSF scheduler:</p>
-<pre><code>    #BSUB -W 2:00
-    #BSUB -n 16
-    #BSUB -M 40000
-    #BSUB -e ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.err
-    #BSUB -o ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.out
-    #BSUB -R "span[hosts=1]"
-
-    # load modules
-    module load fastqc/0.11.7
-    module load trimgalore/0.6.6
-    module load STAR/2.7.9
-    module load samtools
-    module load homer/4.11
-
-    # execute fastqc
-    fastqc /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz -o ./fastqc_orig/
-    fastqc /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz -o ./fastqc_orig/
-
-    # execute trim_galore
-    trim_galore \
-        --cores 4 \
-        --paired /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz\
-        --fastqc \
-        --output_dir ./trim_galore/
-
-    # rename trimmed files
-    mv ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1_val_1.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz
-    mv ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2_val_2.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz
-    mv ./trim_galore/*fastqc* ./fastqc_trimmed/
-
-    # execute STAR
-    STAR \
-        --runThreadN 16 \
-        --genomeDir /data/hpc-troutman/data/genomes/indexes/star/mm10_starIndex/ \
-        --readFilesCommand zcat \
-        --readFilesIn ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz \
-        --outFileNamePrefix ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10. \
-        --outSAMtype BAM SortedByCoordinate
-
-    # remove STAR temporary directories
-    rm -r ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10._STARtmp
-
-    # execute HOMER makeTagDirectory
-    makeTagDirectory ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/ \
-    ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10.Aligned*am \
-        -genome mm10 -checkGC -format sam -sspe -flip
-
-    # copy STAR log files to the HOMER tag directory
-    cp ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.*Log.final.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.log.mm10
-    cp ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.*Log.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.consolelog.mm10 \
-
-    echo Done!</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">#BSUB -W 2:00</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">#BSUB -n 16</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#BSUB -M 40000</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#BSUB -e ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.err</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#BSUB -o ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.out</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#BSUB -R "span[hosts=1]"</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># load modules</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">module</span> load fastqc/0.11.7</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">module</span> load trimgalore/0.6.6</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">module</span> load STAR/2.7.9</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">module</span> load samtools</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="ex">module</span> load homer/4.11</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># execute fastqc</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">fastqc</span> /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz <span class="at">-o</span> ./fastqc_orig/</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="ex">fastqc</span> /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz <span class="at">-o</span> ./fastqc_orig/</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># execute trim_galore</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="ex">trim_galore</span> <span class="dt">\</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">--cores</span> 4 <span class="dt">\</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">--paired</span> /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz<span class="dt">\</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">--fastqc</span> <span class="dt">\</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">--output_dir</span> ./trim_galore/</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># rename trimmed files</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mv</span> ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1_val_1.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mv</span> ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2_val_2.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mv</span> ./trim_galore/<span class="pp">*</span>fastqc<span class="pp">*</span> ./fastqc_trimmed/</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># execute STAR</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="ex">STAR</span> <span class="dt">\</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">--runThreadN</span> 16 <span class="dt">\</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">--genomeDir</span> /data/hpc-troutman/data/genomes/indexes/star/mm10_starIndex/ <span class="dt">\</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">--readFilesCommand</span> zcat <span class="dt">\</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">--readFilesIn</span> ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz <span class="dt">\</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">--outFileNamePrefix</span> ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10. <span class="dt">\</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">--outSAMtype</span> BAM SortedByCoordinate</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remove STAR temporary directories</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span> <span class="at">-r</span> ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10._STARtmp</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># execute HOMER makeTagDirectory</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    <span class="ex">makeTagDirectory</span> ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/ <span class="dt">\</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10.Aligned<span class="pp">*</span>am <span class="dt">\</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>        <span class="at">-genome</span> mm10 <span class="at">-checkGC</span> <span class="at">-format</span> sam <span class="at">-sspe</span> <span class="at">-flip</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># copy STAR log files to the HOMER tag directory</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cp</span> ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.<span class="pp">*</span>Log.final.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.log.mm10</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cp</span> ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.<span class="pp">*</span>Log.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.consolelog.mm10 <span class="dt">\</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> Done!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="a.c.rsuite" class="level3">
 <h3 class="anchored" data-anchor-id="a.c.rsuite"><a href="https://github.com/z5ouyang/A.C.Rsuite">A.C.Rsuite</a></h3>
@@ -530,25 +531,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p><em>The GitHub versions are not fully functional on the BMI cluster, but we have edited versions suppressing the non-functional aspects (<code>makeMultiWigHub.pl</code>).</em></p>
 <p>####rnaPipe.R <code>rnaPipe.R</code> is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called <code>alignStats.txt</code>, data quantification results in a directory called <code>rnaQuan/</code>, and differential expression results in a directory called <code>rnaDiff/</code>. These tools require a compatible R module is loaded when run through the BMI HPC. An example usage follows:</p>
-<pre><code>    module load R/4.2.1
-    rnaPipe.R /path/to/sample_definition_file -o /desired/output/path -g available_homer_genome</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">module</span> load R/4.2.1</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">rnaPipe.R</span> /path/to/sample_definition_file <span class="at">-o</span> /desired/output/path <span class="at">-g</span> available_homer_genome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Steps from <code>rnaPipe.R</code> can also be run/rerun individually, and some have additional analysis options available. Script instructions and available options can be viewed by entering the command into the terminal.</p>
 <section id="alignstats.r" class="level4">
 <h4 class="anchored" data-anchor-id="alignstats.r">alignStats.R</h4>
 <p><code>alignStats.R</code> compiles various quality control statistics into a summary table based on what is in the sample definition file. An example usage follows:</p>
-<pre><code>    Rscript alignStats.R /path/to/sample_definition_file &gt; alignStats.txt</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Rscript</span> alignStats.R /path/to/sample_definition_file <span class="op">&gt;</span> alignStats.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="rnaquan.r" class="level4">
 <h4 class="anchored" data-anchor-id="rnaquan.r">rnaQuan.R</h4>
 <p><code>rnaQuan.R</code> performs routine quantification of RNA-seq data by reading in the sample definition file and using HOMER and R to perform the following: - Generate an <code>analyzeRepeats.pl</code> raw sequencing count file (<code>-raw</code> or <code>-noadj</code>) specifying the options <code>-condenseGenes -count exons</code>. - Generate an <code>analyzeRepeats.pl</code> TPM normalized file (<code>-tpm</code> option) specifying the option <code>-count exons</code> <u>but not <code>-condenseGenes</code></u>. This file is subsetted based on accession numbers within the raw count file. - Short genes (less than 200 bp) are removed, and a simplified raw file (<code>rawC.txt</code>) and TPM file (<code>rawT.txt</code>) are created. - A series of plots are created that: compare gene length versus expression means and variance; assess data grouping using principal component analyses; compare pair-wise Parson’s correlations using heat maps and within group 2d kernel density plots. - Group replicate tag directories are merged into a <code>mergeTag</code> folder. - A UCSC genome browser hub track is created using the sample definition file name. <u>This aspect will not function until the web server and script are correctly configured</u>.</p>
 <p>An example usage follows:</p>
-<pre><code>    Rscript rnaQuan.R /path/to/sample_definition_file -o rnaQuan</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Rscript</span> rnaQuan.R /path/to/sample_definition_file <span class="at">-o</span> rnaQuan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="rnadiff.r" class="level4">
 <h4 class="anchored" data-anchor-id="rnadiff.r">rnaDiff.R</h4>
 <p><code>rnaDiff.R</code> performs group pairwise differential expression analysis using DeSeq2 as. This depends both on the sample definition file <em>and</em> the processed raw count and TPM files generated by <code>rnaQuan.R</code>. It generates the following: - DeSeq2 results for any gene above a declared TPM threshold (default 8) for each pairwise comparison between each group (not one group versus all remaining). - Scatter plots and MA plots visualizing expression differences between each pair of groups. - A series of summary heat map for the composite list of deferentially expressed genes between all groups.</p>
 <p>An example usage is follows:</p>
-<pre><code>    Rscript rnaDiff.R /path/to/sample_definition_file -c rnaQuan/rawC.txt -t rnaQuan/rawT.txt -o rnaDiff/</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Rscript</span> rnaDiff.R /path/to/sample_definition_file <span class="at">-c</span> rnaQuan/rawC.txt <span class="at">-t</span> rnaQuan/rawT.txt <span class="at">-o</span> rnaDiff/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>These scripts can be run from the lab’s cluster drive or added as an executable to your path. Current versions are located at <code>/data/hpc-troutman/software/scripts/</code>.</p>
 
 
