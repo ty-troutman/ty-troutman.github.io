@@ -432,8 +432,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -W 2:00</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -n 16</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -M 40000</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -e ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.err</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -o ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.out</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -e ./bsub_scripts/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.err</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -o ./bsub_scripts/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.out</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#BSUB -R "span[hosts=1]"</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># load modules</span></span>
@@ -444,43 +444,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load homer/4.11</span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># execute fastqc</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz <span class="at">-o</span> ./fastqc_orig/</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz <span class="at">-o</span> ./fastqc_orig/</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> /data/hpc-troutman/data/archive/230608_CCHMC_SP/atf3//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1.fastq.gz <span class="at">-o</span> ./fastqc_orig/</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> /data/hpc-troutman/data/archive/230608_CCHMC_SP/atf3//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2.fastq.gz <span class="at">-o</span> ./fastqc_orig/</span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># execute trim_galore</span></span>
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="ex">trim_galore</span> <span class="dt">\</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>--cores 4 <span class="dt">\</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>--paired /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz<span class="dt">\</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>--fastqc <span class="dt">\</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>--output_dir ./trim_galore/</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">--cores</span> 4 <span class="dt">\</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">--paired</span> /data/hpc-troutman/data/archive/230608_CCHMC_SP/atf3//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1.fastq.gz /data/hpc-troutman/data/archive/230608_CCHMC_SP/atf3//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2.fastq.gz<span class="dt">\</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">--fastqc</span> <span class="dt">\</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">--output_dir</span> ./trim_galore/</span>
 <span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co"># rename trimmed files</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1_val_1.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2_val_2.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> ./trim_galore/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1_val_1.fq.gz ./trim_galore/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1.fastq.gz</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> ./trim_galore/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2_val_2.fq.gz ./trim_galore/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2.fastq.gz</span>
 <span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> ./trim_galore/<span class="pp">*</span>fastqc<span class="pp">*</span> ./fastqc_trimmed/</span>
 <span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co"># execute STAR</span></span>
 <span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="dt">\</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>--runThreadN 16 <span class="dt">\</span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>--genomeDir /data/hpc-troutman/data/genomes/indexes/star/mm10_starIndex/ <span class="dt">\</span></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>--readFilesCommand zcat <span class="dt">\</span></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>--readFilesIn ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz <span class="dt">\</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>--outFileNamePrefix ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10. <span class="dt">\</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>--outSAMtype BAM SortedByCoordinate</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">--runThreadN</span> 16 <span class="dt">\</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">--genomeDir</span> /data/hpc-troutman/data/genomes/indexes/star/mm10_starIndex/ <span class="dt">\</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">--readFilesCommand</span> zcat <span class="dt">\</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">--readFilesIn</span> ./trim_galore//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1.fastq.gz ./trim_galore//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2.fastq.gz <span class="dt">\</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">--outFileNamePrefix</span> ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10. <span class="dt">\</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">--outSAMtype</span> BAM SortedByCoordinate</span>
 <span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co"># remove STAR temporary directories</span></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10._STARtmp</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10._STARtmp</span>
 <span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co"># execute HOMER makeTagDirectory</span></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="ex">makeTagDirectory</span> ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/ <span class="dt">\</span></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10.Aligned<span class="pp">*</span>am <span class="dt">\</span></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>-genome mm10 <span class="at">-checkGC</span> <span class="at">-format</span> sam <span class="at">-sspe</span> <span class="at">-flip</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="ex">makeTagDirectory</span> ./tag_directories/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10/ <span class="dt">\</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10.Aligned<span class="pp">*</span>am <span class="dt">\</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">-genome</span> mm10 <span class="at">-checkGC</span> <span class="at">-format</span> sam <span class="at">-sspe</span> <span class="at">-flip</span></span>
 <span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co"># copy STAR log files to the HOMER tag directory</span></span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.<span class="pp">*</span>Log.final.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.log.mm10</span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.<span class="pp">*</span>Log.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.consolelog.mm10 <span class="dt">\</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.<span class="pp">*</span>Log.final.out ./tag_directories/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.star.log.mm10</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.<span class="pp">*</span>Log.out ./tag_directories/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.star.consolelog.mm10 <span class="dt">\</span></span>
 <span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> Done!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a> <span class="bu">echo</span> Done!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="a.c.rsuite" class="level3">
 <h3 class="anchored" data-anchor-id="a.c.rsuite"><a href="https://github.com/z5ouyang/A.C.Rsuite">A.C.Rsuite</a></h3>

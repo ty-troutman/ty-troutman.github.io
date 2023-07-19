@@ -121,8 +121,8 @@ For example, the script generates and submits the following .bat file to the LSF
 #BSUB -W 2:00
 #BSUB -n 16
 #BSUB -M 40000
-#BSUB -e ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.err
-#BSUB -o ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.out
+#BSUB -e ./bsub_scripts/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.err
+#BSUB -o ./bsub_scripts/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.out
 #BSUB -R "span[hosts=1]"
 
 # load modules
@@ -133,43 +133,43 @@ module load samtools
 module load homer/4.11
 
 # execute fastqc
-fastqc /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz -o ./fastqc_orig/
-fastqc /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz -o ./fastqc_orig/
+fastqc /data/hpc-troutman/data/archive/230608_CCHMC_SP/atf3//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1.fastq.gz -o ./fastqc_orig/
+fastqc /data/hpc-troutman/data/archive/230608_CCHMC_SP/atf3//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2.fastq.gz -o ./fastqc_orig/
 
 # execute trim_galore
 trim_galore \
---cores 4 \
---paired /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz\
---fastqc \
---output_dir ./trim_galore/
+    --cores 4 \
+    --paired /data/hpc-troutman/data/archive/230608_CCHMC_SP/atf3//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1.fastq.gz /data/hpc-troutman/data/archive/230608_CCHMC_SP/atf3//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2.fastq.gz\
+    --fastqc \
+    --output_dir ./trim_galore/
 
 # rename trimmed files
-mv ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1_val_1.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz
-mv ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2_val_2.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz
+mv ./trim_galore/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1_val_1.fq.gz ./trim_galore/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1.fastq.gz
+mv ./trim_galore/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2_val_2.fq.gz ./trim_galore/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2.fastq.gz
 mv ./trim_galore/*fastqc* ./fastqc_trimmed/
 
 # execute STAR
 STAR \
---runThreadN 16 \
---genomeDir /data/hpc-troutman/data/genomes/indexes/star/mm10_starIndex/ \
---readFilesCommand zcat \
---readFilesIn ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz \
---outFileNamePrefix ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10. \
---outSAMtype BAM SortedByCoordinate
+    --runThreadN 16 \
+    --genomeDir /data/hpc-troutman/data/genomes/indexes/star/mm10_starIndex/ \
+    --readFilesCommand zcat \
+    --readFilesIn ./trim_galore//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1.fastq.gz ./trim_galore//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2.fastq.gz \
+    --outFileNamePrefix ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10. \
+    --outSAMtype BAM SortedByCoordinate
 
 # remove STAR temporary directories
-rm -r ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10._STARtmp
+rm -r ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10._STARtmp
 
 # execute HOMER makeTagDirectory
-makeTagDirectory ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/ \
-./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10.Aligned*am \
--genome mm10 -checkGC -format sam -sspe -flip
+makeTagDirectory ./tag_directories/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10/ \
+    ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10.Aligned*am \
+    -genome mm10 -checkGC -format sam -sspe -flip
 
 # copy STAR log files to the HOMER tag directory
-cp ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.*Log.final.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.log.mm10
-cp ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.*Log.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.consolelog.mm10 \
+cp ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.*Log.final.out ./tag_directories/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.star.log.mm10
+cp ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.*Log.out ./tag_directories/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.star.consolelog.mm10 \
 
-echo Done!
+ echo Done!
 ```
 
 ### [A.C.Rsuite](https://github.com/z5ouyang/A.C.Rsuite)
