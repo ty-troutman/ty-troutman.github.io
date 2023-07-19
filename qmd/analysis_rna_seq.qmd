@@ -14,38 +14,38 @@ This is meant to be a guideline for processing and analysis of RNA-seq data in t
 
 3.  Run [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) on the raw fastq files.
 ```bash
-    module load fastqc/0.11.7
-    fastqc <data>.R1.fastq.gz -o <preferred_name>
-    fastqc <data>.R2.fastq.gz -o <preferred_name>
+module load fastqc/0.11.7
+fastqc <data>.R1.fastq.gz -o <preferred_name>
+fastqc <data>.R2.fastq.gz -o <preferred_name>
 ```
 
 4.  Run [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) on the fastq files. Rerun fastqc on the trimmed fastq files. Trim Galore can automatically do this for you.
 ```bash
-    module load trimgalore/0.6.6
-    trim_galore \
-        --cores 4 \
-        --paired <data_R1.fastq.gz> <data_R2.fastq.gz> \
-        --fastqc \
-        --output_dir <preferred_path>/
+module load trimgalore/0.6.6
+trim_galore \
+--cores 4 \
+--paired <data_R1.fastq.gz> <data_R2.fastq.gz> \
+--fastqc \
+--output_dir <preferred_path>/
 ```
 
 5.  Align the data with [STAR](https://github.com/alexdobin/STAR). Have STAR format the alignment as a sorted BAM file.
 ```bash
-    module load STAR/2.7.9
-    module load samtools
-        STAR \
-        --runThreadN 16 \
-        --genomeDir /path/to/star/index/ \
-        --readFilesCommand zcat \
-        --readFilesIn <data_R1.fastq.gz> <data_R2.fastq.gz> \
-        --outFileNamePrefix <preferred_prefix> \
-        --outSAMtype BAM SortedByCoordinate
+module load STAR/2.7.9
+module load samtools
+STAR \
+--runThreadN 16 \
+--genomeDir /path/to/star/index/ \
+--readFilesCommand zcat \
+--readFilesIn <data_R1.fastq.gz> <data_R2.fastq.gz> \
+--outFileNamePrefix <preferred_prefix> \
+--outSAMtype BAM SortedByCoordinate
 ```
 
 6.  Use [HOMER](http://homer.ucsd.edu/homer/) to generate [tag directories](http://homer.ucsd.edu/homer/ngs/tagDir.html) from the STAR alignment BAM file. Use the `-sspe -flip` options if the data is generated using our lab's dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.
 ```bash
-    makeTagDirectory <tagDirectoryName> <filename.sam> -genome <experiment_genome> \
-    -checkGC -format sam -sspe -flip
+makeTagDirectory <tagDirectoryName> <filename.sam> -genome <experiment_genome> \
+-checkGC -format sam -sspe -flip
 ```
     Omit `-sspe` if the sequencing data is not paired end, and omit `-flip` if the sequencing reads will not align to the opposite DNA strand as in "first-strand" library synthesis protocols.
     
@@ -103,73 +103,73 @@ These wrapper scripts takes an input directory path of grouped data and generate
 These scripts can be run from the lab's cluster drive or added as executables to your path. Current versions are located at:
 
 ```bash         
-    /data/hpc-troutman/software/scripts/working_wrapper_star_paired.R
-    /data/hpc-troutman/software/scripts/working_wrapper_bowtie2_pairedend.R
-    /data/hpc-troutman/software/scripts/working_wrapper_bowtie2_singleread.R
+/data/hpc-troutman/software/scripts/working_wrapper_star_paired.R
+/data/hpc-troutman/software/scripts/working_wrapper_bowtie2_pairedend.R
+/data/hpc-troutman/software/scripts/working_wrapper_bowtie2_singleread.R
 ```
 
 Usage on the cluster requires a loaded R module. An example follows:
 
 ```bash         
-    module load R/4.2.1
-    Rscript /data/hpc-troutman/software/scripts/working_wrapper_star_paired.R -d /data/troutman-hpc/data/archive/fastq_path
+module load R/4.2.1
+Rscript /data/hpc-troutman/software/scripts/working_wrapper_star_paired.R -d /data/troutman-hpc/data/archive/fastq_path
 ```
 
 For example, the script generates and submits the following .bat file to the LSF scheduler:
 
 ```bash         
-    #BSUB -W 2:00
-    #BSUB -n 16
-    #BSUB -M 40000
-    #BSUB -e ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.err
-    #BSUB -o ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.out
-    #BSUB -R "span[hosts=1]"
+#BSUB -W 2:00
+#BSUB -n 16
+#BSUB -M 40000
+#BSUB -e ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.err
+#BSUB -o ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.out
+#BSUB -R "span[hosts=1]"
 
-    # load modules
-    module load fastqc/0.11.7
-    module load trimgalore/0.6.6
-    module load STAR/2.7.9
-    module load samtools
-    module load homer/4.11
+# load modules
+module load fastqc/0.11.7
+module load trimgalore/0.6.6
+module load STAR/2.7.9
+module load samtools
+module load homer/4.11
 
-    # execute fastqc
-    fastqc /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz -o ./fastqc_orig/
-    fastqc /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz -o ./fastqc_orig/
+# execute fastqc
+fastqc /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz -o ./fastqc_orig/
+fastqc /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz -o ./fastqc_orig/
 
-    # execute trim_galore
-    trim_galore \
-        --cores 4 \
-        --paired /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz\
-        --fastqc \
-        --output_dir ./trim_galore/
+# execute trim_galore
+trim_galore \
+--cores 4 \
+--paired /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz\
+--fastqc \
+--output_dir ./trim_galore/
 
-    # rename trimmed files
-    mv ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1_val_1.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz
-    mv ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2_val_2.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz
-    mv ./trim_galore/*fastqc* ./fastqc_trimmed/
+# rename trimmed files
+mv ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1_val_1.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz
+mv ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2_val_2.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz
+mv ./trim_galore/*fastqc* ./fastqc_trimmed/
 
-    # execute STAR
-    STAR \
-        --runThreadN 16 \
-        --genomeDir /data/hpc-troutman/data/genomes/indexes/star/mm10_starIndex/ \
-        --readFilesCommand zcat \
-        --readFilesIn ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz \
-        --outFileNamePrefix ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10. \
-        --outSAMtype BAM SortedByCoordinate
+# execute STAR
+STAR \
+--runThreadN 16 \
+--genomeDir /data/hpc-troutman/data/genomes/indexes/star/mm10_starIndex/ \
+--readFilesCommand zcat \
+--readFilesIn ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz \
+--outFileNamePrefix ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10. \
+--outSAMtype BAM SortedByCoordinate
 
-    # remove STAR temporary directories
-    rm -r ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10._STARtmp
+# remove STAR temporary directories
+rm -r ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10._STARtmp
 
-    # execute HOMER makeTagDirectory
-    makeTagDirectory ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/ \
-    ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10.Aligned*am \
-        -genome mm10 -checkGC -format sam -sspe -flip
+# execute HOMER makeTagDirectory
+makeTagDirectory ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/ \
+./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10.Aligned*am \
+-genome mm10 -checkGC -format sam -sspe -flip
 
-    # copy STAR log files to the HOMER tag directory
-    cp ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.*Log.final.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.log.mm10
-    cp ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.*Log.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.consolelog.mm10 \
+# copy STAR log files to the HOMER tag directory
+cp ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.*Log.final.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.log.mm10
+cp ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.*Log.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.consolelog.mm10 \
 
-    echo Done!
+echo Done!
 ```
 
 ### [A.C.Rsuite](https://github.com/z5ouyang/A.C.Rsuite)
@@ -192,11 +192,12 @@ An example follows (omit the header column):
 
 *The GitHub versions are not fully functional on the BMI cluster, but we have edited versions suppressing the non-functional aspects (`makeMultiWigHub.pl`).*
 
-####rnaPipe.R `rnaPipe.R` is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called `alignStats.txt`, data quantification results in a directory called `rnaQuan/`, and differential expression results in a directory called `rnaDiff/`. These tools require a compatible R module is loaded when run through the BMI HPC. An example usage follows:
+####rnaPipe.R `rnaPipe.R` is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called `alignStats.txt`, data quantification results in a directory called `rnaQuan/`, and differential expression results in a directory called `rnaDiff/`. These tools require a compatible R and HOMER module is loaded when run through the BMI HPC. An example usage follows:
 
 ```bash         
-    module load R/4.2.1
-    rnaPipe.R /path/to/sample_definition_file -o /desired/output/path -g available_homer_genome
+module load R/4.2.1
+module load homer/4.11
+rnaPipe.R /path/to/sample_definition_file -o /desired/output/path -g available_homer_genome
 ```
 
 Steps from `rnaPipe.R` can also be run/rerun individually, and some have additional analysis options available. Script instructions and available options can be viewed by entering the command into the terminal.
@@ -206,7 +207,7 @@ Steps from `rnaPipe.R` can also be run/rerun individually, and some have additio
 `alignStats.R` compiles various quality control statistics into a summary table based on what is in the sample definition file. An example usage follows:
 
 ```bash         
-    Rscript alignStats.R /path/to/sample_definition_file > alignStats.txt
+Rscript alignStats.R /path/to/sample_definition_file > alignStats.txt
 ```
 
 #### rnaQuan.R
@@ -216,7 +217,7 @@ Steps from `rnaPipe.R` can also be run/rerun individually, and some have additio
 An example usage follows:
 
 ```bash         
-    Rscript rnaQuan.R /path/to/sample_definition_file -o rnaQuan
+Rscript rnaQuan.R /path/to/sample_definition_file -o rnaQuan
 ```
 
 #### rnaDiff.R
@@ -226,7 +227,7 @@ An example usage follows:
 An example usage is follows:
 
 ```bash         
-    Rscript rnaDiff.R /path/to/sample_definition_file -c rnaQuan/rawC.txt -t rnaQuan/rawT.txt -o rnaDiff/
+Rscript rnaDiff.R /path/to/sample_definition_file -c rnaQuan/rawC.txt -t rnaQuan/rawT.txt -o rnaDiff/
 ```
 
 These scripts can be run from the lab's cluster drive or added as an executable to your path. Current versions are located at `/data/hpc-troutman/software/scripts/`.
