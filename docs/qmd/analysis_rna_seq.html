@@ -435,10 +435,10 @@ Omit <code>-sspe</code> if the sequencing data is not paired end, and omit <code
 <p>An example follows (omit the header column):</p>
 <table class="table">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 61%">
+<col style="width: 21%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -470,13 +470,10 @@ Omit <code>-sspe</code> if the sequencing data is not paired end, and omit <code
 </tbody>
 </table>
 <p><em>The GitHub versions are not fully functional on the BMI cluster, but we have edited versions suppressing the non-functional aspects (<code>makeMultiWigHub.pl</code>).</em></p>
-<section id="rnapipe.r" class="level4">
-<h4 class="anchored" data-anchor-id="rnapipe.r">rnaPipe.R</h4>
-<p><code>rnaPipe.R</code> is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called <code>alignStats.txt</code>, data quantification results in a directory called <code>rnaQuan/</code>, and differential expression results in a directory called <code>rnaDiff/</code>. These tools require a compatible R module is loaded when run through the BMI HPC. An example usage follows:</p>
+<p>####rnaPipe.R <code>rnaPipe.R</code> is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called <code>alignStats.txt</code>, data quantification results in a directory called <code>rnaQuan/</code>, and differential expression results in a directory called <code>rnaDiff/</code>. These tools require a compatible R module is loaded when run through the BMI HPC. An example usage follows:</p>
 <pre><code>    module load R/4.2.1
     rnaPipe.R /path/to/sample_definition_file -o /desired/output/path -g available_homer_genome</code></pre>
 <p>Steps from <code>rnaPipe.R</code> can also be run/rerun individually, and some have additional analysis options available. Script instructions and available options can be viewed by entering the command into the terminal.</p>
-</section>
 <section id="alignstats.r" class="level4">
 <h4 class="anchored" data-anchor-id="alignstats.r">alignStats.R</h4>
 <p><code>alignStats.R</code> compiles various quality control statistics into a summary table based on what is in the sample definition file. An example usage follows:</p>

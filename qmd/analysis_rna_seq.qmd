@@ -149,15 +149,14 @@ This analysis tool suite was created by Zhengyu Ouyang to simplify frequent HOME
 An example follows (omit the header column):
 
 | Column 1 | Column 2 | Column 3                                                                | Column 4                |
-|:-----------------|:-----------------|:-----------------|:-----------------|
+|:---------|:---------|:------------------------------------------------------------------------|:------------------------|
 | group1   | gray0    | /path/to/tag_directory/group1_rep1/;/path/to/tag_directory/group1_rep2/ | group1_rep1;group1_rep2 |
 | group2   | gray33   | /path/to/tag_directory/group2_rep1/;/path/to/tag_directory/group2_rep2/ | group2_rep1;group2_rep2 |
 | group3   | gray66   | /path/to/tag_directory/group3_rep1/;/path/to/tag_directory/group3_rep2/ | group3_rep1;group3_rep2 |
 
 *The GitHub versions are not fully functional on the BMI cluster, but we have edited versions suppressing the non-functional aspects (`makeMultiWigHub.pl`).*
 
-#### rnaPipe.R
-`rnaPipe.R` is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called `alignStats.txt`, data quantification results in a directory called `rnaQuan/`, and differential expression results in a directory called `rnaDiff/`. These tools require a compatible R module is loaded when run through the BMI HPC. An example usage follows:
+####rnaPipe.R `rnaPipe.R` is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called `alignStats.txt`, data quantification results in a directory called `rnaQuan/`, and differential expression results in a directory called `rnaDiff/`. These tools require a compatible R module is loaded when run through the BMI HPC. An example usage follows:
 
 ```         
     module load R/4.2.1
