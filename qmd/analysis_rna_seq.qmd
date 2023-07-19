@@ -43,9 +43,9 @@ This is meant to be a guideline for processing and analysis of RNA-seq data in t
 ```
 
 6.  Use [HOMER](http://homer.ucsd.edu/homer/) to generate [tag directories](http://homer.ucsd.edu/homer/ngs/tagDir.html) from the STAR alignment BAM file. Use the `-sspe -flip` options if the data is generated using our lab's dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.\
-    \`\`\` bash\
+```bash
     makeTagDirectory \<tagDirectoryName\> \<filename.sam\> -genome \<experiment_genome\> \\ -checkGC -format sam -sspe -flip\
-    \`\`\`\
+```
     Omit `-sspe` if the sequencing data is not paired end, and omit `-flip` if the sequencing reads will not align to the opposite DNA strand as in "first-strand" library synthesis protocols.
     
 7.  Use [Samtools](http://www.htslib.org) to [index](http://www.htslib.org/doc/samtools-index.html) the sorted BAM files.

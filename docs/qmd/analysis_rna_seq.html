@@ -366,12 +366,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">--outFileNamePrefix</span> <span class="op">&lt;</span>preferred_prefix<span class="op">&gt;</span> <span class="dt">\</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">--outSAMtype</span> BAM SortedByCoordinate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="6" type="1">
-<li><p>Use <a href="http://homer.ucsd.edu/homer/">HOMER</a> to generate <a href="http://homer.ucsd.edu/homer/ngs/tagDir.html">tag directories</a> from the STAR alignment BAM file. Use the <code>-sspe -flip</code> options if the data is generated using our lab’s dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.<br>
-``` bash<br>
-makeTagDirectory &lt;tagDirectoryName&gt; &lt;filename.sam&gt; -genome &lt;experiment_genome&gt; \ -checkGC -format sam -sspe -flip<br>
-```<br>
-Omit <code>-sspe</code> if the sequencing data is not paired end, and omit <code>-flip</code> if the sequencing reads will not align to the opposite DNA strand as in “first-strand” library synthesis protocols.</p></li>
-<li><p>Use <a href="http://www.htslib.org">Samtools</a> to <a href="http://www.htslib.org/doc/samtools-index.html">index</a> the sorted BAM files.</p></li>
+<li>Use <a href="http://homer.ucsd.edu/homer/">HOMER</a> to generate <a href="http://homer.ucsd.edu/homer/ngs/tagDir.html">tag directories</a> from the STAR alignment BAM file. Use the <code>-sspe -flip</code> options if the data is generated using our lab’s dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.<br>
+</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">makeTagDirectory</span> <span class="dt">\&lt;</span>tagDirectoryName<span class="dt">\&gt;</span> <span class="dt">\&lt;</span>filename.sam<span class="dt">\&gt;</span> <span class="at">-genome</span> <span class="dt">\&lt;</span>experiment_genome<span class="dt">\&gt;</span> <span class="dt">\\</span> <span class="at">-checkGC</span> <span class="at">-format</span> sam <span class="at">-sspe</span> <span class="at">-flip</span><span class="dt">\</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Omit `-sspe` if the sequencing data is not paired end, and omit `-flip` if the sequencing reads will not align to the opposite DNA strand as in "first-strand" library synthesis protocols.</code></pre>
+<ol start="7" type="1">
+<li>Use <a href="http://www.htslib.org">Samtools</a> to <a href="http://www.htslib.org/doc/samtools-index.html">index</a> the sorted BAM files.</li>
 </ol>
 </section>
 <section id="data-quality-control" class="level3">
