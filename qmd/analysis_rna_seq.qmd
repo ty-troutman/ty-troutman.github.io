@@ -23,10 +23,10 @@ fastqc <data>.R2.fastq.gz -o <preferred_name>
 ```bash
 module load trimgalore/0.6.6
 trim_galore \
---cores 4 \
---paired <data_R1.fastq.gz> <data_R2.fastq.gz> \
---fastqc \
---output_dir <preferred_path>/
+    --cores 4 \
+    --paired <data_R1.fastq.gz> <data_R2.fastq.gz> \
+    --fastqc \
+    --output_dir <preferred_path>/
 ```
 
 5.  Align the data with [STAR](https://github.com/alexdobin/STAR). Have STAR format the alignment as a sorted BAM file.
@@ -34,18 +34,18 @@ trim_galore \
 module load STAR/2.7.9
 module load samtools
 STAR \
---runThreadN 16 \
---genomeDir /path/to/star/index/ \
---readFilesCommand zcat \
---readFilesIn <data_R1.fastq.gz> <data_R2.fastq.gz> \
---outFileNamePrefix <preferred_prefix> \
---outSAMtype BAM SortedByCoordinate
+    --runThreadN 16 \
+    --genomeDir /path/to/star/index/ \
+    --readFilesCommand zcat \
+    --readFilesIn <data_R1.fastq.gz> <data_R2.fastq.gz> \
+    --outFileNamePrefix <preferred_prefix> \
+    --outSAMtype BAM SortedByCoordinate
 ```
 
 6.  Use [HOMER](http://homer.ucsd.edu/homer/) to generate [tag directories](http://homer.ucsd.edu/homer/ngs/tagDir.html) from the STAR alignment BAM file. Use the `-sspe -flip` options if the data is generated using our lab's dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.
 ```bash
 makeTagDirectory <tagDirectoryName> <filename.sam> -genome <experiment_genome> \
--checkGC -format sam -sspe -flip
+    -checkGC -format sam -sspe -flip
 ```
     Omit `-sspe` if the sequencing data is not paired end, and omit `-flip` if the sequencing reads will not align to the opposite DNA strand as in "first-strand" library synthesis protocols.
     
@@ -66,7 +66,7 @@ In order to run MultiQc from your local machine, you will need to do one of the 
 Once a drive is mounted and the Docker software is opened, the Multiqc docker image can be run through your terminal application on your local machine as in the example described [here](https://multiqc.info/docs/getting_started/installation/#docker) and provided below:
 
 ``` bash 
-    docker run -t -v `pwd`:`pwd` -w `pwd` ewels/multiqc multiqc ./path/to/mounted/drive
+docker run -t -v `pwd`:`pwd` -w `pwd` ewels/multiqc multiqc ./path/to/mounted/drive
 ``` 
 
 Another useful tool is `alignStats.R`, which generates a table containing selected information from the STAR log file and the HOMER `tagInfo.txt` file. This tool is described in more detail [below](map_on_bmi_hpc%20(in%20progress!)).
