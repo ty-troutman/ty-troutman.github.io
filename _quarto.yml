@@ -9,13 +9,13 @@ website:
       - text: Home
         href: index.qmd
       # - text: Research
-      #   href: Pages/Research/Research.qmd
+      #   href: qmd/Research/Research.qmd
       # - text: Publications
-      #   href: Pages/Publications/Publications.qmd
+      #   href: qmd/Publications/Publications.qmd
       # - text: Lab Members
-      #   href: Pages/Lab_Members/Lab_Members.qmd
+      #   href: qmd/Lab_Members/Lab_Members.qmd
       - text: Internal Materials
-        href: Pages/Internal_Materials/Internal_Materials.qmd
+        href: qmd/Internal_Materials.qmd
       - icon: github
         href: https://github.com/ty-troutman
         aria-label: Troutman GitHub
@@ -29,29 +29,29 @@ website:
       collapse-level: 1
       contents:
       - text: "Internal Materials"
-        href: Pages/Internal_Materials/Internal_Materials.qmd
+        href: qmd/Internal_Materials.qmd
       - section: "Using the Server"
         contents:
           - text: "BMI Cluster"
-            href: Pages/Server/server_bmi_cluster.qmd
+            href: qmd/server_bmi_cluster.qmd
           - text: "Lab Cluster Drives"
-            href: Pages/Server/server_lab_drives.qmd
+            href: qmd/server_lab_drives.qmd
       - section: "Analysis"
         contents:
           - text: "RNA-Seq Analysis"
-            href: Pages/Analysis/analysis_rna_seq.qmd
+            href: qmd/analysis_rna_seq.qmd
           - text: "ATAC- and ChIP-Seq Analysis"
-            href: Pages/Analysis/analysis_atac_chip_seq.qmd
+            href: qmd/analysis_atac_chip_seq.qmd
           - text: "Additional Analyses"
             href: "https://github.com/ty-troutman/Genomics-analyses"
       - section: "Sequencing"
         contents: 
           - text: "Database and Barcodes"
-            href: Pages/Sequencing/Database_Barcodes.qmd
+            href: qmd/Database_Barcodes.qmd
           - text: "Pooling and Submitting Samples"
-            href: Pages/Sequencing/Pooling_Submission.qmd
+            href: qmd/Pooling_Submission.qmd
           - text: "Downloading from CCHMC"
-            href: Pages/Sequencing/NGS_Scraper_KevinErnst.qmd
+            href: qmd/NGS_Scraper_KevinErnst.qmd
       - section: "Logs and Protocols"
         contents:
           - text: "Troutman-Lab-Share"

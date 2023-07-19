@@ -44,11 +44,13 @@ Each pair was designed with a Hamming distance of at least 3 across the entire s
 
 Adapter stocks are delivered at 25 µM and diluted to 0.625 µM in 1X T4 DNA ligase buffer (10X T4 ligase buffer, NEB #B0202S; dilute 1:10 with ultra-pure water to obtain 1X buffer). Diluted stocks are further diluted to 0.25 µM as routine use aliquots. Typically, 0.5 to 1 µl of the working aliquot is adequate for adapter ligation. Barcoded libraries are amplified using NEXTFLEX common primer sequences.
 
-    NEXTFLEX PCR Primer 1: AATGATACGGCGACCACCGAGATCTACAC 
-    NEXTFLEX PCR Primer 2: CAAGCAGAAGACGGCATACGAGAT
+```         
+NEXTFLEX PCR Primer 1: AATGATACGGCGACCACCGAGATCTACAC 
+NEXTFLEX PCR Primer 2: CAAGCAGAAGACGGCATACGAGAT
 
-    NEXTFLEX i5 Adapter: AATGATACGGCGACCACCGAGATCTACACXXXXXXXXACACTCTTTCCCTACACGACGCTCTTCCGATCT
-    NEXTFLEX i7 Adapter: GATCGGAAGAGCACACGTCTGAACTCCAGTCACXXXXXXXXATCTCGTATGCCGTCTTCTGCTTG
+NEXTFLEX i5 Adapter: AATGATACGGCGACCACCGAGATCTACACXXXXXXXXACACTCTTTCCCTACACGACGCTCTTCCGATCT
+NEXTFLEX i7 Adapter: GATCGGAAGAGCACACGTCTGAACTCCAGTCACXXXXXXXXATCTCGTATGCCGTCTTCTGCTTG
+```
 
 ::: callout-note
 XXXXXXXX denotes the i5 or i7 index region of the adapter.
@@ -62,8 +64,10 @@ Nextera Tn5 transposase barcoding primers for (ATAC-seq and other suitable trans
 
 Primers were ordered from IDT as standard oligonucleotides and suspended at 10 µM in low-EDTA TE buffer. Reconstituted primers stocks are stored at -20C. Working aliquots should be used routinely in place of the stocks.
 
-    Nextera Tn5 i5 Primer Sequence: AATGATACGGCGACCACCGAGATCTACACXXXXXXXXTCGTCGGCAGCGTCAGATGTGTAT
-    Nextera Tn5 i7 Primer Sequence: CAAGCAGAAGACGGCATACGAGATXXXXXXXXGTCTCGTGGGCTCGGAGATGTG
+```         
+Nextera Tn5 i5 Primer Sequence: AATGATACGGCGACCACCGAGATCTACACXXXXXXXXTCGTCGGCAGCGTCAGATGTGTAT
+Nextera Tn5 i7 Primer Sequence: CAAGCAGAAGACGGCATACGAGATXXXXXXXXGTCTCGTGGGCTCGGAGATGTG
+```
 
 ::: callout-note
 XXXXXXXX denotes the i5 or i7 index region of the primer.

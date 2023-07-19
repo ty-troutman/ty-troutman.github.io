@@ -2,17 +2,17 @@
   subtitle: Get started using the computational cluster and the command line interface
   links:
     - text: "BMI Cluster"
-      href: ../Server/server_bmi_cluster.qmd
+      href: server_bmi_cluster.qmd
     - text: "Lab Cluster Drives"
-      href: ../Server/server_lab_drives.qmd
+      href: server_lab_drives.qmd
       
 - title: Analysis
   subtitle: Data analysis workflow and examples
   links:
     - text: "RNA-Seq Analysis"
-      href: ../Analysis/analysis_rna_seq.qmd
+      href: analysis_rna_seq.qmd
     - text: "ATAC- and ChIP-Seq Analysis"
-      href: ../Analysis/analysis_atac_chip_seq.qmd
+      href: analysis_atac_chip_seq.qmd
     - text: "Additional Analyses"
       href: "https://github.com/ty-troutman/Genomics-analyses"
 
@@ -20,11 +20,11 @@
   subtitle: Information related to sequencing libraries, sample submission, and data download
   links:
     - text: "Sequencing Database and Barcodes"
-      href: ../Sequencing/Database_Barcodes.qmd
+      href: Database_Barcodes.qmd
     - text: "Sample Pooling and Submission"
-      href: ../Sequencing/Pooling_Submission.qmd
+      href: Pooling_Submission.qmd
     - text: "Downloading from CCHMC"
-      href: ../Sequencing/NGS_Scraper_KevinErnst.qmd
+      href: NGS_Scraper_KevinErnst.qmd
       
 - title: Logs and Protocols
   subtitle: Locations of lab logs and common protocols

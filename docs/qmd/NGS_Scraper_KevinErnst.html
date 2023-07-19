@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Troutman Lab - Internal Materials</title>
+<title>Troutman Lab - NGS scraper / downloader</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-listing/list.min.js"></script>
-<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -61,40 +94,9 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-guide-links .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-links',{ data: ['index'] },{ data: ['categories'] }],
-      
-      searchColumns: ["listing-title","listing-subtitle","listing-links"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-guide-links'] = new List('listing-guide-links', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
@@ -104,22 +106,22 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Troutman Lab</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="false"></div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
+    <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../Pages/Internal_Materials/Internal_Materials.html" rel="" target="" aria-current="page">
+    <a class="nav-link active" href="../qmd/Internal_Materials.html" rel="" target="" aria-current="page">
  <span class="menu-text">Internal Materials</span></a>
   </li>  
   <li class="nav-item compact">
@@ -143,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Pages/Internal_Materials/Internal_Materials.html">Internal Materials</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../qmd/Database_Barcodes.html">Sequencing</a></li><li class="breadcrumb-item"><a href="../qmd/NGS_Scraper_KevinErnst.html">Downloading from CCHMC</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -157,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Pages/Internal_Materials/Internal_Materials.html" class="sidebar-item-text sidebar-link active">
+  <a href="../qmd/Internal_Materials.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Internal Materials</span></a>
   </div>
 </li>
@@ -172,13 +174,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Pages/Server/server_bmi_cluster.html" class="sidebar-item-text sidebar-link">
+  <a href="../qmd/server_bmi_cluster.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">BMI Cluster</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Pages/Server/server_lab_drives.html" class="sidebar-item-text sidebar-link">
+  <a href="../qmd/server_lab_drives.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab Cluster Drives</span></a>
   </div>
 </li>
@@ -195,13 +197,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Pages/Analysis/analysis_rna_seq.html" class="sidebar-item-text sidebar-link">
+  <a href="../qmd/analysis_rna_seq.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">RNA-Seq Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Pages/Analysis/analysis_atac_chip_seq.html" class="sidebar-item-text sidebar-link">
+  <a href="../qmd/analysis_atac_chip_seq.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ATAC- and ChIP-Seq Analysis</span></a>
   </div>
 </li>
@@ -215,28 +217,28 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
  <span class="menu-text">Sequencing</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Pages/Sequencing/Database_Barcodes.html" class="sidebar-item-text sidebar-link">
+  <a href="../qmd/Database_Barcodes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Database and Barcodes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Pages/Sequencing/Pooling_Submission.html" class="sidebar-item-text sidebar-link">
+  <a href="../qmd/Pooling_Submission.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Pooling and Submitting Samples</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Pages/Sequencing/NGS_Scraper_KevinErnst.html" class="sidebar-item-text sidebar-link">
+  <a href="../qmd/NGS_Scraper_KevinErnst.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Downloading from CCHMC</span></a>
   </div>
 </li>
@@ -289,15 +291,31 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#requirements" id="toc-requirements" class="nav-link active" data-scroll-target="#requirements">Requirements</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a>
+  <ul class="collapse">
+  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick Start</a></li>
+  <li><a href="#setup-for-local-development" id="toc-setup-for-local-development" class="nav-link" data-scroll-target="#setup-for-local-development">Setup for Local Development</a></li>
+  </ul></li>
+  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
+  <li><a href="#other-tips" id="toc-other-tips" class="nav-link" data-scroll-target="#other-tips">Other Tips</a>
+  <ul class="collapse">
+  <li><a href="#getting-data-files-for-a-specific-sequencing-run" id="toc-getting-data-files-for-a-specific-sequencing-run" class="nav-link" data-scroll-target="#getting-data-files-for-a-specific-sequencing-run">Getting data files for a specific sequencing run</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Internal Materials</h1>
-<p class="subtitle lead">Information and resources useful for day-to-day research activities in the Troutman Lab.</p>
+<h1 class="title">NGS scraper / downloader</h1>
 </div>
 
 
@@ -312,77 +330,128 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div id="listing-guide-links" class="column-screen-inset-right quarto-listing quarto-listing-container-custom" style="max-width: 850px;">
-<div class="link-cards">
-<div class="card">
-<div class="card-body">
-<section id="servers" class="level4 card-title">
-<h4 data-anchor-id="servers">Servers</h4>
-<section id="get-started-using-the-computational-cluster-and-the-command-line-interface" class="level6 card-subtitle text-muted">
-<h6 data-anchor-id="get-started-using-the-computational-cluster-and-the-command-line-interface">Get started using the computational cluster and the command line interface</h6>
-</section>
-</section>
+<p><strong>Author:</strong> Kevin Ernst, Weirauch lab</p>
+<p><strong>Contact:</strong> kevin.ernst -at- cchmc.org</p>
+<p><strong>License:</strong> MIT</p>
+<p>This script prompts for login credentials to the CCHMC DNA Sequencing and Genotyping Core’s “<a href="https://dna.cchmc.org/www/main.php">customer portal</a>” and then generates a series of command-line invocations of <code>curl</code>, setting an appropriate cookie to authenticate you with the site, which you can then</p>
 <ul>
-<li><a href="../../Pages/Server/server_bmi_cluster.html">BMI Cluster</a></li>
-<li><a href="../../Pages/Server/server_lab_drives.html">Lab Cluster Drives</a></li>
+<li>redirect to a file</li>
+<li>optionally modify (to exclude certain data types)</li>
+<li>and execute later</li>
+<li>or even pipe directly into <code>bash</code> if you’re brave</li>
 </ul>
-</div>
-</div>
-<div class="card">
-<div class="card-body">
-<section id="analysis" class="level4 card-title">
-<h4 data-anchor-id="analysis">Analysis</h4>
-<section id="data-analysis-workflow-and-examples" class="level6 card-subtitle text-muted">
-<h6 data-anchor-id="data-analysis-workflow-and-examples">Data analysis workflow and examples</h6>
-</section>
-</section>
+<p>in order to download <em>all</em> NGS data that is available on the site under your login.</p>
+<p>The included setup.py will install the script as <code>ngsdl</code>.</p>
+<section id="requirements" class="level2">
+<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
 <ul>
-<li><a href="../../Pages/Analysis/analysis_rna_seq.html">RNA-Seq Analysis</a></li>
-<li><a href="../../Pages/Analysis/analysis_atac_chip_seq.html">ATAC- and ChIP-Seq Analysis</a></li>
-<li><a href="https://github.com/ty-troutman/Genomics-analyses">Additional Analyses</a></li>
+<li>Python ≥3.5</li>
+<li><a href="http://docs.python-requests.org/en/latest/">Requests</a></li>
+<li><a href="http://lxml.de/">lxml</a></li>
 </ul>
-</div>
-</div>
-<div class="card">
-<div class="card-body">
-<section id="ngs-libraries" class="level4 card-title">
-<h4 data-anchor-id="ngs-libraries">NGS libraries</h4>
-<section id="information-related-to-sequencing-libraries-sample-submission-and-data-download" class="level6 card-subtitle text-muted">
-<h6 data-anchor-id="information-related-to-sequencing-libraries-sample-submission-and-data-download">Information related to sequencing libraries, sample submission, and data download</h6>
+</section>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<section id="quick-start" class="level3">
+<h3 class="anchored" data-anchor-id="quick-start">Quick Start</h3>
+<p>This procedure requires you have pip <a href="https://pip.pypa.io/en/stable/installing/">installed</a>. <em>If you are using Linux, your distro may already provide <a href="https://pkgs.org/download/python-pip">a package</a>.</em></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># if you are on the HPC cluster, you will need to load a python/3.x module</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load python3</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install the latest release from GitLab using pip</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--user</span> https://tfinternal.research.cchmc.org/gitlab/databank/seq-core-ngs-downloader/-/archive/master/seq-core-ngs-downloader-master.zip</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure it works; otherwise, see the 'Updating Your PATH' section below</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="at">--help</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># …or try this as a backup</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> cchmc_seq_core <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Older versions of pip may require you to download the and manually extract the .zip file from GitLab first, like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-LOJ</span> https://tf.cchmc.org/s/e1f9a</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> seq-core-ngs-downloader<span class="pp">*</span>.zip <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-f</span> seq-core-ngs-downloader<span class="pp">*</span>.zip</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> seq-core-ngs-downloader<span class="pp">*</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--user</span> .</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># optionally delete the downloaded source code</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> .. <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> seq-core-ngs-downloader<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="updating-your-path" class="level4">
+<h4 class="anchored" data-anchor-id="updating-your-path">Updating Your <code>PATH</code></h4>
+<p>If you install with <code>pip install --user</code>, that precludes the need for a virtual environment (see below), but necessitates that you manually add <code>~/.local/bin</code> to your <code>PATH</code> if you want to be able to run this script from an arbitrary directory:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># recommended place for PATH modifications is ~/.profile or ~/.bash_profile</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">test</span> <span class="at">-f</span> ~/.bash_profile <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">'export PATH="$HOME/.local/bin:$PATH"'</span> <span class="op">&gt;&gt;</span> ~/.bash_profile <span class="kw">||</span> <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">'export PATH="$HOME/.local/bin:$PATH"'</span> <span class="op">&gt;&gt;</span> ~/.profile</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># you will need to log out and back in to see the changes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Some Linux distros do this by default now.</p>
+<p>On a Mac, pip installs things to your (hidden) <code>~/Library</code> folder. You will need to add <code>$HOME/Library/Python/&lt;python_maj.minor_version&gt;/bin</code> to your <code>$PATH</code> when using the system default Python, where <code>&lt;python_maj.minor_version&gt;</code> would be something like “2.7”, depending on which version of the OS you have.</p>
 </section>
 </section>
-<ul>
-<li><a href="../../Pages/Sequencing/Database_Barcodes.html">Sequencing Database and Barcodes</a></li>
-<li><a href="../../Pages/Sequencing/Pooling_Submission.html">Sample Pooling and Submission</a></li>
-<li><a href="../../Pages/Sequencing/NGS_Scraper_KevinErnst.html">Downloading from CCHMC</a></li>
-</ul>
-</div>
-</div>
-<div class="card">
-<div class="card-body">
-<section id="logs-and-protocols" class="level4 card-title">
-<h4 data-anchor-id="logs-and-protocols">Logs and Protocols</h4>
-<section id="locations-of-lab-logs-and-common-protocols" class="level6 card-subtitle text-muted">
-<h6 data-anchor-id="locations-of-lab-logs-and-common-protocols">Locations of lab logs and common protocols</h6>
+<section id="setup-for-local-development" class="level3">
+<h3 class="anchored" data-anchor-id="setup-for-local-development">Setup for Local Development</h3>
+<p>If you are just experimenting, and don’t want to mess with setting your <code>$PATH</code> or potentially needing <code>sudo</code> to install, here’s a sure bet:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">GITLAB</span><span class="op">=</span>https://tfwebdev.research.cchmc.org/gitlab</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="va">$GITLAB</span>/databank/seq-core-ngs-downloader</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> seq-core-ngs-downloader</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">virtualenv</span> venv      <span class="co"># or, possibly: python3 -m venv venv</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> venv/bin/activate  <span class="co"># activate the virtual environment</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-e</span> .     <span class="co"># install using the 'setup.py' in the local directory</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="at">--help</span>         <span class="co"># make sure it works in the virtualenv</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This repository includes a setuptools <a href="https://pythonhosted.org/an_example_pypi_project/setuptools.html#using-setup-py"><code>setup.py</code></a>, which you can run in the usual way, if that’s your thing: <code>python setup.py [--help | install]</code>.</p>
 </section>
 </section>
-<ul>
-<li><a href="https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share?csf=1&amp;web=1&amp;e=nEuYqw">Troutman-Lab-Share</a></li>
-<li><a href="https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Reagent_Logs?csf=1&amp;web=1&amp;e=oK8Gbg">Logs</a></li>
-<li><a href="https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Protocols-Methods/primaryCells?csf=1&amp;web=1&amp;e=gtd3YL">Cell Preparation</a></li>
-<li><a href="https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Equipment?csf=1&amp;web=1&amp;e=cgrrX0">Equipment</a></li>
-<li><a href="https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Protocols-Methods/genomics?csf=1&amp;web=1&amp;e=eifcHl">Genomics</a></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div>
+<section id="basic-usage" class="level2">
+<h2 class="anchored" data-anchor-id="basic-usage">Basic Usage</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pretty failsafe; works because of cchmc_seq_core/__main__.py</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> cchmc_seq_core <span class="at">--help</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># redirect 'curl' commands into a script that you can run later</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> cchmc_seq_core <span class="op">&gt;</span> download.sh</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> a+x download.sh</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># or, if you've installed it properly and set up your $PATH</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="op">&gt;</span> download.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The script will prompt you for your CCHMC credentials (which are not stored anywhere). These prompts and any other script output goes to stderr, so you can safely redirect the rest of the output to a file or pipe through <code>grep</code>, and so on.</p>
+<!--
+(This option was disabled due to the DNA Core server not supporting byte
+range requests)
+
+**By default, all the invocations of `curl` will be run with the `-C`
+(_a.k.a._ `--continue-at`) option**, which causes it to attempt to resume
+partial / failed downloads. If you wish to avoid this behavior, maybe to
+force a re-download of all existing datasets, pass the `-nr` / `--no-resume`
+option to the Python script.
+-->
+<p>You can suppress <code>curl</code>’s progress meters on all the download tasks with the <code>-s</code> / <code>--silent</code> option.</p>
+<p>You can limit the types of files that would be downloaded (say, just download <code>.bam</code> files) with the <code>-t</code> / <code>--data-type</code> option, which may be specified more than once, like so:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="at">-t</span> bam <span class="at">-t</span> bai <span class="op">&gt;</span> download.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>See the output of <code>ngsdl --help</code> for all the details.</p>
+</section>
+<section id="other-tips" class="level2">
+<h2 class="anchored" data-anchor-id="other-tips">Other Tips</h2>
+<p>There is no option (yet) to leave the “ignored” file types out of the output shell script entirely; that is, file types that you did not explicitly ask for with the <code>-t</code> / <code>--data-type</code> option.</p>
+<p>If you use the <code>-t</code> option, the file types you didn’t explicitly ask for are just commented out, because the code was simpler that way. The default if you leave it off is to get <em>all</em> file types.</p>
+<p>If this bothers you, the following small <code>sed</code> script will clean up some of the noise, while still preserving the experiment “headings”:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="at">-t</span> fastq <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'/^# /d; /^## --/d; /^$/d'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="getting-data-files-for-a-specific-sequencing-run" class="level3">
+<h3 class="anchored" data-anchor-id="getting-data-files-for-a-specific-sequencing-run">Getting data files for a specific sequencing run</h3>
+<p>Try something like this:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="kw">|</span> <span class="fu">grep</span> run0529 <span class="op">&gt;</span> download.sh</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># or, pipe it to a shell to start the downloads directly</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="kw">|</span> <span class="fu">grep</span> run0529 <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li><a href="http://centerlink.cchmc.org/research/research---tabs/dna-sequencing-core">CCHMC DNA Sequencing and Genotyping Core</a> - on CenterLink</li>
+</ol>
 
 
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -520,6 +589,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

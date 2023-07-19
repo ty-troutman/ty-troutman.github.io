@@ -1,6 +1,7 @@
 ---
 title: "ATAC- and ChIP-seq Analysis"
 ---
+
 This is meant to be a guideline for processing and analysis of ATAC-seq and ChIP-seq data in the Troutman lab. There are many alternative ways to consider processing, quality control, quantification, and differential expression analysis. This workflow is not a gold standard, will not always work for all data, and is open for interpretation/criticism.
 
 # Under construction

@@ -6,7 +6,7 @@ anchor-sections: false
 search: false
 listing:
   id: guide-links
-  template: ../../ejs/links.ejs
+  template: ../ejs/links.ejs
   contents: Internal_Materials.yml
 ---
 
