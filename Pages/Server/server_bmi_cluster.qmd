@@ -6,19 +6,19 @@ title: "Biomedical Informatics High Performance Computing Cluster"
 
 We have access to a Linux [computational cluster](https://bmi.cchmc.org/resources/clusters/computational-cluster) through the Division of Biomedical Informatics. To request access to the cluster, please send an email to Cluster Support: help-cluster\@bmi.cchmc.org. After your access is enabled, you should be able to login to the cluster with your CCHMC employee network credentials. All users have a default disk (home directory) quota of 100 GB and a job walltime quota of 10000 hours per quarter, which is free. The quota of your home directory is fixed, and cannot be changed. To increase the walltime, please send an email to [Cluster Support](mailto:help-cluster@bmi.cchmc.org).
 
-Your [home directory](https://en.wikipedia.org/wiki/home_directory) is accessible at the path `/users/YOURUSERID` and has a default 100 GB quota. You also have access to a "[scratch](https://hpc.research.cchmc.org/node/14)" volume at `/scratch/YOURUSERID`, where there is a 100 GB quota with a burst of up to 5 TB for up to 7 days. Anything there will be removed after 60 days. Users typically do not have (read/write) access to other users' home directories. Thus, [`/data/hpc-troutman/`](Lab_Cluster_Drives.qmd) is the place to store any data or analyses (*not personal files*) that anyone else in the lab might ever need to work with.
+Your [home directory](https://en.wikipedia.org/wiki/home_directory) is accessible at the path `/users/YOURUSERID` and has a default 100 GB quota. You also have access to a "[scratch](https://hpc.research.cchmc.org/node/14)" volume at `/scratch/YOURUSERID`, where there is a 100 GB quota with a burst of up to 5 TB for up to 7 days. Anything there will be removed after 60 days. Users typically do not have (read/write) access to other users' home directories. Thus, [`/data/hpc-troutman/`](server_lab_drives.qmd) is the place to store any data or analyses (*not personal files*) that anyone else in the lab might ever need to work with.
 
 # Accessing the HPC cluster
 
 Connect to the CCHMC cluster by following the [BMI instructions](https://bmi.cchmc.org/resources/clusters/computational-cluster), or follow the examples below.
 
--   If you are in the CCHMC network or connected to CCHMC VPN:  
+-   If you are in the CCHMC network or connected to CCHMC VPN:
 
     `ssh [yourusername]@bmiclusterp.chmcres.cchmc.org`
 
--   If you are outside of CCHMC network, connect to ssh.research.cchmc.org then to bmiclusterp.chmcres.cchmc.org:  
+-   If you are outside of CCHMC network, connect to ssh.research.cchmc.org then to bmiclusterp.chmcres.cchmc.org:
 
-    `ssh [yourusername]@ssh.research.cchmc.org`  
+    `ssh [yourusername]@ssh.research.cchmc.org`\
     `ssh [yourusername]@bmiclusterp.chmcres.cchmc.org`
 
 -   Alternatively, connect through [citrix](https://connect.research.cchmc.org/vpn/index.html).
@@ -49,23 +49,23 @@ The cluster batch system is currently managed by LSF resource manager and schedu
 
 Essentially, users submit jobs to the server using the bsub command. The current state of the queue in the server can be viewed using bjobs. There are a host of other utilities that can be used by Torque users like: bkill, bmod, bstop, bmig, bresume etc. bsub can be used for batch as well as interactive submission of jobs. Interactive job submission should be used only when a user needs to run and debug his code and for short-duration jobs. In either case, you need to submit your job to a cluster node so that you can do your testing without burdening the head node.
 
-An example to directly submit a script:  
-    `bsub -W 4:00 -n 1 -M 10000 < script`
+An example to directly submit a script:\
+`bsub -W 4:00 -n 1 -M 10000 < script`
 
-An example command to request an interactive session:  
-    `bsub -W 4:00 -n 1 -M 10000 -Is /bin/bash`
+An example command to request an interactive session:\
+`bsub -W 4:00 -n 1 -M 10000 -Is /bin/bash`
 
 ::: callout-note
-We have wrapper scripts to automate assembly of .bat files and submission to the LSF scheduler. More information is available [here](Processing_RNASeq_Data.qmd).
+We have wrapper scripts to automate assembly of .bat files and submission to the LSF scheduler. More information is available [here](../Analysis/analysis_rna_seq.qmd).
 :::
 
 # Checking your cluster balance
 
 By default, you have 10,000 hours of "wall time" (real-world computation time for the jobs you run) on the cluster, and this quota resets quarterly ([ref](https://bmi.cchmc.org/resources/charge-backs)).
 
-BMI uses an accounting system named "Gold" to keep track of how many wall hours you have remaining; you need to load a module named gold to use this: - load the 'gold' module, which provides the 'gbalance' command - you should be on a cluster node (e.g., bmiclusterp2) when you do this.  
+BMI uses an accounting system named "Gold" to keep track of how many wall hours you have remaining; you need to load a module named gold to use this: - load the 'gold' module, which provides the 'gbalance' command - you should be on a cluster node (e.g., bmiclusterp2) when you do this.
 
-```bash
+``` bash
 module load gold
 gbalance -h -u \$USER
 ```
@@ -74,13 +74,12 @@ gbalance -h -u \$USER
 leave off the '-h' if for some reason you want to see the output in seconds of wall time instead of the more human-readable hours
 :::
 
-
 The string \$USER is an environment variable that always refers to the currently-logged in user (you!). You can replace \$USER with some other username if you want to spy on someone else's cluster usage.
 
 The columns in the output of gbalance are:
 
 | Column Name | Meaning                                                          |
-|--------------------------|:--------------------------------------------|
+|---------------------------|:--------------------------------------------|
 | Id          | Unique user identifier                                           |
 | Name        | Your username                                                    |
 | Amount      | Wall time requested for currently running jobs                   |
@@ -98,18 +97,20 @@ The columns in the output of gbalance are:
 
 Here is a boilerplate request for a BMI HPC cluster account that you can update with your own information:
 
-    To: help@bmi.cchmc.org 
-    Subject: New HPC cluster account
+```         
+To: help@bmi.cchmc.org 
+Subject: New HPC cluster account
 
-    Hi everyone,
+Hi everyone,
 
-    May I please have an HPC cluster account? My username is usr0xy (replace with your actual username).
+May I please have an HPC cluster account? My username is usr0xy (replace with your actual username).
 
-    Please also grant me the appropriate roles so that I can use the BMI HTTP proxy to download scientific data to the cluster.
+Please also grant me the appropriate roles so that I can use the BMI HTTP proxy to download scientific data to the cluster.
 
-    Thanks very much.
+Thanks very much.
 
-    --Your Name
+--Your Name
+```
 
 ::: callout-note
 Make sure to say "please" and "thank you," and include your Children's username, which is something like `usr0xy` (three letters of your last name, then three random characters). Also include with your request that you want BMI proxy access, and mention that they can look at account `ern6xv` if they need a template.

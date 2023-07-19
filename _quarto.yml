@@ -30,15 +30,19 @@ website:
       contents:
       - text: "Internal Materials"
         href: Pages/Internal_Materials/Internal_Materials.qmd
-      - section: "Analysis"
+      - section: "Using the Server"
         contents:
           - text: "BMI Cluster"
-            href: Pages/Analysis/BMI_Cluster.qmd
+            href: Pages/Server/server_bmi_cluster.qmd
           - text: "Lab Cluster Drives"
-            href: Pages/Analysis/Lab_Cluster_Drives.qmd
-          - text: "Processing RNA-Seq Data"
-            href: Pages/Analysis/Processing_RNASeq_Data.qmd
-          - text: "Genomics Analyses"
+            href: Pages/Server/server_lab_drives.qmd
+      - section: "Analysis"
+        contents:
+          - text: "RNA-Seq Analysis"
+            href: Pages/Analysis/analysis_rna_seq.qmd
+          - text: "ATAC- and ChIP-Seq Analysis"
+            href: Pages/Analysis/analysis_atac_chip_seq.qmd
+          - text: "Additional Analyses"
             href: "https://github.com/ty-troutman/Genomics-analyses"
       - section: "Sequencing"
         contents: 

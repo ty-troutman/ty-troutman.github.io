@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Troutman Lab - NGS scraper / downloader</title>
+<title>Troutman Lab - RNA-seq analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -145,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Pages/Sequencing/Database_Barcodes.html">Sequencing</a></li><li class="breadcrumb-item"><a href="../../Pages/Sequencing/NGS_Scraper_KevinErnst.html">Downloading from CCHMC</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Pages/Analysis/analysis_rna_seq.html">Analysis</a></li><li class="breadcrumb-item"><a href="../../Pages/Analysis/analysis_rna_seq.html">RNA-Seq Analysis</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -188,16 +154,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
  <span class="menu-text">Analysis</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Pages/Analysis/analysis_rna_seq.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Pages/Analysis/analysis_rna_seq.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">RNA-Seq Analysis</span></a>
   </div>
 </li>
@@ -217,13 +183,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
  <span class="menu-text">Sequencing</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Pages/Sequencing/Database_Barcodes.html" class="sidebar-item-text sidebar-link">
@@ -238,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Pages/Sequencing/NGS_Scraper_KevinErnst.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Pages/Sequencing/NGS_Scraper_KevinErnst.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Downloading from CCHMC</span></a>
   </div>
 </li>
@@ -295,18 +261,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#requirements" id="toc-requirements" class="nav-link active" data-scroll-target="#requirements">Requirements</a></li>
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a>
+  <li><a href="#general-workflow" id="toc-general-workflow" class="nav-link active" data-scroll-target="#general-workflow">General workflow</a>
   <ul class="collapse">
-  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick Start</a></li>
-  <li><a href="#setup-for-local-development" id="toc-setup-for-local-development" class="nav-link" data-scroll-target="#setup-for-local-development">Setup for Local Development</a></li>
+  <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing">Data processing</a></li>
+  <li><a href="#data-quality-control" id="toc-data-quality-control" class="nav-link" data-scroll-target="#data-quality-control">Data quality control</a></li>
+  <li><a href="#data-quantification" id="toc-data-quantification" class="nav-link" data-scroll-target="#data-quantification">Data quantification</a></li>
+  <li><a href="#differential-expression-analysis" id="toc-differential-expression-analysis" class="nav-link" data-scroll-target="#differential-expression-analysis">Differential expression analysis</a></li>
+  <li><a href="#analytical-creativity" id="toc-analytical-creativity" class="nav-link" data-scroll-target="#analytical-creativity">Analytical creativity</a></li>
   </ul></li>
-  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
-  <li><a href="#other-tips" id="toc-other-tips" class="nav-link" data-scroll-target="#other-tips">Other Tips</a>
+  <li><a href="#automated-pipelines" id="toc-automated-pipelines" class="nav-link" data-scroll-target="#automated-pipelines">Automated pipelines</a>
   <ul class="collapse">
-  <li><a href="#getting-data-files-for-a-specific-sequencing-run" id="toc-getting-data-files-for-a-specific-sequencing-run" class="nav-link" data-scroll-target="#getting-data-files-for-a-specific-sequencing-run">Getting data files for a specific sequencing run</a></li>
+  <li><a href="#map_on_bmi_hpc-in-progress" id="toc-map_on_bmi_hpc-in-progress" class="nav-link" data-scroll-target="#map_on_bmi_hpc-in-progress">map_on_bmi_hpc (in progress!)</a></li>
+  <li><a href="#a.c.rsuite" id="toc-a.c.rsuite" class="nav-link" data-scroll-target="#a.c.rsuite">A.C.Rsuite</a></li>
   </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -315,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">NGS scraper / downloader</h1>
+<h1 class="title">RNA-seq analysis</h1>
 </div>
 
 
@@ -330,127 +297,200 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><strong>Author:</strong> Kevin Ernst, Weirauch lab</p>
-<p><strong>Contact:</strong> kevin.ernst -at- cchmc.org</p>
-<p><strong>License:</strong> MIT</p>
-<p>This script prompts for login credentials to the CCHMC DNA Sequencing and Genotyping Core’s “<a href="https://dna.cchmc.org/www/main.php">customer portal</a>” and then generates a series of command-line invocations of <code>curl</code>, setting an appropriate cookie to authenticate you with the site, which you can then</p>
-<ul>
-<li>redirect to a file</li>
-<li>optionally modify (to exclude certain data types)</li>
-<li>and execute later</li>
-<li>or even pipe directly into <code>bash</code> if you’re brave</li>
-</ul>
-<p>in order to download <em>all</em> NGS data that is available on the site under your login.</p>
-<p>The included setup.py will install the script as <code>ngsdl</code>.</p>
-<section id="requirements" class="level2">
-<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
-<ul>
-<li>Python ≥3.5</li>
-<li><a href="http://docs.python-requests.org/en/latest/">Requests</a></li>
-<li><a href="http://lxml.de/">lxml</a></li>
-</ul>
-</section>
-<section id="installation" class="level2">
-<h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<section id="quick-start" class="level3">
-<h3 class="anchored" data-anchor-id="quick-start">Quick Start</h3>
-<p>This procedure requires you have pip <a href="https://pip.pypa.io/en/stable/installing/">installed</a>. <em>If you are using Linux, your distro may already provide <a href="https://pkgs.org/download/python-pip">a package</a>.</em></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># if you are on the HPC cluster, you will need to load a python/3.x module</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load python3</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install the latest release from GitLab using pip</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--user</span> https://tfinternal.research.cchmc.org/gitlab/databank/seq-core-ngs-downloader/-/archive/master/seq-core-ngs-downloader-master.zip</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure it works; otherwise, see the 'Updating Your PATH' section below</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="at">--help</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># …or try this as a backup</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> cchmc_seq_core <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Older versions of pip may require you to download the and manually extract the .zip file from GitLab first, like this:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-LOJ</span> https://tf.cchmc.org/s/e1f9a</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> seq-core-ngs-downloader<span class="pp">*</span>.zip <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-f</span> seq-core-ngs-downloader<span class="pp">*</span>.zip</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> seq-core-ngs-downloader<span class="pp">*</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--user</span> .</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># optionally delete the downloaded source code</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> .. <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> seq-core-ngs-downloader<span class="pp">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="updating-your-path" class="level4">
-<h4 class="anchored" data-anchor-id="updating-your-path">Updating Your <code>PATH</code></h4>
-<p>If you install with <code>pip install --user</code>, that precludes the need for a virtual environment (see below), but necessitates that you manually add <code>~/.local/bin</code> to your <code>PATH</code> if you want to be able to run this script from an arbitrary directory:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># recommended place for PATH modifications is ~/.profile or ~/.bash_profile</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">test</span> <span class="at">-f</span> ~/.bash_profile <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">'export PATH="$HOME/.local/bin:$PATH"'</span> <span class="op">&gt;&gt;</span> ~/.bash_profile <span class="kw">||</span> <span class="dt">\</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">'export PATH="$HOME/.local/bin:$PATH"'</span> <span class="op">&gt;&gt;</span> ~/.profile</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># you will need to log out and back in to see the changes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Some Linux distros do this by default now.</p>
-<p>On a Mac, pip installs things to your (hidden) <code>~/Library</code> folder. You will need to add <code>$HOME/Library/Python/&lt;python_maj.minor_version&gt;/bin</code> to your <code>$PATH</code> when using the system default Python, where <code>&lt;python_maj.minor_version&gt;</code> would be something like “2.7”, depending on which version of the OS you have.</p>
-</section>
-</section>
-<section id="setup-for-local-development" class="level3">
-<h3 class="anchored" data-anchor-id="setup-for-local-development">Setup for Local Development</h3>
-<p>If you are just experimenting, and don’t want to mess with setting your <code>$PATH</code> or potentially needing <code>sudo</code> to install, here’s a sure bet:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">GITLAB</span><span class="op">=</span>https://tfwebdev.research.cchmc.org/gitlab</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="va">$GITLAB</span>/databank/seq-core-ngs-downloader</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> seq-core-ngs-downloader</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">virtualenv</span> venv      <span class="co"># or, possibly: python3 -m venv venv</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> venv/bin/activate  <span class="co"># activate the virtual environment</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-e</span> .     <span class="co"># install using the 'setup.py' in the local directory</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="at">--help</span>         <span class="co"># make sure it works in the virtualenv</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This repository includes a setuptools <a href="https://pythonhosted.org/an_example_pypi_project/setuptools.html#using-setup-py"><code>setup.py</code></a>, which you can run in the usual way, if that’s your thing: <code>python setup.py [--help | install]</code>.</p>
-</section>
-</section>
-<section id="basic-usage" class="level2">
-<h2 class="anchored" data-anchor-id="basic-usage">Basic Usage</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pretty failsafe; works because of cchmc_seq_core/__main__.py</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> cchmc_seq_core <span class="at">--help</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># redirect 'curl' commands into a script that you can run later</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> cchmc_seq_core <span class="op">&gt;</span> download.sh</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> a+x download.sh</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># or, if you've installed it properly and set up your $PATH</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="op">&gt;</span> download.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The script will prompt you for your CCHMC credentials (which are not stored anywhere). These prompts and any other script output goes to stderr, so you can safely redirect the rest of the output to a file or pipe through <code>grep</code>, and so on.</p>
-<!--
-(This option was disabled due to the DNA Core server not supporting byte
-range requests)
-
-**By default, all the invocations of `curl` will be run with the `-C`
-(_a.k.a._ `--continue-at`) option**, which causes it to attempt to resume
-partial / failed downloads. If you wish to avoid this behavior, maybe to
-force a re-download of all existing datasets, pass the `-nr` / `--no-resume`
-option to the Python script.
--->
-<p>You can suppress <code>curl</code>’s progress meters on all the download tasks with the <code>-s</code> / <code>--silent</code> option.</p>
-<p>You can limit the types of files that would be downloaded (say, just download <code>.bam</code> files) with the <code>-t</code> / <code>--data-type</code> option, which may be specified more than once, like so:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="at">-t</span> bam <span class="at">-t</span> bai <span class="op">&gt;</span> download.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>See the output of <code>ngsdl --help</code> for all the details.</p>
-</section>
-<section id="other-tips" class="level2">
-<h2 class="anchored" data-anchor-id="other-tips">Other Tips</h2>
-<p>There is no option (yet) to leave the “ignored” file types out of the output shell script entirely; that is, file types that you did not explicitly ask for with the <code>-t</code> / <code>--data-type</code> option.</p>
-<p>If you use the <code>-t</code> option, the file types you didn’t explicitly ask for are just commented out, because the code was simpler that way. The default if you leave it off is to get <em>all</em> file types.</p>
-<p>If this bothers you, the following small <code>sed</code> script will clean up some of the noise, while still preserving the experiment “headings”:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="at">-t</span> fastq <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'/^# /d; /^## --/d; /^$/d'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="getting-data-files-for-a-specific-sequencing-run" class="level3">
-<h3 class="anchored" data-anchor-id="getting-data-files-for-a-specific-sequencing-run">Getting data files for a specific sequencing run</h3>
-<p>Try something like this:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="kw">|</span> <span class="fu">grep</span> run0529 <span class="op">&gt;</span> download.sh</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># or, pipe it to a shell to start the downloads directly</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">ngsdl</span> <span class="kw">|</span> <span class="fu">grep</span> run0529 <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>This is meant to be a guideline for processing and analysis of RNA-seq data in the Troutman lab. There are many alternative ways to consider processing, quality control, quantification, and differential expression analysis. This workflow is not a gold standard, will not always work for all data, and is open for interpretation/criticism.</p>
+<section id="general-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="general-workflow">General workflow</h2>
+<section id="data-processing" class="level3">
+<h3 class="anchored" data-anchor-id="data-processing">Data processing</h3>
 <ol type="1">
-<li><a href="http://centerlink.cchmc.org/research/research---tabs/dna-sequencing-core">CCHMC DNA Sequencing and Genotyping Core</a> - on CenterLink</li>
+<li>Verify data checksums and rename following lab convention: &lt;filenameA&gt;_R1.fastq.gz &lt;filenameA&gt;_R2.fastq.gz &lt;filenameB&gt;_R1.fastq.gz &lt;filenameB&gt;_R2.fastq.gz</li>
+<li>Group data according to mapping needs, e.g.&nbsp;by genome, paired end and single read, etc.</li>
+<li>Run <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">fastqc</a> on the raw fastq files.</li>
+<li>Run <a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim Galore</a> on the fastq files. Rerun fastqc on the trimmed fastq files. Trim Galore can automatically do this for you.</li>
+<li>Align the data with <a href="https://github.com/alexdobin/STAR">STAR</a>. Have STAR format the alignment as a sorted BAM file.</li>
+<li>Use <a href="http://homer.ucsd.edu/homer/">HOMER</a> to generate <a href="http://homer.ucsd.edu/homer/ngs/tagDir.html">tag directories</a> from the STAR alignment BAM file. Use the <code>-sspe -flip</code> options if the data is generated using our lab’s dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.<br>
+``` bash<br>
+makeTagDirectory &lt;tagDirectoryName&gt; &lt;filename.sam&gt; -genome &lt;experiment_genome&gt; \ -checkGC -format sam -sspe -flip<br>
+```<br>
+Omit <code>-sspe</code> if the sequencing data is not paired end, and omit <code>-flip</code> if the sequencing reads will not align to the opposite DNA strand as in “first-strand” library synthesis protocols.</li>
+<li>Use <a href="http://www.htslib.org">Samtools</a> to <a href="http://www.htslib.org/doc/samtools-index.html">index</a> the sorted BAM files.</li>
 </ol>
+</section>
+<section id="data-quality-control" class="level3">
+<h3 class="anchored" data-anchor-id="data-quality-control">Data quality control</h3>
+<ol type="1">
+<li>Use the fastqc results to check basic data quality.</li>
+<li>Check data assumptions and quality using a local install of the <a href="https://software.broadinstitute.org/software/igv/">Integrative Genomics Viewer</a>. An alternative would be to load a HOMER <a href="http://homer.ucsd.edu/homer/ngs/ucsc.html"><code>makeUCSCfile</code></a> into the <a href="https://genome.ucsc.edu">UCSC Genome Browser</a>. An even better solution is to load HOMER <a href="http://homer.ucsd.edu/homer/ngs/ucsc.html"><code>makeMultiWigHub.pl</code></a> tracks to the UCSC Genome Browser using a lab web server. <em>We have a web server for this purpose, but the resource is not functional yet.</em></li>
+<li>Check mapping efficiency using the STAR alignment log file.</li>
+<li>Check other basic quality parameters using the HOMER <code>tagInfo.txt</code>, <code>tagLengthDistribution.txt</code>, and <code>tagCountDistribution.txt</code> files. These files will be found in the HOMER tag directory.</li>
+<li>Check sequence bias using the HOMER <code>tagFreq.txt</code> and <code>tagFreqUniq.txt</code>. These files will also be in the HOMER tag directory. Fastqc also reports on sequencing bias.</li>
+</ol>
+<p>Many of these QC parameters can quickly be summarized using <a href="https://multiqc.info">MultiQC</a>. This software is not currently available on the BMI cluster but can be run locally. Installation is easy via <a href="https://www.docker.com">Docker</a>.</p>
+<p>In order to run MultiQc from your local machine, you will need to do one of the following: mount the server folder as a drive on your local machine (good idea), or copy the data from the server to your local machine (bad idea). Instructions for mounting the drives can be found <a href="../../Pages/Server/server_lab_drives.html">here</a> and <a href="https://confluence.research.cchmc.org/display/RESITHUB/Data+Storage">here</a>.</p>
+<p>Once a drive is mounted and the Docker software is opened, the Multiqc docker image can be run through your terminal application on your local machine as in the example described <a href="https://multiqc.info/docs/getting_started/installation/#docker">here</a> and provided below:<br>
+<code>docker run -t -v `pwd`:`pwd` -w `pwd` ewels/multiqc multiqc ./path/to/mounted/drive</code> Another useful tool is <code>alignStats.R</code>, which generates a table containing selected information from the STAR log file and the HOMER <code>tagInfo.txt</code> file. This tool is described in more detail <a href="map_on_bmi_hpc (in progress!)">below</a>.</p>
+</section>
+<section id="data-quantification" class="level3">
+<h3 class="anchored" data-anchor-id="data-quantification">Data quantification</h3>
+<ol type="1">
+<li>Quantify sequencing reads using HOMER <code>[analyzeRepeat.pl]</code>(http://homer.ucsd.edu/homer/ngs/analyzeRNA.html).</li>
+<li>Compare gene detection depth by plotting distribution of normalized transcript counts at various thresholds.</li>
+<li>Validate experimental replicates and treatment differences with log transformed data using principal component analysis and/or pairwise correlation analysis.</li>
+<li>Compare expression of some control and test genes using bar plots, box whisker plots, and/or a genome browser.</li>
+<li>Compare global expression profiles with log transformed data by heat map. Assess global expression profiles with and without row scaling.</li>
+</ol>
+</section>
+<section id="differential-expression-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="differential-expression-analysis">Differential expression analysis</h3>
+<ol type="1">
+<li>Differential expression analysis should be used cautiously if data fails QC steps or statistical method assumptions.</li>
+<li>Identify deferentially expressed genes with raw sequencing counts (non-normalized data) using <a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html">DeSeq2</a>. This can be done directly with DeSeq2 in R, or it can be done through HOMER using <a href="http://homer.ucsd.edu/homer/ngs/diffExpression.html"><code>getDiffExpression.pl</code></a>.</li>
+<li>Results can be summarized genome wide with various types of scatter plots or heat maps.</li>
+<li>Check biological function of differential genes using gene ontology tools. Examples include: <a href="https://metascape.org/gp/index.html">Metascape</a>, <a href="https://toppgene.cchmc.org">ToppGene</a> or <a href="https://toppgene.cchmc.org/enrichment.jsp">ToppFun</a>, <a href="https://www.gsea-msigdb.org/gsea/index.jsp">Gene Set Enrichment Analysis</a>, <a href="https://digitalinsights.qiagen.com/products-overview/discovery-insights-portfolio/analysis-and-visualization/qiagen-ipa/">Qiagen Ingenuity Pathway Analysis</a> (<em>$$$</em>), etc.</li>
+</ol>
+</section>
+<section id="analytical-creativity" class="level3">
+<h3 class="anchored" data-anchor-id="analytical-creativity">Analytical creativity</h3>
+<p>Analysis of RNA-seq data is only limited by the quality of the data and your imagination. Consider intersecting your results with data from other systems, experiments, or genomics assays as a way to develop and refine new hypotheses.</p>
+</section>
+</section>
+<section id="automated-pipelines" class="level2">
+<h2 class="anchored" data-anchor-id="automated-pipelines">Automated pipelines</h2>
+<p>Applying the steps outlined above to a set of new data is cumbersome and prone to human typing errors. We have access to a few automated pipelines to help streamline these steps. However, it is a good idea to learn how to use the above tools in an independent workflow. And to learn how to apply the various options as best suited to your data type/assumptions. <em>Becoming over reliant on automated processing and analysis will limit understanding, independence, and creativity.</em></p>
+<section id="map_on_bmi_hpc-in-progress" class="level3">
+<h3 class="anchored" data-anchor-id="map_on_bmi_hpc-in-progress">map_on_bmi_hpc (in progress!)</h3>
+<p><em>Presently, the lab has independent wrapper scripts individually tailored for single-read or paired-end RNA-seq data, or single-read or paired-end ChIP-seq or ATAC-seq data. Eventually these scripts will be merged into an integrated tool that functions via specification of command line options.</em></p>
+<p>These wrapper scripts takes an input directory path of grouped data and generate and submit a series of batch .bat files on the BMI High Performance Cluster. Users have the option to specify variables specific to their data or use default specified parameters. The submitted batch files automate execution of the following: fastqc, trim_galore, data alignment, tag directory creation, and sorting and indexing alignment bam files.</p>
+<p>These scripts can be run from the lab’s cluster drive or added as executables to your path. Current versions are located at:</p>
+<pre><code>    /data/hpc-troutman/software/scripts/working_wrapper_star_paired.R
+    /data/hpc-troutman/software/scripts/working_wrapper_bowtie2_pairedend.R
+    /data/hpc-troutman/software/scripts/working_wrapper_bowtie2_singleread.R</code></pre>
+<p>Usage on the cluster requires a loaded R module. An example follows:</p>
+<pre><code>    module load R/4.2.1
+    Rscript /data/hpc-troutman/software/scripts/working_wrapper_star_paired.R -d /data/troutman-hpc/data/archive/fastq_path</code></pre>
+<p>For example, the script generates and submits the following .bat file to the LSF scheduler:</p>
+<pre><code>    #BSUB -W 2:00
+    #BSUB -n 16
+    #BSUB -M 40000
+    #BSUB -e ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.err
+    #BSUB -o ./bsub_scripts/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.out
+    #BSUB -R "span[hosts=1]"
+
+    # load modules
+    module load fastqc/0.11.7
+    module load trimgalore/0.6.6
+    module load STAR/2.7.9
+    module load samtools
+    module load homer/4.11
+
+    # execute fastqc
+    fastqc /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz -o ./fastqc_orig/
+    fastqc /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz -o ./fastqc_orig/
+
+    # execute trim_galore
+    trim_galore \
+        --cores 4 \
+        --paired /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz /data/hpc-troutman/data/archive/20230629_Troutman_Seq/rna//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz\
+        --fastqc \
+        --output_dir ./trim_galore/
+
+    # rename trimmed files
+    mv ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1_val_1.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz
+    mv ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2_val_2.fq.gz ./trim_galore/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz
+    mv ./trim_galore/*fastqc* ./fastqc_trimmed/
+
+    # execute STAR
+    STAR \
+        --runThreadN 16 \
+        --genomeDir /data/hpc-troutman/data/genomes/indexes/star/mm10_starIndex/ \
+        --readFilesCommand zcat \
+        --readFilesIn ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R1.fastq.gz ./trim_galore//Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT_R2.fastq.gz \
+        --outFileNamePrefix ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10. \
+        --outSAMtype BAM SortedByCoordinate
+
+    # remove STAR temporary directories
+    rm -r ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10._STARtmp
+
+    # execute HOMER makeTagDirectory
+    makeTagDirectory ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/ \
+    ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10.Aligned*am \
+        -genome mm10 -checkGC -format sam -sspe -flip
+
+    # copy STAR log files to the HOMER tag directory
+    cp ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.*Log.final.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.log.mm10
+    cp ./star_out/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.*Log.out ./tag_directories/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.mm10/Mouse-C57BL6J-KupfferTim4Pos-RNA-LPS-16H-1119-M-E00551-CTCCTACA-GTCTCAGT.star.consolelog.mm10 \
+
+    echo Done!</code></pre>
+</section>
+<section id="a.c.rsuite" class="level3">
+<h3 class="anchored" data-anchor-id="a.c.rsuite"><a href="https://github.com/z5ouyang/A.C.Rsuite">A.C.Rsuite</a></h3>
+<p>This analysis tool suite was created by Zhengyu Ouyang to simplify frequent HOMER analyses of mapped and processed genomics data (RNA-seq as well as ATAC-seq and ChIP-seq). These tools require an input <code>sample definition</code> file. This is a 4 column table for RNA-Seq or ATAC-Seq and 5 column table for ChIP-Seq. The table must be formatted as ‘tab’ separated (\t) and should not contain a header row.</p>
+<ul>
+<li>Each row in the table corresponds to a data group.</li>
+<li>The first column is the name of the group.</li>
+<li>The second column defines the color of the group. This can contain default <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">R colors</a> or hex formatted color codes (example: #de2d26).</li>
+<li>The third column contains the paths to each HOMER tag directory belonging to the data group. Each sample/replicate directory for the group must be separated by a semicolon <code>;</code> (no space!).</li>
+<li>The fourth column contains the name assigned to each sample. Each sample/replicate name for the group must be separated by a semicolon <code>;</code> (no space!). The order and number of sample names should be the same as the tag directories in column 3.</li>
+</ul>
+<p>An example follows (omit the header column):</p>
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Column 1</th>
+<th style="text-align: left;">Column 2</th>
+<th style="text-align: left;">Column 3</th>
+<th style="text-align: left;">Column 4</th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">group1</td>
+<td style="text-align: left;">gray0</td>
+<td style="text-align: left;">/path/to/tag_directory/group1_rep1/;/path/to/tag_directory/group1_rep2/</td>
+<td style="text-align: left;">group1_rep1;group1_rep2</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">group2</td>
+<td style="text-align: left;">gray33</td>
+<td style="text-align: left;">/path/to/tag_directory/group2_rep1/;/path/to/tag_directory/group2_rep2/</td>
+<td style="text-align: left;">group2_rep1;group2_rep2</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">group3</td>
+<td style="text-align: left;">gray66</td>
+<td style="text-align: left;">/path/to/tag_directory/group3_rep1/;/path/to/tag_directory/group3_rep2/</td>
+<td style="text-align: left;">group3_rep1;group3_rep2</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p><em>The GitHub versions are not fully functional on the BMI cluster, but we have edited versions suppressing the non-functional aspects (<code>makeMultiWigHub.pl</code>).</em></p>
+<p><code>rnaPipe.R</code> is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called <code>alignStats.txt</code>, data quantification results in a directory called <code>rnaQuan/</code>, and differential expression results in a directory called <code>rnaDiff/</code>. These tools require a compatible R module is loaded when run through the BMI HPC. An example usage follows:</p>
+<pre><code>    module load R/4.2.1
+    rnaPipe.R /path/to/sample_definition_file -o /desired/output/path -g available_homer_genome</code></pre>
+<p>Steps from <code>rnaPipe.R</code> can also be run/rerun individually, and some have additional analysis options available. Script instructions and available options can be viewed by entering the command into the terminal.</p>
+<p><code>alignStats.R</code> compiles various quality control statistics into a summary table based on what is in the sample definition file. An example usage follows:</p>
+<pre><code>    Rscript alignStats.R /path/to/sample_definition_file &gt; alignStats.txt</code></pre>
+<p><code>rnaQuan.R</code> performs routine quantification of RNA-seq data by reading in the sample definition file and using HOMER and R to perform the following: - Generate an <code>analyzeRepeats.pl</code> raw sequencing count file (<code>-raw</code> or <code>-noadj</code>) specifying the options <code>-condenseGenes -count exons</code>. - Generate an <code>analyzeRepeats.pl</code> TPM normalized file (<code>-tpm</code> option) specifying the option <code>-count exons</code> <u>but not <code>-condenseGenes</code></u>. This file is subsetted based on accession numbers within the raw count file. - Short genes (less than 200 bp) are removed, and a simplified raw file (<code>rawC.txt</code>) and TPM file (<code>rawT.txt</code>) are created. - A series of plots are created that: compare gene length versus expression means and variance; assess data grouping using principal component analyses; compare pair-wise Parson’s correlations using heat maps and within group 2d kernel density plots. - Group replicate tag directories are merged into a <code>mergeTag</code> folder. - A UCSC genome browser hub track is created using the sample definition file name. <u>This aspect will not function until the web server and script are correctly configured</u>.</p>
+<p>An example usage follows:</p>
+<pre><code>    Rscript rnaQuan.R /path/to/sample_definition_file -o rnaQuan</code></pre>
+<p><code>rnaDiff.R</code> performs group pairwise differential expression analysis using DeSeq2 as. This depends both on the sample definition file <em>and</em> the processed raw count and TPM files generated by <code>rnaQuan.R</code>. It generates the following: - DeSeq2 results for any gene above a declared TPM threshold (default 8) for each pairwise comparison between each group (not one group versus all remaining). - Scatter plots and MA plots visualizing expression differences between each pair of groups. - A series of summary heat map for the composite list of deferentially expressed genes between all groups.</p>
+<p>An example usage is follows:</p>
+<pre><code>    Rscript rnaDiff.R /path/to/sample_definition_file -c rnaQuan/rawC.txt -t rnaQuan/rawT.txt -o rnaDiff/</code></pre>
+<p>These scripts can be run from the lab’s cluster drive or added as an executable to your path. Current versions are located at <code>/data/hpc-troutman/software/scripts/</code>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

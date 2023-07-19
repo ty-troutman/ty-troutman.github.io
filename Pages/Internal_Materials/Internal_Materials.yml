@@ -1,16 +1,22 @@
-- title: Analysis
-  subtitle: Get started analyzing sequencing data 
+- title: Servers
+  subtitle: Get started using the computational cluster and the command line interface
   links:
     - text: "BMI Cluster"
-      href: ../Analysis/BMI_Cluster.qmd
+      href: ../Server/server_bmi_cluster.qmd
     - text: "Lab Cluster Drives"
-      href: ../Analysis/Lab_Cluster_Drives.qmd
-    - text: "Processing RNA-Seq"
-      href: ../Analysis/Processing_RNASeq_Data.qmd
-    - text: "Genomics Analyses"
+      href: ../Server/server_lab_drives.qmd
+      
+- title: Analysis
+  subtitle: Data analysis workflow and examples
+  links:
+    - text: "RNA-Seq Analysis"
+      href: ../Analysis/analysis_rna_seq.qmd
+    - text: "ATAC- and ChIP-Seq Analysis"
+      href: ../Analysis/analysis_atac_chip_seq.qmd
+    - text: "Additional Analyses"
       href: "https://github.com/ty-troutman/Genomics-analyses"
 
-- title: Sequencing
+- title: NGS libraries
   subtitle: Information related to sequencing libraries, sample submission, and data download
   links:
     - text: "Sequencing Database and Barcodes"
