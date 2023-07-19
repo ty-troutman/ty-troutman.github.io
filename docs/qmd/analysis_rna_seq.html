@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -303,17 +337,41 @@ ul.task-list li input[type="checkbox"] {
 <section id="data-processing" class="level3">
 <h3 class="anchored" data-anchor-id="data-processing">Data processing</h3>
 <ol type="1">
-<li>Verify data checksums and rename following lab convention: &lt;filenameA&gt;_R1.fastq.gz &lt;filenameA&gt;_R2.fastq.gz &lt;filenameB&gt;_R1.fastq.gz &lt;filenameB&gt;_R2.fastq.gz</li>
-<li>Group data according to mapping needs, e.g.&nbsp;by genome, paired end and single read, etc.</li>
-<li>Run <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">fastqc</a> on the raw fastq files.</li>
+<li><p>Verify data checksums and rename following lab convention: &lt;filenameA&gt;_R1.fastq.gz &lt;filenameA&gt;_R2.fastq.gz &lt;filenameB&gt;_R1.fastq.gz &lt;filenameB&gt;_R2.fastq.gz</p></li>
+<li><p>Group data according to mapping needs, e.g.&nbsp;by genome, paired end and single read, etc.</p></li>
+<li><p>Run <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">fastqc</a> on the raw fastq files.</p></li>
+</ol>
+<pre><code>    module load fastqc/0.11.7
+    fastqc &lt;data&gt;.R1.fastq.gz -o &lt;preferred_name&gt;
+    fastqc &lt;data&gt;.R2.fastq.gz -o &lt;preferred_name&gt;</code></pre>
+<ol start="4" type="1">
 <li>Run <a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim Galore</a> on the fastq files. Rerun fastqc on the trimmed fastq files. Trim Galore can automatically do this for you.</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">module</span> load trimgalore/0.6.6</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">trim_galore</span> <span class="dt">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">--cores</span> 4 <span class="dt">\</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">--paired</span> <span class="op">&lt;</span>data_R1.fastq.gz<span class="op">&gt;</span> <span class="op">&lt;</span>data_R2.fastq.gz<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">--fastqc</span> <span class="dt">\</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">--output_dir</span> <span class="op">&lt;</span>preferred_path<span class="op">&gt;</span>/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="5" type="1">
 <li>Align the data with <a href="https://github.com/alexdobin/STAR">STAR</a>. Have STAR format the alignment as a sorted BAM file.</li>
-<li>Use <a href="http://homer.ucsd.edu/homer/">HOMER</a> to generate <a href="http://homer.ucsd.edu/homer/ngs/tagDir.html">tag directories</a> from the STAR alignment BAM file. Use the <code>-sspe -flip</code> options if the data is generated using our lab’s dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.<br>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">module</span> load STAR/2.7.9</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">module</span> load samtools</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="ex">STAR</span> <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">--runThreadN</span> 16 <span class="dt">\</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">--genomeDir</span> /path/to/star/index/ <span class="dt">\</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">--readFilesCommand</span> zcat <span class="dt">\</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">--readFilesIn</span> <span class="op">&lt;</span>data_R1.fastq.gz<span class="op">&gt;</span> <span class="op">&lt;</span>data_R2.fastq.gz<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">--outFileNamePrefix</span> <span class="op">&lt;</span>preferred_prefix<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">--outSAMtype</span> BAM SortedByCoordinate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="6" type="1">
+<li><p>Use <a href="http://homer.ucsd.edu/homer/">HOMER</a> to generate <a href="http://homer.ucsd.edu/homer/ngs/tagDir.html">tag directories</a> from the STAR alignment BAM file. Use the <code>-sspe -flip</code> options if the data is generated using our lab’s dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.<br>
 ``` bash<br>
 makeTagDirectory &lt;tagDirectoryName&gt; &lt;filename.sam&gt; -genome &lt;experiment_genome&gt; \ -checkGC -format sam -sspe -flip<br>
 ```<br>
-Omit <code>-sspe</code> if the sequencing data is not paired end, and omit <code>-flip</code> if the sequencing reads will not align to the opposite DNA strand as in “first-strand” library synthesis protocols.</li>
-<li>Use <a href="http://www.htslib.org">Samtools</a> to <a href="http://www.htslib.org/doc/samtools-index.html">index</a> the sorted BAM files.</li>
+Omit <code>-sspe</code> if the sequencing data is not paired end, and omit <code>-flip</code> if the sequencing reads will not align to the opposite DNA strand as in “first-strand” library synthesis protocols.</p></li>
+<li><p>Use <a href="http://www.htslib.org">Samtools</a> to <a href="http://www.htslib.org/doc/samtools-index.html">index</a> the sorted BAM files.</p></li>
 </ol>
 </section>
 <section id="data-quality-control" class="level3">
@@ -435,10 +493,10 @@ Omit <code>-sspe</code> if the sequencing data is not paired end, and omit <code
 <p>An example follows (omit the header column):</p>
 <table class="table">
 <colgroup>
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 61%">
-<col style="width: 21%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">

@@ -9,15 +9,45 @@ This is meant to be a guideline for processing and analysis of RNA-seq data in t
 ### Data processing
 
 1.  Verify data checksums and rename following lab convention: \<filenameA\>\_R1.fastq.gz \<filenameA\>\_R2.fastq.gz \<filenameB\>\_R1.fastq.gz \<filenameB\>\_R2.fastq.gz
+
 2.  Group data according to mapping needs, e.g. by genome, paired end and single read, etc.
+
 3.  Run [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) on the raw fastq files.
+```
+    module load fastqc/0.11.7
+    fastqc <data>.R1.fastq.gz -o <preferred_name>
+    fastqc <data>.R2.fastq.gz -o <preferred_name>
+```
+
 4.  Run [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) on the fastq files. Rerun fastqc on the trimmed fastq files. Trim Galore can automatically do this for you.
+```bash
+    module load trimgalore/0.6.6
+    trim_galore \
+        --cores 4 \
+        --paired <data_R1.fastq.gz> <data_R2.fastq.gz> \
+        --fastqc \
+        --output_dir <preferred_path>/
+```
+
 5.  Align the data with [STAR](https://github.com/alexdobin/STAR). Have STAR format the alignment as a sorted BAM file.
+```bash
+    module load STAR/2.7.9
+    module load samtools
+        STAR \
+        --runThreadN 16 \
+        --genomeDir /path/to/star/index/ \
+        --readFilesCommand zcat \
+        --readFilesIn <data_R1.fastq.gz> <data_R2.fastq.gz> \
+        --outFileNamePrefix <preferred_prefix> \
+        --outSAMtype BAM SortedByCoordinate
+```
+
 6.  Use [HOMER](http://homer.ucsd.edu/homer/) to generate [tag directories](http://homer.ucsd.edu/homer/ngs/tagDir.html) from the STAR alignment BAM file. Use the `-sspe -flip` options if the data is generated using our lab's dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.\
     \`\`\` bash\
     makeTagDirectory \<tagDirectoryName\> \<filename.sam\> -genome \<experiment_genome\> \\ -checkGC -format sam -sspe -flip\
     \`\`\`\
     Omit `-sspe` if the sequencing data is not paired end, and omit `-flip` if the sequencing reads will not align to the opposite DNA strand as in "first-strand" library synthesis protocols.
+    
 7.  Use [Samtools](http://www.htslib.org) to [index](http://www.htslib.org/doc/samtools-index.html) the sorted BAM files.
 
 ### Data quality control
@@ -149,7 +179,7 @@ This analysis tool suite was created by Zhengyu Ouyang to simplify frequent HOME
 An example follows (omit the header column):
 
 | Column 1 | Column 2 | Column 3                                                                | Column 4                |
-|:---------|:---------|:------------------------------------------------------------------------|:------------------------|
+|:-----------------|:-----------------|:-----------------|:-----------------|
 | group1   | gray0    | /path/to/tag_directory/group1_rep1/;/path/to/tag_directory/group1_rep2/ | group1_rep1;group1_rep2 |
 | group2   | gray33   | /path/to/tag_directory/group2_rep1/;/path/to/tag_directory/group2_rep2/ | group2_rep1;group2_rep2 |
 | group3   | gray66   | /path/to/tag_directory/group3_rep1/;/path/to/tag_directory/group3_rep2/ | group3_rep1;group3_rep2 |
