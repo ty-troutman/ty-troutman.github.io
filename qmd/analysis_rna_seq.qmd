@@ -148,11 +148,11 @@ This analysis tool suite was created by Zhengyu Ouyang to simplify frequent HOME
 
 An example follows (omit the header column):
 
-| Column 1 | Column 2 | Column 3                                                                | Column 4                |     |
-|:--------------|:--------------|:--------------|:--------------|:--------------|
-| group1   | gray0    | /path/to/tag_directory/group1_rep1/;/path/to/tag_directory/group1_rep2/ | group1_rep1;group1_rep2 |     |
-| group2   | gray33   | /path/to/tag_directory/group2_rep1/;/path/to/tag_directory/group2_rep2/ | group2_rep1;group2_rep2 |     |
-| group3   | gray66   | /path/to/tag_directory/group3_rep1/;/path/to/tag_directory/group3_rep2/ | group3_rep1;group3_rep2 |     |
+| Column 1 | Column 2 | Column 3                                                                | Column 4                |
+|:--------------|:--------------|:--------------|:--------------|
+| group1   | gray0    | /path/to/tag_directory/group1_rep1/;/path/to/tag_directory/group1_rep2/ | group1_rep1;group1_rep2 |
+| group2   | gray33   | /path/to/tag_directory/group2_rep1/;/path/to/tag_directory/group2_rep2/ | group2_rep1;group2_rep2 |
+| group3   | gray66   | /path/to/tag_directory/group3_rep1/;/path/to/tag_directory/group3_rep2/ | group3_rep1;group3_rep2 |
 
 *The GitHub versions are not fully functional on the BMI cluster, but we have edited versions suppressing the non-functional aspects (`makeMultiWigHub.pl`).*
 
