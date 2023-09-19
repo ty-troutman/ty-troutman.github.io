@@ -118,7 +118,7 @@ These scripts can be run from the lab's cluster drive or added as executables to
     ```
     
 -   These tools require input of only one `fastq.gz` file per sample per read direction.
--   These tools generate tag directories assuming a stranded library chemistry (e.g. lab standard [dUTP RNA-seq protocol](https://cchmc-my.sharepoint.com/:w:/g/personal/ty_troutman_cchmc_org/EQq4IL-eReVMgL_-hyBey8IBvTnNd7zF6jL4pGzWQxyylw?e=uFlh8V).
+-   These tools generate tag directories assuming a stranded library chemistry (e.g. lab standard [dUTP RNA-seq protocol](https://cchmc-my.sharepoint.com/:w:/g/personal/ty_troutman_cchmc_org/EQq4IL-eReVMgL_-hyBey8IBvTnNd7zF6jL4pGzWQxyylw?e=uFlh8V)).
 :::
 
 Usage on the cluster requires a loaded R module. An example follows:
