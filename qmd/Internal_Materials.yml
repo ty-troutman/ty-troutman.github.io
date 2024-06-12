@@ -1,3 +1,13 @@
+- title: Welcome to the Troutman lab!
+  subtitle: Lab policies, rules, and other helpful information
+  links:
+    - text: "Lab policies and rules"
+      href: rules_policies.qmd
+    - text: "Member contact information"
+      href:  "https://cchmc-my.sharepoint.com/:w:/g/personal/ty_troutman_cchmc_org/EcZjXGbja-tNiBppyW2v950BevUzcQV8cCpfNJLyixJYFA?e=K0p3UP"
+    #- text: "Getting started in the lab"
+      #href: getting_started.qmd
+
 - title: Servers
   subtitle: Get started using the computational cluster and the command line interface
   links:

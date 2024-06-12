@@ -1,0 +1,220 @@
+---
+title: "Rules and Policies for the Troutman lab"
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+# CCHMC and Division Rules
+
+::: callout-important
+## These general rules are required
+
+-   All safety guidelines must be consistently followed.
+-   Behavior must comply with current CCHMC and divisional requirements.
+-   Experiments must be performed in accordance with current operation protocols (IBC, IACUC, IRB, etc).
+-   Lab notebooks and records must be accurate and up to date. Lab notebooks belong to CCHMC and the lab. They cannot be taken home.
+-   Be a good steward of CCHMC/division/lab resources. Report faulty equipment/reagents.
+-   Work hard and work smart. Learn from your mistakes and the mistakes of others.
+-   Be willing to receive, give, and act on constructive feedback.
+-   Always strive to do rigorous and reproducible science.
+:::
+
+# Lab policies
+
+The below policies can be flexible with implementation if in keeping with federal, CCHMC, and lab regulations.
+
+-   Be careful with equipment and reagents.
+-   Handle reagents consistent with their intended use.
+-   Control for and eliminate sources of cross contamination.
+-   Appropriately report faulty reagents/equipment.
+-   Maintain **appropriate** inventory levels. Don't be the reason someone's experiment fails.
+-   Electronic data should be logically organized and traceable through the lab notebook.
+-   Be prepared for lab meetings and journal clubs.
+
+# Lab expectations
+
+## Expectations for everyone
+
+-   Replace reagents and materials ***before*** running out.
+-   Clean up after yourself. Dispose of hazardous wastes in a timely manner, and in accordance with CCHMC and Division policies.
+-   Mistake will happen. Learn from them. Try to learn from the mistake of colleagues as well.
+-   Plan ahead. Be proactive.
+-   Read!
+
+## Expectations for research assistants
+
+-   You are the first line of defense in lab upkeep. Stay on top of all upkeep, keep a schedule and calendar, and work with other lab members.
+-   Keep the mouse colony organized and trimmed.
+-   Check inventory levels at least once a month. Refer to our [inventory spreadsheet](https://cchmc-my.sharepoint.com/:x:/g/personal/ty_troutman_cchmc_org/EcSs0ac-G1BGruQFfj-g-O0Bx3whzrTIX7TJCxolJ51bUA?e=lwmfQA), and update it as appropriate.
+-   Stay busy. Help out other lab members or make sure new experiments are planned and executed.
+-   Help keep operation protocols (IBC, IACUC, IRB) up to date.
+-   Ensure experiment protocols are organized and accessible.
+
+## Expectations for graduate students and research associates
+
+-   Help research assistants with mouse work and other lab/division tasks.
+-   Be thoughtful and diligent in planning experiments. Include necessary controls. Eliminate unnecessary conditions. Communicate with colleagues when uncertain.
+-   Research succeeds when projects are done in parallel.
+-   Collaborate with colleagues within the lab and outside the lab.
+-   Continually improve written and spoken communication skills.
+-   Develop new technical skills and refine those you already have.
+-   Keep a [career development plan](https://myidp.sciencecareers.org/?AspxAutoDetectCookieSupport=1) that includes short-term and long-term growth goals. Try to build lab projects around achieving these goals.
+-   Stay imaginative and positive. Believe in yourself.
+
+## Good practice for laboratory notebooks
+
+::: callout-note
+## Most of this information was sourced nearly verbatim from:
+
+[Making the Right Moves: A Practical Guide to Scientifıc Management for Postdocs and New Faculty. Second Edition.](https://www.hhmi.org/sites/default/files/2023-10/making-the-right-moves-second-edition.pdf)
+:::
+
+Although individual scientists are responsible for maintaining their own notebooks, heads of labs are responsible for making sure that the notebooks of those under their direction are in order.
+The precise way in which to document scientific research varies from field to field and from institution to institution, but some general rules apply, such as the following:
+
+-   Lab notebooks are the property of CCHMC. They cannot be taken home.
+-   Use a permanently bound book, with consecutive signed and dated entries. When appropriate, witness entries as well (novel discoveries, equipment failures, safety issues).
+-   For computer-kept logs, you can use a loose-leaf notebook, but pages must be consecutively numbered (using a sequential page-number stamp), dated, and signed.
+-   Record entries chronologically.
+-   Each entry should stand on its own to permit others to replicate the work.
+-   Organize material with sections and headings.
+-   Identify and describe reagents and specimens used.
+-   Identify sources of those materials (e.g., reagent manufacturer, lot number, purity, expiration date).
+-   Enter instrument serial numbers and calibration dates.
+-   Use proper nouns for items.
+-   Write all entries in the first person, and be specific about who did the work.
+-   Explain nonstandard abbreviations.
+-   Use ink and never obliterate original writing; never remove pages or portions of a page.
+-   If a page is left blank or a space within a page is left blank, draw a line through it.
+-   Permanently affix with glue any attachments (such as graphs or computer printouts) to the pages of the notebook; date and sign both the notebook page and the attachment.
+-   Outline new experiments, including their objectives and rationale.
+-   Include periodic factual, not speculative, summaries of status and findings.
+-   Enter ideas and observations into your notebook immediately. Summarize discussions from lab meetings and ideas or suggestions made by others, citing the persons by name.
+
+::: callout-important
+## Why keep daily records?
+
+Every person working in a lab should keep detailed records of the experiments conducted each day.
+Here are some reasons why.
+
+*Establishing good work practices.* Lab records allow your work to be reproduced by others.
+The records you keep should allow you and others to recreate the work and achieve the same results, thereby validating or extending your work.
+The records also allow you to prepare formal reports, papers, and presentations.
+They also serve as a source for assigning credit to lab members.
+
+*Teaching colleagues in the lab.* Scientific training involves gathering information, forming hypotheses, designing experiments, and observing results.
+Lab notebooks, in which these activities are carefully recorded, can be a valuable aid in teaching your grad students, postdocs, and technicians how to analyze results, construct new theories and tests, and retrace their steps to identify an error.
+
+*Meeting contractual requirements.* From grants to contracts to patent applications, researchers have explicit terms and implicit expectations to meet, for which detailed records and data are essential.
+For example, the National Institutes of Health has the legal right to audit and examine records that are relevant to any research grant award.
+Accordingly, the recipients of research grants have an obligation to keep appropriate records.
+
+*Avoiding fraud.* Lab directors are responsible for the integrity of their lab and everything it produces.
+Periodic checks of raw data in notebooks and project files can uncover and correct carelessness or outright fraud before they become huge problems.
+
+*Defending patents.* U.S. patent law follows a first-to-conceive rather than a first-to-file system.
+That is why documentation to support the date of discovery or invention is critical and why pages of lab notebooks and other records should be consecutively numbered, dated, and signed.
+Careful records can save a patent.
+:::
+
+## Questions on lab notebooks
+
+::: {.callout-important appearance="minimal"}
+## Why should I learn to write in the notebook?
+
+You want to create an ***accurate***, ***original***, ***permanent record***.
+There is a tendency to record information on the handiest piece of paper available, even on a paper towel lying on a bench, and then later transferring the information to a notebook.
+Therefore, you should get into the habit of immediately recording data as they are being collected into your lab notebook.
+:::
+
+::: {.callout-important appearance="minimal"}
+## What’s the responsible way to document errors?
+
+Make the required changes as soon as possible without obliterating the original entry.
+Electronic documents may require a new entry, not an override.
+If the error is logged by hand, do not erase or alter the initial entry.
+Correct the data at the point in the log where the error was discovered, refer to the original page, and go on (e.g., “Reagent was 50 percent of the strength we originally thought.”).
+:::
+
+::: {.callout-important appearance="minimal"}
+## For patent purposes, what’s an “original” record?
+
+An original is the first human-readable form—for example, a printout of a measurement but not a photocopy of it.
+It should be dated, signed, and filed.
+:::
+
+::: {.callout-important appearance="minimal"}
+## Genomics produces massive amounts of data. If the data are burned on a CD, are they considered “original”?
+
+In this era of computer-assisted research, many pieces of data are collected, stored, and analyzed by computer.The problem with electronic records is that it is hard to prove that the data are not added to, deleted from, or in some way tampered with.
+The Food and Drug Administration (FDA) has published clear guidelines for maintaining electronic records in a way that will meet legal scrutiny (<http://www.fda.gov/ora/compliance_ref/part11).>
+If you have really important results, it is probably safer to print them out, sign and date the documents, and indicate why they are significant.
+*This obviously isn't possible with gigabytes of sequencing data.*
+:::
+
+## Electronic laboratory notebooks
+
+Electronic laboratory notebooks (ELNs) do everything their handwritten forebears do but with the attractive bonus of search and organization functions.
+Through links to analytical software, ELNs can usually download and store data directly, and many ELNs also support secure access for multiple users and remote users.
+
+Choosing the right ELN for your lab requires homework.
+One important consideration is whether the ELN complies with the FDA’s rules for acceptance of electronic documents, which were published in March 1997 in title 21 of the Code of Federal Regulations, part 11, available online at http://www.fda.gov/ora/compliance_ref/part11.
+
+So far, few ELNs have been subjected to legal scrutiny, and it is doubtful that many would pass the test.
+For this reason, most researchers in academic and industry settings are sticking to paper records.
+
+[**CCHMC offers Lab Archives**](https://centerlink.cchmc.org/research/research---tabs/lab-archives) **as an Electronic Lab Notebook**
+
+LabArchives is an electronic lab notebook (ELN) software hosted on the cloud and is accessible from any device with an internet connection.
+LabArchives allows researchers to replace their paper notebooks, making notebook data easily searchable.
+LabArchives also facilitates sharing among collaborators and promotes common document and protocol storage in the lab.
+Customizable forms called ‘widgets’ allow researchers to standardize data entry for common experiments and provide tools for freezer box storage and chemical inventory lists.
+You can learn more about Lab Archives at this link: <http://www.labarchives.com/>
+
+CCHMC has partnered with LabArchives to offer Cincinnati Children’s Research Foundation (CCRF) members access to the LabArchives ELN software.
+
+-   Visit this site <https://mynotebook.labarchives.com/login> to sign up for a new LabArchives account.
+    If you are working at a CCHMC campus, you will be redirected to the Cincinnati Children’s Hospital Medical Center login page.
+    If you are working off campus, select the option to ‘create a new account’ and then ‘sign up through your institution’.
+    Be sure to sign up using your CCHMC email address so that you are included in our enterprise license and you can take advantage of unlimited data storage!
+
+**For more information and to sign up for a training webinar, please visit the links below:**
+
+-   <https://www.labarchives.com/webinars/>  
+-   [Labarchives ELN for Research](https://youtu.be/YTp0W0i2eD4)
+
+For more information, check out the [Research IT Hub](https://confluence.research.cchmc.org/pages/viewpage.action?pageId=90966414)
+
+\* For Help, please contact: [help-eln\@bmi.cchmc.org](mailto:help-eln@bmi.cchmc.org)
+
+# Other lab records
+
+All lab work should be saved on a system that is appropriately backed up.
+The options are your synchronized OneDrive or one of the lab’s server drives.
+You will need a BMI HPC account to access the lab’s server drives.
+Instructions are at the bottom of this page.
+Ty or Mel can add you to the permission list when your account is activated, and Ty can give you a tour of that space.
+
+An information file or readme should describe the materials and point to the correct page(s) in a lab notebook.
+Lab notebooks should describe where data files/analyses or stored on the shared OneDrive and/or server drive.
+
+::: callout-note
+## Data should be logically organized and named.
+
+A good example strategy is to name things using the date, a project identifier, subproject identifier, etc.
+Use these concepts for consistent naming of samples inside of files.
+Do not use spaces or other special characters in the names:
+
+``` bash
+( !@#$%^&*()?<>,/\|[]{}+`~:;’” )
+```
+
+Underscores \_ and dashes - are fine to use in file names.
+**These strategies save time!** For example:
+
+**Project directory:** `projectID_simpleDescription, useridA_genotyping; useridB_albCreATF3-NASH`\
+**Project subdirectory:** `date_projectID-experimentID_simpleDescription`; `230601_useridA23_clec4fcre-atf3flox-lyz2cre`; `230601_useridB_nashtimecourse_albcre-atf3flox` \
+**Project data file:** `date_expid_assaytype`; `readme`; `230601_useridA_clec4fgel.png`; `230601_useridB_serumelisa_il6.csv` \
+**Sample info:** `date_assay_mouseID_sex_celltype _treatmentA_treamentZ`; `230601_m2301_male_kc_tim4pos_8wk_CDAHFDdiet_drug1regimen2`
+:::

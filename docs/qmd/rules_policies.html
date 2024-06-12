@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Troutman Lab - ATAC- and ChIP-seq Analysis</title>
+<title>Troutman Lab - Rules and Policies for the Troutman lab</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -119,7 +153,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../qmd/analysis_rna_seq.html">Analysis</a></li><li class="breadcrumb-item"><a href="../qmd/analysis_atac_chip_seq.html">ATAC- and ChIP-Seq Analysis</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../qmd/rules_policies.html">Lab policies and rules</a></li><li class="breadcrumb-item"><a href="../qmd/rules_policies.html">Lab policies and rules</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -139,16 +173,16 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
  <span class="menu-text">Lab policies and rules</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../qmd/rules_policies.html" class="sidebar-item-text sidebar-link">
+  <a href="../qmd/rules_policies.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab policies and rules</span></a>
   </div>
 </li>
@@ -185,13 +219,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
  <span class="menu-text">Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../qmd/analysis_rna_seq.html" class="sidebar-item-text sidebar-link">
@@ -200,7 +234,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../qmd/analysis_atac_chip_seq.html" class="sidebar-item-text sidebar-link active">
+  <a href="../qmd/analysis_atac_chip_seq.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ATAC- and ChIP-Seq Analysis</span></a>
   </div>
 </li>
@@ -292,16 +326,27 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#under-construction" id="toc-under-construction" class="nav-link active" data-scroll-target="#under-construction">Under construction</a></li>
+  <li><a href="#cchmc-and-division-rules" id="toc-cchmc-and-division-rules" class="nav-link active" data-scroll-target="#cchmc-and-division-rules">CCHMC and Division Rules</a></li>
+  <li><a href="#lab-policies" id="toc-lab-policies" class="nav-link" data-scroll-target="#lab-policies">Lab policies</a></li>
+  <li><a href="#lab-expectations" id="toc-lab-expectations" class="nav-link" data-scroll-target="#lab-expectations">Lab expectations</a>
+  <ul class="collapse">
+  <li><a href="#expectations-for-everyone" id="toc-expectations-for-everyone" class="nav-link" data-scroll-target="#expectations-for-everyone">Expectations for everyone</a></li>
+  <li><a href="#expectations-for-research-assistants" id="toc-expectations-for-research-assistants" class="nav-link" data-scroll-target="#expectations-for-research-assistants">Expectations for research assistants</a></li>
+  <li><a href="#expectations-for-graduate-students-and-research-associates" id="toc-expectations-for-graduate-students-and-research-associates" class="nav-link" data-scroll-target="#expectations-for-graduate-students-and-research-associates">Expectations for graduate students and research associates</a></li>
+  <li><a href="#good-practice-for-laboratory-notebooks" id="toc-good-practice-for-laboratory-notebooks" class="nav-link" data-scroll-target="#good-practice-for-laboratory-notebooks">Good practice for laboratory notebooks</a></li>
+  <li><a href="#questions-on-lab-notebooks" id="toc-questions-on-lab-notebooks" class="nav-link" data-scroll-target="#questions-on-lab-notebooks">Questions on lab notebooks</a></li>
+  <li><a href="#electronic-laboratory-notebooks" id="toc-electronic-laboratory-notebooks" class="nav-link" data-scroll-target="#electronic-laboratory-notebooks">Electronic laboratory notebooks</a></li>
+  </ul></li>
+  <li><a href="#other-lab-records" id="toc-other-lab-records" class="nav-link" data-scroll-target="#other-lab-records">Other lab records</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../qmd/analysis_rna_seq.html">Analysis</a></li><li class="breadcrumb-item"><a href="../qmd/analysis_atac_chip_seq.html">ATAC- and ChIP-Seq Analysis</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../qmd/rules_policies.html">Lab policies and rules</a></li><li class="breadcrumb-item"><a href="../qmd/rules_policies.html">Lab policies and rules</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">ATAC- and ChIP-seq Analysis</h1>
+<h1 class="title">Rules and Policies for the Troutman lab</h1>
 </div>
 
 
@@ -318,9 +363,233 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is meant to be a guideline for processing and analysis of ATAC-seq and ChIP-seq data in the Troutman lab. There are many alternative ways to consider processing, quality control, quantification, and differential expression analysis. This workflow is not a gold standard, will not always work for all data, and is open for interpretation/criticism.</p>
-<section id="under-construction" class="level1">
-<h1>Under construction</h1>
+<section id="cchmc-and-division-rules" class="level1">
+<h1>CCHMC and Division Rules</h1>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+These general rules are required
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>All safety guidelines must be consistently followed.</li>
+<li>Behavior must comply with current CCHMC and divisional requirements.</li>
+<li>Experiments must be performed in accordance with current operation protocols (IBC, IACUC, IRB, etc).</li>
+<li>Lab notebooks and records must be accurate and up to date. Lab notebooks belong to CCHMC and the lab. They cannot be taken home.</li>
+<li>Be a good steward of CCHMC/division/lab resources. Report faulty equipment/reagents.</li>
+<li>Work hard and work smart. Learn from your mistakes and the mistakes of others.</li>
+<li>Be willing to receive, give, and act on constructive feedback.</li>
+<li>Always strive to do rigorous and reproducible science.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="lab-policies" class="level1">
+<h1>Lab policies</h1>
+<p>The below policies can be flexible with implementation if in keeping with federal, CCHMC, and lab regulations.</p>
+<ul>
+<li>Be careful with equipment and reagents.</li>
+<li>Handle reagents consistent with their intended use.</li>
+<li>Control for and eliminate sources of cross contamination.</li>
+<li>Appropriately report faulty reagents/equipment.</li>
+<li>Maintain <strong>appropriate</strong> inventory levels. Don’t be the reason someone’s experiment fails.</li>
+<li>Electronic data should be logically organized and traceable through the lab notebook.</li>
+<li>Be prepared for lab meetings and journal clubs.</li>
+</ul>
+</section>
+<section id="lab-expectations" class="level1">
+<h1>Lab expectations</h1>
+<section id="expectations-for-everyone" class="level2">
+<h2 class="anchored" data-anchor-id="expectations-for-everyone">Expectations for everyone</h2>
+<ul>
+<li>Replace reagents and materials <strong><em>before</em></strong> running out.</li>
+<li>Clean up after yourself. Dispose of hazardous wastes in a timely manner, and in accordance with CCHMC and Division policies.</li>
+<li>Mistake will happen. Learn from them. Try to learn from the mistake of colleagues as well.</li>
+<li>Plan ahead. Be proactive.</li>
+<li>Read!</li>
+</ul>
+</section>
+<section id="expectations-for-research-assistants" class="level2">
+<h2 class="anchored" data-anchor-id="expectations-for-research-assistants">Expectations for research assistants</h2>
+<ul>
+<li>You are the first line of defense in lab upkeep. Stay on top of all upkeep, keep a schedule and calendar, and work with other lab members.</li>
+<li>Keep the mouse colony organized and trimmed.</li>
+<li>Check inventory levels at least once a month. Refer to our <a href="https://cchmc-my.sharepoint.com/:x:/g/personal/ty_troutman_cchmc_org/EcSs0ac-G1BGruQFfj-g-O0Bx3whzrTIX7TJCxolJ51bUA?e=lwmfQA">inventory spreadsheet</a>, and update it as appropriate.</li>
+<li>Stay busy. Help out other lab members or make sure new experiments are planned and executed.</li>
+<li>Help keep operation protocols (IBC, IACUC, IRB) up to date.</li>
+<li>Ensure experiment protocols are organized and accessible.</li>
+</ul>
+</section>
+<section id="expectations-for-graduate-students-and-research-associates" class="level2">
+<h2 class="anchored" data-anchor-id="expectations-for-graduate-students-and-research-associates">Expectations for graduate students and research associates</h2>
+<ul>
+<li>Help research assistants with mouse work and other lab/division tasks.</li>
+<li>Be thoughtful and diligent in planning experiments. Include necessary controls. Eliminate unnecessary conditions. Communicate with colleagues when uncertain.</li>
+<li>Research succeeds when projects are done in parallel.</li>
+<li>Collaborate with colleagues within the lab and outside the lab.</li>
+<li>Continually improve written and spoken communication skills.</li>
+<li>Develop new technical skills and refine those you already have.</li>
+<li>Keep a <a href="https://myidp.sciencecareers.org/?AspxAutoDetectCookieSupport=1">career development plan</a> that includes short-term and long-term growth goals. Try to build lab projects around achieving these goals.</li>
+<li>Stay imaginative and positive. Believe in yourself.</li>
+</ul>
+</section>
+<section id="good-practice-for-laboratory-notebooks" class="level2">
+<h2 class="anchored" data-anchor-id="good-practice-for-laboratory-notebooks">Good practice for laboratory notebooks</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Most of this information was sourced nearly verbatim from:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://www.hhmi.org/sites/default/files/2023-10/making-the-right-moves-second-edition.pdf">Making the Right Moves: A Practical Guide to Scientifıc Management for Postdocs and New Faculty. Second Edition.</a></p>
+</div>
+</div>
+<p>Although individual scientists are responsible for maintaining their own notebooks, heads of labs are responsible for making sure that the notebooks of those under their direction are in order. The precise way in which to document scientific research varies from field to field and from institution to institution, but some general rules apply, such as the following:</p>
+<ul>
+<li>Lab notebooks are the property of CCHMC. They cannot be taken home.</li>
+<li>Use a permanently bound book, with consecutive signed and dated entries. When appropriate, witness entries as well (novel discoveries, equipment failures, safety issues).</li>
+<li>For computer-kept logs, you can use a loose-leaf notebook, but pages must be consecutively numbered (using a sequential page-number stamp), dated, and signed.</li>
+<li>Record entries chronologically.</li>
+<li>Each entry should stand on its own to permit others to replicate the work.</li>
+<li>Organize material with sections and headings.</li>
+<li>Identify and describe reagents and specimens used.</li>
+<li>Identify sources of those materials (e.g., reagent manufacturer, lot number, purity, expiration date).</li>
+<li>Enter instrument serial numbers and calibration dates.</li>
+<li>Use proper nouns for items.</li>
+<li>Write all entries in the first person, and be specific about who did the work.</li>
+<li>Explain nonstandard abbreviations.</li>
+<li>Use ink and never obliterate original writing; never remove pages or portions of a page.</li>
+<li>If a page is left blank or a space within a page is left blank, draw a line through it.</li>
+<li>Permanently affix with glue any attachments (such as graphs or computer printouts) to the pages of the notebook; date and sign both the notebook page and the attachment.</li>
+<li>Outline new experiments, including their objectives and rationale.</li>
+<li>Include periodic factual, not speculative, summaries of status and findings.</li>
+<li>Enter ideas and observations into your notebook immediately. Summarize discussions from lab meetings and ideas or suggestions made by others, citing the persons by name.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why keep daily records?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every person working in a lab should keep detailed records of the experiments conducted each day. Here are some reasons why.</p>
+<p><em>Establishing good work practices.</em> Lab records allow your work to be reproduced by others. The records you keep should allow you and others to recreate the work and achieve the same results, thereby validating or extending your work. The records also allow you to prepare formal reports, papers, and presentations. They also serve as a source for assigning credit to lab members.</p>
+<p><em>Teaching colleagues in the lab.</em> Scientific training involves gathering information, forming hypotheses, designing experiments, and observing results. Lab notebooks, in which these activities are carefully recorded, can be a valuable aid in teaching your grad students, postdocs, and technicians how to analyze results, construct new theories and tests, and retrace their steps to identify an error.</p>
+<p><em>Meeting contractual requirements.</em> From grants to contracts to patent applications, researchers have explicit terms and implicit expectations to meet, for which detailed records and data are essential. For example, the National Institutes of Health has the legal right to audit and examine records that are relevant to any research grant award. Accordingly, the recipients of research grants have an obligation to keep appropriate records.</p>
+<p><em>Avoiding fraud.</em> Lab directors are responsible for the integrity of their lab and everything it produces. Periodic checks of raw data in notebooks and project files can uncover and correct carelessness or outright fraud before they become huge problems.</p>
+<p><em>Defending patents.</em> U.S. patent law follows a first-to-conceive rather than a first-to-file system. That is why documentation to support the date of discovery or invention is critical and why pages of lab notebooks and other records should be consecutively numbered, dated, and signed. Careful records can save a patent.</p>
+</div>
+</div>
+</section>
+<section id="questions-on-lab-notebooks" class="level2">
+<h2 class="anchored" data-anchor-id="questions-on-lab-notebooks">Questions on lab notebooks</h2>
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why should I learn to write in the notebook?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You want to create an <strong><em>accurate</em></strong>, <strong><em>original</em></strong>, <strong><em>permanent record</em></strong>. There is a tendency to record information on the handiest piece of paper available, even on a paper towel lying on a bench, and then later transferring the information to a notebook. Therefore, you should get into the habit of immediately recording data as they are being collected into your lab notebook.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What’s the responsible way to document errors?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make the required changes as soon as possible without obliterating the original entry. Electronic documents may require a new entry, not an override. If the error is logged by hand, do not erase or alter the initial entry. Correct the data at the point in the log where the error was discovered, refer to the original page, and go on (e.g., “Reagent was 50 percent of the strength we originally thought.”).</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+For patent purposes, what’s an “original” record?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An original is the first human-readable form—for example, a printout of a measurement but not a photocopy of it. It should be dated, signed, and filed.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Genomics produces massive amounts of data. If the data are burned on a CD, are they considered “original”?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In this era of computer-assisted research, many pieces of data are collected, stored, and analyzed by computer.The problem with electronic records is that it is hard to prove that the data are not added to, deleted from, or in some way tampered with. The Food and Drug Administration (FDA) has published clear guidelines for maintaining electronic records in a way that will meet legal scrutiny (<a href="http://www.fda.gov/ora/compliance_ref/part11)." class="uri">http://www.fda.gov/ora/compliance_ref/part11).</a> If you have really important results, it is probably safer to print them out, sign and date the documents, and indicate why they are significant. <em>This obviously isn’t possible with gigabytes of sequencing data.</em></p>
+</div>
+</div>
+</section>
+<section id="electronic-laboratory-notebooks" class="level2">
+<h2 class="anchored" data-anchor-id="electronic-laboratory-notebooks">Electronic laboratory notebooks</h2>
+<p>Electronic laboratory notebooks (ELNs) do everything their handwritten forebears do but with the attractive bonus of search and organization functions. Through links to analytical software, ELNs can usually download and store data directly, and many ELNs also support secure access for multiple users and remote users.</p>
+<p>Choosing the right ELN for your lab requires homework. One important consideration is whether the ELN complies with the FDA’s rules for acceptance of electronic documents, which were published in March 1997 in title 21 of the Code of Federal Regulations, part 11, available online at http://www.fda.gov/ora/compliance_ref/part11.</p>
+<p>So far, few ELNs have been subjected to legal scrutiny, and it is doubtful that many would pass the test. For this reason, most researchers in academic and industry settings are sticking to paper records.</p>
+<p><a href="https://centerlink.cchmc.org/research/research---tabs/lab-archives"><strong>CCHMC offers Lab Archives</strong></a> <strong>as an Electronic Lab Notebook</strong></p>
+<p>LabArchives is an electronic lab notebook (ELN) software hosted on the cloud and is accessible from any device with an internet connection. LabArchives allows researchers to replace their paper notebooks, making notebook data easily searchable. LabArchives also facilitates sharing among collaborators and promotes common document and protocol storage in the lab. Customizable forms called ‘widgets’ allow researchers to standardize data entry for common experiments and provide tools for freezer box storage and chemical inventory lists. You can learn more about Lab Archives at this link:&nbsp;<a href="http://www.labarchives.com/" class="uri">http://www.labarchives.com/</a></p>
+<p>CCHMC has partnered with LabArchives to offer Cincinnati Children’s Research Foundation (CCRF) members access to the LabArchives ELN software.</p>
+<ul>
+<li>Visit this site&nbsp;<a href="https://mynotebook.labarchives.com/login" class="uri">https://mynotebook.labarchives.com/login</a>&nbsp;to sign up for a new LabArchives account. If you are working at a CCHMC campus, you will be redirected to the Cincinnati Children’s Hospital Medical Center login page. If you are working off campus, select the option to ‘create a new account’ and then ‘sign up through your institution’. Be sure to sign up using your CCHMC email address so that you are included in our enterprise license and you can take advantage of unlimited data storage!</li>
+</ul>
+<p><strong>For more information and to sign up for a training webinar, please visit the links below:</strong></p>
+<ul>
+<li><a href="https://www.labarchives.com/webinars/" class="uri">https://www.labarchives.com/webinars/</a>&nbsp;&nbsp;</li>
+<li><a href="https://youtu.be/YTp0W0i2eD4">Labarchives ELN for Research</a></li>
+</ul>
+<p>For more information, check out the&nbsp;<a href="https://confluence.research.cchmc.org/pages/viewpage.action?pageId=90966414">Research IT Hub</a></p>
+<p>* For Help, please contact:&nbsp;<a href="mailto:help-eln@bmi.cchmc.org">help-eln@bmi.cchmc.org</a></p>
+</section>
+</section>
+<section id="other-lab-records" class="level1">
+<h1>Other lab records</h1>
+<p>All lab work should be saved on a system that is appropriately backed up. The options are your synchronized OneDrive or one of the lab’s server drives. You will need a BMI HPC account to access the lab’s server drives. Instructions are at the bottom of this page. Ty or Mel can add you to the permission list when your account is activated, and Ty can give you a tour of that space.</p>
+<p>An information file or readme should describe the materials and point to the correct page(s) in a lab notebook. Lab notebooks should describe where data files/analyses or stored on the shared OneDrive and/or server drive.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Data should be logically organized and named.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A good example strategy is to name things using the date, a project identifier, subproject identifier, etc. Use these concepts for consistent naming of samples inside of files. Do not use spaces or other special characters in the names:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span> <span class="ex">!@#$%^</span><span class="kw">&amp;</span><span class="ex">*</span><span class="er">(</span><span class="kw">)</span><span class="ex">?</span><span class="op">&lt;&gt;</span>,/\|[]{}+<span class="kw">`</span><span class="ex">~:</span><span class="kw">;</span><span class="ex">’”</span> <span class="er">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Underscores _ and dashes - are fine to use in file names. <strong>These strategies save time!</strong> For example:</p>
+<p><strong>Project directory:</strong> <code>projectID_simpleDescription, useridA_genotyping; useridB_albCreATF3-NASH</code><br>
+<strong>Project subdirectory:</strong> <code>date_projectID-experimentID_simpleDescription</code>; <code>230601_useridA23_clec4fcre-atf3flox-lyz2cre</code>; <code>230601_useridB_nashtimecourse_albcre-atf3flox</code><br>
+<strong>Project data file:</strong> <code>date_expid_assaytype</code>; <code>readme</code>; <code>230601_useridA_clec4fgel.png</code>; <code>230601_useridB_serumelisa_il6.csv</code><br>
+<strong>Sample info:</strong> <code>date_assay_mouseID_sex_celltype _treatmentA_treamentZ</code>; <code>230601_m2301_male_kc_tim4pos_8wk_CDAHFDdiet_drug1regimen2</code></p>
+</div>
+</div>
 
 
 </section>

@@ -4,13 +4,13 @@ title: "Biomedical Informatics High Performance Computing Cluster"
 
 **Credit:** Kevin Ernst, Matthew Weirauch, and Leah Kottyan for compiling and hosting much of this information not found on the DBS HPC website.
 
-We have access to a Linux [computational cluster](https://bmi.cchmc.org/resources/clusters/computational-cluster) through the Division of Biomedical Informatics. To request access to the cluster, please send an email to Cluster Support: help-cluster\@bmi.cchmc.org. After your access is enabled, you should be able to login to the cluster with your CCHMC employee network credentials. All users have a default disk (home directory) quota of 100 GB and a job walltime quota of 10000 hours per quarter, which is free. The quota of your home directory is fixed, and cannot be changed. To increase the walltime, please send an email to [Cluster Support](mailto:help-cluster@bmi.cchmc.org).
+We have access to a Linux [computational cluster](https://hpc.research.cchmc.org/accessing-the-cluster) through the [Data Management and Analysis Collaborative (DMAC)](https://centerlink.cchmc.org/research/research---tabs/dmac/grant-boilerplate). To request access to the cluster, please send an email to Cluster Support: help-cluster\@bmi.cchmc.org. After your access is enabled, you should be able to login to the cluster with your CCHMC employee network credentials. All users have a default disk (home directory) quota of 100 GB and a job walltime quota of 10000 hours per quarter, which is free. The quota of your home directory is fixed, and cannot be changed. To increase the walltime, please send an email to [Cluster Support](mailto:help-cluster@bmi.cchmc.org).
 
 Your [home directory](https://en.wikipedia.org/wiki/home_directory) is accessible at the path `/users/YOURUSERID` and has a default 100 GB quota. You also have access to a "[scratch](https://hpc.research.cchmc.org/node/14)" volume at `/scratch/YOURUSERID`, where there is a 100 GB quota with a burst of up to 5 TB for up to 7 days. Anything there will be removed after 60 days. Users typically do not have (read/write) access to other users' home directories. Thus, [`/data/hpc-troutman/`](server_lab_drives.qmd) is the place to store any data or analyses (*not personal files*) that anyone else in the lab might ever need to work with.
 
 # Accessing the HPC cluster
 
-Connect to the CCHMC cluster by following the [BMI instructions](https://bmi.cchmc.org/resources/clusters/computational-cluster), or follow the examples below.
+Connect to the CCHMC cluster by following the [BMI instructions]https://hpc.research.cchmc.org/accessing-the-cluster), or [here](https://hpc.research.cchmc.org/node/26), or follow the examples below.
 
 -   If you are in the CCHMC network or connected to CCHMC VPN:
 
@@ -45,7 +45,7 @@ The BMI cluster offers several advantages:
 
 # Scheduling computation jobs with LSF
 
-The cluster batch system is currently managed by LSF resource manager and scheduler. You can find some examples of submitting jobs using LSF [here](https://bmi.cchmc.org/resources/software/lsf-examples). Please read the job scheduling policies [page](https://bmi.cchmc.org/resources/clusters/policies) for recent policy changes.
+The cluster batch system is currently managed by LSF resource manager and scheduler. You can find some examples of submitting jobs using LSF [here](https://hpc.research.cchmc.org/node/1). Please read the job scheduling policies [page](https://hpc.research.cchmc.org/node/13) for recent policy changes.
 
 Essentially, users submit jobs to the server using the bsub command. The current state of the queue in the server can be viewed using bjobs. There are a host of other utilities that can be used by Torque users like: bkill, bmod, bstop, bmig, bresume etc. bsub can be used for batch as well as interactive submission of jobs. Interactive job submission should be used only when a user needs to run and debug his code and for short-duration jobs. In either case, you need to submit your job to a cluster node so that you can do your testing without burdening the head node.
 

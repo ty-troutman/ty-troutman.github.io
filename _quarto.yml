@@ -30,6 +30,12 @@ website:
       contents:
       - text: "Internal Materials"
         href: qmd/Internal_Materials.qmd
+      - section: "Lab policies and rules"
+        contents:
+          - text: "Lab policies and rules"
+            href: qmd/rules_policies.qmd
+          - text: "Member contact information"
+            href:  "https://cchmc-my.sharepoint.com/:w:/g/personal/ty_troutman_cchmc_org/EcZjXGbja-tNiBppyW2v950BevUzcQV8cCpfNJLyixJYFA?e=K0p3UP"
       - section: "Using the Server"
         contents:
           - text: "BMI Cluster"
