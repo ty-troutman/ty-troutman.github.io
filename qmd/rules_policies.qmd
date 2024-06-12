@@ -13,36 +13,31 @@ editor:
 -   All safety guidelines must be consistently followed.
 -   Behavior must comply with current CCHMC and divisional requirements.
 -   Experiments must be performed in accordance with current operation protocols (IBC, IACUC, IRB, etc).
--   Lab notebooks and records must be accurate and up to date. Lab notebooks belong to CCHMC and the lab. They cannot be taken home.
--   Be a good steward of CCHMC/division/lab resources. Report faulty equipment/reagents.
--   Work hard and work smart. Learn from your mistakes and the mistakes of others.
+-   Lab records and notebooks must be maintained to a high standard. They should be accurate, up to date, and [beyond reproach](https://www.merriam-webster.com/dictionary/above%2Fbeyond%20reproach).
+-   Be a good steward of CCHMC/division/lab resources.
+-   Observe [CCHMC expectations and principles](https://centerlink.cchmc.org/employees/learning--cchmc/our-expectations) by being <u>C</u>ompassionate, <u>C</u>ollaborative, <u>H</u>onest, i<u>M</u>pactful, and <u>C</u>urious.
+-   Be prepared for lab meetings and journal clubs.
 -   Be willing to receive, give, and act on constructive feedback.
+-   Work hard, work smart, work efficient.
+-   Report faulty equipment/reagents.
+-   Clean up after yourself. Dispose of hazardous wastes in a timely manner, and in accordance with CCHMC and Division policies.
+-   Mistake will happen. Learn from them. Try to learn from the mistakes of colleagues as well.
+-   Lab notebooks belong to CCHMC and the lab. They cannot be taken home.
 -   Always strive to do rigorous and reproducible science.
 :::
 
-# Lab policies
+# Lab policies and expectations
 
-The below policies can be flexible with implementation if in keeping with federal, CCHMC, and lab regulations.
+Policies must first be in accordance with federal, CCHMC, and Allergy/Immunology regulations.
 
--   Be careful with equipment and reagents.
+-   Plan ahead. Be proactive.
+-   Be careful and considerate.
 -   Handle reagents consistent with their intended use.
 -   Control for and eliminate sources of cross contamination.
--   Appropriately report faulty reagents/equipment.
--   Maintain **appropriate** inventory levels. Don't be the reason someone's experiment fails.
--   Electronic data should be logically organized and traceable through the lab notebook.
--   Be prepared for lab meetings and journal clubs.
-
-# Lab expectations
-
-## Expectations for everyone
-
--   Replace reagents and materials ***before*** running out.
--   Clean up after yourself. Dispose of hazardous wastes in a timely manner, and in accordance with CCHMC and Division policies.
--   Mistake will happen. Learn from them. Try to learn from the mistake of colleagues as well.
--   Plan ahead. Be proactive.
+-   Data should be logically organized and traceable through the lab notebook.
 -   Read!
 
-## Expectations for research assistants
+## Additional expectations for research assistants
 
 -   You are the first line of defense in lab upkeep. Stay on top of all upkeep, keep a schedule and calendar, and work with other lab members.
 -   Keep the mouse colony organized and trimmed.
@@ -51,7 +46,7 @@ The below policies can be flexible with implementation if in keeping with federa
 -   Help keep operation protocols (IBC, IACUC, IRB) up to date.
 -   Ensure experiment protocols are organized and accessible.
 
-## Expectations for graduate students and research associates
+## Additional expectations for graduate students and research fellows/associates
 
 -   Help research assistants with mouse work and other lab/division tasks.
 -   Be thoughtful and diligent in planning experiments. Include necessary controls. Eliminate unnecessary conditions. Communicate with colleagues when uncertain.
@@ -62,7 +57,14 @@ The below policies can be flexible with implementation if in keeping with federa
 -   Keep a [career development plan](https://myidp.sciencecareers.org/?AspxAutoDetectCookieSupport=1) that includes short-term and long-term growth goals. Try to build lab projects around achieving these goals.
 -   Stay imaginative and positive. Believe in yourself.
 
-## Good practice for laboratory notebooks
+## Additional expectations for undergraduates
+
+-   Maintain and achieve high academic standards.
+-   Help research assistants with mouse work and other lab/division tasks.
+-   Be considerate of your colleagues' time. Honor your commitments. Communicate early and often.
+-   To the best of your ability, attend all lab meetings.
+
+# Good practice for laboratory notebooks
 
 ::: callout-note
 ## Most of this information was sourced nearly verbatim from:
@@ -174,10 +176,7 @@ You can learn more about Lab Archives at this link: <http://www.labarchives.com
 
 CCHMC has partnered with LabArchives to offer Cincinnati Children’s Research Foundation (CCRF) members access to the LabArchives ELN software.
 
--   Visit this site <https://mynotebook.labarchives.com/login> to sign up for a new LabArchives account.
-    If you are working at a CCHMC campus, you will be redirected to the Cincinnati Children’s Hospital Medical Center login page.
-    If you are working off campus, select the option to ‘create a new account’ and then ‘sign up through your institution’.
-    Be sure to sign up using your CCHMC email address so that you are included in our enterprise license and you can take advantage of unlimited data storage!
+-   Visit this site <https://mynotebook.labarchives.com/login> to sign up for a new LabArchives account. If you are working at a CCHMC campus, you will be redirected to the Cincinnati Children’s Hospital Medical Center login page. If you are working off campus, select the option to ‘create a new account’ and then ‘sign up through your institution’. Be sure to sign up using your CCHMC email address so that you are included in our enterprise license and you can take advantage of unlimited data storage!
 
 **For more information and to sign up for a training webinar, please visit the links below:**
 
@@ -214,7 +213,7 @@ Underscores \_ and dashes - are fine to use in file names.
 **These strategies save time!** For example:
 
 **Project directory:** `projectID_simpleDescription, useridA_genotyping; useridB_albCreATF3-NASH`\
-**Project subdirectory:** `date_projectID-experimentID_simpleDescription`; `230601_useridA23_clec4fcre-atf3flox-lyz2cre`; `230601_useridB_nashtimecourse_albcre-atf3flox` \
-**Project data file:** `date_expid_assaytype`; `readme`; `230601_useridA_clec4fgel.png`; `230601_useridB_serumelisa_il6.csv` \
+**Project subdirectory:** `date_projectID-experimentID_simpleDescription`; `230601_useridA23_clec4fcre-atf3flox-lyz2cre`; `230601_useridB_nashtimecourse_albcre-atf3flox`\
+**Project data file:** `date_expid_assaytype`; `readme`; `230601_useridA_clec4fgel.png`; `230601_useridB_serumelisa_il6.csv`\
 **Sample info:** `date_assay_mouseID_sex_celltype _treatmentA_treamentZ`; `230601_m2301_male_kc_tim4pos_8wk_CDAHFDdiet_drug1regimen2`
 :::
