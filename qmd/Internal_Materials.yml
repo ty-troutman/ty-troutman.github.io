@@ -1,9 +1,9 @@
-- title: Welcome to the Troutman lab!
-  subtitle: Lab policies, rules, and other helpful information
+- title: Rules and policies
+  subtitle: Lab rules, policies, and other helpful information
   links:
     - text: "Lab policies and rules"
       href: rules_policies.qmd
-    - text: "Member contact information"
+    - text: "Contact information"
       href:  "https://cchmc-my.sharepoint.com/:w:/g/personal/ty_troutman_cchmc_org/EcZjXGbja-tNiBppyW2v950BevUzcQV8cCpfNJLyixJYFA?e=K0p3UP"
     #- text: "Getting started in the lab"
       #href: getting_started.qmd
@@ -11,39 +11,39 @@
 - title: Servers
   subtitle: Get started using the computational cluster and the command line interface
   links:
-    - text: "BMI Cluster"
+    - text: "BMI cluster"
       href: server_bmi_cluster.qmd
-    - text: "Lab Cluster Drives"
+    - text: "Lab cluster drives"
       href: server_lab_drives.qmd
       
 - title: Analysis
   subtitle: Data analysis workflow and examples
   links:
-    - text: "RNA-Seq Analysis"
+    - text: "RNA-seq analysis"
       href: analysis_rna_seq.qmd
-    - text: "ATAC- and ChIP-Seq Analysis"
+    - text: "ATAC- and ChIP-seq analysis (TBD)"
       href: analysis_atac_chip_seq.qmd
-    - text: "Additional Analyses"
+    - text: "Additional analyses"
       href: "https://github.com/ty-troutman/Genomics-analyses"
 
 - title: NGS libraries
   subtitle: Information related to sequencing libraries, sample submission, and data download
   links:
-    - text: "Sequencing Database and Barcodes"
+    - text: "Sequencing database and barcodes"
       href: Database_Barcodes.qmd
-    - text: "Sample Pooling and Submission"
+    - text: "Sample pooling and submission"
       href: Pooling_Submission.qmd
-    - text: "Downloading from CCHMC"
-      href: NGS_Scraper_KevinErnst.qmd
+    # - text: "Downloading from CCHMC"
+    #   href: NGS_Scraper_KevinErnst.qmd
       
-- title: Logs and Protocols
+- title: Logs and protocols
   subtitle: Locations of lab logs and common protocols
   links:
     - text: "Troutman-Lab-Share"
       href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share?csf=1&web=1&e=nEuYqw"        
     - text: "Logs"
       href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Reagent_Logs?csf=1&web=1&e=oK8Gbg"
-    - text: "Cell Preparation"
+    - text: "Cell preparation"
       href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Protocols-Methods/primaryCells?csf=1&web=1&e=gtd3YL"
     - text: "Equipment"
       href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Equipment?csf=1&web=1&e=cgrrX0"

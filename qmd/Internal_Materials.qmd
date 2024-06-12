@@ -1,6 +1,6 @@
 ---
 title: "Internal Materials"
-subtitle: Information and resources useful for day-to-day research activities in the Troutman Lab.
+subtitle: Information and resources for research in the Troutman Lab.
 page-layout: article
 anchor-sections: false
 search: false
