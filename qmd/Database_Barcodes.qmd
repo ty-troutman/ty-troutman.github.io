@@ -6,7 +6,7 @@ editor: visual
 ::: callout-important
 # Required!
 
-Use the [linked database](https://docs.google.com/spreadsheets/d/15NMOWsKdL7QIupXOQ3CLYt0YsTYBMaimaXhoMHbe-8w/edit?usp=sharing) to generate a sample name with a unique id and to track associated meta data.
+Use the [linked ](https://docs.google.com/spreadsheets/d/15NMOWsKdL7QIupXOQ3CLYt0YsTYBMaimaXhoMHbe-8w/edit?usp=sharing)[database](https://cchmc-my.sharepoint.com/:x:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/reagent_logs/sequencing_sample_database.xlsx?d=wda4be1958ae645368dab60d561681100&csf=1&web=1&e=Pbet5v) to generate a sample name with a unique id and to track associated meta data.
 :::
 
 # Data base instructions
