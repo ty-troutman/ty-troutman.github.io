@@ -5,11 +5,9 @@ editor:
     wrap: sentence
 ---
 
-# CCHMC and Division Rules
+# General rules
 
 ::: callout-important
-### These general rules are required
-
 ##### **1.** All safety guidelines must be consistently followed.
 
 ##### **2.** Behavior must comply with current CCHMC and divisional requirements.
