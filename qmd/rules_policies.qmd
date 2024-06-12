@@ -8,7 +8,9 @@ editor:
 # General rules
 
 ::: callout-important
-##### **1.** All safety guidelines must be consistently followed.
+## Required
+
+##### **1.**  All safety guidelines must be followed.
 
 ##### **2.** Behavior must comply with current CCHMC and divisional requirements.
 
