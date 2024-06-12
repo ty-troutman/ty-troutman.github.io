@@ -8,22 +8,35 @@ editor:
 # CCHMC and Division Rules
 
 ::: callout-important
-## These general rules are required
+### These general rules are required
 
--   All safety guidelines must be consistently followed.
--   Behavior must comply with current CCHMC and divisional requirements.
--   Experiments must be performed in accordance with current operation protocols (IBC, IACUC, IRB, etc).
--   Lab records and notebooks must be maintained to a high standard. They should be accurate, up to date, and [beyond reproach](https://www.merriam-webster.com/dictionary/above%2Fbeyond%20reproach).
--   Be a good steward of CCHMC/division/lab resources.
--   Observe [CCHMC expectations and principles](https://centerlink.cchmc.org/employees/learning--cchmc/our-expectations) by being <u>C</u>ompassionate, <u>C</u>ollaborative, <u>H</u>onest, i<u>M</u>pactful, and <u>C</u>urious.
--   Be prepared for lab meetings and journal clubs.
--   Be willing to receive, give, and act on constructive feedback.
--   Work hard, work smart, work efficient.
--   Report faulty equipment/reagents.
--   Clean up after yourself. Dispose of hazardous wastes in a timely manner, and in accordance with CCHMC and Division policies.
--   Mistake will happen. Learn from them. Try to learn from the mistakes of colleagues as well.
--   Lab notebooks belong to CCHMC and the lab. They cannot be taken home.
--   Always strive to do rigorous and reproducible science.
+##### **1.** All safety guidelines must be consistently followed.
+
+##### **2.** Behavior must comply with current CCHMC and divisional requirements.
+
+##### **3.** Experiments must be performed in accordance with current operation protocols (IBC, IACUC, IRB, etc).
+
+##### **4.** Lab records and notebooks must be maintained to a high standard. They should be accurate, up to date, and [beyond reproach](https://www.merriam-webster.com/dictionary/above%2Fbeyond%20reproach). 
+
+##### **5.** Be a good steward of CCHMC/division/lab resources. 
+
+##### **6.** Observe [CCHMC expectations and principles](https://centerlink.cchmc.org/employees/learning--cchmc/our-expectations) by being <u>C</u>ompassionate, <u>C</u>ollaborative, <u>H</u>onest, i<u>M</u>pactful, and <u>C</u>urious.
+
+##### **7.** Be prepared for lab meetings and journal clubs.
+
+##### **8.** Be willing to receive, give, and act on constructive feedback. 
+
+##### **9.** Work hard, work smart, work efficient. 
+
+##### **10.** Report faulty equipment/reagents.
+
+##### **11.** Clean up after yourself. Dispose of hazardous wastes in a timely manner, and in accordance with CCHMC and Division policies.
+
+##### **12.** Mistake will happen. Learn from them. Try to learn from the mistakes of colleagues as well.
+
+##### **13.** Lab notebooks belong to CCHMC and the lab. They cannot be taken home.
+
+##### **14.** Always strive to do rigorous and reproducible science.
 :::
 
 # Lab policies and expectations
@@ -42,9 +55,10 @@ Policies must first be in accordance with federal, CCHMC, and Allergy/Immunology
 -   You are the first line of defense in lab upkeep. Stay on top of all upkeep, keep a schedule and calendar, and work with other lab members.
 -   Keep the mouse colony organized and trimmed.
 -   Check inventory levels at least once a month. Refer to our [inventory spreadsheet](https://cchmc-my.sharepoint.com/:x:/g/personal/ty_troutman_cchmc_org/EcSs0ac-G1BGruQFfj-g-O0Bx3whzrTIX7TJCxolJ51bUA?e=lwmfQA), and update it as appropriate.
+-   Perform division tech tasks on time and correctly.
 -   Stay busy. Help out other lab members or make sure new experiments are planned and executed.
--   Help keep operation protocols (IBC, IACUC, IRB) up to date.
--   Ensure experiment protocols are organized and accessible.
+-   Help maintain up to date operation protocols (IBC, IACUC, IRB).
+-   Ensure standard experiment protocols are organized and accessible.
 
 ## Additional expectations for graduate students and research fellows/associates
 
@@ -190,7 +204,7 @@ For more information, check out the [Research IT Hub](https://confluence.resear
 # Other lab records
 
 All lab work should be saved on a system that is appropriately backed up.
-The options are your synchronized OneDrive or one of the lab’s server drives.
+The options are your synchronized OneDrive or one of the [lab’s server drives](server_lab_drives.qmd).
 You will need a BMI HPC account to access the lab’s server drives.
 Instructions are at the bottom of this page.
 Ty or Mel can add you to the permission list when your account is activated, and Ty can give you a tour of that space.
