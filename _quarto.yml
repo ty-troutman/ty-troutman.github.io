@@ -75,8 +75,8 @@ website:
 format:
   html:
     theme:
-      light: flatly
-      dark: darkly
+      light: sandstone
+      dark: solar
     css: styles.css
     toc: true
 editor: visual
