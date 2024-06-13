@@ -80,13 +80,8 @@ Policies must first be in accordance with federal, CCHMC, and Allergy/Immunology
 
 # Good practice for laboratory notebooks
 
-::: callout-note
-## Nearly everything in this section is verbatim from:
-
-[Making the Right Moves: A Practical Guide to Scientifıc Management for Postdocs and New Faculty. Second Edition.](https://www.hhmi.org/sites/default/files/2023-10/making-the-right-moves-second-edition.pdf)
-
-::: {.callout-note collapse="true" icon="false"}
-## © 2006 by the Howard Hughes Medical Institute and Burroughs Wellcome Fund
+::: {.callout-note collapse="true"}
+## Nearly everything in this section is verbatim from [Making the Right Moves: A Practical Guide to Scientifıc Management for Postdocs and New Faculty. Second Edition.](https://www.hhmi.org/sites/default/files/2023-10/making-the-right-moves-second-edition.pdf) © 2006 by the Howard Hughes Medical Institute and Burroughs Wellcome Fund.
 
 All rights reserved.
 
@@ -94,7 +89,6 @@ All rights reserved.
 
 Permission to use, copy, and distribute this manual or excerpts from this manual is granted provided that (1) the copyright notice above appears in all reproductions; (2) use is for noncommercial educational purposes only; (3) the manual or excerpts are not modified in any way; and (4) no figures or graphic images are used, copied, or distrib- uted separate from accompanying text.
 Requests beyond that scope should be directed to labmgmt\@hhmi.org.
-:::
 :::
 
 Although individual scientists are responsible for maintaining their own notebooks, heads of labs are responsible for making sure that the notebooks of those under their direction are in order.
