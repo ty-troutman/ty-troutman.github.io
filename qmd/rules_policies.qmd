@@ -108,7 +108,7 @@ The precise way in which to document scientific research varies from field to fi
 -   Include periodic factual, not speculative, summaries of status and findings.
 -   Enter ideas and observations into your notebook immediately. Summarize discussions from lab meetings and ideas or suggestions made by others, citing the persons by name.
 
-::: callout-important
+::: callout-note
 ## Why keep daily records?
 
 Every person working in a lab should keep detailed records of the experiments conducted each day.
