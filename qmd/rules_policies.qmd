@@ -136,7 +136,7 @@ Careful records can save a patent.
 
 ## Questions on lab notebooks
 
-::: {.callout-important appearance="minimal"}
+::: {.callout-note appearance="minimal"}
 ## Why should I learn to write in the notebook?
 
 You want to create an ***accurate***, ***original***, ***permanent record***.
@@ -144,7 +144,7 @@ There is a tendency to record information on the handiest piece of paper availab
 Therefore, you should get into the habit of immediately recording data as they are being collected into your lab notebook.
 :::
 
-::: {.callout-important appearance="minimal"}
+::: {.callout-note appearance="minimal"}
 ## What’s the responsible way to document errors?
 
 Make the required changes as soon as possible without obliterating the original entry.
@@ -153,14 +153,14 @@ If the error is logged by hand, do not erase or alter the initial entry.
 Correct the data at the point in the log where the error was discovered, refer to the original page, and go on (e.g., “Reagent was 50 percent of the strength we originally thought.”).
 :::
 
-::: {.callout-important appearance="minimal"}
+::: {.callout-note appearance="minimal"}
 ## For patent purposes, what’s an “original” record?
 
 An original is the first human-readable form—for example, a printout of a measurement but not a photocopy of it.
 It should be dated, signed, and filed.
 :::
 
-::: {.callout-important appearance="minimal"}
+::: {.callout-note appearance="minimal"}
 ## Genomics produces massive amounts of data. If the data are burned on a CD, are they considered “original”?
 
 In this era of computer-assisted research, many pieces of data are collected, stored, and analyzed by computer.The problem with electronic records is that it is hard to prove that the data are not added to, deleted from, or in some way tampered with.
