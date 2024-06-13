@@ -10,29 +10,29 @@ editor:
 ::: callout-important
 ## Required
 
-##### **1.**  All safety guidelines must be followed.
+##### **1.** All safety guidelines must be followed.
 
 ##### **2.** Behavior must comply with current CCHMC and divisional requirements.
 
 ##### **3.** Experiments must be performed in accordance with current operation protocols (IBC, IACUC, IRB, etc).
 
-##### **4.** Lab records and notebooks must be maintained to a high standard. They should be accurate, up to date, and [beyond reproach](https://www.merriam-webster.com/dictionary/above%2Fbeyond%20reproach). 
+##### **4.** Lab records and notebooks must be maintained to a high standard. They should be accurate, up to date, and [beyond reproach](https://www.merriam-webster.com/dictionary/above%2Fbeyond%20reproach).
 
-##### **5.** Be a good steward of CCHMC/division/lab resources. 
+##### **5.** Be a good steward of CCHMC/division/lab resources.
 
 ##### **6.** Observe [CCHMC expectations and principles](https://centerlink.cchmc.org/employees/learning--cchmc/our-expectations) by being <u>C</u>ompassionate, <u>C</u>ollaborative, <u>H</u>onest, i<u>M</u>pactful, and <u>C</u>urious.
 
 ##### **7.** Be prepared for lab meetings and journal clubs.
 
-##### **8.** Be willing to receive, give, and act on constructive feedback. 
+##### **8.** Be willing to receive, give, and act on constructive feedback.
 
-##### **9.** Work hard, work smart, work efficient. 
+##### **9.** Work hard, work smart, work efficient.
 
 ##### **10.** Report faulty equipment/reagents.
 
 ##### **11.** Clean up after yourself. Dispose of hazardous wastes in a timely manner, and in accordance with CCHMC and Division policies.
 
-##### **12.** Mistake will happen. Learn from them. Try to learn from the mistakes of colleagues as well.
+##### **12.** Mistakes will happen. Learn from them. Try to learn from the mistakes of colleagues as well.
 
 ##### **13.** Lab notebooks belong to CCHMC and the lab. They cannot be taken home.
 
@@ -81,7 +81,7 @@ Policies must first be in accordance with federal, CCHMC, and Allergy/Immunology
 # Good practice for laboratory notebooks
 
 ::: callout-note
-## Most of this information was sourced nearly verbatim from:
+## Nearly everything in this section is verbatim from:
 
 [Making the Right Moves: A Practical Guide to Scientifıc Management for Postdocs and New Faculty. Second Edition.](https://www.hhmi.org/sites/default/files/2023-10/making-the-right-moves-second-edition.pdf)
 :::
