@@ -84,6 +84,17 @@ Policies must first be in accordance with federal, CCHMC, and Allergy/Immunology
 ## Nearly everything in this section is verbatim from:
 
 [Making the Right Moves: A Practical Guide to Scientifıc Management for Postdocs and New Faculty. Second Edition.](https://www.hhmi.org/sites/default/files/2023-10/making-the-right-moves-second-edition.pdf)
+
+© 2006 by the Howard Hughes Medical Institute and Burroughs Wellcome Fund\
+All rights reserved.
+09 08 07 06 1 2 3 4 5
+Permission to use, copy, and distribute this manual or excerpts from this manual is
+granted provided that (1) the copyright notice above appears in all reproductions; (2)
+use is for noncommercial educational purposes only; (3) the manual or excerpts are not
+modified in any way; and (4) no figures or graphic images are used, copied, or distrib-
+uted separate from accompanying text.
+Requests beyond that scope should be directed
+to labmgmt\@hhmi.org.
 :::
 
 Although individual scientists are responsible for maintaining their own notebooks, heads of labs are responsible for making sure that the notebooks of those under their direction are in order.
@@ -166,6 +177,8 @@ It should be dated, signed, and filed.
 In this era of computer-assisted research, many pieces of data are collected, stored, and analyzed by computer.The problem with electronic records is that it is hard to prove that the data are not added to, deleted from, or in some way tampered with.
 The Food and Drug Administration (FDA) has published clear guidelines for maintaining electronic records in a way that will meet legal scrutiny (<http://www.fda.gov/ora/compliance_ref/part11).>
 If you have really important results, it is probably safer to print them out, sign and date the documents, and indicate why they are significant.
+\
+\
 *This obviously isn't possible with gigabytes of sequencing data.*
 :::
 
