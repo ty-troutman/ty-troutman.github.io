@@ -224,17 +224,44 @@ Lab notebooks should describe where data files/analyses or stored on the shared 
 
 A good example strategy is to name things using the date, a project identifier, subproject identifier, etc.
 Use these concepts for consistent naming of samples inside of files.
-Do not use spaces or other special characters in the names:
+**These strategies save time!** Do not use spaces or other special characters in the names:
 
 ``` bash
 ( !@#$%^&*()?<>,/\|[]{}+`~:;’” )
 ```
 
-Underscores \_ and dashes - are fine to use in file names.
-**These strategies save time!** For example:
+Underscores \_ and dashes - are fine to use in file names.\
 
-**Project directory:** `projectID_simpleDescription, useridA_genotyping; useridB_albCreATF3-NASH`\
-**Project subdirectory:** `date_projectID-experimentID_simpleDescription`; `230601_useridA23_clec4fcre-atf3flox-lyz2cre`; `230601_useridB_nashtimecourse_albcre-atf3flox`\
-**Project data file:** `date_expid_assaytype`; `readme`; `230601_useridA_clec4fgel.png`; `230601_useridB_serumelisa_il6.csv`\
-**Sample info:** `date_assay_mouseID_sex_celltype _treatmentA_treamentZ`; `230601_m2301_male_kc_tim4pos_8wk_CDAHFDdiet_drug1regimen2`
+\
+**Project directory examples:**
+
+``` bash
+    projectID_simpleDescription
+    useridA_genotyping` 
+    useridB_albCreATF3-NASH
+```
+
+**Project sub-directory examples:**
+
+``` bash
+    date_projectID-experimentID_simpleDescription
+    230601_useridA23_clec4fcre-atf3flox-lyz2cre
+    230601_useridB_nashtimecourse_albcre-atf3flox
+```
+
+**Project data file examples:**
+
+``` bash
+    date_expid_assaytype
+    readme
+    230601_useridA_clec4fgel.png
+    230601_useridB_serumelisa_il6.csv
+```
+
+**Sample info examples:**
+
+``` bash
+    date_assay_mouseID_sex_celltype_treatmentA_treamentZ
+    230601_m2301_male_kc_tim4pos_8wk_CDAHFDdiet_drug1regimen2
+```
 :::

@@ -465,13 +465,27 @@ Data should be logically organized and named.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A good example strategy is to name things using the date, a project identifier, subproject identifier, etc. Use these concepts for consistent naming of samples inside of files. Do not use spaces or other special characters in the names:</p>
+<p>A good example strategy is to name things using the date, a project identifier, subproject identifier, etc. Use these concepts for consistent naming of samples inside of files. <strong>These strategies save time!</strong> Do not use spaces or other special characters in the names:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span> <span class="ex">!@#$%^</span><span class="kw">&amp;</span><span class="ex">*</span><span class="er">(</span><span class="kw">)</span><span class="ex">?</span><span class="op">&lt;&gt;</span>,/\|[]{}+<span class="kw">`</span><span class="ex">~:</span><span class="kw">;</span><span class="ex">’”</span> <span class="er">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Underscores _ and dashes - are fine to use in file names. <strong>These strategies save time!</strong> For example:</p>
-<p><strong>Project directory:</strong> <code>projectID_simpleDescription, useridA_genotyping; useridB_albCreATF3-NASH</code><br>
-<strong>Project subdirectory:</strong> <code>date_projectID-experimentID_simpleDescription</code>; <code>230601_useridA23_clec4fcre-atf3flox-lyz2cre</code>; <code>230601_useridB_nashtimecourse_albcre-atf3flox</code><br>
-<strong>Project data file:</strong> <code>date_expid_assaytype</code>; <code>readme</code>; <code>230601_useridA_clec4fgel.png</code>; <code>230601_useridB_serumelisa_il6.csv</code><br>
-<strong>Sample info:</strong> <code>date_assay_mouseID_sex_celltype _treatmentA_treamentZ</code>; <code>230601_m2301_male_kc_tim4pos_8wk_CDAHFDdiet_drug1regimen2</code></p>
+<p>Underscores _ and dashes - are fine to use in file names.<br>
+</p>
+<p><br>
+<strong>Project directory examples:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">projectID_simpleDescription</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">useridA_genotyping</span><span class="kw">`</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">useridB_albCreATF3-NASH</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Project sub-directory examples:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">date_projectID-experimentID_simpleDescription</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">230601_useridA23_clec4fcre-atf3flox-lyz2cre</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">230601_useridB_nashtimecourse_albcre-atf3flox</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Project data file examples:</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">date_expid_assaytype</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">readme</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">230601_useridA_clec4fgel.png</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">230601_useridB_serumelisa_il6.csv</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Sample info examples:</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">date_assay_mouseID_sex_celltype_treatmentA_treamentZ</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">230601_m2301_male_kc_tim4pos_8wk_CDAHFDdiet_drug1regimen2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 
