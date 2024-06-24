@@ -103,7 +103,7 @@ These wrapper scripts takes an input directory path of grouped data and generate
 These scripts can be run from the lab's cluster drive or added as executables to your path. Current versions are located at:
 
 ```bash         
-/data/hpc-troutman/software/scripts/working_wrapper_star_paired.R
+/data/hpc-troutman/software/scripts/wrapper_star_paired.R
 /data/hpc-troutman/software/scripts/working_wrapper_bowtie2_pairedend.R
 /data/hpc-troutman/software/scripts/working_wrapper_bowtie2_singleread.R
 ```
@@ -112,9 +112,8 @@ These scripts can be run from the lab's cluster drive or added as executables to
 -   These tools depend on file names in the lab convention (`*R1.fastq.gz *R2.fastq.gz`). Samples from the CCHMC core can be renamed as in the example below. *It is good practice to triple-check your commands with an `echo` statement before running the final command.*
 
     ``` bash
-    for i in *read1*.fastq.gz; do echo mv $i ${i/.fastq.gz/_R1.fastq.gz}; done
-    for i in *read2*.fastq.gz; do echo mv $i ${i/.fastq.gz/_R2.fastq.gz}; done
-    for i in *.fastq.gz; do echo mv $i ${i/run*=/}; done
+    for i in *R1*.fastq.gz; do echo mv $i ${i/R1_001.fastq.gz/R1.fastq.gz}; done
+    for i in *R2*.fastq.gz; do echo mv $i ${i/R2_001.fastq.gz/R2.fastq.gz}; done
     ```
     
 -   These tools require input of only one `fastq.gz` file per sample per read direction.
@@ -125,7 +124,7 @@ Usage on the cluster requires a loaded R module. An example follows:
 
 ```bash         
 module load R/4.2.1
-Rscript /data/hpc-troutman/software/scripts/working_wrapper_star_paired.R -d /data/troutman-hpc/data/archive/fastq_path
+Rscript /data/hpc-troutman/software/scripts/working_wrapper_star_paired.R -d /data/troutman-hpc/archive/fastq_path
 ```
 
 For example, the script generates and submits the following .bat file to the LSF scheduler:
