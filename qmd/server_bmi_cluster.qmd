@@ -4,7 +4,9 @@ title: "Biomedical Informatics High Performance Computing Cluster"
 
 **Credit:** Kevin Ernst, Matthew Weirauch, and Leah Kottyan for compiling and hosting much of this information not found on the DBS HPC website.
 
-We have access to a Linux [computational cluster](https://hpc.research.cchmc.org/accessing-the-cluster) through the [Data Management and Analysis Collaborative (DMAC)](https://centerlink.cchmc.org/research/research---tabs/dmac/grant-boilerplate). To request access to the cluster, please send an email to Cluster Support: help-cluster\@bmi.cchmc.org. After your access is enabled, you should be able to login to the cluster with your CCHMC employee network credentials. All users have a default disk (home directory) quota of 100 GB and a job walltime quota of 10000 hours per quarter, which is free. The quota of your home directory is fixed, and cannot be changed. To increase the walltime, please send an email to [Cluster Support](mailto:help-cluster@bmi.cchmc.org).
+We have access to a Linux [computational cluster](https://hpc.research.cchmc.org/accessing-the-cluster) through the [Data Management and Analysis Collaborative (DMAC)](https://centerlink.cchmc.org/research/research---tabs/dmac/grant-boilerplate). To request access to the cluster, please use the linked [web form](https://hpc.research.cchmc.org/node/36), or send an email to Cluster Support: help-cluster\@bmi.cchmc.org. After your access is enabled, you should be able to login to the cluster with your CCHMC employee network credentials. 
+
+Up to date policies are described [here](https://hpc.research.cchmc.org/node/13). In brief, all users have a default disk (home directory) quota of 100 GB and a job walltime quota of 10000 hours per quarter, which is free. The quota of your home directory is fixed, and cannot be changed. To increase the walltime, please send an email to [Cluster Support](mailto:help-cluster@bmi.cchmc.org).
 
 Your [home directory](https://en.wikipedia.org/wiki/home_directory) is accessible at the path `/users/YOURUSERID` and has a default 100 GB quota. You also have access to a "[scratch](https://hpc.research.cchmc.org/node/14)" volume at `/scratch/YOURUSERID`, where there is a 100 GB quota with a burst of up to 5 TB for up to 7 days. Anything there will be removed after 60 days. Users typically do not have (read/write) access to other users' home directories. Thus, [`/data/hpc-troutman/`](server_lab_drives.qmd) is the place to store any data or analyses (*not personal files*) that anyone else in the lab might ever need to work with.
 
@@ -21,7 +23,7 @@ Connect to the CCHMC cluster by following the [BMI instructions]https://hpc.rese
     `ssh [yourusername]@ssh.research.cchmc.org`\
     `ssh [yourusername]@bmiclusterp.chmcres.cchmc.org`
 
--   Alternatively, connect through [citrix](https://connect.research.cchmc.org/vpn/index.html).
+-   Alternatively, connect through the [OnDemand Portal](https://ondemand.research.cchmc.org/pun/sys/dashboard). Detailed instructions are [here](https://cchmc-my.sharepoint.com/personal/roberto_perea_cchmc_org/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Froberto%5Fperea%5Fcchmc%5Forg%2FDocuments%2FShared%20Documents%2FOndemand%5FUserGuide%2Epdf&parent=%2Fpersonal%2Froberto%5Fperea%5Fcchmc%5Forg%2FDocuments%2FShared%20Documents&ga=1)
 
 # Running jobs on the HPC cluster
 
@@ -39,7 +41,7 @@ The BMI cluster offers several advantages:
 
 -   First, the cluster has big computer capabilities. The largest nodes have 512 GB RAM and 16 cores.
 
--   Linux environment with lots of software ready to go. This is handles with many pre-installed sofware envrionment, called [Modules](http://modules.sourceforge.net/). Please refer to modules [page](https://bmi.cchmc.org/resources/software/environment-modules) for more information and examples.
+-   Linux environment with lots of software ready to go. This is handles with many pre-installed sofware envrionment, called [Modules](http://modules.sourceforge.net/). ~~Please refer to modules [page](https://bmi.cchmc.org/resources/software/environment-modules) for more information and examples.~~
 
 -   The cluster allows you to do pseudo-parallelism. You can break a problem into many pieces and run many jobs in a distributed fashion.
 
@@ -61,9 +63,9 @@ We have wrapper scripts to automate assembly of .bat files and submission to the
 
 # Checking your cluster balance
 
-By default, you have 10,000 hours of "wall time" (real-world computation time for the jobs you run) on the cluster, and this quota resets quarterly ([ref](https://bmi.cchmc.org/resources/charge-backs)).
+By default, you have 10,000 hours of "wall time" (real-world computation time for the jobs you run) on the cluster, and this quota resets quarterly ([ref](https://centerlink.cchmc.org/research/research-home/page-data/research-news/2023/12/2023-12-11/changes-to-research-storage-and-compute-chargebacks?sc_lang=en)).
 
-BMI uses an accounting system named "Gold" to keep track of how many wall hours you have remaining; you need to load a module named gold to use this: - load the 'gold' module, which provides the 'gbalance' command - you should be on a cluster node (e.g., bmiclusterp2) when you do this.
+BMI uses an accounting system named ["Gold"](https://hpc.research.cchmc.org/node/16) to keep track of how many wall hours you have remaining; you need to load a module named gold to use this: - load the 'gold' module, which provides the 'gbalance' command - you should be on a cluster node (e.g., bmiclusterp2) when you do this.
 
 ``` bash
 module load gold
@@ -91,9 +93,10 @@ The columns in the output of gbalance are:
 ## See also:
 
 -   [Gold Allocation Manager User Guide](http://docs.adaptivecomputing.com) ([pdf](http://docs.adaptivecomputing.com/gold/pdf/GoldUserGuide.pdf))\
--   ["Check the Balance"](http://docs.adaptivecomputing.com/gold/pdf/GoldUserGuide.pdf#page=32) section of the user guide
+-   ["Check the Balance"](https://hpc.research.cchmc.org/node/16) 
 
 # Requesting a cluster account
+Cluster accounts are now requested using a [web form](https://hpc.research.cchmc.org/node/36). The older email system below is out dated. It may still be useful if the form is broken.
 
 Here is a boilerplate request for a BMI HPC cluster account that you can update with your own information:
 

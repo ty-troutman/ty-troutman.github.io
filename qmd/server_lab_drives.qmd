@@ -2,7 +2,7 @@
 title: "Lab Cluster Drives"
 ---
 
-We have two [institutionally supported](https://bmi.cchmc.org/resources/data-storage) enterprise storage volumes on the HPC cluster "Isilon" drive.
+We have two [institutionally supported](https://centerlink.cchmc.org/research/is4r/home) storage volumes on the HPC cluster.
 
     /data/hpc-troutman/
     /data/troutman-nobackup/
@@ -10,7 +10,7 @@ We have two [institutionally supported](https://bmi.cchmc.org/resources/data-sto
 # `/data/hpc-troutman/`
 
 ::: callout-note
-This drive uses the [standard (two-month) backup plan](https://bmi.cchmc.org/resources/data-storage) and is billed at \$0.20/GB/year.
+This drive uses a [standard (two-month) backup plan](https://bmi.cchmc.org/resources/data-storage). .
 :::
 
 This drive is for easily sharing data with lab members and the place to store data/analysis (*not personal files*) that anyone else in the lab might ever need to work with. *So keep this place organized!*
@@ -19,7 +19,7 @@ Raw and archival data belong in /hpc-troutman/data within the appropriate sub-di
 
 Analysis and results belong in `/data/hpc-troutman/member/<username>/`. Ty doesn't care if you look through his analyses and code (*don't edit or delete anything*). Other people don't like snooping on their computer files. ***Be courteous, get permission before digging into personal directories on /data/hpc-troutman/member/.***
 
-We currently have 7 TB of space here. Don't store unnecessary redundant files or sam files here. Use `/data/troutman-nobackup/<username>` if needed for temporary storage of sam files.
+We currently have 7 TB of space here. Expansion is supported by CCHMC, as [described](https://centerlink.cchmc.org/research/research-home/page-data/research-news/2023/12/2023-12-11/changes-to-research-storage-and-compute-chargebacks?sc_lang=en). Don't store unnecessary redundant files or sam files here. Use `/data/troutman-nobackup/<username>` if needed for temporary storage of sam files.
 
 # `/data/troutman-nobackup/<username>`
 
@@ -27,16 +27,16 @@ We currently have 7 TB of space here. Don't store unnecessary redundant files or
 **This drive is not backed up!**
 :::
 
-`/data/troutman-nobackup/<username>` is for bursty application that exceed space limits in your personal scratch folder. We currently have 10 TB of space here, which can dissappear fast with genetic variation analyses. You may be requested to purge your files when the drive approaches capacity. Organization is not required. It is billed at [\$0.10/GB/year](https://bmi.cchmc.org/resources/data-storage).
+`/data/troutman-nobackup/<username>` is for bursty applications that exceed space limits in your personal scratch folder. We have 10 TB of space here and can expand when warranted. You may be requested to purge your files when the drive approaches capacity. Organization is not required.
 
 # Access
 
 Ty Troutman and Melissa Mingler are authorizers for both `/data/hpc-troutman` and `/data/troutman-nobackup`. Either can grant/revoke access permissions. Access is managed using the permissions software located at [here](https://dp.research.cchmc.org/). Your login information is the same as your network id and password.
 
-Connect to the CCHMC cluster by following the instructions [here](https://bmi.cchmc.org/resources/clusters/computational-cluster). You can access the drive through the terminal, Citrix, or:
+Connect to the CCHMC cluster by following the instructions [here](https://hpc.research.cchmc.org/accessing-the-cluster). Network drives can be mapped to your local computer:
 
 -   PC via `\\bmiisi.chmcres.cchmc.org\hpc-troutman` or `\\bmiisi.chmcres.cchmc.org\troutman-nobackup`
 -   Mac via `smb://bmiisi.chmcres.cchmc.org/hpc-troutman` or `smb://bmiisi.chmcres.cchmc.org/troutman-nobackup`
--   More detailed [instructions](https://confluence.research.cchmc.org/display/RESITHUB/Data+Storage)
+-   More detailed instructions are [here](https://hpc.research.cchmc.org/accessing-the-cluster) and [here](https://confluence.research.cchmc.org/display/RESITHUB/Data+Storage)
 
 If you want to request a new storage volume for research data on the cluster, or manage space for an existing one, visit the [BMI Store](https://research.cchmc.org/bmistore). If you need to request access to a storage volume which is accessible from the cluster, you can do so [here](https://dp.research.cchmc.org).

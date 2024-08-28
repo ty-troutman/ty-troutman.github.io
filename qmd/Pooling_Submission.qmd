@@ -11,7 +11,7 @@ editor: source
 -   Example pooling sheet (coming soon).
 -   Pooling requires an estimate of each sample's molecular weight and a qubit quantification of each samples concentration in ng/µl.
 
-::: {.callout-important}
+::: callout-important
 ## Critical!! Know which index orientation to submit.
 
 Verify the appropriate orientation of the index sequence matches the requirements of the targeted sequencing platform. This must be appropriately entered in the submission sample sheet or demultiplexing will fail. Illumina NovaSeq v1.0 and v1.5 workflows utilize different strategies and require entering i5 index sequences appropriately. Forward strand i5 workflow is performed with v1.0 reagent kits, while reverse complement i5 workflow is performed with v1.5 reagent kits (NovaSeq). For the Illumina MiniSeq or NextSeq platforms, enter the i5 index as the reverse complement. When in doubt, verify with the core facility or sequencing provider and/or read the user manual!!
@@ -19,54 +19,42 @@ Verify the appropriate orientation of the index sequence matches the requirement
 
 # CCHMC Sequencing
 
-The local [CCHMC DNA Sequencing and Genotyping Core](https://centerlink.cchmc.org/research/research---tabs/dna-sequencing-core) is currently managed by David Fletcher.
+The local [CCHMC Genomics Sequencing Facility](https://centerlink.cchmc.org/research/research---tabs/dna-sequencing-core) is currently directed by Hassan Chaib, PhD, and managed by David Fletcher and direct.
 
 -   Non-core generated libraries can only be sequenced on a complete purchased flow cells.
--   One SP flow cell configured at PE150 is \$3679, per [DNA Core Price Calculator](https://centerlink.cchmc.org/research/research---tabs/dna-sequencing-core/price-calculator).
--   One lane for external users at UCSD IGM Genomics Center is \$3,302 and yields 500 million per lane.
--   A single SP1 flow cell can yield 1 billion reads, not the core stated 650-750M clusters.
+-   One lane of a NovaSeq X Plus 1-B flow cell configured at PE50 is \$1,204.75, per [DNA Core Price Calculator](https://centerlink.cchmc.org/research/research---tabs/dna-sequencing-core/price-calculator).
 -   More information on submission can be found at the bottom of this [page](https://dna.cchmc.org/www/nextgen_main.php).
--   SP flow cells can turn around in 1-3 days, but the cost is \~30% higher than for S4 PE150 data from Novogene.
--   Data is downloaded individually. The Kottyan and Weirach lab handle this by scraping the download website links, trimming out the samples already downloaded, then running the script on HPC. An example for our lab is [here](NGS_Scraper_KevinErnst.qmd).
 
-## Core sequencing options
+## Core sequencing options:
 
-        Instrument     Type           Lanes   Cycles          Clusters/Lane(M)   Total Clusters(M) 
-        -------------  -------------  ------  --------------  -----------------  ------------------
-        iSeq 100       i1             1       300             4                  4                 
-        MiSeq          MiSeq          1       300, 500, 600   15                 15                
-        NextSeq 500    Mid Output     1       150             130                130               
-        NextSeq 500    High Output    1       75, 150         360                360               
-        NovaSeq 6000   SP (S prime)   1       100, 300, 500   720                720               
-        NovaSeq 6000   S1*            2       100, 200        720                1440              
-        NovaSeq 6000   S2             2       100, 200, 300   1600               3200              
-        NovaSeq 6000   S4             4       200, 300        2000               8000   
-
-::: callout-note
-# Note
-
-S1 flow cells can be split into separate, independent lanes with the XP workflow. Talk to the core manager ahead of time if this is needed.
-:::
+```
+Instrument       Type                        Flow Cell Type    Number Lanes Flow Cell  Total Cycles     Expected Output (M Clusters Lane)   Expected Output (M Clusters Total)
+---------------  --------------------------  ---------------  -----------------------  --------------  ----------------------------------  -----------------------------------
+iSeq 100         Reverse Complement          i1                                     1  300                                              4                                    4
+MiSeq            Forward                     MiSeq                                  1  300, 500, 600                                   15                                   15
+NovaSeq 6000     Reverse Complement (v1.5)   SP (S prime)                           1  100, 300, 500                                  720                                  720
+NovaSeq 6000     Reverse Complement (v1.5)   S2                                     2  100, 200                                       720                                 1440
+NovaSeq 6000     Reverse Complement (v1.5)   S4                                     2  100, 200, 300                                 1600                                 3200
+NovaSeq 6000     Reverse Complement (v1.5)   S4                                     4  200, 300                                      2000                                 8000
+NovaSeq X Plus   Reverse Complement          1.5B                                   2  100, 200, 300                                  720                                 1440
+NovaSeq X Plus   Reverse Complement          10B                                    8  100, 200, 300                                 1200                                 9600
+NovaSeq X Plus   Reverse Complement          25B                                    8  300                                           3000                                24000
+```
 
 ## Lane submission requirements:
 
-    Sequencing           Min µl   Max µl   Diluent          [Min] 
-    -------------------  -------  -------  ---------------  ------
-    MiSeq                20       50       10 mM Tris-HCl   5 nM  
-    NextSeq 500          20       50       10 mM Tris-HCl   5 nM  
-    NovaSeq SP, S1, S2   30       50       10 mM Tris-HCl   5 nM  
-    NovaSeq S4           65       120      10 mM Tris-HCl   5 nM
+```         
+Service              Input.Material                      Recommended.volume..µl.  Diluent          Minimum.Concentration 
+-------------------  ---------------------------------  ------------------------  ---------------  ----------------------
+iSeq 100             Illumina-compatible library pool                         30  10 mM Tris-HCl   5 nM                  
+MiSeq                Illumina-compatible library pool                         30  10 mM Tris-HCl   5 nM                  
+NovaSeq SP, S1, S2   Illumina-compatible library pool                         40  10 mM Tris-HCl   5 nM                  
+NovaSeq S4           Illumina-compatible library pool                         80  10 mM Tris-HCl   5 nM                  
+NovaSeqX 1.5B, 10B   Illumina-compatible library pool                         30  10 mM Tris-HCl   5 nM                  
+NovaSeqX 25B         Illumina-compatible library pool                         60  10 mM Tris-HCl   5 nM                  
+
+```
 
 ## [CCMHC Submission Sample Sheet](https://docs.google.com/spreadsheets/d/1jsq9Pe1AbLTcPkmoBw3DCj2ewyRkCqlng8q2KOK_6iQ/edit?usp=sharing):
 
-Use the lab standardized naming convention (linked here)!
-
-# Novogene Sequencing
-
--   Email Justin.Golday\@novogeneusa.com to arrange a quote.
--   All runs are PE150 on S4 lanes. To be determined, but for this reason the lab will probably target PE150 for libraries sequenced elsewhere.
--   Human samples exome sequencing and whole genome sequencing require approval and may be subject to change. Be sure to check regulations first.
--   There may be a minimum requirement of \>300 million reads per pool.
--   Submit quoted order at 30 µl and 0.5 ng/µl, 2-30 nM.
--   Turn around is \~2 weeks.
--   Accessing the data is quirky as CCHMC block access by default. The Kottyan and Weirach labs' work around is to download the data first to their Ohio Super Computer account then transfer to over to HPC. These accounts are linked in some way.
+Use the lab standardized naming convention!

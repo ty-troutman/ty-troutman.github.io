@@ -44,6 +44,7 @@ STAR \
 
 6.  Use [HOMER](http://homer.ucsd.edu/homer/) to generate [tag directories](http://homer.ucsd.edu/homer/ngs/tagDir.html) from the STAR alignment BAM file. Use the `-sspe -flip` options if the data is generated using our lab's dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.
 ```bash
+module load homer/5.1
 makeTagDirectory <tagDirectoryName> <filename.sam> -genome <experiment_genome> \
     -checkGC -format sam -sspe -flip
 ```
@@ -104,6 +105,7 @@ These scripts can be run from the lab's cluster drive or added as executables to
 
 ```bash         
 /data/hpc-troutman/software/scripts/wrapper_star_paired.R
+/data/hpc-troutman/software/scripts/wrapper_star_singleread.R
 /data/hpc-troutman/software/scripts/working_wrapper_bowtie2_pairedend.R
 /data/hpc-troutman/software/scripts/working_wrapper_bowtie2_singleread.R
 ```
@@ -123,8 +125,8 @@ These scripts can be run from the lab's cluster drive or added as executables to
 Usage on the cluster requires a loaded R module. An example follows:
 
 ```bash         
-module load R/4.2.1
-Rscript /data/hpc-troutman/software/scripts/working_wrapper_star_paired.R -d /data/troutman-hpc/archive/fastq_path
+module load R/4.4.0-R9
+Rscript /data/hpc-troutman/software/scripts/wrapper_star_paired.R -d /data/troutman-hpc/archive/fastq_path
 ```
 
 For example, the script generates and submits the following .bat file to the LSF scheduler:
@@ -133,8 +135,8 @@ For example, the script generates and submits the following .bat file to the LSF
 #BSUB -W 2:00
 #BSUB -n 16
 #BSUB -M 40000
-#BSUB -e ./bsub_scripts/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.err
-#BSUB -o ./bsub_scripts/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.out
+#BSUB -e ./bsub_scripts/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.err
+#BSUB -o ./bsub_scripts/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.out
 #BSUB -R "span[hosts=1]"
 
 # load modules
@@ -142,46 +144,50 @@ module load fastqc/0.11.7
 module load trimgalore/0.6.6
 module load STAR/2.7.9
 module load samtools
-module load homer/4.11
+module load homer/5.1
 
 # execute fastqc
-fastqc /data/hpc-troutman/data/archive/230608_CCHMC_SP/atf3//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1.fastq.gz -o ./fastqc_orig/
-fastqc /data/hpc-troutman/data/archive/230608_CCHMC_SP/atf3//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2.fastq.gz -o ./fastqc_orig/
+fastqc demo_data//Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R1.fastq.gz -o ./fastqc_orig/
+fastqc demo_data//Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R2.fastq.gz -o ./fastqc_orig/
 
 # execute trim_galore
 trim_galore \
     --cores 4 \
-    --paired /data/hpc-troutman/data/archive/230608_CCHMC_SP/atf3//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1.fastq.gz /data/hpc-troutman/data/archive/230608_CCHMC_SP/atf3//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2.fastq.gz\
+    --paired demo_data//Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R1.fastq.gz demo_data//Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R2.fastq.gz\
     --fastqc \
     --output_dir ./trim_galore/
 
 # rename trimmed files
-mv ./trim_galore/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1_val_1.fq.gz ./trim_galore/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1.fastq.gz
-mv ./trim_galore/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2_val_2.fq.gz ./trim_galore/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2.fastq.gz
+mv ./trim_galore/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R1_val_1.fq.gz ./trim_galore/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R1.fastq.gz
+mv ./trim_galore/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R2_val_2.fq.gz ./trim_galore/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R2.fastq.gz
 mv ./trim_galore/*fastqc* ./fastqc_trimmed/
 
 # execute STAR
 STAR \
     --runThreadN 16 \
-    --genomeDir /data/hpc-troutman/data/genomes/indexes/star/mm10_starIndex/ \
+    --genomeDir /data/hpc-troutman/genomes/indexes/star/mm10_starIndex/ \
     --readFilesCommand zcat \
-    --readFilesIn ./trim_galore//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R1.fastq.gz ./trim_galore//Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG_R2.fastq.gz \
-    --outFileNamePrefix ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10. \
+    --readFilesIn ./trim_galore//Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R1.fastq.gz ./trim_galore//Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R2.fastq.gz \
+    --outFileNamePrefix ./star_out/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10. \
     --outSAMtype BAM SortedByCoordinate
 
 # remove STAR temporary directories
-rm -r ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10._STARtmp
+rm -r ./star_out/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10._STARtmp
 
 # execute HOMER makeTagDirectory
-makeTagDirectory ./tag_directories/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10/ \
-    ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10.Aligned*am \
+makeTagDirectory ./tag_directories/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10/ \
+    ./star_out/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10.Aligned*am \
     -genome mm10 -checkGC -format sam -sspe -flip
 
 # copy STAR log files to the HOMER tag directory
-cp ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.*Log.final.out ./tag_directories/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.star.log.mm10
-cp ./star_out/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.*Log.out ./tag_directories/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.mm10/Mouse-C57BL6J-BMDM-RNA-ATF3ko-LPS-1hr-1407-m-E00457-TATTGAAT-TGCGTCGG.star.consolelog.mm10 \
+cp ./star_out/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.*Log.final.out ./tag_directories/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10.star.log
+cp ./star_out/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.*Log.out ./tag_directories/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10.star.consolelog
 
- echo Done!
+# execute samtools index, then discard the sam file and trimmed fastq file
+samtools index ./star_out/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10.Aligned*am
+rm ./trim_galore/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R1.fastq.gz ./trim_galore/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R2.fastq.gz
+
+echo Done!
 ```
 
 ### [A.C.Rsuite](https://github.com/z5ouyang/A.C.Rsuite)
@@ -207,8 +213,8 @@ An example follows (omit the header column):
 ####rnaPipe.R `rnaPipe.R` is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called `alignStats.txt`, data quantification results in a directory called `rnaQuan/`, and differential expression results in a directory called `rnaDiff/`. These tools require a compatible R and HOMER module is loaded when run through the BMI HPC. An example usage follows:
 
 ```bash         
-module load R/4.2.1
-module load homer/4.11
+module load R/4.4.0-R9
+module load homer/5.1
 rnaPipe.R /path/to/sample_definition_file -o /desired/output/path -g available_homer_genome
 ```
 
