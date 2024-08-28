@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Troutman Lab - Biomedical Informatics High Performance Computing Cluster</title>
+<title>Biomedical Informatics High Performance Computing Cluster – Troutman Lab</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -143,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
@@ -192,7 +192,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><strong>Credit:</strong> Kevin Ernst, Matthew Weirauch, and Leah Kottyan for compiling and hosting much of this information not found on the DBS HPC website.</p>
-<p>We have access to a Linux <a href="https://hpc.research.cchmc.org/accessing-the-cluster">computational cluster</a> through the <a href="https://centerlink.cchmc.org/research/research---tabs/dmac/grant-boilerplate">Data Management and Analysis Collaborative (DMAC)</a>. To request access to the cluster, please send an email to Cluster Support: help-cluster@bmi.cchmc.org. After your access is enabled, you should be able to login to the cluster with your CCHMC employee network credentials. All users have a default disk (home directory) quota of 100 GB and a job walltime quota of 10000 hours per quarter, which is free. The quota of your home directory is fixed, and cannot be changed. To increase the walltime, please send an email to <a href="mailto:help-cluster@bmi.cchmc.org">Cluster Support</a>.</p>
+<p>We have access to a Linux <a href="https://hpc.research.cchmc.org/accessing-the-cluster">computational cluster</a> through the <a href="https://centerlink.cchmc.org/research/research---tabs/dmac/grant-boilerplate">Data Management and Analysis Collaborative (DMAC)</a>. To request access to the cluster, please use the linked <a href="https://hpc.research.cchmc.org/node/36">web form</a>, or send an email to Cluster Support: help-cluster@bmi.cchmc.org. After your access is enabled, you should be able to login to the cluster with your CCHMC employee network credentials.</p>
+<p>Up to date policies are described <a href="https://hpc.research.cchmc.org/node/13">here</a>. In brief, all users have a default disk (home directory) quota of 100 GB and a job walltime quota of 10000 hours per quarter, which is free. The quota of your home directory is fixed, and cannot be changed. To increase the walltime, please send an email to <a href="mailto:help-cluster@bmi.cchmc.org">Cluster Support</a>.</p>
 <p>Your <a href="https://en.wikipedia.org/wiki/home_directory">home directory</a> is accessible at the path <code>/users/YOURUSERID</code> and has a default 100 GB quota. You also have access to a “<a href="https://hpc.research.cchmc.org/node/14">scratch</a>” volume at <code>/scratch/YOURUSERID</code>, where there is a 100 GB quota with a burst of up to 5 TB for up to 7 days. Anything there will be removed after 60 days. Users typically do not have (read/write) access to other users’ home directories. Thus, <a href="../qmd/server_lab_drives.html"><code>/data/hpc-troutman/</code></a> is the place to store any data or analyses (<em>not personal files</em>) that anyone else in the lab might ever need to work with.</p>
 <section id="accessing-the-hpc-cluster" class="level1">
 <h1>Accessing the HPC cluster</h1>
@@ -203,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>If you are outside of CCHMC network, connect to ssh.research.cchmc.org then to bmiclusterp.chmcres.cchmc.org:</p>
 <p><code>ssh [yourusername]@ssh.research.cchmc.org</code><br>
 <code>ssh [yourusername]@bmiclusterp.chmcres.cchmc.org</code></p></li>
-<li><p>Alternatively, connect through <a href="https://connect.research.cchmc.org/vpn/index.html">citrix</a>.</p></li>
+<li><p>Alternatively, connect through the <a href="https://ondemand.research.cchmc.org/pun/sys/dashboard">OnDemand Portal</a>. Detailed instructions are <a href="https://cchmc-my.sharepoint.com/personal/roberto_perea_cchmc_org/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Froberto%5Fperea%5Fcchmc%5Forg%2FDocuments%2FShared%20Documents%2FOndemand%5FUserGuide%2Epdf&amp;parent=%2Fpersonal%2Froberto%5Fperea%5Fcchmc%5Forg%2FDocuments%2FShared%20Documents&amp;ga=1">here</a></p></li>
 </ul>
 </section>
 <section id="running-jobs-on-the-hpc-cluster" class="level1">
@@ -227,7 +228,7 @@ Note
 <p>The BMI cluster offers several advantages:</p>
 <ul>
 <li><p>First, the cluster has big computer capabilities. The largest nodes have 512 GB RAM and 16 cores.</p></li>
-<li><p>Linux environment with lots of software ready to go. This is handles with many pre-installed sofware envrionment, called <a href="http://modules.sourceforge.net/">Modules</a>. Please refer to modules <a href="https://bmi.cchmc.org/resources/software/environment-modules">page</a> for more information and examples.</p></li>
+<li><p>Linux environment with lots of software ready to go. This is handles with many pre-installed sofware envrionment, called <a href="http://modules.sourceforge.net/">Modules</a>. <del>Please refer to modules <a href="https://bmi.cchmc.org/resources/software/environment-modules">page</a> for more information and examples.</del></p></li>
 <li><p>The cluster allows you to do pseudo-parallelism. You can break a problem into many pieces and run many jobs in a distributed fashion.</p></li>
 </ul>
 </section>
@@ -255,8 +256,8 @@ Note
 </section>
 <section id="checking-your-cluster-balance" class="level1">
 <h1>Checking your cluster balance</h1>
-<p>By default, you have 10,000 hours of “wall time” (real-world computation time for the jobs you run) on the cluster, and this quota resets quarterly (<a href="https://bmi.cchmc.org/resources/charge-backs">ref</a>).</p>
-<p>BMI uses an accounting system named “Gold” to keep track of how many wall hours you have remaining; you need to load a module named gold to use this: - load the ‘gold’ module, which provides the ‘gbalance’ command - you should be on a cluster node (e.g., bmiclusterp2) when you do this.</p>
+<p>By default, you have 10,000 hours of “wall time” (real-world computation time for the jobs you run) on the cluster, and this quota resets quarterly (<a href="https://centerlink.cchmc.org/research/research-home/page-data/research-news/2023/12/2023-12-11/changes-to-research-storage-and-compute-chargebacks?sc_lang=en">ref</a>).</p>
+<p>BMI uses an accounting system named <a href="https://hpc.research.cchmc.org/node/16">“Gold”</a> to keep track of how many wall hours you have remaining; you need to load a module named gold to use this: - load the ‘gold’ module, which provides the ‘gbalance’ command - you should be on a cluster node (e.g., bmiclusterp2) when you do this.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load gold</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gbalance</span> <span class="at">-h</span> <span class="at">-u</span> <span class="dt">\$</span>USER</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -321,12 +322,13 @@ Note
 <ul>
 <li><a href="http://docs.adaptivecomputing.com">Gold Allocation Manager User Guide</a> (<a href="http://docs.adaptivecomputing.com/gold/pdf/GoldUserGuide.pdf">pdf</a>)<br>
 </li>
-<li><a href="http://docs.adaptivecomputing.com/gold/pdf/GoldUserGuide.pdf#page=32">“Check the Balance”</a> section of the user guide</li>
+<li><a href="https://hpc.research.cchmc.org/node/16">“Check the Balance”</a></li>
 </ul>
 </section>
 </section>
 <section id="requesting-a-cluster-account" class="level1">
 <h1>Requesting a cluster account</h1>
+<p>Cluster accounts are now requested using a <a href="https://hpc.research.cchmc.org/node/36">web form</a>. The older email system below is out dated. It may still be useful if the form is broken.</p>
 <p>Here is a boilerplate request for a BMI HPC cluster account that you can update with your own information:</p>
 <pre><code>To: help@bmi.cchmc.org 
 Subject: New HPC cluster account
@@ -537,18 +539,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -580,7 +571,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -588,7 +601,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

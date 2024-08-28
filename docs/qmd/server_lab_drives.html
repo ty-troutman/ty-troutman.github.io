@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Troutman Lab - Lab Cluster Drives</title>
+<title>Lab Cluster Drives – Troutman Lab</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -85,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -109,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
@@ -152,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>We have two <a href="https://bmi.cchmc.org/resources/data-storage">institutionally supported</a> enterprise storage volumes on the HPC cluster “Isilon” drive.</p>
+<p>We have two <a href="https://centerlink.cchmc.org/research/is4r/home">institutionally supported</a> storage volumes on the HPC cluster.</p>
 <pre><code>/data/hpc-troutman/
 /data/troutman-nobackup/</code></pre>
 <section id="datahpc-troutman" class="level1">
@@ -167,13 +167,13 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This drive uses the <a href="https://bmi.cchmc.org/resources/data-storage">standard (two-month) backup plan</a> and is billed at $0.20/GB/year.</p>
+<p>This drive uses a <a href="https://bmi.cchmc.org/resources/data-storage">standard (two-month) backup plan</a>. .</p>
 </div>
 </div>
 <p>This drive is for easily sharing data with lab members and the place to store data/analysis (<em>not personal files</em>) that anyone else in the lab might ever need to work with. <em>So keep this place organized!</em></p>
 <p>Raw and archival data belong in /hpc-troutman/data within the appropriate sub-directories. ALL lab funded fastq files must be immediately archived in /data/hpc-troutman/data/archive and the location deposited in <a href="https://cchmc-my.sharepoint.com/:x:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/reagent_logs/sequencing_sample_database.xlsx?d=wda4be1958ae645368dab60d561681100&amp;csf=1&amp;web=1&amp;e=VC78Hb&amp;nav=MTVfezAwMDAwMDAwLTAwMDEtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMH0">Sequencing Sample Database</a>. Common tag directories or bam files passing standard QC steps should be organized in <code>/data/hpc-troutman/data/processed</code> and logged in the database. Genome builds are found in /data/hpc-troutman/data/genomes.</p>
 <p>Analysis and results belong in <code>/data/hpc-troutman/member/&lt;username&gt;/</code>. Ty doesn’t care if you look through his analyses and code (<em>don’t edit or delete anything</em>). Other people don’t like snooping on their computer files. <strong><em>Be courteous, get permission before digging into personal directories on /data/hpc-troutman/member/.</em></strong></p>
-<p>We currently have 7 TB of space here. Don’t store unnecessary redundant files or sam files here. Use <code>/data/troutman-nobackup/&lt;username&gt;</code> if needed for temporary storage of sam files.</p>
+<p>We currently have 7 TB of space here. Expansion is supported by CCHMC, as <a href="https://centerlink.cchmc.org/research/research-home/page-data/research-news/2023/12/2023-12-11/changes-to-research-storage-and-compute-chargebacks?sc_lang=en">described</a>. Don’t store unnecessary redundant files or sam files here. Use <code>/data/troutman-nobackup/&lt;username&gt;</code> if needed for temporary storage of sam files.</p>
 </section>
 <section id="datatroutman-nobackupusername" class="level1">
 <h1><code>/data/troutman-nobackup/&lt;username&gt;</code></h1>
@@ -190,16 +190,16 @@ Warning
 <p><strong>This drive is not backed up!</strong></p>
 </div>
 </div>
-<p><code>/data/troutman-nobackup/&lt;username&gt;</code> is for bursty application that exceed space limits in your personal scratch folder. We currently have 10 TB of space here, which can dissappear fast with genetic variation analyses. You may be requested to purge your files when the drive approaches capacity. Organization is not required. It is billed at <a href="https://bmi.cchmc.org/resources/data-storage">$0.10/GB/year</a>.</p>
+<p><code>/data/troutman-nobackup/&lt;username&gt;</code> is for bursty applications that exceed space limits in your personal scratch folder. We have 10 TB of space here and can expand when warranted. You may be requested to purge your files when the drive approaches capacity. Organization is not required.</p>
 </section>
 <section id="access" class="level1">
 <h1>Access</h1>
 <p>Ty Troutman and Melissa Mingler are authorizers for both <code>/data/hpc-troutman</code> and <code>/data/troutman-nobackup</code>. Either can grant/revoke access permissions. Access is managed using the permissions software located at <a href="https://dp.research.cchmc.org/">here</a>. Your login information is the same as your network id and password.</p>
-<p>Connect to the CCHMC cluster by following the instructions <a href="https://bmi.cchmc.org/resources/clusters/computational-cluster">here</a>. You can access the drive through the terminal, Citrix, or:</p>
+<p>Connect to the CCHMC cluster by following the instructions <a href="https://hpc.research.cchmc.org/accessing-the-cluster">here</a>. Network drives can be mapped to your local computer:</p>
 <ul>
 <li>PC via <code>\\bmiisi.chmcres.cchmc.org\hpc-troutman</code> or <code>\\bmiisi.chmcres.cchmc.org\troutman-nobackup</code></li>
 <li>Mac via <code>smb://bmiisi.chmcres.cchmc.org/hpc-troutman</code> or <code>smb://bmiisi.chmcres.cchmc.org/troutman-nobackup</code></li>
-<li>More detailed <a href="https://confluence.research.cchmc.org/display/RESITHUB/Data+Storage">instructions</a></li>
+<li>More detailed instructions are <a href="https://hpc.research.cchmc.org/accessing-the-cluster">here</a> and <a href="https://confluence.research.cchmc.org/display/RESITHUB/Data+Storage">here</a></li>
 </ul>
 <p>If you want to request a new storage volume for research data on the cluster, or manage space for an existing one, visit the <a href="https://research.cchmc.org/bmistore">BMI Store</a>. If you need to request access to a storage volume which is accessible from the cluster, you can do so <a href="https://dp.research.cchmc.org">here</a>.</p>
 
@@ -386,18 +386,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -429,7 +418,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -437,7 +448,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
