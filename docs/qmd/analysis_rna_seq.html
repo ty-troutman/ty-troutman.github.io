@@ -292,22 +292,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/data/hpc-troutman/software/scripts/wrapper_star_singleread.R</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">/data/hpc-troutman/software/scripts/working_wrapper_bowtie2_pairedend.R</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">/data/hpc-troutman/software/scripts/working_wrapper_bowtie2_singleread.R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><p>These tools depend on file names in the lab convention (<code>*R1.fastq.gz *R2.fastq.gz</code>). Samples from the CCHMC core can be renamed as in the example below. <em>It is good practice to triple-check your commands with an <code>echo</code> statement before running the final command.</em></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>R1<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> mv <span class="va">$i</span> <span class="va">${i</span><span class="op">/</span><span class="ss">R1_001.fastq.gz</span><span class="op">/</span>R1.fastq.gz<span class="va">}</span><span class="kw">;</span> <span class="cf">done</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>R2<span class="pp">*</span>.fastq.gz<span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> mv <span class="va">$i</span> <span class="va">${i</span><span class="op">/</span><span class="ss">R2_001.fastq.gz</span><span class="op">/</span>R2.fastq.gz<span class="va">}</span><span class="kw">;</span> <span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>These tools require input of only one <code>fastq.gz</code> file per sample per read direction.</p></li>
-<li><p>These tools generate tag directories assuming a stranded library chemistry (e.g.&nbsp;lab standard <a href="https://cchmc-my.sharepoint.com/:w:/g/personal/ty_troutman_cchmc_org/EQq4IL-eReVMgL_-hyBey8IBvTnNd7zF6jL4pGzWQxyylw?e=uFlh8V">dUTP RNA-seq protocol</a>).</p></li>
+<li>These tools depend on file names using the standard/default Illumina naming convention. Samples from the CCHMC core meet this convention.
+<ul>
+<li><code>[sample_name]_S#*L00#*[R/I]#001.fastq.gz</code></li>
+<li><code>[sample_name]</code>is the name of the sample/library as it is submitted to the core in their online submission interface.</li>
+<li><code>S#</code> is the number of the sample in the sequencing run. Each unique sample_name will be assigned an individual sample number for that run. If the same sample is present on a subsequent flow cell run, this sample may or may not have the same sample number assigned to it.</li>
+<li><code>L00#</code> is the lane number of the flow cell.</li>
+<li><code>[R/I]#</code>is the read number. Libraries that are sequenced with in a ‘Single End’ specification will not contain a Read 2 file. If fastq files are created for the index reads, these will be indicated by ‘I1’ for the i7 index or ‘I2’ for the i5 index.</li>
+<li><code>001</code> The last segment is always 001.</li>
+<li><code>fastq.gz</code> Each file has been compressed with the gzip compression algorithm to conserve space. The CCHMC core meets this convention.</li>
+</ul></li>
+<li>Other samples may need to be renamed, as in the case-specific example below. <em>It is good practice to triple-check your commands with an <code>echo</code> statement before running the final command.</em></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> R1.fastq.gz<span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> mv <span class="va">$i</span> <span class="va">${i</span><span class="op">/</span><span class="ss">R1_001.fastq.gz</span><span class="op">/</span>R1.fastq.gz<span class="va">}</span><span class="kw">;</span> <span class="cf">done</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> R2.fastq.gz<span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> mv <span class="va">$i</span> <span class="va">${i</span><span class="op">/</span><span class="ss">R2_001.fastq.gz</span><span class="op">/</span>R2.fastq.gz<span class="va">}</span><span class="kw">;</span> <span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>These tools require input of only one <code>fastq.gz</code> file per sample per read direction.</li>
+<li>These tools generate tag directories assuming a stranded library chemistry (e.g.&nbsp;lab standard <a href="https://cchmc-my.sharepoint.com/:w:/g/personal/ty_troutman_cchmc_org/EQq4IL-eReVMgL_-hyBey8IBvTnNd7zF6jL4pGzWQxyylw?e=uFlh8V">dUTP RNA-seq protocol</a>).</li>
 </ul>
 </div>
 </div>
@@ -420,41 +432,57 @@ Important
 </tbody>
 </table>
 <p><em>The GitHub versions are not fully functional on the BMI cluster, but we have edited versions suppressing the non-functional aspects (<code>makeMultiWigHub.pl</code>).</em></p>
-<p>####rnaPipe.R <code>rnaPipe.R</code> is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called <code>alignStats.txt</code>, data quantification results in a directory called <code>rnaQuan/</code>, and differential expression results in a directory called <code>rnaDiff/</code>. These tools require a compatible R and HOMER module is loaded when run through the BMI HPC.</p>
-<div class="callout callout-style-default callout-important callout-titled">
+<section id="rnapipe.r" class="level4">
+<h4 class="anchored" data-anchor-id="rnapipe.r">rnaPipe.R</h4>
+<p><code>rnaPipe.R</code> is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called <code>alignStats.txt</code>, data quantification results in a directory called <code>rnaQuan/</code>, and differential expression results in a directory called <code>rnaDiff/</code>. These tools require a compatible R and HOMER module is loaded when run through the BMI HPC.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+Make sure you specify the correct genome for your analysis!
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>Make sure you specify the correct genome for your analysis!default genome for A.C.Rsuite is <code>mm10</code>.</em></p>
+<p>This must match the genome used for mapping. The default genome for A.C.Rsuite is <code>mm10</code>. The most up-to-date mouse genome is currently <code>mm39</code>. Human genomes could be <code>hg38</code> or <code>hg19.</code></p>
 </div>
 </div>
 <p>An example usage follows:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load R/4.4.0-R9</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load homer/5.1</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">rnaPipe.R</span> /path/to/sample_definition_file <span class="at">-o</span> /desired/output/path <span class="at">-g</span> available_homer_genome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">rnaPipe.R</span> /path/sample_definition <span class="at">-o</span> /output/path <span class="at">-g</span> available_homer_genome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Steps from <code>rnaPipe.R</code> can also be run/rerun individually, and some have additional analysis options available. Script instructions and available options can be viewed by entering the command into the terminal.</p>
+</section>
 <section id="alignstats.r" class="level4">
 <h4 class="anchored" data-anchor-id="alignstats.r">alignStats.R</h4>
 <p><code>alignStats.R</code> compiles various quality control statistics into a summary table based on what is in the sample definition file. An example usage follows:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> alignStats.R /path/to/sample_definition_file <span class="op">&gt;</span> alignStats.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> alignStats.R /path/sample_definition <span class="op">&gt;</span> alignStats.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="rnaquan.r" class="level4">
 <h4 class="anchored" data-anchor-id="rnaquan.r">rnaQuan.R</h4>
 <p><code>rnaQuan.R</code> performs routine quantification of RNA-seq data by reading in the sample definition file and using HOMER and R to perform the following: - Generate an <code>analyzeRepeats.pl</code> raw sequencing count file (<code>-raw</code> or <code>-noadj</code>) specifying the options <code>-condenseGenes -count exons</code>. - Generate an <code>analyzeRepeats.pl</code> TPM normalized file (<code>-tpm</code> option) specifying the option <code>-count exons</code> <u>but not <code>-condenseGenes</code></u>. This file is subsetted based on accession numbers within the raw count file. - Short genes (less than 200 bp) are removed, and a simplified raw file (<code>rawC.txt</code>) and TPM file (<code>rawT.txt</code>) are created. - A series of plots are created that: compare gene length versus expression means and variance; assess data grouping using principal component analyses; compare pair-wise Parson’s correlations using heat maps and within group 2d kernel density plots. - Group replicate tag directories are merged into a <code>mergeTag</code> folder. - A UCSC genome browser hub track is created using the sample definition file name. <u>This aspect will not function until the web server and script are correctly configured</u>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Make sure you specify the correct genome for your analysis!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This must match the genome used for mapping. The default genome for A.C.Rsuite is <code>mm10</code>. The most up-to-date mouse genome is currently <code>mm39.</code> Human genomes could be <code>hg38</code> or <code>hg19.</code></p>
+</div>
+</div>
 <p>An example usage follows:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> rnaQuan.R /path/to/sample_definition_file <span class="at">-o</span> rnaQuan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> rnaQuan.R /path/sample_definition <span class="at">-o</span> rnaQuan <span class="at">-g</span> homer_genome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="rnadiff.r" class="level4">
 <h4 class="anchored" data-anchor-id="rnadiff.r">rnaDiff.R</h4>
 <p><code>rnaDiff.R</code> performs group pairwise differential expression analysis using DeSeq2 as. This depends both on the sample definition file <em>and</em> the processed raw count and TPM files generated by <code>rnaQuan.R</code>. It generates the following: - DeSeq2 results for any gene above a declared TPM threshold (default 8) for each pairwise comparison between each group (not one group versus all remaining). - Scatter plots and MA plots visualizing expression differences between each pair of groups. - A series of summary heat map for the composite list of deferentially expressed genes between all groups.</p>
 <p>An example usage is follows:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> rnaDiff.R /path/to/sample_definition_file <span class="at">-c</span> rnaQuan/rawC.txt <span class="at">-t</span> rnaQuan/rawT.txt <span class="at">-o</span> rnaDiff/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> rnaDiff.R /path/sample_definition <span class="at">-c</span> rnaQuan/rawC.txt <span class="at">-t</span> rnaQuan/rawT.txt <span class="at">-o</span> rnaDiff/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>These scripts can be run from the lab’s cluster drive or added as an executable to your path. Current versions are located at <code>/data/hpc-troutman/software/scripts/</code>.</p>
 
 
