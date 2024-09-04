@@ -67,7 +67,7 @@ In order to run MultiQc from your local machine, you will need to do one of the 
 Once a drive is mounted and the Docker software is opened, the Multiqc docker image can be run through your terminal application on your local machine as in the example described [here](https://multiqc.info/docs/getting_started/installation/#docker) and provided below:
 
 ``` bash 
-docker run -t -v `pwd`:`pwd` -w `pwd` ewels/multiqc multiqc ./path/to/mounted/drive
+docker run -t -v `pwd`:`pwd` -w `pwd` multiqc/multiqc multiqc ./path/to/mounted/drive
 ``` 
 
 Another useful tool is `alignStats.R`, which generates a table containing selected information from the STAR log file and the HOMER `tagInfo.txt` file. This tool is described in more detail [below](map_on_bmi_hpc%20(in%20progress!)).
