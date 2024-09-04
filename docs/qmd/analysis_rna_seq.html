@@ -420,7 +420,21 @@ Important
 </tbody>
 </table>
 <p><em>The GitHub versions are not fully functional on the BMI cluster, but we have edited versions suppressing the non-functional aspects (<code>makeMultiWigHub.pl</code>).</em></p>
-<p>####rnaPipe.R <code>rnaPipe.R</code> is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called <code>alignStats.txt</code>, data quantification results in a directory called <code>rnaQuan/</code>, and differential expression results in a directory called <code>rnaDiff/</code>. These tools require a compatible R and HOMER module is loaded when run through the BMI HPC. An example usage follows:</p>
+<p>####rnaPipe.R <code>rnaPipe.R</code> is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called <code>alignStats.txt</code>, data quantification results in a directory called <code>rnaQuan/</code>, and differential expression results in a directory called <code>rnaDiff/</code>. These tools require a compatible R and HOMER module is loaded when run through the BMI HPC.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Make sure you specify the correct genome for your analysis!default genome for A.C.Rsuite is <code>mm10</code>.</em></p>
+</div>
+</div>
+<p>An example usage follows:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load R/4.4.0-R9</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load homer/5.1</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">rnaPipe.R</span> /path/to/sample_definition_file <span class="at">-o</span> /desired/output/path <span class="at">-g</span> available_homer_genome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

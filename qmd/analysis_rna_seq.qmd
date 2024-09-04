@@ -210,7 +210,13 @@ An example follows (omit the header column):
 
 *The GitHub versions are not fully functional on the BMI cluster, but we have edited versions suppressing the non-functional aspects (`makeMultiWigHub.pl`).*
 
-####rnaPipe.R `rnaPipe.R` is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called `alignStats.txt`, data quantification results in a directory called `rnaQuan/`, and differential expression results in a directory called `rnaDiff/`. These tools require a compatible R and HOMER module is loaded when run through the BMI HPC. An example usage follows:
+####rnaPipe.R `rnaPipe.R` is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called `alignStats.txt`, data quantification results in a directory called `rnaQuan/`, and differential expression results in a directory called `rnaDiff/`. These tools require a compatible R and HOMER module is loaded when run through the BMI HPC. 
+
+::: callout-important
+*Make sure you specify the correct genome for your analysis!\nThe default genome for A.C.Rsuite is `mm10`.*
+:::
+
+An example usage follows:
 
 ```bash         
 module load R/4.4.0-R9
