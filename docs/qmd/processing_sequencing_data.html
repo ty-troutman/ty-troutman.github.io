@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Processing sequencing data – Troutman Lab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-199d74c3f977287933e89adc4815e41a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-d3b79b1984fa0b3c143c6b749bfe5fff.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Troutman Lab</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../qmd/Internal_Materials.html"> 
+<span class="menu-text">Internal Materials</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ty-troutman"> <i class="bi bi-github" role="img" aria-label="Troutman GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.cincinnatichildrens.org/research/divisions/a/allergy-immunology/labs/troutman"> 
+<span class="menu-text">CCHMC</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../qmd/processing_sequencing_data.html">Sequencing data</a></li><li class="breadcrumb-item"><a href="../qmd/processing_sequencing_data.html">Processing data</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Using the Server</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/server_bmi_cluster.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BMI Cluster</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/server_lab_drives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab Cluster Drives</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Sequencing data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/processing_sequencing_data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Processing data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/analysis_rna_seq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RNA-seq</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/analysis_atac_chip_seq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ATAC- and ChIP-Seq Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/ty-troutman/Genomics-analyses" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Additional Analyses</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">NGS libraries</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/Database_Barcodes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Database and Barcodes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/Pooling_Submission.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pooling and Submitting Samples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../qmd/NGS_Scraper_KevinErnst.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Downloading from CCHMC</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Logs and Protocols</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share?csf=1&amp;web=1&amp;e=nEuYqw" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Troutman-Lab-Share</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Reagent_Logs?csf=1&amp;web=1&amp;e=oK8Gbg" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Protocols-Methods/primaryCells?csf=1&amp;web=1&amp;e=gtd3YL" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cell Preparation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Equipment?csf=1&amp;web=1&amp;e=cgrrX0" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Equipment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Protocols-Methods/genomics?csf=1&amp;web=1&amp;e=eifcHl" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genomics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#general-workflow" id="toc-general-workflow" class="nav-link active" data-scroll-target="#general-workflow">General workflow</a></li>
+  <li><a href="#data-quality-control" id="toc-data-quality-control" class="nav-link" data-scroll-target="#data-quality-control">Data quality control</a></li>
+  <li><a href="#automated-data-processing" id="toc-automated-data-processing" class="nav-link" data-scroll-target="#automated-data-processing">Automated data processing</a>
+  <ul class="collapse">
+  <li><a href="#using-mapper_wrapper.sh" id="toc-using-mapper_wrapper.sh" class="nav-link" data-scroll-target="#using-mapper_wrapper.sh">Using <code>mapper_wrapper.sh</code></a></li>
+  <li><a href="#data-processing-validation" id="toc-data-processing-validation" class="nav-link" data-scroll-target="#data-processing-validation">Data processing validation</a></li>
+  </ul></li>
+  <li><a href="#mouse-genetic-variation" id="toc-mouse-genetic-variation" class="nav-link" data-scroll-target="#mouse-genetic-variation">Mouse genetic variation</a>
+  <ul class="collapse">
+  <li><a href="#strain-specific-genomes" id="toc-strain-specific-genomes" class="nav-link" data-scroll-target="#strain-specific-genomes">Strain specific genomes</a></li>
+  <li><a href="#shifting-to-the-reference" id="toc-shifting-to-the-reference" class="nav-link" data-scroll-target="#shifting-to-the-reference">Shifting to the reference</a></li>
+  <li><a href="#sorting-allele-specific-reads" id="toc-sorting-allele-specific-reads" class="nav-link" data-scroll-target="#sorting-allele-specific-reads">Sorting allele specific reads</a></li>
+  </ul></li>
+  <li><a href="#script-locations" id="toc-script-locations" class="nav-link" data-scroll-target="#script-locations">Script locations</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../qmd/processing_sequencing_data.html">Sequencing data</a></li><li class="breadcrumb-item"><a href="../qmd/processing_sequencing_data.html">Processing data</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Processing sequencing data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This is meant to be a guideline for processing and analysis of most Illumina sequencing data in the Troutman lab. There are many alternative ways to consider processing, quality control, quantification, and differential expression analysis. This workflow is not a gold standard, will not always work for all data, and is open for interpretation/criticism.</p>
+<section id="general-workflow" class="level1">
+<h1>General workflow</h1>
+<ol type="1">
+<li><p>Verify data checksums and rename following lab convention: &lt;filenameA&gt;_R1.fastq.gz &lt;filenameA&gt;_R2.fastq.gz &lt;filenameB&gt;_R1.fastq.gz &lt;filenameB&gt;_R2.fastq.gz</p></li>
+<li><p>Group data according to mapping needs, e.g.&nbsp;by genome, paired end and single read, etc.</p></li>
+<li><p>Run <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">fastqc</a> on the raw fastq files.</p></li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load fastqc/0.11.7</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="op">&lt;</span>data<span class="op">&gt;</span>R1_001.fastq.gz <span class="at">-o</span> <span class="op">&lt;</span>preferred_name<span class="op">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="op">&lt;</span>data<span class="op">&gt;</span>R2_001.fastq.gz <span class="at">-o</span> <span class="op">&lt;</span>preferred_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>Run <a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim Galore</a> on the fastq files. Rerun fastqc on the trimmed fastq files. Trim Galore can automatically do this for you.</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load trimgalore/0.6.6</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">trim_galore</span> <span class="dt">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--cores</span> 4 <span class="dt">\</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--paired</span> <span class="op">&lt;</span>data_R1_001.fastq.gz<span class="op">&gt;</span> <span class="op">&lt;</span>data_R2_001.fastq.gz<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--fastqc</span> <span class="dt">\</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--output_dir</span> <span class="op">&lt;</span>preferred_path<span class="op">&gt;</span>/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="5" type="1">
+<li>Align the data with <a href="https://github.com/alexdobin/STAR">STAR</a>. Have STAR format the alignment as a sorted BAM file.</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load STAR/2.7.9</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load samtools</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--runThreadN</span> 16 <span class="dt">\</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--genomeDir</span> /path/to/star/index/ <span class="dt">\</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--readFilesCommand</span> zcat <span class="dt">\</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">--readFilesIn</span> <span class="op">&lt;</span>data_R1_001.fastq.gz<span class="op">&gt;</span> <span class="op">&lt;</span>data_R2_001.fastq.gz<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--outFileNamePrefix</span> <span class="op">&lt;</span>preferred_prefix<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">--outSAMtype</span> BAM SortedByCoordinate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="6" type="1">
+<li>Use <a href="http://homer.ucsd.edu/homer/">HOMER</a> to generate <a href="http://homer.ucsd.edu/homer/ngs/tagDir.html">tag directories</a> from the STAR alignment BAM file. Use the <code>-sspe -flip</code> options if the data is generated using our lab’s dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load homer/5.1</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">makeTagDirectory</span> <span class="op">&lt;</span>tagDirectoryName<span class="op">&gt;</span> <span class="op">&lt;</span>filename.sam<span class="op">&gt;</span> -genome <span class="op">&lt;</span>experiment_genome<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-checkGC</span> <span class="at">-format</span> sam <span class="at">-sspe</span> <span class="at">-flip</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Omit `-sspe` if the sequencing data is not paired end, and omit `-flip` if the sequencing reads will not align to the opposite DNA strand as in "first-strand" library synthesis protocols.</code></pre>
+<ol start="7" type="1">
+<li>Use <a href="http://www.htslib.org">Samtools</a> to <a href="http://www.htslib.org/doc/samtools-index.html">index</a> the sorted BAM files.</li>
+</ol>
+</section>
+<section id="data-quality-control" class="level1">
+<h1>Data quality control</h1>
+<ol type="1">
+<li>Use the fastqc results to check basic data quality.</li>
+<li>Check data assumptions and quality using a local install of the <a href="https://software.broadinstitute.org/software/igv/">Integrative Genomics Viewer</a>. An alternative would be to load a HOMER <a href="http://homer.ucsd.edu/homer/ngs/ucsc.html"><code>makeUCSCfile</code></a> into the <a href="https://genome.ucsc.edu">UCSC Genome Browser</a>. An even better solution is to load HOMER <a href="http://homer.ucsd.edu/homer/ngs/ucsc.html"><code>makeMultiWigHub.pl</code></a> tracks to the UCSC Genome Browser using a lab web server. <em>We have a web server for this purpose, but the resource is not functional yet.</em></li>
+<li>Check mapping efficiency using the STAR alignment log file.</li>
+<li>Check other basic quality parameters using the HOMER <code>tagInfo.txt</code>, <code>tagLengthDistribution.txt</code>, and <code>tagCountDistribution.txt</code> files. These files will be found in the HOMER tag directory.</li>
+<li>Check sequence bias using the HOMER <code>tagFreq.txt</code> and <code>tagFreqUniq.txt</code>. These files will also be in the HOMER tag directory. Fastqc also reports on sequencing bias.</li>
+</ol>
+<p>Many of these QC parameters can quickly be summarized using <a href="https://multiqc.info">MultiQC</a>. This software is not currently available on the BMI cluster but can be run locally. Installation is easy via <a href="https://www.docker.com">Docker</a>.</p>
+<p>In order to run MultiQc from your local machine, you will need to do one of the following: mount the server folder as a drive on your local machine (good idea), or copy the data from the server to your local machine (bad idea). Instructions for mounting the drives can be found <a href="../qmd/server_lab_drives.html">here</a> and <a href="https://confluence.research.cchmc.org/display/RESITHUB/Data+Storage">here</a>.</p>
+<p>Once a drive is mounted and the Docker software is opened, the Multiqc docker image can be run through your terminal application on your local machine as in the example described <a href="https://multiqc.info/docs/getting_started/installation/#docker">here</a> and provided below:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-t</span> <span class="at">-v</span> <span class="kw">`</span><span class="bu">pwd</span><span class="kw">`</span>:<span class="kw">`</span><span class="bu">pwd</span><span class="kw">`</span> <span class="at">-w</span> <span class="kw">`</span><span class="bu">pwd</span><span class="kw">`</span> multiqc/multiqc multiqc ./</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Another useful tool is <code>alignStats.R</code>, which generates a table containing selected information from the STAR log file and the HOMER <code>tagInfo.txt</code> file. This tool is described in more detail <a href="map_on_bmi_hpc (in progress!)">below</a>.</p>
+</section>
+<section id="automated-data-processing" class="level1">
+<h1>Automated data processing</h1>
+<p>Applying the steps outlined above to a set of new data is cumbersome and prone to human typing errors. <strong>The lab has a multi-purpose wrapper script (<code>mapper_wrapper.sh</code>) for single-read or paired-end RNA-seq data, OR single-read or paired-end ATAC- or ChIP-seq data.</strong> However, it is a good idea to learn how to use the above tools in an independent workflow. And to learn how to apply various options as best suited to your data type/assumptions. <em>Becoming over reliant on automated processing and analysis will limit understanding, independence, and creativity.</em></p>
+<p><code>mapper_wrapper.sh</code> can be run from the lab’s cluster drive or added as executables to your path. The current script version is located at <code>/data/hpc-troutman/software/scripts/mapper_wrapper.sh</code>. Let Ty know if you come across bugs or implement improvements.</p>
+<p><code>mapper_wrapper.sh</code> takes an input list file or directory of *fastq.gz files and generates and submits a series of batch files to the LSF scheduler on the CCHMC BMI High Performance Cluster. Users may use default specified parameters for standard Troutman lab paired-end RNA-seq, or specify options specific to their data type. The submitted batch files automate execution of the following: trim_galore, fastqc, data alignment, sorting and indexing alignment bam files, and tag directory creation.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution! Some assumptions made-expand to learn more.
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>This tool should work with any R1_001.fastq.gz file. Samples from the CCHMC core meet this convention.
+<ul>
+<li><code>[sample_name]_S#*L00#*[R/I][1/2]#001.fastq.gz</code></li>
+<li><code>[sample_name]</code>is the name of the sample/library as it is submitted to the core in their online submission interface.</li>
+<li><code>S#</code> is the number of the sample in the sequencing run. Each unique sample_name will be assigned an individual sample number for that run. If the same sample is present on a subsequent flow cell run, this sample may or may not have the same sample number assigned to it.</li>
+<li><code>L00#</code> is the lane number of the flow cell.</li>
+<li><code>[R/I][1/2]#</code>is the read number. Libraries that are sequenced with in a ‘Single End’ specification will not contain a Read 2 file. If fastq files are created for the index reads, these will be indicated by ‘I1’ for the i7 index or ‘I2’ for the i5 index.</li>
+<li><code>001</code> The last segment is always 001.</li>
+<li><code>fastq.gz</code> Each file has been compressed with the gzip compression algorithm to conserve space. The CCHMC core meets this convention.</li>
+</ul></li>
+<li>Other samples may need to be renamed, as in the case-specific example below. <em>It is good practice to triple-check your commands with an <code>echo</code> statement before running the final command.</em></li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> R1.fastq.gz<span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> mv <span class="va">$i</span> <span class="va">${i</span><span class="op">/</span><span class="ss">R1_001.fastq.gz</span><span class="op">/</span>R1.fastq.gz<span class="va">}</span><span class="kw">;</span> <span class="cf">done</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> R2.fastq.gz<span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> mv <span class="va">$i</span> <span class="va">${i</span><span class="op">/</span><span class="ss">R2_001.fastq.gz</span><span class="op">/</span>R2.fastq.gz<span class="va">}</span><span class="kw">;</span> <span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>These tools require input of only one <code>fastq.gz</code> file per sample per read direction. If you have multiple files <code>*R1_001.fastq.gz</code> or <code>*R2_001.fastq.gz</code> file per sample, they can be concatenated using <code>bash /data/hpc-troutman/software/scripts/combine_fastq.sh</code>.</li>
+<li>This tool generates tag directories specif to lab library chemistries (e.g.&nbsp;lab standard <a href="https://cchmc-my.sharepoint.com/:w:/g/personal/ty_troutman_cchmc_org/EQq4IL-eReVMgL_-hyBey8IBvTnNd7zF6jL4pGzWQxyylw?e=uFlh8V">dUTP RNA-seq protocol</a>).</li>
+</ul>
+</div>
+</div>
+</div>
+<section id="using-mapper_wrapper.sh" class="level3">
+<h3 class="anchored" data-anchor-id="using-mapper_wrapper.sh">Using <code>mapper_wrapper.sh</code></h3>
+<p>Usage on the cluster should be done on the head node and does not require loading module(s).</p>
+<p>First, list the data you wish to process into a file. For example:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /directory/one/<span class="pp">*</span>R1_001.fastq.gz <span class="op">&gt;</span> file.list</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /directory/one/<span class="pp">*</span>R1_001.fastq.gz <span class="op">&gt;&gt;</span> file.list</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /directory/two/<span class="pp">*</span>R1_001.fastq.gz <span class="op">&gt;&gt;</span> file.list</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /directory/two/<span class="pp">*</span>R1_001.fastq.gz <span class="op">&gt;&gt;</span> file.list</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the list</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> file.list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, for standard lab paired-end RNA-seq using mm39, run the following command:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> /data/hpc-troutman/software/scripts/mapper_wrapper.sh file.list mm39</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For standard lab ATAC-seq or ChIP-seq:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> /data/hpc-troutman/software/scripts/mapper_wrapper.sh file.list mm39 <span class="at">-a</span> bowtie2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If specifically requiring .sam alignment files:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> /data/hpc-troutman/software/scripts/mapper_wrapper.sh file.list mm39 <span class="at">-o</span> SAM <span class="at">-k</span> samtools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Additional options:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Usage:</span> mapper_wrapper.sh INPUT GENOME <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Required</span> positional arguments:</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">INPUT</span>                           Path to file list or directory of <span class="pp">*</span>_R1_<span class="pp">*</span>.fastq.gz</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">GENOME</span>                          Genome key <span class="er">(</span><span class="ex">e.g.,</span> mm39<span class="kw">)</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Options:</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-o,</span> <span class="at">--output-format</span> SAM<span class="kw">|</span><span class="ex">BAM</span>     Output format <span class="er">(</span><span class="ex">default</span> BAM<span class="kw">)</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-a,</span> <span class="at">--aligner</span> star<span class="kw">|</span><span class="ex">bowtie2</span>      Aligner choice <span class="er">(</span><span class="ex">default</span> star<span class="kw">)</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-r,</span> <span class="at">--read-type</span> auto<span class="kw">|</span><span class="ex">single</span><span class="kw">|</span><span class="ex">paired</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="ex">Read</span> layout detection <span class="er">(</span><span class="ex">default</span> auto<span class="kw">)</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-s,</span> <span class="at">--subsample</span> N<span class="kw">|</span><span class="ex">all</span>           Subsample reads <span class="er">(</span><span class="ex">default</span> all<span class="kw">)</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-k,</span> <span class="at">--skip</span> step1,step2          Skip steps: trim_galore,fastqc,align,samtools,tagdir</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-e,</span> <span class="at">--extra-aligner-opts</span> <span class="st">"OPTS"</span> Extra options passed to aligner</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--extra-tagdir-opts</span> <span class="st">"OPTS"</span>      Extra options passed to makeTagDirectory</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--custom-genome</span> DIR             Override genome index directory</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--load-modules</span> <span class="st">"m1 m2 ..."</span>      Replace default list of modules to load</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-w,</span> <span class="at">--walltime</span> H:MM             Set walltime limit <span class="er">(</span><span class="ex">default</span> 4:00<span class="kw">)</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-c,</span> <span class="at">--cores</span> N                   Set number of cores <span class="er">(</span><span class="ex">default</span> 16<span class="kw">)</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-m,</span> <span class="at">--memory</span> MB                 Set memory per job <span class="er">(</span><span class="ex">default</span> 40000<span class="kw">)</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-n,</span> <span class="at">--dry-run</span>                   Dry run <span class="er">(</span><span class="ex">show</span> but do not submit jobs<span class="kw">)</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-f,</span> <span class="at">--force</span>                     Force overwrite of existing outputs</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-h,</span> <span class="at">--help</span>                      Show this help message and exit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The script generates and submits individual .bat files to the LSF scheduler. For example:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#!/bin/bash</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">set</span> <span class="at">-euo</span> pipefail</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#BSUB -J Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#BSUB -o logs/map_Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.out</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#BSUB -e logs/map_Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.err</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#BSUB -W 2:00</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#BSUB -n 16</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#BSUB -M 64000</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#BSUB -R "rusage[mem=64000]"</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#BSUB -R "span[hosts=1]"</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">module</span> purge <span class="op">&gt;</span>/dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">||</span> <span class="fu">true</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="ex">module</span> load trimgalore/0.6.6</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="ex">module</span> load fastqc/0.11.7</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="ex">module</span> load STAR/2.7.9</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="ex">module</span> load bowtie2/2.3.4.1</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="ex">module</span> load samtools</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="ex">module</span> load homer/5.1</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="va">SKIP_STEPS</span><span class="op">=</span><span class="st">""</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skip()</span><span class="kw">{</span> <span class="kw">[[</span> <span class="st">" </span><span class="va">$SKIP_STEPS</span><span class="st"> "</span> <span class="ot">==</span> <span class="pp">*</span><span class="st">" </span><span class="va">$1</span><span class="st"> "</span><span class="pp">*</span> <span class="kw">]];</span> <span class="kw">}</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subsample (if requested)</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Trim Galore</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="ot">! </span><span class="ex">skip</span> trim_galore<span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="ex">trim_galore</span> <span class="at">--paired</span> <span class="at">--fastqc</span> <span class="at">--cores</span> 8 <span class="at">-o</span> trim_galore <span class="st">"/data/hpc-troutman/archive/221102_CCHMC_SP1/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.fastq.gz"</span> <span class="st">"/data/hpc-troutman/archive/221102_CCHMC_SP1/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R2_001.fastq.gz"</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Alignment (STAR or Bowtie2)</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="ot">! </span><span class="ex">skip</span> align<span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>    <span class="ex">STAR</span> <span class="at">--genomeDir</span> <span class="st">"/data/hpc-troutman/genomes/indexes/star/mm10_starIndex"</span> <span class="at">--readFilesCommand</span> zcat <span class="at">--readFilesIn</span> trim_galore/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001_val_1.fq.gz trim_galore/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R2_001_val_2.fq.gz <span class="at">--runThreadN</span> <span class="st">"16"</span>  <span class="at">--outFileNamePrefix</span> <span class="st">"align_out/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.mm10."</span> <span class="at">--outSAMtype</span> BAM SortedByCoordinate</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># SAMtools sort/index (if needed)</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="ot">! </span><span class="ex">skip</span> samtools<span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="ex">samtools</span> index <span class="st">"align_out/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.mm10.Aligned.sortedByCoord.out.bam"</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># TagDir</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="ot">! </span><span class="ex">skip</span> tagdir<span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>    <span class="ex">makeTagDirectory</span> <span class="st">"tagdirs/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.mm10"</span> <span class="st">"align_out/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.mm10.Aligned.sortedByCoord.out.bam"</span> <span class="at">-checkGC</span> <span class="at">-format</span> sam <span class="at">-sspe</span> <span class="at">-flip</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="data-processing-validation" class="level3">
+<h3 class="anchored" data-anchor-id="data-processing-validation">Data processing validation</h3>
+<p>Runs errors/warnings/success can quickly be summarized using <code>validate_mapping.py</code>. <em>This tool makes heavy use of hard-coding and may not catch all possible errors/warnings.</em></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">usage:</span> validate_mapping.py <span class="pp">[-</span><span class="ss">h</span><span class="pp">]</span> <span class="at">-d</span> DIRECTORY <span class="at">-t</span> <span class="dt">{mapper</span><span class="op">,</span><span class="dt">shift</span><span class="op">,</span><span class="dt">allele}</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                           <span class="ex">[</span><span class="dt">{mapper</span><span class="op">,</span><span class="dt">shift</span><span class="op">,</span><span class="dt">allele}</span> ...]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">validate_mapping.py:</span> error: the following arguments are required: <span class="at">-d</span>/--directory, <span class="at">-t</span>/--type</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Example output:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tro3nr@bmiclusterp2:/data/hpc-troutman/member/tro3nr/250513_tmp$</span> validate_mapping.py <span class="at">-d</span> logs/ <span class="at">-t</span> mapper</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Summary</span> of errors and completions for mapper logs <span class="er">(</span><span class="ex">sorted</span> by sample name<span class="kw">)</span><span class="bu">:</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="ex">map_Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001:</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> ✅ Successfully completed.</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="ex">map_Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00315-GGAGATTC-GTTCAGAC_R1_001:</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> ✅ Successfully completed.</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="ex">map_Mouse-C57BL6J-BMDM-RNA-PBS-E00306-TTATGTAT-TTCAAGAG_R1_001:</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> ✅ Successfully completed.</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="ex">map_Mouse-C57BL6J-BMDM-RNA-PBS-E00307-TTGGTCCG-TTAACACT_R1_001:</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> ✅ Successfully completed.</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Summary:</span> 0 Errors, 0 Partial Successes <span class="er">(</span><span class="ex">Chunks</span><span class="kw">)</span><span class="ex">,</span> 4 Full Successes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="mouse-genetic-variation" class="level1">
+<h1>Mouse genetic variation</h1>
+<p><a href="https://academic.oup.com/nar/article/46/14/7006/5035172">MMARGE: Motif Mutation Analysis for Regulatory Genomic Elements</a></p>
+<section id="strain-specific-genomes" class="level2">
+<h2 class="anchored" data-anchor-id="strain-specific-genomes">Strain specific genomes</h2>
+<p>Sequencing data from mouse strains should be mapped to the strain specific genome. With MMARGE.pl, this requires generating a pseudo genome using strain-specific .vcf files. At present, these are still built on mm10 and awaiting formal release by <a href="https://www.mousegenomes.org">The Mouse Genomes Project</a> before moving to mm39. Currently available STAR indexes are: <code>aj, akrj, balbcj, c57bl10j, c57bl6j, c57bl6nj, casteij, dba1j, dba2j, fvbnj, hg38, mm10, mm39, nodshiltj, pwkphj, spreteij, wsbeij</code>.</p>
+<p>Data should be left as .sam files for downstream processing by MMARGE.pl. For standard RNA-seq libraries, the following serves as an example:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mapper_wrapper.sh</span> file.list pwkphj <span class="at">-o</span> SAM <span class="at">-k</span> samtools, tagdir</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We have not generated bowtie2 indexes for these genomes. Further, <code>mapper_wrapper.sh</code> requires an update before it will work with bowtie2 and mouse strians.</p>
+</section>
+<section id="shifting-to-the-reference" class="level2">
+<h2 class="anchored" data-anchor-id="shifting-to-the-reference">Shifting to the reference</h2>
+<p>Data mapped to the strain specific genome is then shifted to the reference using <code>MMARGE.pl shift</code>, which is run through an apptainer container. This processing step can take 1-2 days per file, depending on the file size. LSF jobs can be generated/submitted using <code>mmarge_shift_wrapper.sh</code>. <em>This script is still being developed/validated.</em></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/data/hpc-troutman/software/scripts/mmarge_shift_wrapper.sh</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Error:</span> Must provide filelist or directory and MMARGE_GENOME.</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> /users/tro3nr/.local/bin/mmarge_shift_wrapper.sh <span class="op">&lt;</span>filelist.txt<span class="kw">|</span><span class="ex">directory</span><span class="op">&gt;</span> <span class="op">&lt;</span>MMARGE_GENOME<span class="op">&gt;</span> [-t TYPE] [-w WALLTIME] [-n NCORES] [-m MEMORY] <span class="pp">[--</span><span class="ss">dry</span><span class="pp">-</span><span class="ss">run</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">bamify</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">tagdir</span><span class="pp">]</span> <span class="pp">[-</span><span class="ss">h</span><span class="pp">]</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Positional</span> arguments:</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">filelist.txt</span><span class="kw">|</span><span class="ex">directory</span>   Text file or directory containing SAM/BAM files</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">MMARGE_GENOME</span>            Genome key: one of A_J AKR_J BALB_CJ C57BL_10J C57BL_6J C57BL_6NJ CAST_EIJ DBA_1J DBA_2J FVB_NJ NOD_SHILTJ PWK_PHJ SPRET_EIJ WSB_EIJ</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Optional</span> flags:</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-t,</span> <span class="at">--type</span> TYPE          Data type <span class="er">(</span><span class="ex">default:</span> rna-paired<span class="kw">;</span> <span class="ex">options:</span> rna-single, atac-chip<span class="kw">)</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-w,</span> <span class="at">--walltime</span> WALLTIME  Wall time <span class="er">(</span><span class="ex">default:</span> 36:00<span class="kw">)</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-n,</span> <span class="at">--ncores</span> NCORES      Number of cores <span class="er">(</span><span class="ex">default:</span> 8<span class="kw">)</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-m,</span> <span class="at">--memory</span> MEMORY      Memory in MB <span class="er">(</span><span class="ex">default:</span> 8000<span class="kw">)</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>      <span class="ex">--dry-run</span>            Show job submission but do not execute jobs</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>      <span class="ex">--bamify</span>             Convert SAM to BAM and remove SAM files</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>      <span class="ex">--tagdir</span>             Create tag directories using makeTagDirectory</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-h,</span> <span class="at">--help</span>               Display this help message</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sorting-allele-specific-reads" class="level2">
+<h2 class="anchored" data-anchor-id="sorting-allele-specific-reads">Sorting allele specific reads</h2>
+<p>Shifted .sam files from F1-hybrid mice can then be sorted into reads spanning variants specific to a parental genome. This is done using <code>MMARGE.pl allele_speicfic_reads</code> through the apptainer container. This also takes a long time. LSF jobs can be generated/submitted using <code>mmarge_allele_specific_wrapper.sh</code>. <em>This script is still being developed/validated.</em></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/data/hpc-troutman/software/scripts/mmarge_allele_specific_wrapper.sh</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Error:</span> Must provide filelist or directory and MMARGE_GENOME.</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Usage:</span> mmarge_allele_specific_wrapper.sh <span class="op">&lt;</span>FILE.LIST<span class="kw">|</span><span class="ex">DIRECTORY</span><span class="op">&gt;</span> <span class="op">&lt;</span>MMARGE_GENOME<span class="op">&gt;</span> <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Required</span> arguments:</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>FILE.LIST<span class="kw">|</span><span class="ex">DIRECTORY</span><span class="op">&gt;</span>   File list of shifted SAMs or directory containing them</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">MMARGE_GENOME</span>            Genome key: one of A_J AKR_J BALB_CJ C57BL_10J C57BL_6J C57BL_6NJ CAST_EIJ DBA_1J DBA_2J FVB_NJ NOD_SHILTJ PWK_PHJ SPRET_EIJ WSB_EIJ mm10-clean</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Options:</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--allele-2</span>          Second non-reference genome for f1-hybrids not using C57BL/6 <span class="er">(</span><span class="ex">mm10-clean</span><span class="kw">)</span><span class="ex">,</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                            <span class="ex">one</span> of A_J AKR_J BALB_CJ C57BL_10J C57BL_6J C57BL_6NJ CAST_EIJ DBA_1J DBA_2J FVB_NJ NOD_SHILTJ PWK_PHJ SPRET_EIJ WSB_EIJ mm10-clean</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--aligner</span>           Aligner used for sam files: <span class="er">(</span><span class="ex">default:</span> star<span class="kw">;</span> <span class="ex">options:</span> star, bowtie2<span class="kw">)</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--walltime</span> HH:MM    Wall time for job <span class="er">(</span><span class="ex">default:</span> 24:00<span class="kw">)</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--ncores</span> INT        Number of CPU cores <span class="er">(</span><span class="ex">default:</span> 8<span class="kw">)</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--memory</span> INT        Memory in MB <span class="er">(</span><span class="ex">default:</span> 8000<span class="kw">)</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--type</span> TYPE         Data type <span class="er">(</span><span class="ex">default:</span> rna-paired<span class="kw">;</span> <span class="ex">options:</span> rna-single, atac-chip<span class="kw">)</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--bamify</span>            Convert allele-specific SAMs to sorted BAMs and remove SAMs</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--tagdir</span>            Generate HOMER tag directories from allele-specific outputs</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--dry-run</span>           Preview job script generation without submitting</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--help</span>              Display this help message and exit</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Example:</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="ex">mmarge_allele_specific_wrapper.sh</span> align_out A_J <span class="at">-t</span> rna-paired <span class="at">--bamify</span> <span class="at">--tagdir</span> <span class="at">--dry-run</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="script-locations" class="level1">
+<h1>Script locations</h1>
+<p>Scripts described above can be executed from our cluster drive. Current versions are located at:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/data/hpc-troutman/software/scripts/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can also symlink these scripts to your bin to avoid typing out the fullname. Make sure they are executable. Or run the below for loop:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> combine_fastq.sh mapper_wrapper.sh mmarge_allele_specific_wrapper.sh mmarge_shift_wrapper.sh validate_mapping.py <span class="dt">\</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  do ln <span class="at">-s</span> /data/hpc-troutman/software/scripts/<span class="va">$i</span> ~/.local/bin/ <span class="dt">\</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  chmod +x ~/.local/bin/<span class="va">$i</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

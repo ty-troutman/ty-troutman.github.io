@@ -22,55 +22,57 @@ website:
       - text: "CCHMC"
         href: "https://www.cincinnatichildrens.org/research/divisions/a/allergy-immunology/labs/troutman"
     
-  # sidebar:
-  #   - id: Internal_Materials
-  #     align: left
-  #     style: "floating"
-  #     search: true
-  #     collapse-level: 1
-  #     contents:
-  #     #   - text: "Internal Materials"
-  #     #     href: qmd/Internal_Materials.qmd
-  #     # - section: "Rules, Policies, and other Useful Information"
-  #     #   contents:
-  #     #     - text: "Lab rules and policies"
-  #     #       href: qmd/rules_policies.qmd
-  #     #     - text: "Member contact information"
-  #     #       href:  "https://cchmc-my.sharepoint.com/:w:/g/personal/ty_troutman_cchmc_org/EcZjXGbja-tNiBppyW2v950BevUzcQV8cCpfNJLyixJYFA?e=K0p3UP"
-  #     - section: "Using the Server"
-  #       contents:
-  #         - text: "BMI Cluster"
-  #           href: qmd/server_bmi_cluster.qmd
-  #         - text: "Lab Cluster Drives"
-  #           href: qmd/server_lab_drives.qmd
-  #     - section: "Analysis"
-  #       contents:
-  #         - text: "RNA-Seq Analysis"
-  #           href: qmd/analysis_rna_seq.qmd
-  #         - text: "ATAC- and ChIP-Seq Analysis"
-  #           href: qmd/analysis_atac_chip_seq.qmd
-  #         - text: "Additional Analyses"
-  #           href: "https://github.com/ty-troutman/Genomics-analyses"
-  #     - section: "Sequencing"
-  #       contents:
-  #         - text: "Database and Barcodes"
-  #           href: qmd/Database_Barcodes.qmd
-  #         - text: "Pooling and Submitting Samples"
-  #           href: qmd/Pooling_Submission.qmd
-  #         - text: "Downloading from CCHMC"
-  #           href: qmd/NGS_Scraper_KevinErnst.qmd
-  #     - section: "Logs and Protocols"
-  #       contents:
-  #         - text: "Troutman-Lab-Share"
-  #           href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share?csf=1&web=1&e=nEuYqw"
-  #         - text: "Logs"
-  #           href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Reagent_Logs?csf=1&web=1&e=oK8Gbg"
-  #         - text: "Cell Preparation"
-  #           href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Protocols-Methods/primaryCells?csf=1&web=1&e=gtd3YL"
-  #         - text: "Equipment"
-  #           href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Equipment?csf=1&web=1&e=cgrrX0"
-  #         - text: "Genomics"
-  #           href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Protocols-Methods/genomics?csf=1&web=1&e=eifcHl"
+  sidebar:
+    - id: Internal_Materials
+      align: left
+      style: "floating"
+      search: true
+      collapse-level: 1
+      contents:
+      #   - text: "Internal Materials"
+      #     href: qmd/Internal_Materials.qmd
+      # - section: "Rules, Policies, and other Useful Information"
+      #   contents:
+      #     - text: "Lab rules and policies"
+      #       href: qmd/rules_policies.qmd
+      #     - text: "Member contact information"
+      #       href:  "https://cchmc-my.sharepoint.com/:w:/g/personal/ty_troutman_cchmc_org/EcZjXGbja-tNiBppyW2v950BevUzcQV8cCpfNJLyixJYFA?e=K0p3UP"
+      - section: "Using the Server"
+        contents:
+          - text: "BMI Cluster"
+            href: qmd/server_bmi_cluster.qmd
+          - text: "Lab Cluster Drives"
+            href: qmd/server_lab_drives.qmd
+      - section: "Sequencing data"
+        contents:
+          - text: "Processing data"
+            href: qmd/processing_sequencing_data.qmd
+          - text: "RNA-seq"
+            href: qmd/analysis_rna_seq.qmd
+          - text: "ATAC- and ChIP-Seq Analysis"
+            href: qmd/analysis_atac_chip_seq.qmd
+          - text: "Additional Analyses"
+            href: "https://github.com/ty-troutman/Genomics-analyses"
+      - section: "NGS libraries"
+        contents:
+          - text: "Database and Barcodes"
+            href: qmd/Database_Barcodes.qmd
+          - text: "Pooling and Submitting Samples"
+            href: qmd/Pooling_Submission.qmd
+          - text: "Downloading from CCHMC"
+            href: qmd/NGS_Scraper_KevinErnst.qmd
+      - section: "Logs and Protocols"
+        contents:
+          - text: "Troutman-Lab-Share"
+            href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share?csf=1&web=1&e=nEuYqw"
+          - text: "Logs"
+            href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Reagent_Logs?csf=1&web=1&e=oK8Gbg"
+          - text: "Cell Preparation"
+            href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Protocols-Methods/primaryCells?csf=1&web=1&e=gtd3YL"
+          - text: "Equipment"
+            href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Equipment?csf=1&web=1&e=cgrrX0"
+          - text: "Genomics"
+            href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Protocols-Methods/genomics?csf=1&web=1&e=eifcHl"
         
 format:
   html:

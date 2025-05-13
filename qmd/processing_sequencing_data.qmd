@@ -1,0 +1,326 @@
+---
+title: "Processing sequencing data"
+format:
+  html:
+    toc: true
+    toc-expand: 3
+---
+
+This is meant to be a guideline for processing and analysis of most Illumina sequencing data in the Troutman lab. There are many alternative ways to consider processing, quality control, quantification, and differential expression analysis. This workflow is not a gold standard, will not always work for all data, and is open for interpretation/criticism.
+
+# General workflow
+
+1.  Verify data checksums and rename following lab convention: \<filenameA\>\_R1.fastq.gz \<filenameA\>\_R2.fastq.gz \<filenameB\>\_R1.fastq.gz \<filenameB\>\_R2.fastq.gz
+
+2.  Group data according to mapping needs, e.g. by genome, paired end and single read, etc.
+
+3.  Run [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) on the raw fastq files.
+
+``` bash
+module load fastqc/0.11.7
+fastqc <data>R1_001.fastq.gz -o <preferred_name>
+fastqc <data>R2_001.fastq.gz -o <preferred_name>
+```
+
+4.  Run [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) on the fastq files. Rerun fastqc on the trimmed fastq files. Trim Galore can automatically do this for you.
+
+``` bash
+module load trimgalore/0.6.6
+trim_galore \
+    --cores 4 \
+    --paired <data_R1_001.fastq.gz> <data_R2_001.fastq.gz> \
+    --fastqc \
+    --output_dir <preferred_path>/
+```
+
+5.  Align the data with [STAR](https://github.com/alexdobin/STAR). Have STAR format the alignment as a sorted BAM file.
+
+``` bash
+module load STAR/2.7.9
+module load samtools
+STAR \
+    --runThreadN 16 \
+    --genomeDir /path/to/star/index/ \
+    --readFilesCommand zcat \
+    --readFilesIn <data_R1_001.fastq.gz> <data_R2_001.fastq.gz> \
+    --outFileNamePrefix <preferred_prefix> \
+    --outSAMtype BAM SortedByCoordinate
+```
+
+6.  Use [HOMER](http://homer.ucsd.edu/homer/) to generate [tag directories](http://homer.ucsd.edu/homer/ngs/tagDir.html) from the STAR alignment BAM file. Use the `-sspe -flip` options if the data is generated using our lab's dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.
+
+``` bash
+module load homer/5.1
+makeTagDirectory <tagDirectoryName> <filename.sam> -genome <experiment_genome> \
+    -checkGC -format sam -sspe -flip
+```
+
+```         
+Omit `-sspe` if the sequencing data is not paired end, and omit `-flip` if the sequencing reads will not align to the opposite DNA strand as in "first-strand" library synthesis protocols.
+```
+
+7.  Use [Samtools](http://www.htslib.org) to [index](http://www.htslib.org/doc/samtools-index.html) the sorted BAM files.
+
+# Data quality control
+
+1.  Use the fastqc results to check basic data quality.
+2.  Check data assumptions and quality using a local install of the [Integrative Genomics Viewer](https://software.broadinstitute.org/software/igv/). An alternative would be to load a HOMER [`makeUCSCfile`](http://homer.ucsd.edu/homer/ngs/ucsc.html) into the [UCSC Genome Browser](https://genome.ucsc.edu). An even better solution is to load HOMER [`makeMultiWigHub.pl`](http://homer.ucsd.edu/homer/ngs/ucsc.html) tracks to the UCSC Genome Browser using a lab web server. *We have a web server for this purpose, but the resource is not functional yet.*
+3.  Check mapping efficiency using the STAR alignment log file.
+4.  Check other basic quality parameters using the HOMER `tagInfo.txt`, `tagLengthDistribution.txt`, and `tagCountDistribution.txt` files. These files will be found in the HOMER tag directory.
+5.  Check sequence bias using the HOMER `tagFreq.txt` and `tagFreqUniq.txt`. These files will also be in the HOMER tag directory. Fastqc also reports on sequencing bias.
+
+Many of these QC parameters can quickly be summarized using [MultiQC](https://multiqc.info). This software is not currently available on the BMI cluster but can be run locally. Installation is easy via [Docker](https://www.docker.com).
+
+In order to run MultiQc from your local machine, you will need to do one of the following: mount the server folder as a drive on your local machine (good idea), or copy the data from the server to your local machine (bad idea). Instructions for mounting the drives can be found [here](server_lab_drives.qmd) and [here](https://confluence.research.cchmc.org/display/RESITHUB/Data+Storage).
+
+Once a drive is mounted and the Docker software is opened, the Multiqc docker image can be run through your terminal application on your local machine as in the example described [here](https://multiqc.info/docs/getting_started/installation/#docker) and provided below:
+
+``` bash
+docker run -t -v `pwd`:`pwd` -w `pwd` multiqc/multiqc multiqc ./
+```
+
+Another useful tool is `alignStats.R`, which generates a table containing selected information from the STAR log file and the HOMER `tagInfo.txt` file. This tool is described in more detail [below](map_on_bmi_hpc%20(in%20progress!)).
+
+# Automated data processing
+
+Applying the steps outlined above to a set of new data is cumbersome and prone to human typing errors. **The lab has a multi-purpose wrapper script (`mapper_wrapper.sh`) for single-read or paired-end RNA-seq data, OR single-read or paired-end ATAC- or ChIP-seq data.** However, it is a good idea to learn how to use the above tools in an independent workflow. And to learn how to apply various options as best suited to your data type/assumptions. *Becoming over reliant on automated processing and analysis will limit understanding, independence, and creativity.*
+
+`mapper_wrapper.sh` can be run from the lab's cluster drive or added as executables to your path. The current script version is located at `/data/hpc-troutman/software/scripts/mapper_wrapper.sh`. Let Ty know if you come across bugs or implement improvements.
+
+`mapper_wrapper.sh` takes an input list file or directory of *fastq.gz files and generates and submits a series of batch files to the LSF scheduler on the CCHMC BMI High Performance Cluster. Users may use default specified parameters for standard Troutman lab paired-end RNA-seq, or specify options specific to their data type. The submitted batch files automate execution of the following: trim_galore, fastqc, data alignment, sorting and indexing alignment bam files, and tag directory creation.
+
+::: {.callout-caution collapse="true"}
+## Caution! Some assumptions made-expand to learn more.
+-   This tool should work with any R1_001.fastq.gz file. Samples from the CCHMC core meet this convention.
+    -   `[sample_name]_S#*L00#*[R/I][1/2]#001.fastq.gz`
+    -   `[sample_name]`is the name of the sample/library as it is submitted to the core in their online submission interface.
+    -   `S#` is the number of the sample in the sequencing run. Each unique sample_name will be assigned an individual sample number for that run. If the same sample is present on a subsequent flow cell run, this sample may or may not have the same sample number assigned to it.
+    -   `L00#` is the lane number of the flow cell.
+    -   `[R/I][1/2]#`is the read number. Libraries that are sequenced with in a 'Single End' specification will not contain a Read 2 file. If fastq files are created for the index reads, these will be indicated by 'I1' for the i7 index or 'I2' for the i5 index.
+    -   `001` The last segment is always 001.
+    -   `fastq.gz` Each file has been compressed with the gzip compression algorithm to conserve space. The CCHMC core meets this convention.
+-   Other samples may need to be renamed, as in the case-specific example below. *It is good practice to triple-check your commands with an `echo` statement before running the final command.*
+
+``` bash
+for i in R1.fastq.gz; do echo mv $i ${i/R1_001.fastq.gz/R1.fastq.gz}; done 
+for i in R2.fastq.gz; do echo mv $i ${i/R2_001.fastq.gz/R2.fastq.gz}; done
+```
+
+-   These tools require input of only one `fastq.gz` file per sample per read direction. If you have multiple files `*R1_001.fastq.gz` or `*R2_001.fastq.gz` file per sample, they can be concatenated using `bash /data/hpc-troutman/software/scripts/combine_fastq.sh`.
+-   This tool generates tag directories specif to lab library chemistries (e.g. lab standard [dUTP RNA-seq protocol](https://cchmc-my.sharepoint.com/:w:/g/personal/ty_troutman_cchmc_org/EQq4IL-eReVMgL_-hyBey8IBvTnNd7zF6jL4pGzWQxyylw?e=uFlh8V)).
+:::
+
+
+### Using `mapper_wrapper.sh`
+Usage on the cluster should be done on the head node and does not require loading module(s). 
+
+First, list the data you wish to process into a file. For example:
+```bash
+ls /directory/one/*R1_001.fastq.gz > file.list
+ls /directory/one/*R1_001.fastq.gz >> file.list
+ls /directory/two/*R1_001.fastq.gz >> file.list
+ls /directory/two/*R1_001.fastq.gz >> file.list
+
+# Check the list
+cat file.list
+```
+
+Then, for standard lab paired-end RNA-seq using mm39, run the following command:
+``` bash
+bash /data/hpc-troutman/software/scripts/mapper_wrapper.sh file.list mm39
+```
+
+For standard lab ATAC-seq or ChIP-seq:
+``` bash
+bash /data/hpc-troutman/software/scripts/mapper_wrapper.sh file.list mm39 -a bowtie2
+```
+
+If specifically requiring .sam alignment files:
+``` bash
+bash /data/hpc-troutman/software/scripts/mapper_wrapper.sh file.list mm39 -o SAM -k samtools
+```
+
+Additional options:
+``` bash
+  Usage: mapper_wrapper.sh INPUT GENOME [options]
+
+  Required positional arguments:
+    INPUT                           Path to file list or directory of *_R1_*.fastq.gz
+    GENOME                          Genome key (e.g., mm39)
+
+  Options:
+    -o, --output-format SAM|BAM     Output format (default BAM)
+    -a, --aligner star|bowtie2      Aligner choice (default star)
+    -r, --read-type auto|single|paired
+                                    Read layout detection (default auto)
+    -s, --subsample N|all           Subsample reads (default all)
+    -k, --skip step1,step2          Skip steps: trim_galore,fastqc,align,samtools,tagdir
+    -e, --extra-aligner-opts "OPTS" Extra options passed to aligner
+    --extra-tagdir-opts "OPTS"      Extra options passed to makeTagDirectory
+    --custom-genome DIR             Override genome index directory
+    --load-modules "m1 m2 ..."      Replace default list of modules to load
+    -w, --walltime H:MM             Set walltime limit (default 4:00)
+    -c, --cores N                   Set number of cores (default 16)
+    -m, --memory MB                 Set memory per job (default 40000)
+    -n, --dry-run                   Dry run (show but do not submit jobs)
+    -f, --force                     Force overwrite of existing outputs
+    -h, --help                      Show this help message and exit
+```
+
+The script generates and submits individual .bat files to the LSF scheduler. For example:
+``` bash
+  
+  #!/bin/bash
+  set -euo pipefail
+  #BSUB -J Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001
+  #BSUB -o logs/map_Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.out
+  #BSUB -e logs/map_Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.err
+  #BSUB -W 2:00
+  #BSUB -n 16
+  #BSUB -M 64000
+  #BSUB -R "rusage[mem=64000]"
+  #BSUB -R "span[hosts=1]"
+
+  module purge >/dev/null 2>&1 || true
+  module load trimgalore/0.6.6
+  module load fastqc/0.11.7
+  module load STAR/2.7.9
+  module load bowtie2/2.3.4.1
+  module load samtools
+  module load homer/5.1
+
+
+  SKIP_STEPS=""
+  skip(){ [[ " $SKIP_STEPS " == *" $1 "* ]]; }
+
+  # Subsample (if requested)
+
+
+  # Trim Galore
+  if ! skip trim_galore; then
+    trim_galore --paired --fastqc --cores 8 -o trim_galore "/data/hpc-troutman/archive/221102_CCHMC_SP1/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.fastq.gz" "/data/hpc-troutman/archive/221102_CCHMC_SP1/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R2_001.fastq.gz"
+  fi
+
+  # Alignment (STAR or Bowtie2)
+  if ! skip align; then
+    STAR --genomeDir "/data/hpc-troutman/genomes/indexes/star/mm10_starIndex" --readFilesCommand zcat --readFilesIn trim_galore/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001_val_1.fq.gz trim_galore/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R2_001_val_2.fq.gz --runThreadN "16"  --outFileNamePrefix "align_out/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.mm10." --outSAMtype BAM SortedByCoordinate
+  fi
+
+  # SAMtools sort/index (if needed)
+  if ! skip samtools; then
+    samtools index "align_out/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.mm10.Aligned.sortedByCoord.out.bam"
+  fi
+
+  # TagDir
+  if ! skip tagdir; then
+    makeTagDirectory "tagdirs/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.mm10" "align_out/Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001.mm10.Aligned.sortedByCoord.out.bam" -checkGC -format sam -sspe -flip
+  fi
+  
+```
+
+### Data processing validation
+
+Runs errors/warnings/success can quickly be summarized using `validate_mapping.py`. *This tool makes heavy use of hard-coding and may not catch all possible errors/warnings.*
+
+```bash
+usage: validate_mapping.py [-h] -d DIRECTORY -t {mapper,shift,allele}
+                           [{mapper,shift,allele} ...]
+validate_mapping.py: error: the following arguments are required: -d/--directory, -t/--type
+```
+
+Example output:
+```bash
+tro3nr@bmiclusterp2:/data/hpc-troutman/member/tro3nr/250513_tmp$ validate_mapping.py -d logs/ -t mapper
+Summary of errors and completions for mapper logs (sorted by sample name):
+
+map_Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001:
+  - ✅ Successfully completed.
+map_Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00315-GGAGATTC-GTTCAGAC_R1_001:
+  - ✅ Successfully completed.
+map_Mouse-C57BL6J-BMDM-RNA-PBS-E00306-TTATGTAT-TTCAAGAG_R1_001:
+  - ✅ Successfully completed.
+map_Mouse-C57BL6J-BMDM-RNA-PBS-E00307-TTGGTCCG-TTAACACT_R1_001:
+  - ✅ Successfully completed.
+
+Summary: 0 Errors, 0 Partial Successes (Chunks), 4 Full Successes
+
+```
+
+# Mouse genetic variation
+[MMARGE: Motif Mutation Analysis for Regulatory Genomic Elements](https://academic.oup.com/nar/article/46/14/7006/5035172)
+
+## Strain specific genomes
+Sequencing data from mouse strains should be mapped to the strain specific genome. With MMARGE.pl, this requires generating a pseudo genome using strain-specific .vcf files. At present, these are still built on mm10 and awaiting formal release by [The Mouse Genomes Project](https://www.mousegenomes.org) before moving to mm39. Currently available STAR indexes are: `aj, akrj, balbcj, c57bl10j, c57bl6j, c57bl6nj, casteij, dba1j, dba2j, fvbnj, hg38, mm10, mm39, nodshiltj, pwkphj, spreteij, wsbeij`.
+
+Data should be left as .sam files for downstream processing by MMARGE.pl. For standard RNA-seq libraries, the following serves as an example:
+```bash
+mapper_wrapper.sh file.list pwkphj -o SAM -k samtools, tagdir
+```
+We have not generated bowtie2 indexes for these genomes. Further, `mapper_wrapper.sh` requires an update before it will work with bowtie2 and mouse strians.
+
+## Shifting to the reference
+Data mapped to the strain specific genome is then shifted to the reference using `MMARGE.pl shift`, which is run through an apptainer container. This processing step can take 1-2 days per file, depending on the file size. LSF jobs can be generated/submitted using `mmarge_shift_wrapper.sh`. *This script is still being developed/validated.* 
+
+```bash
+/data/hpc-troutman/software/scripts/mmarge_shift_wrapper.sh
+Error: Must provide filelist or directory and MMARGE_GENOME.
+Usage: /users/tro3nr/.local/bin/mmarge_shift_wrapper.sh <filelist.txt|directory> <MMARGE_GENOME> [-t TYPE] [-w WALLTIME] [-n NCORES] [-m MEMORY] [--dry-run] [--bamify] [--tagdir] [-h]
+
+Positional arguments:
+  filelist.txt|directory   Text file or directory containing SAM/BAM files
+  MMARGE_GENOME            Genome key: one of A_J AKR_J BALB_CJ C57BL_10J C57BL_6J C57BL_6NJ CAST_EIJ DBA_1J DBA_2J FVB_NJ NOD_SHILTJ PWK_PHJ SPRET_EIJ WSB_EIJ
+
+Optional flags:
+  -t, --type TYPE          Data type (default: rna-paired; options: rna-single, atac-chip)
+  -w, --walltime WALLTIME  Wall time (default: 36:00)
+  -n, --ncores NCORES      Number of cores (default: 8)
+  -m, --memory MEMORY      Memory in MB (default: 8000)
+      --dry-run            Show job submission but do not execute jobs
+      --bamify             Convert SAM to BAM and remove SAM files
+      --tagdir             Create tag directories using makeTagDirectory
+  -h, --help               Display this help message
+```
+
+## Sorting allele specific reads
+Shifted .sam files from F1-hybrid mice can then be sorted into reads spanning variants specific to a parental genome. This is done using `MMARGE.pl allele_speicfic_reads` through the apptainer container. This also takes a long time. LSF jobs can be generated/submitted using `mmarge_allele_specific_wrapper.sh`. *This script is still being developed/validated.*
+
+```bash
+/data/hpc-troutman/software/scripts/mmarge_allele_specific_wrapper.sh
+Error: Must provide filelist or directory and MMARGE_GENOME.
+Usage: mmarge_allele_specific_wrapper.sh <FILE.LIST|DIRECTORY> <MMARGE_GENOME> [options]
+
+Required arguments:
+  <FILE.LIST|DIRECTORY>   File list of shifted SAMs or directory containing them
+  MMARGE_GENOME            Genome key: one of A_J AKR_J BALB_CJ C57BL_10J C57BL_6J C57BL_6NJ CAST_EIJ DBA_1J DBA_2J FVB_NJ NOD_SHILTJ PWK_PHJ SPRET_EIJ WSB_EIJ mm10-clean
+
+Options:
+  --allele-2          Second non-reference genome for f1-hybrids not using C57BL/6 (mm10-clean),
+                            one of A_J AKR_J BALB_CJ C57BL_10J C57BL_6J C57BL_6NJ CAST_EIJ DBA_1J DBA_2J FVB_NJ NOD_SHILTJ PWK_PHJ SPRET_EIJ WSB_EIJ mm10-clean
+  --aligner           Aligner used for sam files: (default: star; options: star, bowtie2)
+  --walltime HH:MM    Wall time for job (default: 24:00)
+  --ncores INT        Number of CPU cores (default: 8)
+  --memory INT        Memory in MB (default: 8000)
+  --type TYPE         Data type (default: rna-paired; options: rna-single, atac-chip)
+  --bamify            Convert allele-specific SAMs to sorted BAMs and remove SAMs
+  --tagdir            Generate HOMER tag directories from allele-specific outputs
+  --dry-run           Preview job script generation without submitting
+  --help              Display this help message and exit
+
+Example:
+  mmarge_allele_specific_wrapper.sh align_out A_J -t rna-paired --bamify --tagdir --dry-run
+```
+
+# Script locations
+
+Scripts described above can be executed from our cluster drive. Current versions are located at:
+```bash
+/data/hpc-troutman/software/scripts/
+```
+
+You can also symlink these scripts to your bin to avoid typing out the fullname. Make sure they are executable. Or run the below for loop:
+```bash
+for i in combine_fastq.sh mapper_wrapper.sh mmarge_allele_specific_wrapper.sh mmarge_shift_wrapper.sh validate_mapping.py \
+  do ln -s /data/hpc-troutman/software/scripts/$i ~/.local/bin/ \
+  chmod +x ~/.local/bin/$i
+done
+```

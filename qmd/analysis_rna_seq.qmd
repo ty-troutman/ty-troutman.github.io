@@ -1,211 +1,39 @@
 ---
 title: "RNA-seq analysis"
+format:
+  html:
+    toc: true
+    toc-expand: 3
 ---
 
 This is meant to be a guideline for processing and analysis of RNA-seq data in the Troutman lab. There are many alternative ways to consider processing, quality control, quantification, and differential expression analysis. This workflow is not a gold standard, will not always work for all data, and is open for interpretation/criticism.
 
-## General workflow
+# Garbage in, garbage out
 
-### Data processing
+Ensure data pass standard qc metrics prior to digging into the biological meaning. 
 
-1.  Verify data checksums and rename following lab convention: \<filenameA\>\_R1.fastq.gz \<filenameA\>\_R2.fastq.gz \<filenameB\>\_R1.fastq.gz \<filenameB\>\_R2.fastq.gz
+# Data quantification
 
-2.  Group data according to mapping needs, e.g. by genome, paired end and single read, etc.
-
-3.  Run [fastqc](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) on the raw fastq files.
-
-``` bash
-module load fastqc/0.11.7
-fastqc <data>.R1.fastq.gz -o <preferred_name>
-fastqc <data>.R2.fastq.gz -o <preferred_name>
-```
-
-4.  Run [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) on the fastq files. Rerun fastqc on the trimmed fastq files. Trim Galore can automatically do this for you.
-
-``` bash
-module load trimgalore/0.6.6
-trim_galore \
-    --cores 4 \
-    --paired <data_R1.fastq.gz> <data_R2.fastq.gz> \
-    --fastqc \
-    --output_dir <preferred_path>/
-```
-
-5.  Align the data with [STAR](https://github.com/alexdobin/STAR). Have STAR format the alignment as a sorted BAM file.
-
-``` bash
-module load STAR/2.7.9
-module load samtools
-STAR \
-    --runThreadN 16 \
-    --genomeDir /path/to/star/index/ \
-    --readFilesCommand zcat \
-    --readFilesIn <data_R1.fastq.gz> <data_R2.fastq.gz> \
-    --outFileNamePrefix <preferred_prefix> \
-    --outSAMtype BAM SortedByCoordinate
-```
-
-6.  Use [HOMER](http://homer.ucsd.edu/homer/) to generate [tag directories](http://homer.ucsd.edu/homer/ngs/tagDir.html) from the STAR alignment BAM file. Use the `-sspe -flip` options if the data is generated using our lab's dUTP protocol, which is strand specific and reports on the opposite strand from the original molecule.
-
-``` bash
-module load homer/5.1
-makeTagDirectory <tagDirectoryName> <filename.sam> -genome <experiment_genome> \
-    -checkGC -format sam -sspe -flip
-```
-
-```         
-Omit `-sspe` if the sequencing data is not paired end, and omit `-flip` if the sequencing reads will not align to the opposite DNA strand as in "first-strand" library synthesis protocols.
-```
-
-7.  Use [Samtools](http://www.htslib.org) to [index](http://www.htslib.org/doc/samtools-index.html) the sorted BAM files.
-
-### Data quality control
-
-1.  Use the fastqc results to check basic data quality.
-2.  Check data assumptions and quality using a local install of the [Integrative Genomics Viewer](https://software.broadinstitute.org/software/igv/). An alternative would be to load a HOMER [`makeUCSCfile`](http://homer.ucsd.edu/homer/ngs/ucsc.html) into the [UCSC Genome Browser](https://genome.ucsc.edu). An even better solution is to load HOMER [`makeMultiWigHub.pl`](http://homer.ucsd.edu/homer/ngs/ucsc.html) tracks to the UCSC Genome Browser using a lab web server. *We have a web server for this purpose, but the resource is not functional yet.*
-3.  Check mapping efficiency using the STAR alignment log file.
-4.  Check other basic quality parameters using the HOMER `tagInfo.txt`, `tagLengthDistribution.txt`, and `tagCountDistribution.txt` files. These files will be found in the HOMER tag directory.
-5.  Check sequence bias using the HOMER `tagFreq.txt` and `tagFreqUniq.txt`. These files will also be in the HOMER tag directory. Fastqc also reports on sequencing bias.
-
-Many of these QC parameters can quickly be summarized using [MultiQC](https://multiqc.info). This software is not currently available on the BMI cluster but can be run locally. Installation is easy via [Docker](https://www.docker.com).
-
-In order to run MultiQc from your local machine, you will need to do one of the following: mount the server folder as a drive on your local machine (good idea), or copy the data from the server to your local machine (bad idea). Instructions for mounting the drives can be found [here](server_lab_drives.qmd) and [here](https://confluence.research.cchmc.org/display/RESITHUB/Data+Storage).
-
-Once a drive is mounted and the Docker software is opened, the Multiqc docker image can be run through your terminal application on your local machine as in the example described [here](https://multiqc.info/docs/getting_started/installation/#docker) and provided below:
-
-``` bash
-docker run -t -v `pwd`:`pwd` -w `pwd` multiqc/multiqc multiqc ./path/to/mounted/drive
-```
-
-Another useful tool is `alignStats.R`, which generates a table containing selected information from the STAR log file and the HOMER `tagInfo.txt` file. This tool is described in more detail [below](map_on_bmi_hpc%20(in%20progress!)).
-
-### Data quantification
-
-1.  Quantify sequencing reads using HOMER `[analyzeRepeat.pl]`(http://homer.ucsd.edu/homer/ngs/analyzeRNA.html).
+1.  Quantify sequencing reads using HOMER [`analyzeRepeats.pl`](http://homer.ucsd.edu/homer/ngs/analyzeRNA.html).
 2.  Compare gene detection depth by plotting distribution of normalized transcript counts at various thresholds.
 3.  Validate experimental replicates and treatment differences with log transformed data using principal component analysis and/or pairwise correlation analysis.
 4.  Compare expression of some control and test genes using bar plots, box whisker plots, and/or a genome browser.
 5.  Compare global expression profiles with log transformed data by heat map. Assess global expression profiles with and without row scaling.
 
-### Differential expression analysis
+# Differential expression analysis
 
 1.  Differential expression analysis should be used cautiously if data fails QC steps or statistical method assumptions.
 2.  Identify deferentially expressed genes with raw sequencing counts (non-normalized data) using [DeSeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html). This can be done directly with DeSeq2 in R, or it can be done through HOMER using [`getDiffExpression.pl`](http://homer.ucsd.edu/homer/ngs/diffExpression.html).
 3.  Results can be summarized genome wide with various types of scatter plots or heat maps.
 4.  Check biological function of differential genes using gene ontology tools. Examples include: [Metascape](https://metascape.org/gp/index.html), [ToppGene](https://toppgene.cchmc.org) or [ToppFun](https://toppgene.cchmc.org/enrichment.jsp), [Gene Set Enrichment Analysis](https://www.gsea-msigdb.org/gsea/index.jsp), [Qiagen Ingenuity Pathway Analysis](https://digitalinsights.qiagen.com/products-overview/discovery-insights-portfolio/analysis-and-visualization/qiagen-ipa/) (*\$\$\$*), etc.
 
-### Analytical creativity
+# Analytical creativity
 
 Analysis of RNA-seq data is only limited by the quality of the data and your imagination. Consider intersecting your results with data from other systems, experiments, or genomics assays as a way to develop and refine new hypotheses.
 
-## Automated pipelines
+# Automated pipeline: [A.C.Rsuite](https://github.com/z5ouyang/A.C.Rsuite)
 
-Applying the steps outlined above to a set of new data is cumbersome and prone to human typing errors. We have access to a few automated pipelines to help streamline these steps. However, it is a good idea to learn how to use the above tools in an independent workflow. And to learn how to apply the various options as best suited to your data type/assumptions. *Becoming over reliant on automated processing and analysis will limit understanding, independence, and creativity.*
-
-### map_on_bmi_hpc (in progress!)
-
-*Presently, the lab has independent wrapper scripts individually tailored for single-read or paired-end RNA-seq data, or single-read or paired-end ChIP-seq or ATAC-seq data. Eventually these scripts will be merged into an integrated tool that functions via specification of command line options.*
-
-These wrapper scripts takes an input directory path of grouped data and generate and submit a series of batch .bat files on the BMI High Performance Cluster. Users have the option to specify variables specific to their data or use default specified parameters. The submitted batch files automate execution of the following: fastqc, trim_galore, data alignment, tag directory creation, and sorting and indexing alignment bam files.
-
-These scripts can be run from the lab's cluster drive or added as executables to your path. Current versions are located at:
-
-``` bash
-/data/hpc-troutman/software/scripts/wrapper_star_paired.R
-/data/hpc-troutman/software/scripts/wrapper_star_singleread.R
-/data/hpc-troutman/software/scripts/working_wrapper_bowtie2_pairedend.R
-/data/hpc-troutman/software/scripts/working_wrapper_bowtie2_singleread.R
-```
-
-::: callout-warning
--   These tools depend on file names using the standard/default Illumina naming convention. Samples from the CCHMC core meet this convention.
-    -   `[sample_name]_S#*L00#*[R/I]#001.fastq.gz`
-    -   `[sample_name]`is the name of the sample/library as it is submitted to the core in their online submission interface.
-    -   `S#` is the number of the sample in the sequencing run. Each unique sample_name will be assigned an individual sample number for that run. If the same sample is present on a subsequent flow cell run, this sample may or may not have the same sample number assigned to it.
-    -   `L00#` is the lane number of the flow cell.
-    -   `[R/I]#`is the read number. Libraries that are sequenced with in a 'Single End' specification will not contain a Read 2 file. If fastq files are created for the index reads, these will be indicated by 'I1' for the i7 index or 'I2' for the i5 index.
-    -   `001` The last segment is always 001.
-    -   `fastq.gz` Each file has been compressed with the gzip compression algorithm to conserve space. The CCHMC core meets this convention.
--   Other samples may need to be renamed, as in the case-specific example below. *It is good practice to triple-check your commands with an `echo` statement before running the final command.*
-
-``` bash
-for i in R1.fastq.gz; do echo mv $i ${i/R1_001.fastq.gz/R1.fastq.gz}; done 
-for i in R2.fastq.gz; do echo mv $i ${i/R2_001.fastq.gz/R2.fastq.gz}; done
-```
-
--   These tools require input of only one `fastq.gz` file per sample per read direction.
--   These tools generate tag directories assuming a stranded library chemistry (e.g. lab standard [dUTP RNA-seq protocol](https://cchmc-my.sharepoint.com/:w:/g/personal/ty_troutman_cchmc_org/EQq4IL-eReVMgL_-hyBey8IBvTnNd7zF6jL4pGzWQxyylw?e=uFlh8V)).
-:::
-
-Usage on the cluster requires a loaded R module. An example follows:
-
-``` bash
-module load R/4.4.0-R9
-Rscript /data/hpc-troutman/software/scripts/wrapper_star_paired.R -d /data/troutman-hpc/archive/fastq_path
-```
-
-For example, the script generates and submits the following .bat file to the LSF scheduler:
-
-``` bash
-#BSUB -W 2:00
-#BSUB -n 16
-#BSUB -M 40000
-#BSUB -e ./bsub_scripts/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.err
-#BSUB -o ./bsub_scripts/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.out
-#BSUB -R "span[hosts=1]"
-
-# load modules
-module load fastqc/0.11.7
-module load trimgalore/0.6.6
-module load STAR/2.7.9
-module load samtools
-module load homer/5.1
-
-# execute fastqc
-fastqc demo_data//Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R1.fastq.gz -o ./fastqc_orig/
-fastqc demo_data//Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R2.fastq.gz -o ./fastqc_orig/
-
-# execute trim_galore
-trim_galore \
-    --cores 4 \
-    --paired demo_data//Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R1.fastq.gz demo_data//Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R2.fastq.gz\
-    --fastqc \
-    --output_dir ./trim_galore/
-
-# rename trimmed files
-mv ./trim_galore/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R1_val_1.fq.gz ./trim_galore/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R1.fastq.gz
-mv ./trim_galore/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R2_val_2.fq.gz ./trim_galore/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R2.fastq.gz
-mv ./trim_galore/*fastqc* ./fastqc_trimmed/
-
-# execute STAR
-STAR \
-    --runThreadN 16 \
-    --genomeDir /data/hpc-troutman/genomes/indexes/star/mm10_starIndex/ \
-    --readFilesCommand zcat \
-    --readFilesIn ./trim_galore//Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R1.fastq.gz ./trim_galore//Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R2.fastq.gz \
-    --outFileNamePrefix ./star_out/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10. \
-    --outSAMtype BAM SortedByCoordinate
-
-# remove STAR temporary directories
-rm -r ./star_out/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10._STARtmp
-
-# execute HOMER makeTagDirectory
-makeTagDirectory ./tag_directories/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10/ \
-    ./star_out/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10.Aligned*am \
-    -genome mm10 -checkGC -format sam -sspe -flip
-
-# copy STAR log files to the HOMER tag directory
-cp ./star_out/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.*Log.final.out ./tag_directories/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10.star.log
-cp ./star_out/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.*Log.out ./tag_directories/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10.star.consolelog
-
-# execute samtools index, then discard the sam file and trimmed fastq file
-samtools index ./star_out/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA.mm10.Aligned*am
-rm ./trim_galore/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R1.fastq.gz ./trim_galore/Mouse-AB6F1J-BMDM-RNA-LPS-0H-M-E00494-TATGCGGT-AGCACCTA_R2.fastq.gz
-
-echo Done!
-```
-
-### [A.C.Rsuite](https://github.com/z5ouyang/A.C.Rsuite)
+Applying the steps outlined above to a set of new data is cumbersome and prone to human typing errors. We have access to an automated pipeline to help streamline these steps. However, it is a good idea to learn how to use the above tools in an independent workflow. And to learn how to apply the various options as best suited to your data type/assumptions. *Becoming over reliant on automated processing and analysis will limit understanding, independence, and creativity.*
 
 This analysis tool suite was created by Zhengyu Ouyang to simplify frequent HOMER analyses of mapped and processed genomics data (RNA-seq as well as ATAC-seq and ChIP-seq). These tools require an input `sample definition` file. This is a 4 column table for RNA-Seq or ATAC-Seq and 5 column table for ChIP-Seq. The table must be formatted as 'tab' separated (\\t) and should not contain a header row.
 
@@ -217,20 +45,20 @@ This analysis tool suite was created by Zhengyu Ouyang to simplify frequent HOME
 
 An example follows (omit the header column):
 
-| Column 1 | Column 2 | Column 3                                                                | Column 4                |
+| Column 1 | Column 2 | Column 3 | Column 4 |
 |:-----------------|:-----------------|:-----------------|:-----------------|
-| group1   | gray0    | /path/to/tag_directory/group1_rep1/;/path/to/tag_directory/group1_rep2/ | group1_rep1;group1_rep2 |
-| group2   | gray33   | /path/to/tag_directory/group2_rep1/;/path/to/tag_directory/group2_rep2/ | group2_rep1;group2_rep2 |
-| group3   | gray66   | /path/to/tag_directory/group3_rep1/;/path/to/tag_directory/group3_rep2/ | group3_rep1;group3_rep2 |
+| group1 | gray0 | /path/to/tag_directory/group1_rep1/;/path/to/tag_directory/group1_rep2/ | group1_rep1;group1_rep2 |
+| group2 | gray33 | /path/to/tag_directory/group2_rep1/;/path/to/tag_directory/group2_rep2/ | group2_rep1;group2_rep2 |
+| group3 | gray66 | /path/to/tag_directory/group3_rep1/;/path/to/tag_directory/group3_rep2/ | group3_rep1;group3_rep2 |
 
 *The GitHub versions are not fully functional on the BMI cluster, but we have edited versions suppressing the non-functional aspects (`makeMultiWigHub.pl`).*
 
-#### rnaPipe.R
+## rnaPipe.R
 
 `rnaPipe.R` is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called `alignStats.txt`, data quantification results in a directory called `rnaQuan/`, and differential expression results in a directory called `rnaDiff/`. These tools require a compatible R and HOMER module is loaded when run through the BMI HPC.
 
 ::: callout-warning
-## Make sure you specify the correct genome for your analysis!
+### Make sure you specify the correct genome for your analysis!
 
 This must match the genome used for mapping. The default genome for A.C.Rsuite is `mm10`. The most up-to-date mouse genome is currently `mm39`. Human genomes could be `hg38` or `hg19.`
 :::
@@ -245,7 +73,7 @@ rnaPipe.R /path/sample_definition -o /output/path -g available_homer_genome
 
 Steps from `rnaPipe.R` can also be run/rerun individually, and some have additional analysis options available. Script instructions and available options can be viewed by entering the command into the terminal.
 
-#### alignStats.R
+## alignStats.R
 
 `alignStats.R` compiles various quality control statistics into a summary table based on what is in the sample definition file. An example usage follows:
 
@@ -253,12 +81,12 @@ Steps from `rnaPipe.R` can also be run/rerun individually, and some have additio
 Rscript alignStats.R /path/sample_definition > alignStats.txt
 ```
 
-#### rnaQuan.R
+## rnaQuan.R
 
 `rnaQuan.R` performs routine quantification of RNA-seq data by reading in the sample definition file and using HOMER and R to perform the following: - Generate an `analyzeRepeats.pl` raw sequencing count file (`-raw` or `-noadj`) specifying the options `-condenseGenes -count exons`. - Generate an `analyzeRepeats.pl` TPM normalized file (`-tpm` option) specifying the option `-count exons` <u>but not `-condenseGenes`</u>. This file is subsetted based on accession numbers within the raw count file. - Short genes (less than 200 bp) are removed, and a simplified raw file (`rawC.txt`) and TPM file (`rawT.txt`) are created. - A series of plots are created that: compare gene length versus expression means and variance; assess data grouping using principal component analyses; compare pair-wise Parson's correlations using heat maps and within group 2d kernel density plots. - Group replicate tag directories are merged into a `mergeTag` folder. - A UCSC genome browser hub track is created using the sample definition file name. <u>This aspect will not function until the web server and script are correctly configured</u>.
 
 ::: callout-warning
-## Make sure you specify the correct genome for your analysis!
+### Make sure you specify the correct genome for your analysis!
 
 This must match the genome used for mapping. The default genome for A.C.Rsuite is `mm10`. The most up-to-date mouse genome is currently `mm39.` Human genomes could be `hg38` or `hg19.`
 :::
@@ -269,14 +97,24 @@ An example usage follows:
 Rscript rnaQuan.R /path/sample_definition -o rnaQuan -g homer_genome
 ```
 
-#### rnaDiff.R
+## rnaDiff.R
 
 `rnaDiff.R` performs group pairwise differential expression analysis using DeSeq2 as. This depends both on the sample definition file *and* the processed raw count and TPM files generated by `rnaQuan.R`. It generates the following: - DeSeq2 results for any gene above a declared TPM threshold (default 8) for each pairwise comparison between each group (not one group versus all remaining). - Scatter plots and MA plots visualizing expression differences between each pair of groups. - A series of summary heat map for the composite list of deferentially expressed genes between all groups.
 
 An example usage is follows:
-
 ``` bash
 Rscript rnaDiff.R /path/sample_definition -c rnaQuan/rawC.txt -t rnaQuan/rawT.txt -o rnaDiff/
 ```
+# Script access
+These scripts can be found and run from the lab's cluster drive. 
+```bash
+/data/hpc-troutman/software/scripts/
+```
 
-These scripts can be run from the lab's cluster drive or added as an executable to your path. Current versions are located at `/data/hpc-troutman/software/scripts/`.
+You can also symlink these scripts to your bin to avoid typing out the fullname and Rscript. Make sure they are executable. Or run the below for loop:
+```bash
+for i in alignStats.R peakCor.R peakDiff.R peakIDR.R peakPipe.R peakQuan.RplotMotif.R rnaDiff.R rnaPipe.R rnaQuan.R trimLen.R \\
+  do ln -s /data/hpc-troutman/software/scripts/$i ~/.local/bin/ \\
+  chmod +x ~/.local/bin/$i
+done
+```

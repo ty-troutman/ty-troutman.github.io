@@ -16,12 +16,14 @@
     - text: "Lab cluster drives"
       href: server_lab_drives.qmd
       
-- title: Analysis
-  subtitle: Data analysis workflow and examples
+- title: Sequencing data
+  subtitle: Processing and analysis workflows
   links:
-    - text: "RNA-seq analysis"
+    - text: "Processing data"
+      href: processing_sequencing_data.qmd
+    - text: "RNA-seq"
       href: analysis_rna_seq.qmd
-    - text: "ATAC- and ChIP-seq analysis (TBD)"
+    - text: "ATAC- and ChIP-seq (TBD)"
       href: analysis_atac_chip_seq.qmd
     - text: "Additional analyses"
       href: "https://github.com/ty-troutman/Genomics-analyses"
