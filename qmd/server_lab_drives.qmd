@@ -1,5 +1,14 @@
 ---
 title: "Lab Cluster Drives"
+format:
+  html:
+    toc: true
+    toc-expand: 3
+    grid:
+      sidebar-width: 300px
+      body-width: 1200px
+      margin-width: 300px
+      gutter-width: 1.5rem
 ---
 
 We have two [institutionally supported](https://centerlink.cchmc.org/research/is4r/home) storage volumes on the HPC cluster.

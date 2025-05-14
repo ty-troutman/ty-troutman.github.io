@@ -1,6 +1,15 @@
 ---
 title: "Pooling and Submission of Sequencing Libraries"
 editor: source
+format:
+  html:
+    toc: true
+    toc-expand: 3
+    grid:
+      sidebar-width: 300px
+      body-width: 1200px
+      margin-width: 300px
+      gutter-width: 1.5rem
 ---
 
 -   Only pool samples for sequencing that have compatible i5/p5 and i7/p7 barcodes. More information on Troutman lab barcode collisions can be found [here](https://github.com/ty-troutman/labSequencingBarcodes).

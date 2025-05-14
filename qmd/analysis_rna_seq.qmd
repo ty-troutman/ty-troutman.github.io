@@ -4,6 +4,11 @@ format:
   html:
     toc: true
     toc-expand: 3
+    grid:
+      sidebar-width: 300px
+      body-width: 1200px
+      margin-width: 300px
+      gutter-width: 1.5rem
 ---
 
 This is meant to be a guideline for processing and analysis of RNA-seq data in the Troutman lab. There are many alternative ways to consider processing, quality control, quantification, and differential expression analysis. This workflow is not a gold standard, will not always work for all data, and is open for interpretation/criticism.

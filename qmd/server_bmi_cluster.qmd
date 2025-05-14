@@ -1,5 +1,14 @@
 ---
 title: "Biomedical Informatics High Performance Computing Cluster"
+format:
+  html:
+    toc: true
+    toc-expand: 3
+    grid:
+      sidebar-width: 300px
+      body-width: 1200px
+      margin-width: 300px
+      gutter-width: 1.5rem
 ---
 
 **Credit:** Kevin Ernst, Matthew Weirauch, and Leah Kottyan for compiling and hosting much of this information not found on the DBS HPC website.
