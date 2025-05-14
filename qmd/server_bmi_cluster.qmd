@@ -13,34 +13,37 @@ format:
 
 **Credit:** Kevin Ernst, Matthew Weirauch, and Leah Kottyan for compiling and hosting much of this information not found on the DBS HPC website.
 
-We have access to a Linux [computational cluster](https://hpc.research.cchmc.org/accessing-the-cluster) through the [Data Management and Analysis Collaborative (DMAC)](https://centerlink.cchmc.org/research/research---tabs/dmac/grant-boilerplate). To request access to the cluster, please use the linked [web form](https://hpc.research.cchmc.org/node/36), or send an email to Cluster Support: help-cluster\@bmi.cchmc.org. After your access is enabled, you should be able to login to the cluster with your CCHMC employee network credentials. 
+We have access to a RedHat 9 Linux based high performance computing (HPC) cluster [computational cluster](https://hpc.research.cchmc.org) through the [Data Management and Analysis Collaborative (DMAC)](https://centerlink.cchmc.org/research/research---tabs/dmac/grant-boilerplate). To request access to the cluster,  use the linked [web form](https://hpc.research.cchmc.org/node/36), or send an email to Cluster Support: help-cluster\@bmi.cchmc.org. After your access is enabled, you should be able to login to the cluster with your CCHMC employee network credentials. 
 
-Up to date policies are described [here](https://hpc.research.cchmc.org/node/13). In brief, all users have a default disk (home directory) quota of 100 GB and a job walltime quota of 10000 hours per quarter, which is free. The quota of your home directory is fixed, and cannot be changed. To increase the walltime, please send an email to [Cluster Support](mailto:help-cluster@bmi.cchmc.org).
+Up to date policies are described [here](https://hpc.research.cchmc.org/node/13). Briefly, all users have a default disk (home directory) quota of 100 GB and a job walltime quota of 10000 hours per quarter, which is free. The quota of your home directory is fixed, and cannot be changed. Your home directory is accessible at the path `/users/<userid>` and has a default 100 GB quota. Email [Cluster Support](mailto:help-cluster@bmi.cchmc.org) to request an increase in wall time, as [described](https://hpc.research.cchmc.org/node/13).
 
-Your [home directory](https://en.wikipedia.org/wiki/home_directory) is accessible at the path `/users/YOURUSERID` and has a default 100 GB quota. You also have access to a "[scratch](https://hpc.research.cchmc.org/node/14)" volume at `/scratch/YOURUSERID`, where there is a 100 GB quota with a burst of up to 5 TB for up to 7 days. Anything there will be removed after 60 days. Users typically do not have (read/write) access to other users' home directories. Thus, [`/data/hpc-troutman/`](server_lab_drives.qmd) is the place to store any data or analyses (*not personal files*) that anyone else in the lab might ever need to work with.
+You also have access to a shared scratch volume for **storing temporary job data only**, located at `/scratch/<userid>`. The up-to-date policy for the scratch area is described [here](https://hpc.research.cchmc.org/node/14). In brief:\
+
+-   A user's scratch (`/scratch/<userid>`) directory has a baseline limit of 500GB.\
+-   A user can burst over this 500GB limit for up to 14 days to a maximum of 5TB.\
+-   If a user remains over 500GB past 14 days then additional data writes are denied.\
+-   A user can reset their burst usage clock by reducing usage under 500GB for 10 minutes.\
+-   Data older than 60 days are cleaned every day. Be sure to move your data off this space as soon as your job completes.\
+
+Users typically do not have (read/write) access to other users' home/scratch directories. Thus, [`/data/hpc-troutman/`](server_lab_drives.qmd) is the place to store any data or analyses that anyone else in the lab might ever need to work with. **This space is not for storing personal files.** 
 
 # Accessing the HPC cluster
 
-Connect to the CCHMC cluster by following the [BMI instructions]https://hpc.research.cchmc.org/accessing-the-cluster), or [here](https://hpc.research.cchmc.org/node/26), or follow the examples below.
+Connect to the CCHMC cluster by following the BMI instructions [here](https://hpc.research.cchmc.org/accessing-the-cluster) and [here](https://hpc.research.cchmc.org/node/26), or follow the examples below.
 
--   If you are in the CCHMC network or connected to CCHMC VPN:
-
+-   If you are in the CCHMC network or connected to CCHMC VPN:\
     `ssh [yourusername]@bmiclusterp.chmcres.cchmc.org`
-
--   If you are outside of CCHMC network, connect to ssh.research.cchmc.org then to bmiclusterp.chmcres.cchmc.org:
-
+-   If you are outside of CCHMC network, connect to ssh.research.cchmc.org then to bmiclusterp.chmcres.cchmc.org:\
     `ssh [yourusername]@ssh.research.cchmc.org`\
     `ssh [yourusername]@bmiclusterp.chmcres.cchmc.org`
-
--   Alternatively, connect through the [OnDemand Portal](https://ondemand.research.cchmc.org/pun/sys/dashboard). Detailed instructions are [here](https://cchmc-my.sharepoint.com/personal/roberto_perea_cchmc_org/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Froberto%5Fperea%5Fcchmc%5Forg%2FDocuments%2FShared%20Documents%2FOndemand%5FUserGuide%2Epdf&parent=%2Fpersonal%2Froberto%5Fperea%5Fcchmc%5Forg%2FDocuments%2FShared%20Documents&ga=1)
+-   Alternatively, connect through the [OnDemand Portal](https://hpc.research.cchmc.org/node/67).
 
 # Running jobs on the HPC cluster
 
-::: callout-note
-Do not run computationally intensive jobs on the login/head nodes (bmiclusterp2 or p3). Basic file management or resuming a GNU Screen or tmux session should be about the extent of it.
-:::
-
+::: callout-important
+# Do not run computationally intensive jobs on the login/head nodes (bmiclusterp2 or p3).
 The "head nodes" bmiclusterp1 and bmiclusterp2 are not intended to be used for computationally-intensive tasks; basic file management is about it. The head nodes are where everyone logs in and submits their jobs, so if you were to submit computationally heavy tasks, you could prevent others from logging in or submitting their own jobs to the actual cluster nodes. Processes run from the cluster head node directly (i.e., not submitted using bsub as shown below) are limited to 75% of one CPU and 10% of total system RAM (currently at 10 GB, so 1 GB) and will be terminated if they go over.
+:::
 
 **What is a "job"?** A job is basically a Bash shell script that runs computationally intensive program of your making on the cluster.
 
@@ -48,26 +51,42 @@ The "head nodes" bmiclusterp1 and bmiclusterp2 are not intended to be used for c
 
 The BMI cluster offers several advantages:
 
--   First, the cluster has big computer capabilities. The largest nodes have 512 GB RAM and 16 cores.
-
--   Linux environment with lots of software ready to go. This is handles with many pre-installed sofware envrionment, called [Modules](http://modules.sourceforge.net/). ~~Please refer to modules [page](https://bmi.cchmc.org/resources/software/environment-modules) for more information and examples.~~
-
+-   The cluster has big computer capabilities. The largest nodes have 512 GB RAM and >16 cores.
+-   Linux environment with many pre-installed sofware, called [Modules](http://modules.sourceforge.net/). Refer to the BMI modules [page](https://hpc.research.cchmc.org/node/69) for more information and examples.
 -   The cluster allows you to do pseudo-parallelism. You can break a problem into many pieces and run many jobs in a distributed fashion.
 
 # Scheduling computation jobs with LSF
-
-The cluster batch system is currently managed by LSF resource manager and scheduler. You can find some examples of submitting jobs using LSF [here](https://hpc.research.cchmc.org/node/1). Please read the job scheduling policies [page](https://hpc.research.cchmc.org/node/13) for recent policy changes.
+The cluster batch system is managed by the LSF resource manager and scheduler. You can find some examples of submitting jobs using LSF [here](https://hpc.research.cchmc.org/node/64). Please read the job scheduling policies [page](https://hpc.research.cchmc.org/node/13) for recent policy changes.
 
 Essentially, users submit jobs to the server using the bsub command. The current state of the queue in the server can be viewed using bjobs. There are a host of other utilities that can be used by Torque users like: bkill, bmod, bstop, bmig, bresume etc. bsub can be used for batch as well as interactive submission of jobs. Interactive job submission should be used only when a user needs to run and debug his code and for short-duration jobs. In either case, you need to submit your job to a cluster node so that you can do your testing without burdening the head node.
 
-An example to directly submit a script:\
-`bsub -W 4:00 -n 1 -M 10000 < script`
+To directly submit a script, use:\
+`bsub -W 4:00 -n 1 -M 10000 < <script>`
 
-An example command to request an interactive session:\
-`bsub -W 4:00 -n 1 -M 10000 -Is /bin/bash`
+To request an interactive session (12 hours, 16 cores, 32 GB ram):\
+`bsub -W 12:00 -n 16 -M 32000 -Is /bin/bash`
 
-::: callout-note
-We have wrapper scripts to automate assembly of .bat files and submission to the LSF scheduler. More information is available [here](analysis_rna_seq.qmd).
+Jobs can be viewed using `bjobs`, or for more information, use `bjobs -l <jobid>`.\
+
+Summarize remaining wall time for all jobs using:\
+`bjobs -o "JOBID STAT RUN_TIME TIME_LEFT" -noheader`
+
+This displays run time in seconds and time left like 26:2L, which in the example below is in hours.\
+```txt
+5926570 RUN 165453 second(s) 26:2 L
+5929410 PEND 0 second(s) -
+```
+
+More time can be added using `bmod -W H:MM <jobid>`. Or in a loop:\
+```bash
+for i in <jobid1> <jobid2> <etc>; do bmod -W <H>:<MM> $i; done
+```
+
+Kill a job with `bkill <jobid>`.
+
+::: callout-important
+# We have a wrapper script to automate assembly of .bat files and job submission. 
+More information is available [here](processing_sequencing_data.qmd#Using mapper_wrapper.sh).
 :::
 
 # Checking your cluster balance
@@ -109,7 +128,7 @@ Cluster accounts are now requested using a [web form](https://hpc.research.cchmc
 
 Here is a boilerplate request for a BMI HPC cluster account that you can update with your own information:
 
-```         
+```txt         
 To: help@bmi.cchmc.org 
 Subject: New HPC cluster account
 

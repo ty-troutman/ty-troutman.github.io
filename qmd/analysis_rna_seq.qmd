@@ -14,7 +14,6 @@ format:
 This is meant to be a guideline for processing and analysis of RNA-seq data in the Troutman lab. There are many alternative ways to consider processing, quality control, quantification, and differential expression analysis. This workflow is not a gold standard, will not always work for all data, and is open for interpretation/criticism.
 
 # Garbage in, garbage out
-
 Ensure data pass standard qc metrics prior to digging into the biological meaning. 
 
 # Data quantification
