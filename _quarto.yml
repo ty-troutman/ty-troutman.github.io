@@ -59,8 +59,6 @@ website:
             href: qmd/Database_Barcodes.qmd
           - text: "Pooling and Submitting Samples"
             href: qmd/Pooling_Submission.qmd
-          - text: "Downloading from CCHMC"
-            href: qmd/NGS_Scraper_KevinErnst.qmd
       - section: "Logs and Protocols"
         contents:
           - text: "Troutman-Lab-Share"

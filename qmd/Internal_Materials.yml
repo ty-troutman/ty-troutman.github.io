@@ -35,8 +35,6 @@
       href: Database_Barcodes.qmd
     - text: "Sample pooling and submission"
       href: Pooling_Submission.qmd
-    # - text: "Downloading from CCHMC"
-    #   href: NGS_Scraper_KevinErnst.qmd
       
 - title: Logs and protocols
   subtitle: Locations of lab logs and common protocols

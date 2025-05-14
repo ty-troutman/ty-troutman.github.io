@@ -31,11 +31,19 @@ Users typically do not have (read/write) access to other users' home/scratch dir
 
 Connect to the CCHMC cluster by following the BMI instructions [here](https://hpc.research.cchmc.org/accessing-the-cluster) and [here](https://hpc.research.cchmc.org/node/26), or follow the examples below.
 
--   If you are in the CCHMC network or connected to CCHMC VPN:\
-    `ssh [yourusername]@bmiclusterp.chmcres.cchmc.org`
--   If you are outside of CCHMC network, connect to ssh.research.cchmc.org then to bmiclusterp.chmcres.cchmc.org:\
-    `ssh [yourusername]@ssh.research.cchmc.org`\
-    `ssh [yourusername]@bmiclusterp.chmcres.cchmc.org`
+-   If you are in the CCHMC network or connected to CCHMC VPN:
+
+    ```bash
+    ssh [yourusername]@bmiclusterp.chmcres.cchmc.org
+    ```
+-   If you are outside of CCHMC network, connect to ssh.research.cchmc.org then to bmiclusterp.chmcres.cchmc.org:
+
+    ```bash
+    ssh [yourusername]@ssh.research.cchmc.org
+    ```
+    ```bash
+    ssh [yourusername]@bmiclusterp.chmcres.cchmc.org
+    ```
 -   Alternatively, connect through the [OnDemand Portal](https://hpc.research.cchmc.org/node/67).
 
 # Running jobs on the HPC cluster
@@ -60,24 +68,35 @@ The cluster batch system is managed by the LSF resource manager and scheduler. Y
 
 Essentially, users submit jobs to the server using the bsub command. The current state of the queue in the server can be viewed using bjobs. There are a host of other utilities that can be used by Torque users like: bkill, bmod, bstop, bmig, bresume etc. bsub can be used for batch as well as interactive submission of jobs. Interactive job submission should be used only when a user needs to run and debug his code and for short-duration jobs. In either case, you need to submit your job to a cluster node so that you can do your testing without burdening the head node.
 
-To directly submit a script, use:\
-`bsub -W 4:00 -n 1 -M 10000 < <script>`
+To directly submit a script, use:
 
-To request an interactive session (12 hours, 16 cores, 32 GB ram):\
-`bsub -W 12:00 -n 16 -M 32000 -Is /bin/bash`
+```bash
+bsub -W 4:00 -n 1 -M 10000 < <script>
+```
+
+To request an interactive session (12 hours, 16 cores, 32 GB ram):
+
+```bash
+bsub -W 12:00 -n 16 -M 32000 -Is /bin/bash
+```
 
 Jobs can be viewed using `bjobs`, or for more information, use `bjobs -l <jobid>`.\
 
-Summarize remaining wall time for all jobs using:\
-`bjobs -o "JOBID STAT RUN_TIME TIME_LEFT" -noheader`
+Summarize remaining wall time for all jobs using:
 
-This displays run time in seconds and time left like 26:2L, which in the example below is in hours.\
+```bash
+bjobs -o "JOBID STAT RUN_TIME TIME_LEFT" -noheader
+```
+
+This displays run time in seconds and time left like 26:2L, which in the example below is in hours.
+
 ```txt
 5926570 RUN 165453 second(s) 26:2 L
 5929410 PEND 0 second(s) -
 ```
 
-More time can be added using `bmod -W H:MM <jobid>`. Or in a loop:\
+More time can be added using `bmod -W H:MM <jobid>`. Or in a loop:
+
 ```bash
 for i in <jobid1> <jobid2> <etc>; do bmod -W <H>:<MM> $i; done
 ```
