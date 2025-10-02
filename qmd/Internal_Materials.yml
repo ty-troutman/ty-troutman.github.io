@@ -11,8 +11,8 @@
 - title: Servers
   subtitle: Get started using the computational cluster and the command line interface
   links:
-    - text: "BMI cluster"
-      href: server_bmi_cluster.qmd
+    - text: "IS4R cluster"
+      href: server_is4r_cluster.qmd
     - text: "Lab cluster drives"
       href: server_lab_drives.qmd
       

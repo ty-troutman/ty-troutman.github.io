@@ -39,8 +39,8 @@ website:
       #       href:  "https://cchmc-my.sharepoint.com/:w:/g/personal/ty_troutman_cchmc_org/EcZjXGbja-tNiBppyW2v950BevUzcQV8cCpfNJLyixJYFA?e=K0p3UP"
       - section: "Using the Server"
         contents:
-          - text: "BMI Cluster"
-            href: qmd/server_bmi_cluster.qmd
+          - text: "IS4R cluster"
+            href: qmd/server_is4r_cluster.qmd
           - text: "Lab Cluster Drives"
             href: qmd/server_lab_drives.qmd
       - section: "Sequencing data"

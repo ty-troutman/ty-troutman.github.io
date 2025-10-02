@@ -74,7 +74,7 @@ Omit `-sspe` if the sequencing data is not paired end, and omit `-flip` if the s
 4.  Check other basic quality parameters using the HOMER `tagInfo.txt`, `tagLengthDistribution.txt`, and `tagCountDistribution.txt` files. These files will be found in the HOMER tag directory.
 5.  Check sequence bias using the HOMER `tagFreq.txt` and `tagFreqUniq.txt`. These files will also be in the HOMER tag directory. Fastqc also reports on sequencing bias.
 
-Many of these QC parameters can quickly be summarized using [MultiQC](https://multiqc.info). This software is not currently available on the BMI cluster but can be run locally. Installation is easy via [Docker](https://www.docker.com).
+Many of these QC parameters can quickly be summarized using [MultiQC](https://multiqc.info). This software is not currently available on the IS4R cluster but can be run locally. Installation is easy via [Docker](https://www.docker.com).
 
 In order to run MultiQc from your local machine, you will need to do one of the following: mount the server folder as a drive on your local machine (good idea), or copy the data from the server to your local machine (bad idea). Instructions for mounting the drives can be found [here](server_lab_drives.qmd) and [here](https://confluence.research.cchmc.org/display/RESITHUB/Data+Storage).
 
@@ -92,7 +92,7 @@ Applying the steps outlined above to a set of new data is cumbersome and prone t
 
 `mapper_wrapper.sh` can be run from the lab's cluster drive or added as executables to your path. The current script version is located at `/data/hpc-troutman/software/scripts/mapper_wrapper.sh`. Let Ty know if you come across bugs or implement improvements.
 
-`mapper_wrapper.sh` takes an input list file or directory of *fastq.gz files and generates and submits a series of batch files to the LSF scheduler on the CCHMC BMI High Performance Cluster. Users may use default specified parameters for standard Troutman lab paired-end RNA-seq, or specify options specific to their data type. The submitted batch files automate execution of the following: trim_galore, fastqc, data alignment, sorting and indexing alignment bam files, and tag directory creation.
+`mapper_wrapper.sh` takes an input list file or directory of *fastq.gz files and generates and submits a series of batch files to the LSF scheduler on the CCHMC IS4R High Performance Cluster. Users may use default specified parameters for standard Troutman lab paired-end RNA-seq, or specify options specific to their data type. The submitted batch files automate execution of the following: trim_galore, fastqc, data alignment, sorting and indexing alignment bam files, and tag directory creation.
 
 ::: {.callout-caution collapse="true"}
 ## Caution! Some assumptions made-expand to learn more.
@@ -235,7 +235,7 @@ validate_mapping.py: error: the following arguments are required: -d/--directory
 
 Example output:
 ```bash
-tro3nr@bmiclusterp2:/data/hpc-troutman/member/tro3nr/250513_tmp$ validate_mapping.py -d logs/ -t mapper
+<usr0xy>@bmiclusterp2:/data/hpc-troutman/member/<usr0xy>/250513_tmp$ validate_mapping.py -d logs/ -t mapper
 Summary of errors and completions for mapper logs (sorted by sample name):
 
 map_Mouse-C57BL6J-BMDM-RNA-KLA-2hr-E00314-GGACTCTG-CAAGGTAG_R1_001:
@@ -286,7 +286,7 @@ Data mapped to the strain specific genome is then shifted to the reference using
 ```txt
 /data/hpc-troutman/software/scripts/mmarge_shift_wrapper.sh
 Error: Must provide filelist or directory and MMARGE_GENOME.
-Usage: /users/tro3nr/.local/bin/mmarge_shift_wrapper.sh <filelist.txt|directory> <MMARGE_GENOME> [-t TYPE] [-w WALLTIME] [-n NCORES] [-m MEMORY] [--dry-run] [--bamify] [--tagdir] [-h]
+Usage: /users/<usr0xy>/.local/bin/mmarge_shift_wrapper.sh <filelist.txt|directory> <MMARGE_GENOME> [-t TYPE] [-w WALLTIME] [-n NCORES] [-m MEMORY] [--dry-run] [--bamify] [--tagdir] [-h]
 
 Positional arguments:
   filelist.txt|directory   Text file or directory containing SAM/BAM files

@@ -1,5 +1,5 @@
 ---
-title: "Biomedical Informatics High Performance Computing Cluster"
+title: "Information Systems for Research (IS4R) High Performance Computing Cluster"
 format:
   html:
     toc: true
@@ -29,7 +29,7 @@ Users typically do not have (read/write) access to other users' home/scratch dir
 
 # Accessing the HPC cluster
 
-Connect to the CCHMC cluster by following the BMI instructions [here](https://hpc.research.cchmc.org/accessing-the-cluster) and [here](https://hpc.research.cchmc.org/node/26), or follow the examples below.
+Connect to the CCHMC cluster by following the IS4R instructions [here](https://hpc.research.cchmc.org/accessing-the-cluster) and [here](https://hpc.research.cchmc.org/node/26), or follow the examples below.
 
 -   If you are in the CCHMC network or connected to CCHMC VPN:
 
@@ -49,7 +49,7 @@ Connect to the CCHMC cluster by following the BMI instructions [here](https://hp
 # Running jobs on the HPC cluster
 
 ::: callout-important
-# Do not run computationally intensive jobs on the login/head nodes (bmiclusterp2 or p3).
+# Do not run computationally intensive jobs on the login/head nodes (bmiclusterp1 or p2 or p3).
 The "head nodes" bmiclusterp1 and bmiclusterp2 are not intended to be used for computationally-intensive tasks; basic file management is about it. The head nodes are where everyone logs in and submits their jobs, so if you were to submit computationally heavy tasks, you could prevent others from logging in or submitting their own jobs to the actual cluster nodes. Processes run from the cluster head node directly (i.e., not submitted using bsub as shown below) are limited to 75% of one CPU and 10% of total system RAM (currently at 10 GB, so 1 GB) and will be terminated if they go over.
 :::
 
@@ -155,13 +155,11 @@ Hi everyone,
 
 May I please have an HPC cluster account? My username is usr0xy (replace with your actual username).
 
-Please also grant me the appropriate roles so that I can use the BMI HTTP proxy to download scientific data to the cluster.
-
 Thanks very much.
 
 --Your Name
 ```
 
 ::: callout-note
-Make sure to say "please" and "thank you," and include your Children's username, which is something like `usr0xy` (three letters of your last name, then three random characters). Also include with your request that you want BMI proxy access, and mention that they can look at account `ern6xv` if they need a template.
+Make sure to say "please" and "thank you," and include your Children's username, which is something like `usr0xy` (three letters of your last name, then three random characters). 
 :::

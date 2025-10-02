@@ -221,7 +221,7 @@ For more information, check out the [Research IT Hub](https://confluence.resear
 
 All lab work should be saved on a system that is appropriately backed up.
 The options are your synchronized OneDrive or one of the [lab’s server drives](server_lab_drives.qmd).
-You will need a BMI HPC account to access the lab’s server drives.
+You will need a IS4R HPC account to access the lab’s server drives.
 Instructions are at the bottom of this page.
 Ty or Mel can add you to the permission list when your account is activated, and Ty can give you a tour of that space.
 
