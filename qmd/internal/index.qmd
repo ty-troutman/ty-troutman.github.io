@@ -1,0 +1,14 @@
+---
+title: "Internal Materials"
+subtitle: Information and resources for research in the Troutman Lab.
+page-layout: article
+anchor-sections: false
+search: false
+---
+Use the sidebar to access:
+
+- server resources
+- sequencing workflows
+- library preparation information
+- logs and protocols
+- shared links

@@ -1,1 +1,54 @@
 /* css styles */
+
+/* Lab members page only */
+
+.member-card {
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+
+.member-card-pi {
+  margin-bottom: 2rem;
+}
+
+.member-grid {
+  row-gap: 1rem;
+  column-gap: 1rem;
+}
+
+.profile-img {
+  display: block;
+  margin: 0.75rem auto 0.5rem auto;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.member-card h3,
+.member-card h4 {
+  margin-top: 0;
+  margin-bottom: 0.35rem;
+}
+
+.member-card details {
+  margin-top: 0.75rem;
+}
+
+.member-card summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.members-section {
+  margin-top: 2rem;
+}
+
+.members-section h2 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}

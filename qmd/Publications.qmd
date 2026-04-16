@@ -1,0 +1,11 @@
+---
+title: "Troutman Lab Publications"
+bibliography: ../refs.bib
+# csl: ../nlm-citation-name.csl
+csl: ../nature.csl
+nocite: |
+  @*
+---
+
+::: {#refs}
+:::

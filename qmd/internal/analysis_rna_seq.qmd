@@ -1,0 +1,124 @@
+---
+title: "RNA-seq analysis"
+format:
+  html:
+    toc: true
+    toc-expand: 3
+    grid:
+      sidebar-width: 300px
+      body-width: 1200px
+      margin-width: 300px
+      gutter-width: 1.5rem
+---
+
+This is meant to be a guideline for processing and analysis of RNA-seq data in the Troutman lab. There are many alternative ways to consider processing, quality control, quantification, and differential expression analysis. This workflow is not a gold standard, will not always work for all data, and is open for interpretation/criticism.
+
+# Garbage in, garbage out
+Ensure data pass standard qc metrics prior to digging into the biological meaning. 
+
+# Data quantification
+
+1.  Quantify sequencing reads using HOMER [`analyzeRepeats.pl`](http://homer.ucsd.edu/homer/ngs/analyzeRNA.html).
+2.  Compare gene detection depth by plotting distribution of normalized transcript counts at various thresholds.
+3.  Validate experimental replicates and treatment differences with log transformed data using principal component analysis and/or pairwise correlation analysis.
+4.  Compare expression of some control and test genes using bar plots, box whisker plots, and/or a genome browser.
+5.  Compare global expression profiles with log transformed data by heat map. Assess global expression profiles with and without row scaling.
+
+# Differential expression analysis
+
+1.  Differential expression analysis should be used cautiously if data fails QC steps or statistical method assumptions.
+2.  Identify deferentially expressed genes with raw sequencing counts (non-normalized data) using [DeSeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html). This can be done directly with DeSeq2 in R, or it can be done through HOMER using [`getDiffExpression.pl`](http://homer.ucsd.edu/homer/ngs/diffExpression.html).
+3.  Results can be summarized genome wide with various types of scatter plots or heat maps.
+4.  Check biological function of differential genes using gene ontology tools. Examples include: [Metascape](https://metascape.org/gp/index.html), [ToppGene](https://toppgene.cchmc.org) or [ToppFun](https://toppgene.cchmc.org/enrichment.jsp), [Gene Set Enrichment Analysis](https://www.gsea-msigdb.org/gsea/index.jsp), [Qiagen Ingenuity Pathway Analysis](https://digitalinsights.qiagen.com/products-overview/discovery-insights-portfolio/analysis-and-visualization/qiagen-ipa/) (*\$\$\$*), etc.
+
+# Analytical creativity
+
+Analysis of RNA-seq data is only limited by the quality of the data and your imagination. Consider intersecting your results with data from other systems, experiments, or genomics assays as a way to develop and refine new hypotheses.
+
+# Automated pipeline: [A.C.Rsuite](https://github.com/z5ouyang/A.C.Rsuite)
+
+Applying the steps outlined above to a set of new data is cumbersome and prone to human typing errors. We have access to an automated pipeline to help streamline these steps. However, it is a good idea to learn how to use the above tools in an independent workflow. And to learn how to apply the various options as best suited to your data type/assumptions. *Becoming over reliant on automated processing and analysis will limit understanding, independence, and creativity.*
+
+This analysis tool suite was created by Zhengyu Ouyang to simplify frequent HOMER analyses of mapped and processed genomics data (RNA-seq as well as ATAC-seq and ChIP-seq). These tools require an input `sample definition` file. This is a 4 column table for RNA-Seq or ATAC-Seq and 5 column table for ChIP-Seq. The table must be formatted as 'tab' separated (\\t) and should not contain a header row.
+
+-   Each row in the table corresponds to a data group.
+-   The first column is the name of the group.
+-   The second column defines the color of the group. This can contain default [R colors](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) or hex formatted color codes (example: #de2d26).
+-   The third column contains the paths to each HOMER tag directory belonging to the data group. Each sample/replicate directory for the group must be separated by a semicolon `;` (no space!).
+-   The fourth column contains the name assigned to each sample. Each sample/replicate name for the group must be separated by a semicolon `;` (no space!). The order and number of sample names should be the same as the tag directories in column 3.
+
+An example follows (omit the header column):
+
+| Column 1 | Column 2 | Column 3 | Column 4 |
+|:-----------------|:-----------------|:-----------------|:-----------------|
+| group1 | gray0 | /path/to/tag_directory/group1_rep1/;/path/to/tag_directory/group1_rep2/ | group1_rep1;group1_rep2 |
+| group2 | gray33 | /path/to/tag_directory/group2_rep1/;/path/to/tag_directory/group2_rep2/ | group2_rep1;group2_rep2 |
+| group3 | gray66 | /path/to/tag_directory/group3_rep1/;/path/to/tag_directory/group3_rep2/ | group3_rep1;group3_rep2 |
+
+*The GitHub versions are not fully functional on the IS4R cluster, but we have edited versions suppressing the non-functional aspects (`makeMultiWigHub.pl`).*
+
+## rnaPipe.R
+
+`rnaPipe.R` is a full featured wrapper script that executes the below three tools in series, generating a summary stats file called `alignStats.txt`, data quantification results in a directory called `rnaQuan/`, and differential expression results in a directory called `rnaDiff/`. These tools require a compatible R and HOMER module is loaded when run through the IS4R HPC.
+
+::: callout-warning
+### Make sure you specify the correct genome for your analysis!
+
+This must match the genome used for mapping. The default genome for A.C.Rsuite is `mm10`. The most up-to-date mouse genome is currently `mm39`. Human genomes could be `hg38` or `hg19.`
+:::
+
+An example usage follows:
+
+``` bash
+module load R/4.4.0-R9
+module load homer/5.1
+rnaPipe.R /path/sample_definition -o /output/path -g available_homer_genome
+```
+
+Steps from `rnaPipe.R` can also be run/rerun individually, and some have additional analysis options available. Script instructions and available options can be viewed by entering the command into the terminal.
+
+## alignStats.R
+
+`alignStats.R` compiles various quality control statistics into a summary table based on what is in the sample definition file. An example usage follows:
+
+``` bash
+Rscript alignStats.R /path/sample_definition > alignStats.txt
+```
+
+## rnaQuan.R
+
+`rnaQuan.R` performs routine quantification of RNA-seq data by reading in the sample definition file and using HOMER and R to perform the following: - Generate an `analyzeRepeats.pl` raw sequencing count file (`-raw` or `-noadj`) specifying the options `-condenseGenes -count exons`. - Generate an `analyzeRepeats.pl` TPM normalized file (`-tpm` option) specifying the option `-count exons` <u>but not `-condenseGenes`</u>. This file is subsetted based on accession numbers within the raw count file. - Short genes (less than 200 bp) are removed, and a simplified raw file (`rawC.txt`) and TPM file (`rawT.txt`) are created. - A series of plots are created that: compare gene length versus expression means and variance; assess data grouping using principal component analyses; compare pair-wise Parson's correlations using heat maps and within group 2d kernel density plots. - Group replicate tag directories are merged into a `mergeTag` folder. - A UCSC genome browser hub track is created using the sample definition file name. <u>This aspect will not function until the web server and script are correctly configured</u>.
+
+::: callout-warning
+### Make sure you specify the correct genome for your analysis!
+
+This must match the genome used for mapping. The default genome for A.C.Rsuite is `mm10`. The most up-to-date mouse genome is currently `mm39.` Human genomes could be `hg38` or `hg19.`
+:::
+
+An example usage follows:
+
+``` bash
+Rscript rnaQuan.R /path/sample_definition -o rnaQuan -g homer_genome
+```
+
+## rnaDiff.R
+
+`rnaDiff.R` performs group pairwise differential expression analysis using DeSeq2 as. This depends both on the sample definition file *and* the processed raw count and TPM files generated by `rnaQuan.R`. It generates the following: - DeSeq2 results for any gene above a declared TPM threshold (default 8) for each pairwise comparison between each group (not one group versus all remaining). - Scatter plots and MA plots visualizing expression differences between each pair of groups. - A series of summary heat map for the composite list of deferentially expressed genes between all groups.
+
+An example usage is follows:
+``` bash
+Rscript rnaDiff.R /path/sample_definition -c rnaQuan/rawC.txt -t rnaQuan/rawT.txt -o rnaDiff/
+```
+# Script access
+These scripts can be found and run from the lab's cluster drive. 
+```bash
+/data/hpc-troutman/software/scripts/
+```
+
+You can also symlink these scripts to your bin to avoid typing out the fullname and Rscript. Make sure they are executable. Or run the below for loop:
+```bash
+for i in alignStats.R peakCor.R peakDiff.R peakIDR.R peakPipe.R peakQuan.RplotMotif.R rnaDiff.R rnaPipe.R rnaQuan.R trimLen.R \\
+  do ln -s /data/hpc-troutman/software/scripts/$i ~/.local/bin/ \\
+  chmod +x ~/.local/bin/$i
+done
+```
