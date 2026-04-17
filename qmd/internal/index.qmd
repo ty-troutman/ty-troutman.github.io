@@ -16,7 +16,7 @@ search: false
 
 -   Allergy S drive (Allergy business manager)
 
--   Read/write access to [Troutman-Lab-Share](https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share?csf=1&web=1&e=nEuYqw) on OneDrive (Ty)
+-   Read/write access to [Troutman-Lab-Share](https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/05_resources/Troutman-Lab-Share?csf=1&web=1&e=wQvdsB) on OneDrive (Ty)
 
 -   Access to [hpc-troutman, and troutman-nobackup](server_is4r_cluster.qmd) (Ty)
 
@@ -36,4 +36,4 @@ search: false
 
 -   [NGS Libraries](Database_Barcodes.qmd)
 
--   [Logs](https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Reagent_Logs?csf=1&web=1&e=oK8Gbg)
+-   [Logs](https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/05_resources/Troutman-Lab-Share/logs_organization?csf=1&web=1&e=iqxRXx)

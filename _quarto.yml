@@ -56,15 +56,15 @@ website:
         - section: "Logs and Protocols"
           contents:
             - text: "Troutman-Lab-Share"
-              href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share?csf=1&web=1&e=nEuYqw"
+              href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/05_resources/Troutman-Lab-Share?csf=1&web=1&e=4Rn9Ve"
             - text: "Logs"
-              href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Reagent_Logs?csf=1&web=1&e=oK8Gbg"
+              href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/05_resources/Troutman-Lab-Share/logs_organization?csf=1&web=1&e=S6T1hq"
             - text: "Cell Preparation"
-              href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Protocols-Methods/primaryCells?csf=1&web=1&e=gtd3YL"
+              href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/05_resources/Troutman-Lab-Share/protocols_methods/primary_cells?csf=1&web=1&e=U1fCwF"
             - text: "Equipment"
-              href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Equipment?csf=1&web=1&e=cgrrX0"
+              href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/05_resources/Troutman-Lab-Share/equipment_manuals?csf=1&web=1&e=xe8rd3"
             - text: "Genomics"
-              href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Protocols-Methods/genomics?csf=1&web=1&e=eifcHl"
+              href: "https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/05_resources/Troutman-Lab-Share/protocols_methods/genomics?csf=1&web=1&e=ZYrkdu"
 
 format:
   html:
