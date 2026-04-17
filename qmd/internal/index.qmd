@@ -1,14 +1,39 @@
 ---
-title: "Internal Materials"
+title: "Internal Materials Home"
 subtitle: Information and resources for research in the Troutman Lab.
 page-layout: article
 anchor-sections: false
 search: false
 ---
-Use the sidebar to access:
 
-- server resources
-- sequencing workflows
-- library preparation information
-- logs and protocols
-- shared links
+# Orientation Checklist
+
+-   [Lab rules and expectations](rules_policies.qmd)
+
+-   [Lab notebook](rules_policies.qmd#lab-notebook) (Yusuf) and e-notebook (Ty)
+
+-   Email retention upgrade (Allergy business manager)
+
+-   Allergy S drive (Allergy business manager)
+
+-   Read/write access to [Troutman-Lab-Share](https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share?csf=1&web=1&e=nEuYqw) on OneDrive (Ty)
+
+-   Access to [hpc-troutman, and troutman-nobackup](server_is4r_cluster.qmd) (Ty)
+
+-   Access “Troutman Lab” Teams channel
+
+-   Schedules for various Lab, Division and Center meetings
+
+-   Necessary CITI trainings (find on [CenterLink](https://cchmc.sharepoint.com/sites/Centerlink-Home?ga=chb_na%7Ehub_centerlinkhome%7Este_na))
+
+-   Complete/schedule training requirements for Veterinary Services facility access (search [CenterLink](https://cchmc.sharepoint.com/sites/Centerlink-Home?ga=chb_na%7Ehub_centerlinkhome%7Este_na))
+
+-   Complete/schedule training requirements for the Research Flow Cytometry Facility.
+
+-   Read the lab's Institutional Safety and IACUC protocols. Get added to these protocols.
+
+-   [Sequencing Data](processing_sequencing_data.qmd)
+
+-   [NGS Libraries](Database_Barcodes.qmd)
+
+-   [Logs](https://cchmc-my.sharepoint.com/:f:/r/personal/ty_troutman_cchmc_org/Documents/Troutman-Lab-Share/Reagent_Logs?csf=1&web=1&e=oK8Gbg)

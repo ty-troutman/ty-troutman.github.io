@@ -88,7 +88,7 @@ Policies must first be in accordance with federal, CCHMC, and Allergy/Immunology
 -   Be considerate of your colleagues' time. Honor your commitments. Communicate early and often.
 -   To the best of your ability, attend all lab meetings.
 
-# Good practice for laboratory notebooks
+# Good practice for laboratory notebooks {#lab-notebook}
 
 ::: {.callout-note collapse="true"}
 ## Nearly everything in this section is verbatim from [Making the Right Moves: A Practical Guide to Scientifıc Management for Postdocs and New Faculty. Second Edition.](https://www.hhmi.org/sites/default/files/2023-10/making-the-right-moves-second-edition.pdf) © 2006 by the Howard Hughes Medical Institute and Burroughs Wellcome Fund.
