@@ -1,15 +1,19 @@
 ---
-title: "Welcome to the Troutman Lab"
-sidebar: true
+title: "Troutman Lab"
+sidebar: false
 ---
 
 ![From left: Michael Kotliar, Mohammed Haroon, Amelia Pearson, Yusuf Barudi, Ty Troutman, and Jihye Kang](images/lab_2025.png){fig-alt="Troutman Lab group photo" fig-align="center" width="900"}
 
-We investigate the functions of tissue-resident macrophages and other mononuclear phagocytes in regulating health and disease. Macrophages reside in all tissues, where they contribute to innate immune surveillance, clear cellular debris and promote repair in response to injuries. In addition, macrophages and other recruited mononuclear phagocytes participate in disease processes associated with obesity, allergic inflammation, suppression of anti-cancer immunity and neurodegeneration. Within each tissue, cell subtypes adopt specialized roles through unique combinations of niche-provided signals. As a result, the cells may undergo further functional diversification during disease because of environmental perturbation.
+We study how macrophages and other mononuclear phagocytes regulate health and disease.
 
-We couple cellular and molecular immunology approaches to quantitative analyses of dynamic epigenetic factors ultimately controlling gene expression. With these approaches, we discover novel intercellular and intracellular mechanisms controlling cell behaviors during health and disease.
+Our research is motivated by the urgent need to understand how these cells shape immune responses in chronic digestive and allergic diseases. These diseases affect millions worldwide.  
 
-![](images/kupffer.png){fig-align="center" width="300"}
+We integrate epigenomic and transcriptomic profiling of highly purified cell populations from healthy and diseased tissues to uncover regulatory mechanisms that govern macrophage identity and function.Our work has revealed transcriptional programs controlling hepatic macrophage behaviors, niche specification, and cross-talk with parenchymal and non-parenchymal liver cells. We strive to publish our results in high-impact journals ([*Nature Immunology*, 2023](https://www.nature.com/articles/s41590-023-01631-w) and [*Immunity*, 2020](https://www.cell.com/immunity/fulltext/S107476132030159X)) and make our data and tools available to support the mechanistic studies of others across the field.
+
+#### Find us!
+
+The Troutman lab is housed in the [Division of Allergy and Immunology](https://www.cincinnatichildrens.org/service/a/allergy-immunology) at [Cincinnati Children's Hospital Medical Center](https://www.cincinnatichildrens.org). We are also part of the [Center for Inflammation and Tolerance](https://www.cincinnatichildrens.org/research/divisions/c/inflammation-tolerance) and the Department of Pediatrics in the [University of Cincinnati College of Medicine](https://www.med.uc.edu).
 
 Cincinnati Children's Hospital Medical Center\
 Division of Allergy and Immunology\
